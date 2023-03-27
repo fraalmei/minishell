@@ -1,0 +1,57 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/03/25 17:18:27 by fraalmei          #+#    #+#              #
+#    Updated: 2023/03/27 09:22:03 by fraalmei         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+#	files
+FUNCTIONS = srcs/main.c
+
+OBJS = $(FUNCTIONS_S:.c=.o)
+
+#SRC = 
+
+#	file's name
+NAME = push_swap
+
+#	flags
+FLAGS = -Wall -Werror -Wextra 
+
+LEAK_FLAGS = -fsanitize=address -g3
+
+#	options to create the library
+AR = ar -rc
+
+#	options to force the remove
+RM = rm -f
+
+#	compilation
+CC = gcc
+
+all: $(NAME)
+
+$(NAME): $(SRC)$(OBJS) | lib
+	@$(CC) $(FLAGS) $(SRC)$(FUNCTIONS) ../libft/libftb.a -o $(NAME)
+
+lib:
+	@make bonus -C ../libft
+
+clean:
+	@$(RM) $(OBJS)
+	@make clean -C ../libft
+
+fclean: clean
+	@$(RM) $(NAME) ../libft/libft.a
+
+leaks: $(OBJS)
+	@$(CC) $(FLAGS) $(LEAK_FLAGS) $(SRC)$(FUNCTIONS) ../libft/libftb.a -o $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re libft
