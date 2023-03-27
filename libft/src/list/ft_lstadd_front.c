@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/25 17:09:03 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/03/27 12:33:18 by cagonzal         ###   ########.fr       */
+/*   Created: 2022/03/29 18:36:45 by cagonzal          #+#    #+#             */
+/*   Updated: 2023/02/17 14:47:04 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include <t_list.h>
 
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "basics.h"
-
-#endif
+/**
+ * @brief Adds a new element at the beginning of a linked list.
+ *
+ * @param lst Linked list.
+ * @param new New element to add.
+ */
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	new->next = *lst;
+	*lst = new;
+}

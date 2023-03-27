@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/25 17:09:03 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/03/27 12:33:18 by cagonzal         ###   ########.fr       */
+/*   Created: 2022/03/22 15:34:31 by cagonzal          #+#    #+#             */
+/*   Updated: 2023/02/17 14:38:25 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include <libft.h>
 
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "basics.h"
+char	*ft_strndup(const char *str, unsigned int n)
+{
+	char			*duped;
+	unsigned int	i;
 
-#endif
+	i = 0;
+	duped = (char *)ft_calloc(sizeof(char), (n + 1));
+	while (i < n)
+		duped[i++] = *str++;
+	duped[n] = 0;
+	return (duped);
+}

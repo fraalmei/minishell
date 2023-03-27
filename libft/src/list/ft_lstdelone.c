@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/25 17:09:03 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/03/27 12:33:18 by cagonzal         ###   ########.fr       */
+/*   Created: 2022/03/29 18:37:47 by cagonzal          #+#    #+#             */
+/*   Updated: 2023/02/17 14:47:04 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include <t_list.h>
 
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "basics.h"
-
-#endif
+/**
+ * @brief Deletes the given element with the given function.
+ *
+ * @param lst Element to delete.
+ */
+void	ft_lstdelone(t_list *lst)
+{
+	if (lst == NULL)
+		return ;
+	free(lst);
+}

@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/25 17:09:03 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/03/27 12:33:18 by cagonzal         ###   ########.fr       */
+/*   Created: 2022/03/29 18:33:49 by cagonzal          #+#    #+#             */
+/*   Updated: 2023/02/17 14:47:04 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include <t_list.h>
 
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "basics.h"
+/**
+ * @brief Creates a new element of a linked list and returns a pointer to it.
+ *
+ * @param content Pointer to the content of the new element.
+ * @return t_list* Pointer to the new element.
+ */
+t_list	*ft_lstnew(int content)
+{
+	t_list	*e;
 
-#endif
+	e = malloc(sizeof(t_list));
+	if (e == NULL)
+		return (NULL);
+	e->content = content;
+	e->norm_content = 0;
+	e->next = NULL;
+	return (e);
+}

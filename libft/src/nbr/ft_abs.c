@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/25 17:09:03 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/03/27 12:33:18 by cagonzal         ###   ########.fr       */
+/*   Created: 2021/06/03 22:34:10 by vminomiy          #+#    #+#             */
+/*   Updated: 2023/02/17 14:38:25 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include <libft.h>
 
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "basics.h"
+int	ft_abs(float num)
+{
+	int	tmp;
 
-#endif
+	tmp = (int)num;
+	if ((num - tmp) >= 0.5)
+		return ((int) num + 1);
+	else
+		return ((int) num);
+}
