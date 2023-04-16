@@ -6,7 +6,7 @@
 #    By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/25 17:18:27 by fraalmei          #+#    #+#              #
-#    Updated: 2023/03/27 10:59:29 by fraalmei         ###   ########.fr        #
+#    Updated: 2023/04/13 08:45:59 by fraalmei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,20 +28,30 @@ CC		= gcc
 RM		= /bin/rm -f
 
 #	flags
-CFLAGS	= -Wall -Werror -Wextra
+#------------------------------------------------------------------------------
+CFLAGS	= -Wall -Werror -Wextra #-pedantic
 
 LEAK_FLAGS	= -fsanitize=address -g3
 
-INCLUDES	= -I$(INCLUDE_DIR)
+INCLUDES	= -I $(INCLUDE_DIR) -I $(READ_INCLUDE)
 
-LIBS		= -L$(LIBFT_DIR) -lft -lreadline
+LIBS		= -L $(LIBFT_DIR) -lft -lreadline -L $(READ_LIB)
+
+#------------------------------------------------------------------------------
 
 # Directories
 BIN_DIR		= bin
 SRC_DIR		= srcs
-SRCS		= main.c
-LIBFT_DIR 	= ../libft		# path to libft libft
+SRCS		= main.c signals.c actions.c pipe.c
+LIBFT_DIR	= ../libft		# path to libft libft
 INCLUDE_DIR	= include		# path to headers
+
+# to search the direccion of the library
+# type "find / -name libreadline.a 2>/dev/null"
+# if not installed in your user
+# type "brew install readline"
+READ_INCLUDE	= /System/Volumes/Data/sgoinfre/students/davgarci/homebrew/Cellar/readline/8.2.1/include
+READ_LIB		= /System/Volumes/Data/sgoinfre/students/davgarci/homebrew/Cellar/readline/8.2.1/lib
 
 # Convert source files to binary
 OBJS = $(SRCS:%.c=$(BIN_DIR)/%.o)
@@ -52,16 +62,19 @@ restart: $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) $(LIBS) -o $(NAME)
 
 $(NAME): $(BIN) $(OBJS) | lib
-	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
+	@echo "\033[0;32mCompiling so_long..."
+	$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) $(LIBS) -o $(NAME)
+	@echo "\n\033[0mDone !"
 
 #	Objects construction
 $(OBJS): $(BIN_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
-	@$(CC) -g $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@printf "\033[0;33mGenerating minishell objects... %-33.33s\r" $@
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 #	Libraries compile
 lib:
-	make -C $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR)
 
 re: fclean all
 
@@ -69,13 +82,19 @@ leaks: $(OBJS)
 	$(CC) $(CFLAGS) $(LEAK_FLAGS) $(OBJS) $(INCLUDES) $(LIBS) -o $(NAME)
 
 clean:
-	$(RM) $(OBJS)
-	make clean -C $(LIBFT_DIR)
-	$(RM) -r $(BIN_DIR)
+	@echo "\nRemoving binaries..."
+	@$(RM) $(OBJS)
+	@echo "\033[0;31mCleaning libft..."
+	@make clean -C $(LIBFT_DIR)
+	@$(RM) -r $(BIN_DIR)
+	@echo "\033[0m"
 
 fclean: clean
-	make fclean -C $(LIBFT_DIR)
-	$(RM) $(NAME)
+	@echo "\033[0;31mFcleaning libft..."
+	@make fclean -C $(LIBFT_DIR)
+	@echo "\nDeleting executable..."
+	@$(RM) $(NAME)
+	@echo "\033[0m"
 
 show:
 	@printf "NAME		: $(NAME)\n"
