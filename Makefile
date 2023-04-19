@@ -6,7 +6,7 @@
 #    By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/25 17:18:27 by fraalmei          #+#    #+#              #
-#    Updated: 2023/04/13 08:45:59 by fraalmei         ###   ########.fr        #
+#    Updated: 2023/04/19 15:12:57 by fraalmei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ LIBS		= -L $(LIBFT_DIR) -lft -lreadline -L $(READ_LIB)
 # Directories
 BIN_DIR		= bin
 SRC_DIR		= srcs
-SRCS		= main.c signals.c actions.c pipe.c
+SRCS		= main.c signals.c actions.c pipe.c parse.c
 LIBFT_DIR	= ../libft		# path to libft libft
 INCLUDE_DIR	= include		# path to headers
 
