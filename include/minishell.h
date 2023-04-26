@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: p <p@student.42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:09:03 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/04/19 15:58:30 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/04/22 09:34:09 by p                ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,23 +68,33 @@ typedef struct	s_sig
 	int				sigquit;
 	int				exit_status;
 	pid_t			pid;
-}				t_sig;
+}					t_sig;
 
-t_sig	g_sig;
+typedef struct	s_prompt
+{
+	char				*command;
+	char				*options;
+	char				*arguments;
+	struct s_prompt		*next;
+}						t_prompt;
 
 	// signals.c
-void	signals_do(void);
-void	sig_init(void);
+void		signals_do(void);
+void		sig_init(void);
 
 	// actions.c
-int		get_wd(void);
-int		actions(char *buffer, char **env);
+int			get_wd(void);
+int			actions(char *buffer, char **env);
 
 	// pipe.c
-char	*getpath(char *cmd, char **env);
-int		exec(char *cmd, char **env);
+char		*getpath(char *cmd, char **env);
+int			exec(char *cmd, char **env);
 
 	// parse.c
-char	***deep_split(const char *buffer);
+t_prompt	*prompt_to_list(char ***s);
+char		***deep_split(const char *buffer, char c1, char c2);
+
+	// free.c
+int			free_prompt(t_prompt *prom);
 
 #endif
