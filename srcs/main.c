@@ -6,64 +6,53 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/03/27 11:50:14 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:30:38 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include <minishell.h>
 
 void	leaks(void)
 {
 	system("leaks -q minishell");
 }
 
-int	prompt(char **buffer)
+	// Print the prompt and call rl_on_new_line()
+	// ready to read the
+static int	prompt(void)
 {
+	t_prompt	*prom;
+	char		*buffer;
+
+	signals_do();
 	rl_on_new_line();
-	*buffer = readline(BCYAN"mminishell>"WHITE);
-	add_history(*buffer);
-	return (0);
-}
-
-int	main(int argc, char **argv)
-{
-	char	*buffer;
-
-	atexit(leaks);
-	buffer = (char *)ft_calloc(sizeof(char *), 1);
-	if (argc != 1 || argv[1])
+	buffer = readline(BCYAN"minishell>"WHITE);
+	if (!ft_strnstr(buffer, "exit", ft_strlen(buffer)) && \
+		ft_strncmp(buffer, "\n", ft_strlen(buffer)))
 	{
-		ft_printf("This program does not accept arguments\n");
-		exit(0);
-	}
-	while (!(ft_strnstr(buffer, "exit", 4)))
-	{
-		prompt(&buffer);
 		ft_printf("%s\n", buffer);
-		ft_printf("intentas hacer cosas.\n");
+		prom = buffer_to_list(deep_split(buffer, '|', ' '));
+		free_prompt (prom);
+		return (1);
 	}
-	free(buffer);
+	else if (ft_strnstr(buffer, "exit", ft_strlen(buffer)))
+	{
+		free (buffer);
+		exit (0);
+	}
+	return (1);
+}
+
+int	main(int argc, char **argv, char **env)
+{
+	atexit(leaks);
+	(void) argv;
+	(void) env;
+	if (argc != 1)
+		exit(0);
+	while (1)
+	{
+		prompt();
+	}
 	return (0);
 }
-
-/*
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-
-int main() {
-	char *input;
-
-	// Imprime el prompt y llama a rl_on_new_line() para indicar 
-	// que estamos listos para leer la entrada del usuario
-	rl_on_new_line();
-	input = readline("Ingrese un texto: ");
-	// Agrega la entrada del usuario al historial de comandos
-	add_history(input);
-	// Imprime la entrada del usuario por pantalla
-	printf("Ingresaste: %s\n", input);
-	// Libera la memoria reservada por readline()
-	//free(input);
-	return 0;
-}
-*/

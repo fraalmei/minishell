@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 13:51:51 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/03/27 12:37:12 by cagonzal         ###   ########.fr       */
+/*   Created: 2023/05/11 12:13:01 by cagonzal          #+#    #+#             */
+/*   Updated: 2023/05/11 12:13:12 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include "colors.h"
-# include "../libft/include/libft.h"
+# include "../libft/libft.h"
 
 // ------ DEFINES ------
 # define MSJ_ERROR "Error de sintaxis\n"
