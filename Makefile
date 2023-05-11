@@ -6,7 +6,7 @@
 #    By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/25 17:18:27 by fraalmei          #+#    #+#              #
-#    Updated: 2023/04/19 15:12:57 by fraalmei         ###   ########.fr        #
+#    Updated: 2023/05/10 09:28:51 by fraalmei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,16 +33,16 @@ CFLAGS	= -Wall -Werror -Wextra #-pedantic
 
 LEAK_FLAGS	= -fsanitize=address -g3
 
-INCLUDES	= -I $(INCLUDE_DIR) -I $(READ_INCLUDE)
+INCLUDES	= -I $(INCLUDE_DIR) -I $(READ)/include
 
-LIBS		= -L $(LIBFT_DIR) -lft -lreadline -L $(READ_LIB)
+LIBS		= -L $(LIBFT_DIR) -lft -lreadline -L $(READ)/lib
 
 #------------------------------------------------------------------------------
 
 # Directories
 BIN_DIR		= bin
 SRC_DIR		= srcs
-SRCS		= main.c signals.c actions.c pipe.c parse.c
+SRCS		= main.c signals.c actions.c pipe.c parse.c free.c
 LIBFT_DIR	= ../libft		# path to libft libft
 INCLUDE_DIR	= include		# path to headers
 
@@ -50,8 +50,8 @@ INCLUDE_DIR	= include		# path to headers
 # type "find / -name libreadline.a 2>/dev/null"
 # if not installed in your user
 # type "brew install readline"
-READ_INCLUDE	= /System/Volumes/Data/sgoinfre/students/davgarci/homebrew/Cellar/readline/8.2.1/include
-READ_LIB		= /System/Volumes/Data/sgoinfre/students/davgarci/homebrew/Cellar/readline/8.2.1/lib
+
+READ		= /System/Volumes/Data/sgoinfre/students/fraalmei/homebrew/Cellar/readline/8.2.1
 
 # Convert source files to binary
 OBJS = $(SRCS:%.c=$(BIN_DIR)/%.o)
@@ -62,7 +62,7 @@ restart: $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) $(LIBS) -o $(NAME)
 
 $(NAME): $(BIN) $(OBJS) | lib
-	@echo "\033[0;32mCompiling so_long..."
+	@echo "\033[0;32mCompiling minishell..."
 	$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) $(LIBS) -o $(NAME)
 	@echo "\n\033[0mDone !"
 
@@ -78,8 +78,10 @@ lib:
 
 re: fclean all
 
-leaks: $(OBJS)
+leaks: $(BIN) $(OBJS) | lib
+	@echo "\033[0;32mCompiling minishell with sanitizer..."
 	$(CC) $(CFLAGS) $(LEAK_FLAGS) $(OBJS) $(INCLUDES) $(LIBS) -o $(NAME)
+	@echo "\n\033[0mDone !"
 
 clean:
 	@echo "\nRemoving binaries..."
