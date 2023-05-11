@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: p <p@student.42.fr>                        +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:09:03 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/04/22 09:34:09 by p                ###   ########.fr       */
+/*   Updated: 2023/05/10 11:24:55 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@
 # define UNKNOWN_COMMAND 127
 //-----------------------------------------------------------------------------
 
-typedef struct	s_sig
+typedef struct s_sig
 {
 	int				sigint;
 	int				sigquit;
@@ -70,13 +70,15 @@ typedef struct	s_sig
 	pid_t			pid;
 }					t_sig;
 
-typedef struct	s_prompt
+typedef struct s_prompt
 {
 	char				*command;
 	char				*options;
 	char				*arguments;
 	struct s_prompt		*next;
 }						t_prompt;
+
+t_sig	g_sig;
 
 	// signals.c
 void		signals_do(void);
@@ -91,8 +93,8 @@ char		*getpath(char *cmd, char **env);
 int			exec(char *cmd, char **env);
 
 	// parse.c
-t_prompt	*prompt_to_list(char ***s);
-char		***deep_split(const char *buffer, char c1, char c2);
+t_prompt	*buffer_to_list(char ***s);
+char		***deep_split(char *buffer, char c1, char c2);
 
 	// free.c
 int			free_prompt(t_prompt *prom);
