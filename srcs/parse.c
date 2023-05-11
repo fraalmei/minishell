@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 12:29:45 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/05/10 15:00:32 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/05/11 09:12:31 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static t_prompt	*create_prompt_struct(char *comm, char *opt, char *arg)
 	return (prom);
 }
 
+	// print the struct (or structs) generated frome the buffer
 static void	print_prompt(t_prompt *prom)
 {
 	while (prom)
@@ -52,7 +53,6 @@ static t_prompt	*str_to_promt_struct(char **str)
 	char		*arg;
 
 	i = -1;
-	prom = NULL;
 	comm = NULL;
 	opt = NULL;
 	arg = NULL;
@@ -65,6 +65,8 @@ static t_prompt	*str_to_promt_struct(char **str)
 		else
 			arg = ft_strjoin_onefree(ft_strjoin_onefree(arg, " "), str[i]);
 	}
+	opt = ft_strtrim_onefree(opt, " ");
+	arg = ft_strtrim_onefree(arg, " ");
 	prom = create_prompt_struct(comm, opt, arg);
 	return (prom);
 }
