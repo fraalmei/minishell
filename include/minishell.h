@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:09:03 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/05/10 11:24:55 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/05/11 18:44:14 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,19 @@ typedef struct s_sig
 	pid_t			pid;
 }					t_sig;
 
+typedef struct s_env_var
+{
+	char				*var;
+	char				*value;
+	struct s_env_var	*next;
+}				t_env_var;
+
+typedef struct s_env
+{
+	char			**env;
+	t_env_var		*frst;
+}					t_env;
+
 typedef struct s_prompt
 {
 	char				*command;
@@ -98,5 +111,12 @@ char		***deep_split(char *buffer, char c1, char c2);
 
 	// free.c
 int			free_prompt(t_prompt *prom);
+int			free_env(t_env *env);
+
+	// env/env.c
+void		print_env(t_env	*env, int form);
+t_env_var	*new_struct_env(char **var);
+char		**copy_env(char **env);
+t_env		*read_env(char **env);
 
 #endif
