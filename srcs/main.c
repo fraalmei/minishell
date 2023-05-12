@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/05/10 14:30:38 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/05/12 12:08:01 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,27 @@ static int	prompt(void)
 		free (buffer);
 		exit (0);
 	}
+	else if (!buffer)
+	{
+		write (1, "exit", 4);
+		exit (0);
+	}
 	return (1);
 }
 
 int	main(int argc, char **argv, char **env)
 {
+	t_env	*mini_env;
+
 	atexit(leaks);
 	(void) argv;
-	(void) env;
 	if (argc != 1)
 		exit(0);
+	mini_env = read_env (env);
+	/* print_env(mini_env, 0);
+	ft_printf ("-------------------\n");
+	print_env(mini_env, 1); */
+	free_env (mini_env);
 	while (1)
 	{
 		prompt();
