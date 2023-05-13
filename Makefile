@@ -42,7 +42,7 @@ LIBS		= -L $(LIBFT_DIR) -lft -lreadline -L $(READ)/lib
 # Directories
 BIN_DIR		= bin
 SRC_DIR		= srcs
-SRCS		= main.c signals.c parse.c free.c
+SRCS		= main.c signals.c parse.c free.c env/env.c
 LIBFT_DIR	= libft			# path to libft libft
 INCLUDE_DIR	= include		# path to headers
 
