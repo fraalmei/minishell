@@ -59,7 +59,7 @@ char	**copy_env(char **env)
 	i = 0;
 	while (env[i])
 		i++;
-	copy = (char **)ft_calloc(sizeof(char **), i);
+	copy = (char **)ft_calloc(sizeof(char **), i + 1);
 	if (!copy)
 		return (NULL);
 	i = -1;
