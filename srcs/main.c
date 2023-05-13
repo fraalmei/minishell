@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/05/12 12:08:01 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/05/13 10:07:21 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,18 @@ static int	prompt(void)
 
 	signals_do();
 	rl_on_new_line();
-	buffer = readline(BCYAN"minishell>"WHITE);
-	if (!ft_strnstr(buffer, "exit", ft_strlen(buffer)) && \
-		ft_strncmp(buffer, "\n", ft_strlen(buffer)))
+	buffer = ft_strtrim_onefree(readline(BCYAN"minishell>"WHITE), " ");
+	if (!buffer)
+		printf ("exit\n");
+	else if (!ft_strnstr(buffer, "exit", ft_strlen(buffer)))
 	{
 		ft_printf("%s\n", buffer);
 		prom = buffer_to_list(deep_split(buffer, '|', ' '));
 		free_prompt (prom);
 		return (1);
 	}
-	else if (ft_strnstr(buffer, "exit", ft_strlen(buffer)))
-	{
-		free (buffer);
-		exit (0);
-	}
-	else if (!buffer)
-	{
-		write (1, "exit", 4);
-		exit (0);
-	}
-	return (1);
+	free (buffer);
+	return (0);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -57,13 +49,9 @@ int	main(int argc, char **argv, char **env)
 	if (argc != 1)
 		exit(0);
 	mini_env = read_env (env);
-	/* print_env(mini_env, 0);
-	ft_printf ("-------------------\n");
-	print_env(mini_env, 1); */
-	free_env (mini_env);
-	while (1)
+	while (prompt())
 	{
-		prompt();
 	}
+	free_env (mini_env);
 	return (0);
 }
