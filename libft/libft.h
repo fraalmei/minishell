@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 12:58:45 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/04/21 13:44:30 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/05/21 16:36:52 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,23 @@ int		ft_strchr_nbr(const char *s, int c);
 		//extras
 size_t	ft_intlen(int n);
 
+		// ft_strchr
 int		ft_str_frst_chr(char *str, char c);
+
+		// ft_strrchr
 int		ft_str_lst_chr(const char *s, int c);
 char	*ft_strndup(const char *str, unsigned int n);
+
+		// ft_strncmp
 int		ft_str_frst_cmp(const char *haystack, const char *needle);
 int		ft_str_last_cmp(const char *haystack, const char *needle);
+int		ft_strcmp(const char *s1, const char *s2);
+
+		// ft_strtrim
 char	*ft_strtrim_onefree(char *s1, char const *set);
+
+		//ft_put_nbr_fd
+int		ft_putnbr_base(long long int nbr, long long int i, char *base);
 
 		//free
 int		free_str(char **s);
