@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 15:02:58 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/05/12 11:16:12 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/05/21 11:04:30 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,29 @@ int	free_env(t_env *env)
 		while (env->frst)
 		{
 			swap = env->frst;
-			free (swap->var);
+			free (swap->name);
 			free (swap->value);
 			env->frst = swap->next;
 			free (swap);
 		}
 		free (env);
 	}
+	return (0);
+}
+
+int	free_signals(t_sig *sig)
+{
+	free (sig);
+	return (0);
+}
+
+int	free_global(void)
+{
+	if (!g_mishell->buffer)
+		free (g_mishell->buffer);
+	free_env (g_mishell->envirorment);
+	if (!g_mishell->prompt)
+		free (g_mishell->prompt);
+	free_signals(g_mishell->signals);
 	return (0);
 }

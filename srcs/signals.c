@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:09:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/05/11 08:46:55 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/05/21 12:59:27 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 static void	signal_int(int code)
 {
 	(void) code;
-	printf("\n");
+	ft_printf(BCYAN"minishell>\t\t\t\t\t");
+	ft_printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
@@ -25,7 +26,6 @@ static void	signal_int(int code)
 
 	// signals control
 	// SIGINT => ctrl-C
-	// SIGQUIT => ctrl-D
 	// SIGTSTP => ctrl-Z
 /// @brief calling the main signals to asign an action when they're called
 /// @param  no need
@@ -36,4 +36,14 @@ void	signals_do(void)
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGTERM, SIG_IGN);
 	signal(SIGSTOP, SIG_IGN);
+}
+
+void	init_signals(void)
+{
+	t_sig	*signals;
+
+	signals = NULL;
+	signals = (t_sig *)ft_calloc(sizeof(*signals), 1);
+	signals->exit_status = 0;
+	signals->exit_return = 0;
 }
