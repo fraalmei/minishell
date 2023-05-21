@@ -6,14 +6,14 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:09:03 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/05/11 18:44:14 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/05/21 16:09:04 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "../libft/libft.h"
+# include "../../libft/libft.h"
 # include <basics.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -64,15 +64,13 @@
 
 typedef struct s_sig
 {
-	int				sigint;
-	int				sigquit;
 	int				exit_status;
-	pid_t			pid;
+	int				exit_return;
 }					t_sig;
 
 typedef struct s_env_var
 {
-	char				*var;
+	char				*name;
 	char				*value;
 	struct s_env_var	*next;
 }				t_env_var;
@@ -91,7 +89,18 @@ typedef struct s_prompt
 	struct s_prompt		*next;
 }						t_prompt;
 
-t_sig	g_sig;
+typedef struct s_mini_class
+{
+	char		*buffer;
+	t_env		*envirorment;
+	t_prompt	*prompt;
+	t_sig		*signals;
+}				t_mini_class;
+
+t_mini_class	*g_mishell;
+
+	//main.c
+//int			prompt(void);
 
 	// signals.c
 void		signals_do(void);
@@ -99,7 +108,7 @@ void		sig_init(void);
 
 	// actions.c
 int			get_wd(void);
-int			actions(char *buffer, char **env);
+int			actions(t_prompt *prompt);
 
 	// pipe.c
 char		*getpath(char *cmd, char **env);
@@ -112,11 +121,21 @@ char		***deep_split(char *buffer, char c1, char c2);
 	// free.c
 int			free_prompt(t_prompt *prom);
 int			free_env(t_env *env);
+int			free_signals(t_sig *sig);
+int			free_global(void);
 
 	// env/env.c
-void		print_env(t_env	*env, int form);
 t_env_var	*new_struct_env(char **var);
 char		**copy_env(char **env);
 t_env		*read_env(char **env);
+
+	// builtins/env.c
+void		print_env(t_env	*env, int form);
+
+	// builtins/export.c
+int			export(char *str);
+
+	// builtins/exit.c
+int			exit_shell(void);
 
 #endif
