@@ -6,7 +6,7 @@
 #    By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/25 17:18:27 by fraalmei          #+#    #+#              #
-#    Updated: 2023/05/10 09:28:51 by fraalmei         ###   ########.fr        #
+#    Updated: 2023/05/21 16:08:41 by fraalmei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,8 +42,10 @@ LIBS		= -L $(LIBFT_DIR) -lft -lreadline -L $(READ)/lib
 # Directories
 BIN_DIR		= bin
 SRC_DIR		= srcs
-SRCS		= main.c signals.c parse.c free.c env/env.c
-LIBFT_DIR	= libft			# path to libft libft
+SRCS		= main.c signals.c actions.c pipe.c parse.c free.c $(ENV) $(BUILTINS)
+ENV			= env/env.c env/mod_env.c
+BUILTINS	= builtins/pwd.c builtins/env.c builtins/export.c builtins/exit.c
+LIBFT_DIR	= ../libft		# path to libft libft
 INCLUDE_DIR	= include		# path to headers
 
 # to search the direccion of the library
