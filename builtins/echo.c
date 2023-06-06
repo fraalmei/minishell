@@ -6,12 +6,14 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:36:41 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/06 11:32:06 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/06/06 12:06:49 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+	// imprime los valores de las variables globales cuando se incluye $
+	// $? no implementado
 int	print_wild(char *str)
 {
 	int		i;
@@ -29,12 +31,14 @@ int	print_wild(char *str)
 	{
 		while (*value)
 			write (1, value++, 1);
-		write (1, " ", 1);
+		if (str[i + 1])
+			write (1, " ", 1);
 	}
 	free (name);
 	return (i);
 }
 
+	// echo con opción -n
 int	echo(t_prompt *prom)
 {
 	char	*swap;
@@ -52,6 +56,9 @@ int	echo(t_prompt *prom)
 			i += print_wild(&swap[i]);
 		}
 	}
-	printf ("\n");
+	if (prom->options && ft_strcmp(prom->options, "-n") == 0)
+		printf ("");
+	else
+		printf ("\n");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:39:55 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/05 11:07:49 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/06/06 13:10:43 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	remove_node(t_env_var **prev, t_env_var *node)
 	}
 }
 
+	// busca el nombre en env y export y los elimina
 int	unset(t_env_var **env, char *name)
 {
 	t_env_var	*prev;

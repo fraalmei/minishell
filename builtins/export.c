@@ -6,26 +6,35 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:39:59 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/05 11:22:41 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/06/06 13:09:35 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+	// imprime el export
+static void	print_export(t_env_var	*env)
+{
+	while (env)
+	{
+		ft_printf("declare -x %s", env->name);
+		ft_printf("=");
+		if (env->value)
+			ft_printf("\"%s\"\n", env->value);
+		else
+			ft_printf("\"\"\n");
+		env = env->next;
+	}
+}
+
 	// export ->muestra las variables de entorno en orden alfabetico
-	// export - (con el guion de las flags)-> lo mismo que arriba
-	// export -a ->lo mismo de arriba añadiendo despues las variables ocultas
-	// export -ajqndjn -> omite las 'a' y muestra "export: bad option: -j" 
-			// (- + la primera letra despues de las as)
-	// export -p ->igual que arriba pero añadiedo export delante de resultado
-	// export -p nombre -> muestra el contenido de la variable
-	// export nombre -> no hace nada
+	// export nombre -> guarda el nombre sin valor en export
 	// export nombre= -> guarda el nombre sin valor
 	// export nombre=valor -> guarda el nombre con el valor 
 			// o sustituye el valor si ya existe el nombre
-	// export nombre=valor -> guarda el nombre y el valor
-	// export nombre= valor -> guarda el nombre sin valor
-	// export nombre =valor -> zsh: ioajsd not found
+	// export nombre=valor -> guarda el nombre y el valor en env y export
+	// export nombre= valor -> guarda el nombre sin valor en env y export
+	// export nombre =valor -> bash: export: `=valor': not a valid identifier
 	// export nombre = -> zsh: bad assignment
 int	export(t_prompt *prompt)
 {
@@ -33,7 +42,7 @@ int	export(t_prompt *prompt)
 
 	printf("entra\n");
 	if (!prompt->options && !prompt->arguments)
-		return (print_env(g_mishell->envirorment->s_frst, 1), 0);
+		return (print_export(g_mishell->envirorment->s_frst), 0);
 	else if (prompt->options)
 		return (printf("bad option: %s\n", prompt->options), 0);
 	if (!prompt->arguments)
