@@ -163,4 +163,13 @@ int			unset(t_env_var **env, char *name);
 	// builtins/echo.c
 int			echo(t_prompt *prom);
 
+	// builtins/env.c
+void		print_env(t_env	*env, int form);
+
+	// builtins/export.c
+int			export(char *str);
+
+	// builtins/exit.c
+int			exit_shell(void);
+
 #endif

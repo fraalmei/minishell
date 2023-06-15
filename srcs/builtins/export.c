@@ -66,5 +66,4 @@ int	export(t_prompt *prompt)
 		sort_in_list(&g_mishell->envirorment->frst_ex, \
 			new_struct_env(ft_split(prompt->arguments, '=')));
 	}
-	return (0);
 }
