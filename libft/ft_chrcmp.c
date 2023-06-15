@@ -1,49 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_chrcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/22 09:57:42 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/04 11:58:46 by fraalmei         ###   ########.fr       */
+/*   Created: 2023/05/22 17:36:50 by fraalmei          #+#    #+#             */
+/*   Updated: 2023/06/08 13:29:34 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-	// find the last coincidence of 'c' in "s"
-	// and return a pointer to that position
-char	*ft_strrchr(const char *s, int c)
+	// find the first coincidence of 'c' in "s"
+	// returning a ponter to this position
+int	ft_frst_chrcmp(const char *s, int c)
 {
-	char	*l;
-
-	l = 0;
-	while (*s)
-	{
-		if (*s == (unsigned char)c)
-			l = ((char *)s);
-		s++;
-	}
-	if (*s == (unsigned char)c)
-		return ((char *)s);
-	return (l);
+	if (s[0] == (unsigned char)c)
+		return (1);
+	return (0);
 }
 
-	// find the last coincidence of 'c' in "s"
-	// and return the position
-int	ft_str_lst_chr(const char *s, int c)
+int	ft_lst_chrcmp(const char *s, int c)
+{
+	while (*s)
+		s++;
+	s--;
+	if (*s == (unsigned char)c)
+		return (1);
+	return (0);
+}
+
+int	ft_chrcmp_str(const char *str, char *trim)
 {
 	int		i;
 	int		l;
 
 	i = 0;
-	l = 0;
-	while (s[i])
+	while (str[i])
 	{
-		if (s[i] == (unsigned char)c)
-			l = i;
+		l = 0;
+		while (trim[l])
+		{
+			if (str[i] == trim[l])
+				return (i);
+			l++;
+		}
 		i++;
 	}
-	return (l);
+	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 20:09:54 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/04/20 14:21:33 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/06/13 09:35:24 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	**ft_split(const char *s, char c)
 		return (NULL);
 	i = -1;
 	l = ft_words(s, c);
-	str = (char **)malloc(sizeof(char *) * (l + 1));
+	str = (char **)ft_calloc(sizeof(char *), (l + 1));
 	if (!str)
 		return (NULL);
 	while (++i < l)

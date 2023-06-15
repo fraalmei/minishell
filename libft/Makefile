@@ -6,7 +6,7 @@
 #    By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/21 13:09:37 by fraalmei          #+#    #+#              #
-#    Updated: 2023/04/21 13:31:06 by fraalmei         ###   ########.fr        #
+#    Updated: 2023/05/23 11:56:48 by fraalmei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ OBJS_BONUS = $(BONUS_FUNCTIONS:.c=.o)
 
 #	functions out of libft
 EXTRA_FUNCTIONS = ft_chrjoin.c ft_printf.c get_next_line.c ft_strchr_nbr.c \
-	ft_intlen.c free.c
+	ft_intlen.c free.c ft_chrcmp.c
 
 OBJS_EXTRA = $(EXTRA_FUNCTIONS:.c=.o)
 
@@ -88,7 +88,6 @@ reb: fclean bonus
 
 main:
 	$(CC) $(FLAGS) $(MANDATORY_FUNCTIONS) $(EXTRA_FUNCTIONS) $(MAIN)
-		&& ./a.out
 
 mbonus:
 	$(CC) $(FLAGS) $(MANDATORY_FUNCTIONS) $(BONUS_FUNCTIONS) $(EXTRA_FUNCTIONS) $(MBONUS)

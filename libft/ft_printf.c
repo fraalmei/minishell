@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 12:33:07 by fraalmei          #+#    #+#             */
-/*   Updated: 2022/08/10 15:38:17 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/06/07 15:27:30 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	ft_printf(char const *str, ...)
 	while (*str)
 	{
 		if (*str != '%')
-			len += write(1, &*str++, 1);
+			len += write(1, str++, 1);
 		else
 		{
 			str++;
@@ -103,7 +103,7 @@ int	ft_printf(char const *str, ...)
 				|| *str == 'X' || *str == '%')
 				len += ft_selector(*str, args);
 			else if (*str != '\0')
-				len += write(1, &*str, 1);
+				len += write(1, str, 1);
 			else
 				break ;
 			str++;
