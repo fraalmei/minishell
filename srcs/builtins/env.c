@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   basics.h                                           :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/27 15:15:07 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/03/29 12:24:41 by fraalmei         ###   ########.fr       */
+/*   Created: 2023/05/21 09:49:52 by fraalmei          #+#    #+#             */
+/*   Updated: 2023/06/06 13:09:09 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BASICS_H
-# define BASICS_H
+#include <minishell.h>
 
-# include <minishell.h>
-
-// ------ DEFINES ------
-# define MSJ_ERROR "Error de sintaxis\n"
-
-// -------- ENUMS --------
-/* Boolean */
-enum e_bool
+	// imprime las variables de entorno en el orden de copia
+	// los creados van aleatorios
+	// opciones con i para imprimir
+	// imprimir con env directamente
+void	print_env(t_env_var	*env)
 {
-	TRUE = 1,
-	FALSE = 0
-}		bool;
-
-#endif
+	while (env)
+	{
+		ft_printf("%s", env->name);
+		ft_printf("=");
+		if (env->value)
+			ft_printf("%s\n", env->value);
+		else
+			ft_printf("\n");
+		env = env->next;
+	}
+}

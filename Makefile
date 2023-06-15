@@ -6,7 +6,7 @@
 #    By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/25 17:18:27 by fraalmei          #+#    #+#              #
-#    Updated: 2023/05/11 12:30:06 by cagonzal         ###   ########.fr        #
+#    Updated: 2023/06/15 12:20:24 by cagonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,16 +38,15 @@ INCLUDES	= -I $(INCLUDE_DIR) -I $(READ)/include
 LIBS		= -L $(LIBFT_DIR) -lft -lreadline -L $(READ)/lib
 
 #------------------------------------------------------------------------------
-BUILTINS	=   ./srcs/executer/builtins/cd.c ./srcs/executer/builtins/echo.c ./srcs/executer/builtins/env.c ./srcs/executer/builtins/exit.c \
-				./srcs/executer/builtins/export.c ./srcs/executer/builtins/print_env.c ./srcs/executer/builtins/pwd.c ./srcs/executer/builtins/unset.c ./srcs/executer/builtins/builtin_utils.c
 
-EXECVE		=	./srcs/executer/execve/child_manager.c ./srcs/executer/execve/exec_utils.c ./srcs/executer/execve/executer.c \
-				./srcs/executer/execve/fd_utils.c ./srcs/executer/execve/pathfinder.c
 # Directories
 BIN_DIR		= bin
 SRC_DIR		= srcs
-SRCS		= main.c signals.c parse.c free.c $(BUILTINS) $(ENV_HANDLER) $(EXECVE) #actions.c pipe.c
-LIBFT_DIR	= libft			# path to libft libft
+SRCS		= main.c signals.c actions.c pipe.c parse.c parse1.c free.c $(ENV) $(BUILTINS)
+ENV			= env/new_env.c env/utils_env.c
+BUILTINS	= builtins/pwd.c builtins/env.c builtins/export.c builtins/exit.c builtins/cd.c \
+				builtins/unset.c builtins/echo.c
+LIBFT_DIR	= libft		# path to libft libft
 INCLUDE_DIR	= include		# path to headers
 
 # to search the direccion of the library
@@ -56,7 +55,7 @@ INCLUDE_DIR	= include		# path to headers
 # type "brew install readline"
 
 # READ		= /System/Volumes/Data/sgoinfre/students/fraalmei/homebrew/Cellar/readline/8.2.1
-READ		= /System/Volumes/Data/sgoinfre/students/cagonzal/homebrew/Cellar/readline/8.2.1
+READ		= /System/Volumes/Data/Users/cagonzal/.brew/Cellar/readline/8.2.1/
 
 # Convert source files to binary
 OBJS = $(SRCS:%.c=$(BIN_DIR)/%.o)

@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   basics.h                                           :+:      :+:    :+:   */
+/*   mod_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/27 15:15:07 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/03/29 12:24:41 by fraalmei         ###   ########.fr       */
+/*   Created: 2023/05/12 11:23:41 by fraalmei          #+#    #+#             */
+/*   Updated: 2023/05/21 09:50:10 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BASICS_H
-# define BASICS_H
+#include <minishell.h>
 
-# include <minishell.h>
-
-// ------ DEFINES ------
-# define MSJ_ERROR "Error de sintaxis\n"
-
-// -------- ENUMS --------
-/* Boolean */
-enum e_bool
+char	*get_value(t_env *env, char	*var)
 {
-	TRUE = 1,
-	FALSE = 0
-}		bool;
+	t_env_var	*swap;
 
-#endif
+	if (!env)
+		return (NULL);
+	swap = env->frst;
+	while (swap->name != var)
+		swap = swap->next;
+	return (swap->value);
+}

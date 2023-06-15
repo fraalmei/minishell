@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   basics.h                                           :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/27 15:15:07 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/03/29 12:24:41 by fraalmei         ###   ########.fr       */
+/*   Created: 2023/05/21 09:40:03 by fraalmei          #+#    #+#             */
+/*   Updated: 2023/05/23 11:40:06 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BASICS_H
-# define BASICS_H
+#include <minishell.h>
 
-# include <minishell.h>
-
-// ------ DEFINES ------
-# define MSJ_ERROR "Error de sintaxis\n"
-
-// -------- ENUMS --------
-/* Boolean */
-enum e_bool
+	// function to obtain the Current Working Directory
+	// char *getcwd (char *buf, size_t size);
+int	get_wd(void)
 {
-	TRUE = 1,
-	FALSE = 0
-}		bool;
+	char	*buffer;
 
-#endif
+	buffer = (char *)ft_calloc(sizeof(char *), 1024);
+	if (!buffer)
+		return (-1);
+	ft_printf("%s\n", getcwd(buffer, 1024));
+	free (buffer);
+	return (0);
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/05/10 14:30:38 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/06/15 12:47:54 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,38 +21,47 @@ void	leaks(void)
 	// ready to read the
 static int	prompt(void)
 {
-	t_prompt	*prom;
-	char		*buffer;
-
 	signals_do();
 	rl_on_new_line();
-	buffer = readline(BCYAN"minishell>"WHITE);
-	if (!ft_strnstr(buffer, "exit", ft_strlen(buffer)) && \
-		ft_strncmp(buffer, "\n", ft_strlen(buffer)))
+	g_ms->buffer = ft_strtrim_onefree(readline(BCYAN"minishell>"WHITE), \
+		" \t\n\v\f\r");
+	if (!g_ms->buffer)
+		printf ("exit\n");
+	else if (ft_strcmp(g_ms->buffer, "") == 0)
 	{
-		ft_printf("%s\n", buffer);
-		prom = buffer_to_list(deep_split(buffer, '|', ' '));
-		free_prompt (prom);
+		g_ms->prompt = NULL;
+		free(g_ms->buffer);
 		return (1);
 	}
-	else if (ft_strnstr(buffer, "exit", ft_strlen(buffer)))
+	else
 	{
-		free (buffer);
-		exit (0);
+		add_history(g_ms->buffer);
+		g_ms->prompt = buffer_to_list(deep_split(\
+			g_ms->buffer, '|', ' '));
+		//free_str (splitter(g_ms->buffer));
+		//soft_split(g_ms->buffer);
+		return (1);
 	}
-	return (1);
+	return (0);
 }
 
 int	main(int argc, char **argv, char **env)
 {
 	atexit(leaks);
 	(void) argv;
-	(void) env;
 	if (argc != 1)
-		exit(0);
-	while (1)
+		return (0);
+	g_ms = (t_mini_class *)ft_calloc(sizeof(*g_ms), 1);
+	if (!g_ms)
+		return (0);
+	g_ms->envirorment = read_env (env);
+	while (prompt())
 	{
-		prompt();
+		if (!g_ms->prompt)
+			continue ;
+		start_executer();
+		free_prompt (g_ms->prompt);
 	}
+	free_global();
 	return (0);
 }

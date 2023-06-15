@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   basics.h                                           :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/27 15:15:07 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/03/29 12:24:41 by fraalmei         ###   ########.fr       */
+/*   Created: 2023/05/21 09:37:47 by fraalmei          #+#    #+#             */
+/*   Updated: 2023/05/21 16:07:57 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BASICS_H
-# define BASICS_H
+#include <minishell.h>
 
-# include <minishell.h>
-
-// ------ DEFINES ------
-# define MSJ_ERROR "Error de sintaxis\n"
-
-// -------- ENUMS --------
-/* Boolean */
-enum e_bool
+int	exit_shell(void)
 {
-	TRUE = 1,
-	FALSE = 0
-}		bool;
-
-#endif
+	free_global();
+	exit (0);
+}
