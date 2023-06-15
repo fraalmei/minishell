@@ -39,7 +39,7 @@ static int	prompt(void)
 		g_mishell->prompt = buffer_to_list(deep_split(\
 			g_mishell->buffer, '|', ' '));
 		//free_str (splitter(g_mishell->buffer));
-		soft_split(g_mishell->buffer);
+		//soft_split(g_mishell->buffer);
 		return (1);
 	}
 	return (0);
