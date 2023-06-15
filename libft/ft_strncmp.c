@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 13:48:05 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/05/21 16:44:58 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/05/26 11:59:41 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return ((unsigned char)s1[j] - (unsigned char)s2[j]);
 }
 
-	// compare lexicologically "needle" and the end of "haystack"
+	// compare "needle" and the end of "haystack"
 int	ft_str_last_cmp(const char *haystack, const char *needle)
 {
 	size_t	i;
@@ -45,7 +45,7 @@ int	ft_str_last_cmp(const char *haystack, const char *needle)
 	return (0);
 }
 
-	// compare lexicologically "needle" and the start of "haystack"
+	// compare "needle" and the start of "haystack"
 int	ft_str_frst_cmp(const char *haystack, const char *needle)
 {
 	size_t	i;

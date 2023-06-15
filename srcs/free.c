@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 15:02:58 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/05/21 11:04:30 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/06/13 13:02:26 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,30 @@ int	free_prompt(t_prompt *prom)
 	return (0);
 }
 
-int	free_env(t_env *env)
+int	free_env_var(t_env_var *list)
 {
 	t_env_var	*swap;
 
+	while (list)
+	{
+		swap = list;
+		free (swap->name);
+		free (swap->value);
+		list = swap->next;
+		free (swap);
+	}
+	return (0);
+}
+
+int	free_env(t_env *env)
+{
 	if (env)
 	{
 		free_str (env->env);
-		while (env->frst)
-		{
-			swap = env->frst;
-			free (swap->name);
-			free (swap->value);
-			env->frst = swap->next;
-			free (swap);
-		}
+		free_env_var (env->frst_en);
+		free_env_var (env->frst_ex);
+		if (env->dir)
+			free_env_var (env->dir);
 		free (env);
 	}
 	return (0);

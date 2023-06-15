@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_trim.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 20:09:54 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/13 09:35:24 by fraalmei         ###   ########.fr       */
+/*   Created: 2023/06/08 17:42:05 by fraalmei          #+#    #+#             */
+/*   Updated: 2023/06/08 17:48:17 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+
+#include <minishell.h>
 
 	// count the words in which the string is going to be divided
-static size_t	ft_words(char const *s, char c)
+static size_t	ft_words(char const *s, char *trim)
 {
 	size_t	i;
-	size_t	j;
+	int		j;
+	int		count;
 
 	i = 0;
-	j = 0;
-	while (*s != '\0')
+	count = 0;
+	while (*s)
 	{
-		if (*s == c)
-			j = 0;
+		j = 0;
+		while (trim[j])
+		{
+			if (*s == trim[j])
+			{
+				if (*s == (*s + 1))
+					s++;
+				count++;
+			}
+		}
 		else if (j == 0)
 			j = (i++, 1);
 		s++;
@@ -63,7 +73,7 @@ char	**ft_split(const char *s, char c)
 		return (NULL);
 	i = -1;
 	l = ft_words(s, c);
-	str = (char **)ft_calloc(sizeof(char *), (l + 1));
+	str = (char **)malloc(sizeof(char *) * (l + 1));
 	if (!str)
 		return (NULL);
 	while (++i < l)

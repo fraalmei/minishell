@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 12:58:45 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/05/21 16:36:52 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:17:55 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,22 @@ char	*ft_chrjoin(char *s1, char s2);
 		//get_next_line
 char	*get_next_line(int fd);
 char	*ft_strjoin_onefree(char *s1, char const *s2);
-int		ft_strchr_nbr(const char *s, int c);
 
 		//extras
 size_t	ft_intlen(int n);
 
+		// ft_strchr_nbr
+int		ft_strchr_nbr(const char *s, int c);
+int		ft_strchr_cnt(const char *s, int c);
+
 		// ft_strchr
 int		ft_str_frst_chr(char *str, char c);
+int		*ft_str_all_chr(char *str, char c);
 
 		// ft_strrchr
 int		ft_str_lst_chr(const char *s, int c);
+
+		// ft_strdup
 char	*ft_strndup(const char *str, unsigned int n);
 
 		// ft_strncmp
@@ -115,5 +121,13 @@ int		ft_putnbr_base(long long int nbr, long long int i, char *base);
 		//free
 int		free_str(char **s);
 int		free_str_str(char ***s);
+
+		//ft_chrcmp.c
+int		ft_frst_chrcmp(const char *s, int c);
+int		ft_lst_chrcmp(const char *s, int c);
+int		ft_chrcmp_str(const char *str, char *trim);
+
+		//ft_strlen
+size_t	ft_strlen_array(const void **string);
 
 #endif
