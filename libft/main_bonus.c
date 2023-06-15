@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 09:12:05 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/04/16 17:41:20 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:01:46 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	main(int argc, char *argv[])
 	char	*line;
 
 	i = -1;
+	if (argc == 1)
+		return (0);
 	while (++i < argc - 1)
 		file[i] = open(argv[i + 1], O_RDONLY);
 	line = ft_strdup(" ");
