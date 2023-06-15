@@ -6,14 +6,14 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:09:03 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/14 16:33:34 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/06/15 10:15:47 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "../../libft/libft.h"
+# include "../libft/libft.h"
 # include <basics.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -162,14 +162,5 @@ int			unset(t_env_var **env, char *name);
 
 	// builtins/echo.c
 int			echo(t_prompt *prom);
-
-	// builtins/env.c
-void		print_env(t_env	*env, int form);
-
-	// builtins/export.c
-int			export(char *str);
-
-	// builtins/exit.c
-int			exit_shell(void);
 
 #endif
