@@ -26,7 +26,7 @@ int	print_wild(char *str)
 	else
 		i -= 1;
 	name = ft_substr(str, 0, i);
-	value = get_value(g_mishell->envirorment->frst_en, name);
+	value = get_value(g_ms->envirorment->frst_en, name);
 	if (value)
 	{
 		while (*value)
