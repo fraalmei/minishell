@@ -1,165 +1,279 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse1.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/15 12:29:45 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/15 09:43:09 by fraalmei         ###   ########.fr       */
-/*                                                                            */
+/*	*/
+/*	:::	  ::::::::   */
+/*   parse1.c	   :+:	  :+:	:+:   */
+/*	+:+ +:+	 +:+	 */
+/*   By: fraalmei <fraalmei@student.42.fr>	  +#+  +:+	   +#+	*/
+/*	+#+#+#+#+#+   +#+	   */
+/*   Created: 2023/04/15 12:29:45 by fraalmei	  #+#	#+#	 */
+/*   Updated: 2023/06/15 14:18:36 by fraalmei	 ###   ########.fr	   */
+/*	*/
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-/* static int	count_char(char *buffer, char c)
+/// @brief creates and malloc an t_prompt structure and in itialize it
+/// @param .no need parameters
+/// @return a t_prompt structure
+static t_prompt	*create_prompt_struct(void)
+{
+	t_prompt	*prom;
+
+	prom = (t_prompt *)ft_calloc(sizeof(*prom), 1);
+	if (!prom)
+		return (NULL);
+	prom->prev = NULL;
+	prom->sep0 = NULL;
+	prom->command = NULL;
+	prom->n_options = -1;
+	prom->options = NULL;
+	prom->arguments = NULL;
+	prom->sep1 = NULL;
+	prom->next = NULL;
+	return (prom);
+}
+
+/// @brief check the next 2 characters of the string to know if its a redirecction
+/// @param str the string to check
+/// @return a int (0 if is not a redirecction, 1 if is 1 char or 2 if is 2 chars)
+static int	is_redirecction(char *str)
+{
+	if (!str)
+		return (0);
+	else if (str[0] == '|' && (!str[1] || str[1] != '|'))
+		return (1);
+	else if (str[0] == '|' && str[1] == '|')
+		return (2);
+	else if (str[0] == '<' && (!str[1] || str[1] != '<'))
+		return (1);
+	else if (str[0] == '<' && str[1] == '<')
+		return (2);
+	else if (str[0] == '>' && (!str[1] || str[1] != '>'))
+		return (1);
+	else if (str[0] == '>' && str[1] == '>')
+		return (2);
+	else if (str[0] == '&' && (!str[1] || str[1] != '&'))
+		return (1);
+	else if (str[0] == '&' && str[1] == '&')
+		return (2);
+	return (0);
+}
+
+/// @brief check the number of options in the string
+/// @param s the string to check
+/// @return a int with the numbers of options finded
+int	n_options(char **s)
 {
 	int		i;
+	int		l;
 	int		count;
+	char	*swap;
 
-	i = -1;
+	i = 0;
 	count = 0;
-	while (buffer[++i])
-		if (buffer[i] == c)
-			count++;
-	return (0);
-} */
+	while (s[i] && is_redirecction(s[i]) == 0)
+	{
+		swap = s[i];
+		l = 1;
+		while (swap[l])
+		{
+			if (ft_isalnum(swap[l]))
+				count++;
+			else
+				return (-1);
+			l++;
+		}
+		if (ft_str_frst_cmp(&swap[0], "-") != 0)
+			return (count);
+		i++;
+	}
+	return (count);
+}
 
+/// @brief create an string with the options read in the param string
+/// @param s the string to check
+/// @param count the numbers of options must have the return string
+/// @return a string with the options
+char	*option_generator(char **s, int count, int *i)
+{
+	char	*options;
+	int		l;
+	char	*swap;
+	int		x;
+
+	l = 0;
+	options = (char *)ft_calloc(sizeof(char), count + 1);
+	if (!options)
+		return (NULL);
+	x = 0;
+	while (s[*i] && is_redirecction(s[*i]) == 0)
+	{
+		swap = s[*i];
+		if (ft_str_frst_cmp(&swap[0], "-") == 0)
+		{
+			l = 1;
+			while (swap[l] && x < count)
+				options[x++] = swap[l++];
+			free (swap);
+			*i += 1;
+		}
+		else
+			break ;
+	}
+	return (options);
+}
+
+/// @brief create an structure t_prompt
+/// @param s the string with all words
+/// @return a pointer of a t_prompt structure
+t_prompt	*buff_to_prom(char **s)
+{
+	int			i;
+	int			token_limit;
+	t_prompt	*prom;
+
+	i = 0;
+	prom = create_prompt_struct();
+	token_limit = 1;
+	if (is_redirecction(s[i]) != 0)
+		prom->sep0 = s[i++];
+	while (s[i] && is_redirecction(s[i]) == 0)
+	{
+		if (!prom->command)
+		{
+			prom->command = ft_strtrim_onefree(s[i], " \t\n\v\f\r");
+			prom->n_options = n_options(&s[i + 1]);
+			prom->options = option_generator(&s[i + 1], prom->n_options, &i);
+		}
+		else
+			prom->arguments = ft_strtrim_onefree(ft_strjoin_allfree(\
+				ft_strjoin_onefree(prom->arguments, " "), s[i]), " \t\n\v\f\r");
+		i++;
+	}
+	if (is_redirecction(s[i]) != 0)
+		prom->sep1 = s[i];
+	return (prom);
+}
+
+/// @brief guess it
+/// @param prom the first t_prompt of the list
+/// @return a pointer to the last t_prompt
+t_prompt	*last_prom(t_prompt *prom)
+{
+	while (prom->next)
+		prom = prom->next;
+	return (prom);
+}
+
+/// @brief create a list of t_prompt
+/// @param buffer the bouble string with all the words
+/// @return the first struct t_prompt of the list
+t_prompt	*buffer_to_prom(char **buffer)
+{
+	int			i;
+	t_prompt	*prom;
+	t_prompt	*swap;
+
+	i = 0;
+	prom = buff_to_prom(&buffer[i]);
+	while (buffer[i] && is_redirecction(buffer[i]) == 0)
+		i++;
+	while (buffer[i])
+	{
+		swap = buff_to_prom(&buffer[i]);
+		i++;
+		while (buffer[i] && is_redirecction(buffer[i]) == 0)
+			i++;
+		swap->prev = last_prom(prom);
+		last_prom(prom)->next = swap;
+	}
+	free (buffer);
+	return (prom);
+}
+
+/// @brief join a string to a double string 
+/// mallocing a new double string and free the old
+/// @param str the doubl string for join
+/// @param char* the string to join
+/// @return the new double string
+char	**d_str_join(char **str, char *new)
+{
+	int		len;
+	char	**s;
+	int		i;
+
+	len = 0;
+	if (!new)
+		return (str);
+	if (str)
+		while (str[len])
+			len++;
+	s = (char **)ft_calloc((len + 2), sizeof(char *));
+	if (!s)
+		return (NULL);
+	i = -1;
+	while (++i < len)
+		s[i] = str[i];
+	s[i] = new;
+	s[i + 1] = NULL;
+	free (str);
+	return (s);
+}
+
+/// @brief read a create a string counting the quotes
+/// @param string the string is the buffer got for the readline
+/// @return a string between quotes or spaces
 char	*read_word(char *string)
 {
 	int		i;
 	char	*word;
 	char	c;
-	int		j;
 
 	i = 0;
-	while (string[i] && string[i] == ' ')
+	while (string[i] && string[i] != ' ' && is_redirecction(&string[i]) == 0)
 	{
 		if (string[i] == 39 || string[i] == 34)
 		{
-			j = 0;
-			c = string[i];
+			c = string[i++];
 			while (string[i] != c)
 				i++;
+			break ;
 		}
-		i++;
+		else
+			i++;
 	}
+	if (i == 0 && is_redirecction(&string[i]) > 0)
+		i += is_redirecction(&string[i]);
 	word = ft_substr(string, 0, i);
 	return (word);
 }
 
-
-char	**d_str_join(char **str, char *new)
-{
-	void	**s;
-	int		i;
-
-	if (!str)
-		str = (char **)ft_calloc(1, sizeof(char *));
-	if (str == NULL || new == NULL)
-		return (NULL);
-	s = ft_calloc(sizeof(char *), ft_strlen_array((void *)str) + 2);
-	i = -1;
-	while (str[++i])
-		s[i] = str[i];
-	str[i] = new;
-	return ((char **) s);
-}
-
-void	soft_split(char *buffer)
+/// @brief divide the buffer into strings
+/// @param buffer the buffer got from the readline
+/// @return aa double string with all words from the buffer
+char	**soft_split(char *buffer)
 {
 	char	**swap;
 	char	*word;
 	int		i;
 
-	i = -1;
-	printf("%s\n", buffer);
-	while (buffer[++i])
-	{
-		word = read_word(buffer);
-		swap = d_str_join(swap, word);
-	}
-	i = -1;
-	printf("pasa\n");
-	while (swap[++i])
-		printf("%s\n", swap[i]);
-	free_str(swap);
-	printf("pasa\n");
-}
-
-/* 
-static char	**add_split(char *buffer, char **split, char c)
-{
-	int		*count;
-	int		i;
-	int		l;
-	char	**swap;
-
 	i = 0;
-	while (split[i])
-		i++;
-	count = ft_str_all_chr(buffer, c);
-	swap = ft_calloc(sizeof(char *), i + 2);
-	l = i + 1;
-	while (l-- > 0)
-		swap[l] = split[l];
-	free (split);
-	swap[i] = ft_substr(buffer, 0, count[0]);
-	i++;
-	swap[i] = ft_substr(buffer, count[1], count[2]);
-	free (count);
+	swap = NULL;
+	while (buffer[i])
+	{
+		if (buffer[i] == ' ')
+			i++;
+		else
+		{
+			word = read_word(&buffer[i]);
+			if (is_redirecction(word) == 0)
+				i += ft_strlen(word);
+			else
+				i += is_redirecction(word);
+			swap = d_str_join(swap, word);
+		}
+	}
 	return (swap);
 }
 
-static void	print_splt(char **string)
-{
-	int		i;
-
-	i = -1;
-	while (string[++i])
-		printf("%s\n", string[i]);
-}
-
-char	**splitter(char *buffer)
-{
-	int		i;
-	int		j;
-	char	**swap;
-	char	**string;
-
-	i = 0;
-	j = 0;
-	string = ft_calloc(sizeof(char *), 1);
-	while (buffer[i])
-	{
-		if (buffer[i] == 39 || buffer[i] == 34)
-		{
-			if ((count_char(buffer, buffer[i]) % 2) == 0)
-			{
-				printf("Open %s.\n", &buffer[j]);
-				string = add_split(&buffer[j], string, buffer[i]);
-				j = i + 1;
-			}
-			else
-				return (printf("Open quotes.\n"), NULL);
-		}
-		i++;
-	}
-	if (j + 1 == i)
-	{
-		swap = ft_calloc(sizeof(char *), ft_strlen_array((void *)string) + 1);
-		i = 0;
-		while (string[i])
-			swap[i] = string[i];
-		swap[i] = ft_strdup(&buffer[j]);
-		free (string);
-		print_splt(swap);
-		return (swap);
-	}
-	else
-	{
-		print_splt(string);
-		return (string);
-	}
-}
- */
+// veamos | que se| puede |hacer por aq|ui
