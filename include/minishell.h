@@ -102,7 +102,7 @@ typedef struct s_mini_class
 	t_sig		*signals;
 }				t_mini_class;
 
-t_mini_class	*g_mishell;
+t_mini_class	*g_ms;
 
 	//main.c
 //int			prompt(void);
