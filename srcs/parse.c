@@ -30,25 +30,6 @@ static t_prompt	*create_prompt_struct(char *comm, char *opt, char *arg)
 	return (prom);
 }
 
-	// print the struct (or structs) generated frome the buffer
-static void	print_prompt(t_prompt *prom)
-{
-	while (prom)
-	{
-		ft_printf("++------------++\n");
-		ft_printf("Anterior:	%p\n", prom->prev);
-		ft_printf("Separación:	%p\n", prom->sep0);
-		ft_printf("Dirección:	%p\n", prom);
-		ft_printf("Comando:		%s\n", prom->command);
-		ft_printf("Opciones:	%s\n", prom->options);
-		ft_printf("Argumentos:	%s\n", prom->arguments);
-		ft_printf("Separación:	%p\n", prom->sep1);
-		ft_printf("Siguiente:	%p\n", prom->next);
-		ft_printf("++------------++\n");
-		prom = prom->next;
-	}
-}
-
 	// create the prompt strcut from a string of strings
 static t_prompt	*str_to_promt_struct(char **str)
 {
