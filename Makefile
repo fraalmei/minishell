@@ -44,6 +44,7 @@ BIN_DIR		= bin
 SRC_DIR		= srcs
 SRCS		= main.c signals.c actions.c pipe.c parse.c parse1.c free.c $(ENV) $(BUILTINS)
 ENV			= env/new_env.c env/utils_env.c
+UTILS		= utils/print_things.c
 BUILTINS	= builtins/pwd.c builtins/env.c builtins/export.c builtins/exit.c builtins/cd.c \
 				builtins/unset.c builtins/echo.c
 LIBFT_DIR	= libft		# path to libft libft
