@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 12:58:45 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/13 16:17:55 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/06/18 16:38:48 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	*get_next_line(int fd);
 char	*ft_strjoin_onefree(char *s1, char const *s2);
 
 		//extras
-size_t	ft_intlen(int n);
+size_t	ft_intlen(int n, int base);
 
 		// ft_strchr_nbr
 int		ft_strchr_nbr(const char *s, int c);
