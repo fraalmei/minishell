@@ -23,7 +23,7 @@ size_t	ft_intlen(int n, int base)
 	while (n != 0)
 	{
 		i++;
-		n = n / 10;
+		n = n / base;
 	}
 	return (i);
 }
