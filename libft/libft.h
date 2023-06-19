@@ -84,14 +84,15 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 		//ft_printf
 int		ft_printf(char const *str, ...);
-char	*ft_chrjoin(char *s1, char s2);
 
 		//get_next_line
 char	*get_next_line(int fd);
 
 		//ft_strjoin
 char	*ft_chrjoin(char *s1, char s2);
+char	*ft_strjoin_onefree(char *s1, char const *s2);
 char	*ft_strjoin_allfree(char *s1, char *s2);
+
 
 		//extras
 size_t	ft_intlen(int n, int base);
