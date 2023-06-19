@@ -24,9 +24,9 @@ int	actions(t_prompt *prompt)
 		get_wd();
 	else if (ft_strcmp(prompt->command, "env") == 0)
 	{
-		print_env(g_mishell->envirorment->frst_en);
-		if (g_mishell->envirorment->dir != NULL)
-			print_env(g_mishell->envirorment->dir);
+		print_env(g_ms->envirorment->frst_en);
+		if (g_ms->envirorment->dir != NULL)
+			print_env(g_ms->envirorment->dir);
 	}
 	else if (ft_strcmp(prompt->command, "export") == 0)
 		export(prompt);
@@ -34,10 +34,10 @@ int	actions(t_prompt *prompt)
 		cd(prompt);
 	else if (ft_strcmp(prompt->command, "unset") == 0)
 	{
-		unset(&g_mishell->envirorment->frst_en, prompt->arguments);
-		unset(&g_mishell->envirorment->frst_ex, prompt->arguments);
+		unset(&g_ms->envirorment->frst_en, prompt->arguments);
+		unset(&g_ms->envirorment->frst_ex, prompt->arguments);
 	}
 	else if (ft_strcmp(prompt->command, "echo") == 0)
-		echo(g_mishell->prompt);
+		echo(g_ms->prompt);
 	return (0);
 }
