@@ -23,7 +23,7 @@ char	*ft_itoa(int n)
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
 	ft_bzero(c, 12);
-	j = ft_intlen(n) - 1;
+	j = ft_intlen(n, 10) - 1;
 	if (n < 0)
 	{
 		c[0] = '-';
