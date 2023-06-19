@@ -13,7 +13,7 @@
 #include "libft.h"
 
 	// count the digits of a int
-size_t	ft_intlen(int n)
+size_t	ft_intlen(int n, int base)
 {
 	size_t	i;
 
