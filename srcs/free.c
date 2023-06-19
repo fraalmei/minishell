@@ -66,11 +66,11 @@ int	free_signals(t_sig *sig)
 
 int	free_global(void)
 {
-	if (!g_mishell->buffer)
-		free (g_mishell->buffer);
-	free_env (g_mishell->envirorment);
-	if (!g_mishell->prompt)
-		free (g_mishell->prompt);
-	free_signals(g_mishell->signals);
+	if (!g_ms->buffer)
+		free (g_ms->buffer);
+	free_env (g_ms->envirorment);
+	if (!g_ms->prompt)
+		free (g_ms->prompt);
+	free_signals(g_ms->signals);
 	return (0);
 }
