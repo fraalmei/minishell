@@ -85,6 +85,8 @@ int	n_options(char **s)
 				return (-1);
 			l++;
 		}
+		if (ft_str_frst_cmp(&swap[0], "-") != 0)
+			return (count);
 		i++;
 	}
 	return (count);

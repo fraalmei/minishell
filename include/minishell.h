@@ -173,5 +173,4 @@ void		print_str_str(char **string);
 
 	// utils/meta_char.c
 char		*return_wild(char *str, int *i);
-
 #endif
