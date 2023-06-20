@@ -6,16 +6,16 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:18:16 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/13 13:02:04 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/06/15 12:47:35 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 	// check the buffer command
-	// * if (sizeof(g_mishell->envirorment->dir) == sizeof(t_env_var))
+	// * if (sizeof(g_ms->envirorment->dir) == sizeof(t_env_var))
 	// 	the if condition dont work if only check the existence of "dir"
-	// * if (g_mishell->envirorment->dir)
+	// * if (g_ms->envirorment->dir)
 int	actions(t_prompt *prompt)
 {
 	if (ft_strcmp(prompt->command, "exit") == 0)

@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:09:03 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/18 17:32:20 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/06/20 13:18:42 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,4 +171,6 @@ int			echo(t_prompt *prom);
 void		print_prompt(t_prompt *prom);
 void		print_str_str(char **string);
 
+	// utils/meta_char.c
+char		*return_wild(char *str, int *i);
 #endif
