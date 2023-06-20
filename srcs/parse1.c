@@ -243,7 +243,7 @@ char	*read_word(char *string, int *i)
 			word = ft_chrjoin(word, string[*i]);
 			c = string[*i];
 			*i += 1;
-			while (string[*i] && string[*i] == '$')
+			while (string[*i])
 			{
 				if (string[*i] == '$' && c == 34)
 				{
