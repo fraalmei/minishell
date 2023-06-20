@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 09:21:13 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/03/23 13:37:24 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/06/19 09:47:46 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_itoa(int n)
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
 	ft_bzero(c, 12);
-	j = ft_intlen(n) - 1;
+	j = ft_intlen(n, 10) - 1;
 	if (n < 0)
 	{
 		c[0] = '-';

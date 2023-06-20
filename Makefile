@@ -6,7 +6,7 @@
 #    By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/25 17:18:27 by fraalmei          #+#    #+#              #
-#    Updated: 2023/06/15 10:07:52 by fraalmei         ###   ########.fr        #
+#    Updated: 2023/06/19 17:11:31 by fraalmei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,8 +42,9 @@ LIBS		= -L $(LIBFT_DIR) -lft -lreadline -L $(READ)/lib
 # Directories
 BIN_DIR		= bin
 SRC_DIR		= srcs
-SRCS		= main.c signals.c actions.c pipe.c parse.c parse1.c free.c $(ENV) $(BUILTINS)
+SRCS		= main.c signals.c actions.c pipe.c parse.c parse1.c free.c $(ENV) $(BUILTINS) $(UTILS)
 ENV			= env/new_env.c env/utils_env.c
+UTILS		= utils/print_things.c utils/meta_char.c
 BUILTINS	= builtins/pwd.c builtins/env.c builtins/export.c builtins/exit.c builtins/cd.c \
 				builtins/unset.c builtins/echo.c
 LIBFT_DIR	= libft		# path to libft libft
@@ -55,6 +56,7 @@ INCLUDE_DIR	= include		# path to headers
 # type "brew install readline"
 
 READ		= /System/Volumes/Data/sgoinfre/students/fraalmei/homebrew/Cellar/readline/8.2.1
+# READ		= /System/Volumes/Data/Users/cagonzal/.brew/Cellar/readline/8.2.1/
 
 # Convert source files to binary
 OBJS = $(SRCS:%.c=$(BIN_DIR)/%.o)

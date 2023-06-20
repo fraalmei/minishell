@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:09:03 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/15 10:15:47 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/06/20 13:18:42 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_prompt
 	struct s_prompt		*prev;
 	char				*sep0;
 	char				*command;
+	int					n_options;
 	char				*options;
 	char				*arguments;
 	char				*sep1;
@@ -102,13 +103,14 @@ typedef struct s_mini_class
 	t_sig		*signals;
 }				t_mini_class;
 
-t_mini_class	*g_mishell;
+t_mini_class	*g_ms;
 
 	//main.c
 //int			prompt(void);
 
 	// signals.c
 void		signals_do(void);
+void		signals_dont(void);
 void		sig_init(void);
 
 	// actions.c
@@ -124,7 +126,9 @@ t_prompt	*buffer_to_list(char ***s);
 char		***deep_split(char *buffer, char c1, char c2);
 
 	// parse1.c
-void		soft_split(char *buffer);
+t_prompt	*buffer_to_prom(char **buffer);
+char		**soft_split(char *buffer);
+
 	// free.c
 int			free_prompt(t_prompt *prom);
 int			free_env_var(t_env_var *list);
@@ -162,5 +166,12 @@ int			unset(t_env_var **env, char *name);
 
 	// builtins/echo.c
 int			echo(t_prompt *prom);
+
+	// utils/print_things.c
+void		print_prompt(t_prompt *prom);
+void		print_str_str(char **string);
+
+	// utils/meta_char.c
+char		*return_wild(char *str, int *i);
 
 #endif

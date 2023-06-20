@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse1.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/15 12:29:45 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/15 09:43:09 by fraalmei         ###   ########.fr       */
-/*                                                                            */
+/*	*/
+/*	:::	  ::::::::   */
+/*   parse1.c	   :+:	  :+:	:+:   */
+/*	+:+ +:+	 +:+	 */
+/*   By: fraalmei <fraalmei@student.42.fr>	  +#+  +:+	   +#+	*/
+/*	+#+#+#+#+#+   +#+	   */
+/*   Created: 2023/04/15 12:29:45 by fraalmei	  #+#	#+#	 */
+/*   Updated: 2023/06/15 14:18:36 by fraalmei	 ###   ########.fr	   */
+/*	*/
 /* ************************************************************************** */
 
 #include <minishell.h>
@@ -75,6 +75,8 @@ int	n_options(char **s)
 	{
 		swap = s[i];
 		l = 1;
+		if (ft_str_frst_cmp(&swap[0], "-") != 0)
+			return (count);
 		while (swap[l])
 		{
 			if (ft_isalnum(swap[l]))
@@ -83,8 +85,6 @@ int	n_options(char **s)
 				return (-1);
 			l++;
 		}
-		if (ft_str_frst_cmp(&swap[0], "-") != 0)
-			return (count);
 		i++;
 	}
 	return (count);
@@ -143,6 +143,8 @@ t_prompt	*buff_to_prom(char **s)
 		{
 			prom->command = ft_strtrim_onefree(s[i], " \t\n\v\f\r");
 			prom->n_options = n_options(&s[i + 1]);
+			if (prom->n_options == -1)
+				return (printf("illegal option\n"), NULL);
 			prom->options = option_generator(&s[i + 1], prom->n_options, &i);
 		}
 		else
@@ -181,6 +183,8 @@ t_prompt	*buffer_to_prom(char **buffer)
 	while (buffer[i])
 	{
 		swap = buff_to_prom(&buffer[i]);
+		if (!swap)
+			return (free_prompt(prom), NULL);
 		i++;
 		while (buffer[i] && is_redirecction(buffer[i]) == 0)
 			i++;
@@ -223,36 +227,106 @@ char	**d_str_join(char **str, char *new)
 /// @brief read a create a string counting the quotes
 /// @param string the string is the buffer got for the readline
 /// @return a string between quotes or spaces
-char	*read_word(char *string)
+char	*read_word(char *string, int *i)
 {
-	int		i;
 	char	*word;
+	char	*swap;
 	char	c;
 
-	i = 0;
+	word = (char *)ft_calloc(sizeof(char), 1);
+	while (string[*i] && string[*i] != ' ' && is_redirecction(&string[*i]) == 0)
+	{
+		printf("%c\n", string[*i]);
+		if (string[*i] == 39 || string[*i] == 34)
+		{
+			word = ft_chrjoin(word, string[*i]);
+			c = string[*i];
+			*i += 1;
+			while (string[*i] && string[*i] == '$')
+			{
+				if (string[*i] == '$' && c == 34)
+				{
+					swap = return_wild(string, &*i);
+					*i += 1;
+					if (swap)
+						word = ft_strjoin_onefree(word, swap);
+				}
+				else
+				{
+					word = ft_chrjoin(word, string[*i]);
+					*i += 1;
+				}
+			}
+		}
+		else
+		{
+			if (string[*i] == '$')
+			{
+				swap = return_wild(string, &*i);
+				*i += 1;
+				if (swap)
+					word = ft_strjoin_onefree(word, swap);
+			}
+			else
+			{
+				word = ft_chrjoin(word, string[*i]);
+				*i += 1;
+			}
+		}
+	}
+	if (ft_strlen(word) == 0 && is_redirecction(&string[*i]) > 0)
+	{
+		word = ft_chr_n_join(word, &string[*i], is_redirecction(&string[*i]));
+		*i += is_redirecction(&string[*i]);
+	}
+	return (word);
+}
+
+/* char	*get_in_meta(char *string, char *word, int *init, int i)
+{
+	char	*swap;
+
+	word = ft_substr(string, *init, i - *init);
+	*init = i;
+	swap = return_wild(string, &*init);
+	if (swap)
+		word = ft_strjoin_onefree(word, swap);
+	return (word);
+}
+
+char	*read_word(char *string, int *init)
+{
+	char	*word;
+	int		i;
+
+	i = *init;
+	word = (char *)ft_calloc(sizeof(char), 1);
 	while (string[i] && string[i] != ' ' && is_redirecction(&string[i]) == 0)
 	{
-		if (string[i] == 39 || string[i] == 34)
+		if (string[i] == '$')
+			word = get_in_meta(string, word, &*init, i);
+		else if (string[i] == 39)
+			i += ft_frst_chrcmp(&string[i + 1], 39);
+		else if (string[i] == 34)
 		{
-			c = string[i++];
-			while (string[i] != c)
+			while (string[i] && string[i] != 34)
 			{
-				if (c == '"' && string[i] == '$')
-				{
-					word = return_wild(&string[i]);
-					printf("%s\n", word);
-				}
-				i++;
+				if (string[i] == '$')
+					word = get_in_meta(string, word, &*init, i);
+				else
+					i++;
 			}
+			i++;
 		}
 		else
 			i++;
 	}
-	if (i == 0 && is_redirecction(&string[i]) > 0)
-		i += is_redirecction(&string[i]);
-	word = ft_substr(string, 0, i);
+	word = ft_strjoin_allfree(word, ft_substr(string, *init, i - *init));
+	printf ("devuelve %i - %i - %s\n", *init, i, word);
+	*init += i;
 	return (word);
-}
+} */
+
 
 /// @brief divide the buffer into strings
 /// @param buffer the buffer got from the readline
@@ -271,13 +345,12 @@ char	**soft_split(char *buffer)
 			i++;
 		else
 		{
-			word = read_word(&buffer[i]);
-			if (is_redirecction(word) == 0)
-				i += ft_strlen(word);
-			else
-				i += is_redirecction(word);
-			swap = d_str_join(swap, word);
+			word = read_word(buffer, &i);
+			if (word)
+				swap = d_str_join(swap, word);
 		}
 	}
 	return (swap);
 }
+
+// veamos | que se| puede |hacer por aq|ui

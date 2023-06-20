@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 15:02:58 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/13 13:02:26 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/06/19 18:13:15 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	free_prompt(t_prompt *prom)
 			free (prom->arguments);
 		if ((prom->options))
 			free (prom->options);
+		if ((prom->sep1))
+			free(prom->sep1);
 		free (prom);
 		prom = prom->next;
 	}
@@ -66,11 +68,11 @@ int	free_signals(t_sig *sig)
 
 int	free_global(void)
 {
-	if (!g_mishell->buffer)
-		free (g_mishell->buffer);
-	free_env (g_mishell->envirorment);
-	if (!g_mishell->prompt)
-		free (g_mishell->prompt);
-	free_signals(g_mishell->signals);
+	if (!g_ms->buffer)
+		free (g_ms->buffer);
+	free_env (g_ms->envirorment);
+	if (!g_ms->prompt)
+		free (g_ms->prompt);
+	free_signals(g_ms->signals);
 	return (0);
 }

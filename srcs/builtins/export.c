@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:39:59 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/06 14:55:23 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/06/15 12:41:57 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	export(t_prompt *prompt)
 
 	printf("entra\n");
 	if (!prompt->options && !prompt->arguments)
-		return (print_export(g_mishell->envirorment->frst_ex), 0);
+		return (print_export(g_ms->envirorment->frst_ex), 0);
 	else if (prompt->options)
 		return (printf("bad option: %s\n", prompt->options), 0);
 	if (!prompt->arguments)
@@ -52,18 +52,18 @@ int	export(t_prompt *prompt)
 		return (printf("bad assigment\n"), free_str(splt), 0);
 	else if (ft_str_lst_chr(splt[0], ' ') > 0)
 		return (printf("%s not found\n", splt[1]), free_str(splt), 0);
-	if (get_name(g_mishell->envirorment->frst_ex, splt[0]) && \
-			get_name(g_mishell->envirorment->frst_en, splt[0]))
+	if (get_name(g_ms->envirorment->frst_ex, splt[0]) && \
+			get_name(g_ms->envirorment->frst_en, splt[0]))
 	{
 		printf("actions set\n");
-		(set_value(g_mishell->envirorment->frst_en, splt), \
-			set_value(g_mishell->envirorment->frst_ex, splt));
+		(set_value(g_ms->envirorment->frst_en, splt), \
+			set_value(g_ms->envirorment->frst_ex, splt));
 	}
 	else
 	{
-		lst_strct_env(g_mishell->envirorment->frst_en)->next = \
+		lst_strct_env(g_ms->envirorment->frst_en)->next = \
 			new_struct_env(splt);
-		sort_in_list(&g_mishell->envirorment->frst_ex, \
+		sort_in_list(&g_ms->envirorment->frst_ex, \
 			new_struct_env(ft_split(prompt->arguments, '=')));
 	}
 	return (0);

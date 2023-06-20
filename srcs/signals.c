@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:09:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/08 14:47:07 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/06/18 16:57:21 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,20 @@ static void	signal_int(int code)
 void	signals_do(void)
 {
 	signal(SIGINT, signal_int);
-	//signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	signal(SIGTSTP, SIG_IGN);
 	signal(SIGTERM, SIG_IGN);
 	signal(SIGSTOP, SIG_IGN);
+}
+
+	// dejar de ignorar las seññales
+void	signals_dont(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+	signal(SIGTSTP, SIG_DFL);
+	signal(SIGTERM, SIG_DFL);
+	signal(SIGSTOP, SIG_DFL);
 }
 
 void	init_signals(void)

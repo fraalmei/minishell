@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 12:58:45 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/13 16:17:55 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/06/20 13:13:19 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,20 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 		//ft_printf
 int		ft_printf(char const *str, ...);
+
+		//ft_chrjoin
 char	*ft_chrjoin(char *s1, char s2);
+char	*ft_chr_n_join(char *s1, char *s2, int n);
+
+		//ft_strjoin
+char	*ft_strjoin_onefree(char *s1, char const *s2);
+char	*ft_strjoin_allfree(char *s1, char *s2);
 
 		//get_next_line
 char	*get_next_line(int fd);
-char	*ft_strjoin_onefree(char *s1, char const *s2);
 
 		//extras
-size_t	ft_intlen(int n);
+size_t	ft_intlen(int n, int base);
 
 		// ft_strchr_nbr
 int		ft_strchr_nbr(const char *s, int c);

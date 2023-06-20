@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 12:29:45 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/14 16:38:53 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/06/19 15:41:48 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,6 @@ static t_prompt	*create_prompt_struct(char *comm, char *opt, char *arg)
 	prom->sep1 = NULL;
 	prom->next = NULL;
 	return (prom);
-}
-
-	// print the struct (or structs) generated frome the buffer
-static void	print_prompt(t_prompt *prom)
-{
-	while (prom)
-	{
-		ft_printf("++------------++\n");
-		ft_printf("Anterior:	%p\n", prom->prev);
-		ft_printf("Separación:	%p\n", prom->sep0);
-		ft_printf("Dirección:	%p\n", prom);
-		ft_printf("Comando:		%s\n", prom->command);
-		ft_printf("Opciones:	%s\n", prom->options);
-		ft_printf("Argumentos:	%s\n", prom->arguments);
-		ft_printf("Separación:	%p\n", prom->sep1);
-		ft_printf("Siguiente:	%p\n", prom->next);
-		ft_printf("++------------++\n");
-		prom = prom->next;
-	}
 }
 
 	// create the prompt strcut from a string of strings

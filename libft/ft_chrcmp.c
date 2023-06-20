@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 17:36:50 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/08 13:29:34 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:33:04 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	ft_lst_chrcmp(const char *s, int c)
 	return (0);
 }
 
+	// return the position of the position of a character of trim
 int	ft_chrcmp_str(const char *str, char *trim)
 {
 	int		i;
