@@ -6,11 +6,26 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 11:23:41 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/19 19:04:14 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/07/25 13:06:41 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	list_len(t_env_var *first)
+{
+	int			i;
+	t_env_var	*swap;
+
+	i = 0;
+	swap = first;
+	while (swap->next)
+	{
+		swap = swap->next;
+		i++;
+	}
+	return (i);
+}
 
 t_env_var	*new_struct_env(char **var)
 {
