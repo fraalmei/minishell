@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:18:16 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/22 10:55:44 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/07/26 14:33:06 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	actions(t_prompt *prompt)
 		get_wd();
 	else if (prompt->command && ft_strcmp(prompt->command, "env") == 0)
 	{
-		print_env(g_ms->envirorment->frst_en);
+		print_env(g_ms->envirorment->frst);
 		if (g_ms->envirorment->dir != NULL)
 			print_env(g_ms->envirorment->dir);
 	}
@@ -33,10 +33,7 @@ int	actions(t_prompt *prompt)
 	else if (prompt->command && ft_strcmp(prompt->command, "cd") == 0)
 		cd(prompt);
 	else if (prompt->command && ft_strcmp(prompt->command, "unset") == 0)
-	{
-		unset(&g_ms->envirorment->frst_en, prompt->arguments);
-		unset(&g_ms->envirorment->frst_ex, prompt->arguments);
-	}
+		unset(&g_ms->envirorment->frst, prompt->arguments);
 	else if (prompt->command && ft_strcmp(prompt->command, "echo") == 0)
 		echo(g_ms->prompt);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:09:03 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/20 13:18:42 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/07/26 14:31:38 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,7 @@ typedef struct s_env_var
 typedef struct s_env
 {
 	char			**env;
-	t_env_var		*frst_en;
-	t_env_var		*frst_ex;
+	t_env_var		*frst;
 	t_env_var		*dir;
 }					t_env;
 
@@ -142,6 +141,7 @@ t_env		*read_env(char **env);
 void		sort_in_list(t_env_var **list, t_env_var *node);
 
 	// env/utils_env.c
+int			list_len(t_env_var *first);
 t_env_var	*new_struct_env(char **var);
 char		*get_value(t_env_var *env, char *var);
 void		set_value(t_env_var *env, char **var);

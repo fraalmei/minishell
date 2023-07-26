@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:54:33 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/05/21 12:52:03 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/07/25 12:26:02 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ char	**copy_env(char **env)
 	return (copy);
 }
 
+/// @brief copy and generate a struct for the envirorment
+/// @param env the father envirorment
+/// @return the envirorent struct
 t_env	*read_env(char **env)
 {
 	t_env		*copy;

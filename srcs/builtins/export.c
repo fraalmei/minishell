@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:39:59 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/15 12:41:57 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/07/26 14:36:02 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,58 @@
 	// imprime el export
 static void	print_export(t_env_var	*env)
 {
-	while (env)
+	ft_printf("declare -x %s", env->name);
+	ft_printf("=");
+	if (env->value)
+		ft_printf("\"%s\"\n", env->value);
+	else
+		ft_printf("\"\"\n");
+}
+
+static t_env_var	*get_less_node(t_env_var *list, t_env_var *last)
+{
+	t_env_var	*ret;
+
+	if (!last)
 	{
-		ft_printf("declare -x %s", env->name);
-		ft_printf("=");
-		if (env->value)
-			ft_printf("\"%s\"\n", env->value);
-		else
-			ft_printf("\"\"\n");
-		env = env->next;
+		ret = list;
+		while (list->next)
+		{
+			if (ft_strcmp(ret->name, list->name) >= 0)
+				ret = list;
+			list = list->next;
+		}
+	}
+	else
+	{
+		ret = NULL;
+		while (list->next)
+		{
+			if (ft_strcmp(last->name, list->name) < 0)
+			{
+				if (!ret)
+					ret = list;
+				else if (ft_strcmp(ret->name, list->name) >= 0)
+					ret = list;
+			}
+			list = list->next;
+		}
+	}
+	return (ret);
+}
+
+static void	print_sort_list(t_env_var *list)
+{
+	t_env_var	*swap;
+	int			i;
+
+	i = list_len(list);
+	swap = get_less_node(list, NULL);
+	print_export (swap);
+	while (--i)
+	{
+		swap = get_less_node(list, swap);
+		print_export(swap);
 	}
 }
 
@@ -40,10 +83,9 @@ int	export(t_prompt *prompt)
 {
 	char		**splt;
 
-	printf("entra\n");
-	if (!prompt->options && !prompt->arguments)
-		return (print_export(g_ms->envirorment->frst_ex), 0);
-	else if (prompt->options)
+	if (!prompt->n_options && !prompt->arguments)
+		return (print_sort_list(g_ms->envirorment->frst), 0);
+	else if (prompt->n_options != 0)
 		return (printf("bad option: %s\n", prompt->options), 0);
 	if (!prompt->arguments)
 		return (0);
@@ -52,18 +94,18 @@ int	export(t_prompt *prompt)
 		return (printf("bad assigment\n"), free_str(splt), 0);
 	else if (ft_str_lst_chr(splt[0], ' ') > 0)
 		return (printf("%s not found\n", splt[1]), free_str(splt), 0);
-	if (get_name(g_ms->envirorment->frst_ex, splt[0]) && \
-			get_name(g_ms->envirorment->frst_en, splt[0]))
+	if (get_name(g_ms->envirorment->frst, splt[0]) && \
+			get_name(g_ms->envirorment->frst, splt[0]))
 	{
 		printf("actions set\n");
-		(set_value(g_ms->envirorment->frst_en, splt), \
-			set_value(g_ms->envirorment->frst_ex, splt));
+		(set_value(g_ms->envirorment->frst, splt), \
+			set_value(g_ms->envirorment->frst, splt));
 	}
 	else
 	{
-		lst_strct_env(g_ms->envirorment->frst_en)->next = \
+		lst_strct_env(g_ms->envirorment->frst)->next = \
 			new_struct_env(splt);
-		sort_in_list(&g_ms->envirorment->frst_ex, \
+		sort_in_list(&g_ms->envirorment->frst, \
 			new_struct_env(ft_split(prompt->arguments, '=')));
 	}
 	return (0);

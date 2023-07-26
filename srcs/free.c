@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 15:02:58 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/19 18:13:15 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/07/26 14:33:29 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ int	free_env(t_env *env)
 	if (env)
 	{
 		free_str (env->env);
-		free_env_var (env->frst_en);
-		free_env_var (env->frst_ex);
+		free_env_var (env->frst);
 		if (env->dir)
 			free_env_var (env->dir);
 		free (env);

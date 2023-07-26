@@ -19,6 +19,7 @@ int	echo(t_prompt *prom)
 	int		i;
 
 	i = -1;
+	swap = NULL;
 	if (prom->arguments)
 		write(1, &swap[i], 1);
 	if (prom->options && ft_strcmp(prom->options, "-n") == 0)

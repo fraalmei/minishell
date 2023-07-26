@@ -238,13 +238,12 @@ char	*read_word(char *string, int *i)
 	word = (char *)ft_calloc(sizeof(char), 1);
 	while (string[*i] && string[*i] != ' ' && is_redirecction(&string[*i]) == 0)
 	{
-		printf("%c\n", string[*i]);
 		if (string[*i] == 39 || string[*i] == 34)
 		{
 			word = ft_chrjoin(word, string[*i]);
 			c = string[*i];
 			*i += 1;
-			while (string[*i] && string[*i] == '$')
+			while (string[*i] && string[*i] != c)
 			{
 				if (string[*i] == '$' && c == 34)
 				{
@@ -259,6 +258,7 @@ char	*read_word(char *string, int *i)
 					*i += 1;
 				}
 			}
+			*i += 1;
 		}
 		else
 		{

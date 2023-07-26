@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:54:33 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/06 14:54:29 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/07/26 14:32:31 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,21 +68,6 @@ void	sort_in_list(t_env_var **list, t_env_var *node)
 	}
 }
 
-static t_env_var	*copy_env_sort_list(char **env)
-{
-	t_env_var	*first;
-	int			i;
-
-	i = 0;
-	first = NULL;
-	while (env[i])
-	{
-		if (ft_str_frst_cmp(env[i], "_=") != 0)
-			sort_in_list (&first, new_struct_env(ft_split(env[i], '=')));
-		i++;
-	}
-	return (first);
-}
 
 t_env	*read_env(char **env)
 {
@@ -95,8 +80,7 @@ t_env	*read_env(char **env)
 	if (!copy)
 		return (NULL);
 	copy->env = copy_env(env);
-	copy->frst_en = copy_env_list(env);
-	copy->frst_ex = copy_env_sort_list(env);
+	copy->frst = copy_env_list(env);
 	i = -1;
 	while (env[++i])
 		if (ft_str_frst_cmp(env[i], "_=") == 0)
