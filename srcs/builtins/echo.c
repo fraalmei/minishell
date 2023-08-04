@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:36:41 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/19 16:57:32 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/03 16:56:45 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ int	echo(t_prompt *prom)
 
 	i = -1;
 	swap = NULL;
-	if (prom->arguments)
-		write(1, &swap[i], 1);
+	if (swap)
+		while (swap[++i])
+			write(1, &swap[i], 1);
+	/* if (prom->arguments)
+		write(1, &swap[i], 1); */
 	if (prom->options && ft_strcmp(prom->options, "-n") == 0)
 		printf ("");
 	else

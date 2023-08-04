@@ -6,86 +6,48 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 17:42:05 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/08 17:48:17 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/04 17:15:00 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include <minishell.h>
 
-	// count the words in which the string is going to be divided
-static size_t	ft_words(char const *s, char *trim)
+	// count the number of characcters until thesecond char is finded
+int	ft_scndchrlen(const char *s, char c)
 {
-	size_t	i;
-	int		j;
-	int		count;
+	int		i;
+	int		n;
 
-	i = 0;
-	count = 0;
-	while (*s)
+	i = -1;
+	n = 0;
+	while (n < 2 && s[++i])
 	{
-		j = 0;
-		while (trim[j])
-		{
-			if (*s == trim[j])
-			{
-				if (*s == (*s + 1))
-					s++;
-				count++;
-			}
-		}
-		else if (j == 0)
-			j = (i++, 1);
-		s++;
+		if (s[i] == c)
+			n++;
 	}
-	return (i);
+	if (s[i])
+		return (i);
+	else
+		return (-1);
 }
 
-	// count the number of character until the char 'c' is finded
-static size_t	ft_chrlen(const char *s, char c)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] != c && s[i])
-		i++;
-	return (i);
-}
-
-	// release the memory of all allocated memories
-static char	**ft_free_malloc(char **s, size_t i)
-{
-	while (i + 1 >= 1)
-		free ((void *)s[i--]);
-	free (s);
-	return (NULL);
-}
-
-	// split a string in multiples strings
-char	**ft_split(const char *s, char c)
+char	**str_strjoin_freeall(char **s1, char *s2)
 {
 	char	**str;
-	size_t	l;
-	size_t	i;
-	size_t	j;
+	int		str_len;
+	int		i;
 
-	if (!s)
+	if (!s1)
+		s1 = (char **)ft_calloc(sizeof(char *), 2);
+	if (!s1)
 		return (NULL);
+	str_len = ft_str_strlen(s1);
 	i = -1;
-	l = ft_words(s, c);
-	str = (char **)malloc(sizeof(char *) * (l + 1));
-	if (!str)
-		return (NULL);
-	while (++i < l)
-	{
-		while (*s == c)
-			s++;
-		j = ft_chrlen(s, c);
-		str[i] = ft_substr(s, 0, j);
-		if (!str[i])
-			return (ft_free_malloc(str, i));
-		s = (ft_strchr(s, (int)c));
-	}
-	str[i] = 0;
+	str = (char **)ft_calloc(sizeof(char *), str_len + 2);
+	while (s1[++i])
+		str[i] = s1[i];
+	free (s1);
+	str[i] = s2;
 	return (str);
 }

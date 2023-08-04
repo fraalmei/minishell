@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:49:52 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/06 13:09:09 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/07/28 16:09:52 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,15 @@ void	print_env(t_env_var	*env)
 {
 	while (env)
 	{
-		ft_printf("%s", env->name);
-		ft_printf("=");
-		if (env->value)
-			ft_printf("%s\n", env->value);
-		else
-			ft_printf("\n");
+		if (env->equal)
+		{
+			ft_printf("%s", env->name);
+			ft_printf("=");
+			if (env->value)
+				ft_printf("%s\n", env->value);
+			else
+				ft_printf("\n");
+		}
 		env = env->next;
 	}
 }

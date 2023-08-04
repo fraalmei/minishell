@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 12:29:45 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/19 15:41:48 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/04 17:14:58 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ static t_prompt	*create_prompt_struct(char *comm, char *opt, char *arg)
 {
 	t_prompt	*prom;
 
-	prom = (t_prompt *)ft_calloc(sizeof(*prom), 1);
+	prom = (t_prompt *)ft_calloc(sizeof(*prom), 2);
 	if (!prom)
 		return (NULL);
 	prom->prev = NULL;
 	prom->sep0 = NULL;
 	prom->command = comm;
 	prom->options = opt;
-	prom->arguments = arg;
+	prom->arguments = &arg;
 	prom->sep1 = NULL;
 	prom->next = NULL;
 	return (prom);

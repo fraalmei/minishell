@@ -6,7 +6,7 @@
 #    By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/25 17:18:27 by fraalmei          #+#    #+#              #
-#    Updated: 2023/06/19 17:11:31 by fraalmei         ###   ########.fr        #
+#    Updated: 2023/08/04 12:22:04 by fraalmei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,13 +42,15 @@ LIBS		= -L $(LIBFT_DIR) -lft -lreadline -L $(READ)/lib
 # Directories
 BIN_DIR		= bin
 SRC_DIR		= srcs
-SRCS		= main.c signals.c actions.c pipe.c parse.c parse1.c free.c $(ENV) $(BUILTINS) $(UTILS)
-ENV			= env/new_env.c env/utils_env.c
-UTILS		= utils/print_things.c utils/meta_char.c
+SRCS		= main.c signals.c actions.c pipe.c free.c parse_prompt.c $(ENV) $(BUILTINS) $(UTILS) #$(EXECUTER)
+ENV			= env/new_env.c env/utils_env.c env/list_util.c
+UTILS		= utils/print_things.c utils/meta_char.c utils/ft_split_trim.c utils/parse_prompt_utils.c
 BUILTINS	= builtins/pwd.c builtins/env.c builtins/export.c builtins/exit.c builtins/cd.c \
 				builtins/unset.c builtins/echo.c
 LIBFT_DIR	= libft		# path to libft libft
 INCLUDE_DIR	= include		# path to headers
+#EXECUTER	= executer/call_execve.c executer/executer.c
+
 
 # to search the direccion of the library
 # type "find / -name libreadline.a 2>/dev/null"

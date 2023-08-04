@@ -6,62 +6,40 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 11:23:41 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/07/25 13:06:41 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/07/28 18:00:49 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	list_len(t_env_var *first)
-{
-	int			i;
-	t_env_var	*swap;
-
-	i = 0;
-	swap = first;
-	while (swap->next)
-	{
-		swap = swap->next;
-		i++;
-	}
-	return (i);
-}
-
-t_env_var	*new_struct_env(char **var)
-{
-	t_env_var	*env;
-
-	env = (t_env_var *)ft_calloc(sizeof(*env), 1);
-	if (!env)
-		return (NULL);
-	env->name = var[0];
-	if (var[1])
-		env->value = var[1];
-	else
-		env->value = NULL;
-	env->next = NULL;
-	free (var);
-	return (env);
-}
-
-void	set_value(t_env_var *env, char **var)
+void	set_value(t_env_var *env, char *var)
 {
 	t_env_var	*swap;
+	char		**str;
 
 	if (!env)
 		return ;
 	swap = env;
 	while (swap->next)
 	{
-		if (ft_strcmp(swap->name, var[0]) == 0)
+		str = ft_split(var, '=');
+		if (ft_strcmp(swap->name, str[0]) == 0)
 		{
 			if (swap->value != NULL)
 				free (swap->value);
-			swap->value = var[1];
-			free (var[0]);
-			free (var);
+			if (ft_str_frst_chr(var, '=') >= 0)
+			{
+				swap->equal = '=';
+				if (!str[1])
+					swap->value = NULL;
+				else
+					swap->value = str[1];
+			}
+			free (str[0]);
+			free (str);
 			return ;
 		}
+		free_str (str);
 		swap = swap->next;
 	}
 	swap->next = new_struct_env(var);
@@ -97,11 +75,4 @@ int	get_name(t_env_var *env, char	*var)
 		swap = swap->next;
 	}
 	return (1);
-}
-
-t_env_var	*lst_strct_env(t_env_var *env)
-{
-	while (env->next)
-		env = env->next;
-	return (env);
 }

@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:09:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/18 16:57:21 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/04 16:13:14 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,13 @@ void	signals_dont(void)
 	signal(SIGSTOP, SIG_DFL);
 }
 
-void	init_signals(void)
+int	init_signals(void)
 {
-	t_sig	*signals;
-
-	signals = NULL;
-	signals = (t_sig *)ft_calloc(sizeof(*signals), 1);
-	signals->exit_status = 0;
-	signals->exit_return = 0;
+	g_ms->signals = (t_sig *)ft_calloc(sizeof(t_sig), 2);
+	if (!g_ms->signals)
+		return (1);
+	g_ms->signals->exit_function = 0;
+	g_ms->signals->error_status = 0;
+	g_ms->signals->exit_return = 0;
+	return (0);
 }

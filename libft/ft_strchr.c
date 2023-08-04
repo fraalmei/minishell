@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 14:54:18 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/13 11:53:03 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/07/31 17:52:54 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,41 @@ char	*ft_strchr(const char *s, int c)
 	// returning a the position
 int	ft_str_frst_chr(char *str, char c)
 {
-	if (str[0] == c)
-		return (0);
-	return (-1);
+	size_t	i;
+
+	i = 0;
+	while (str[i] != c && str[i])
+		i++;
+	return (i);
+}
+
+	// find the first coincidence of 'c' in "s"
+	// returning a the position if exist
+	// or -1 if dont find coincidence
+int	ft_str_chr(char *str, char c)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != c && str[i])
+		i++;
+	if (!str[i])
+		return (-1);
+	else
+		return (i);
+}
+
+int	ft_strnchr(char *str, char c, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != c && str[i] && i < n)
+		i++;
+	if (!str[i])
+		return (-1);
+	else
+		return (i);
 }
 
 	// find and return the positions os the coincidences of 'c' in 's'

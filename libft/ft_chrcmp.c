@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 17:36:50 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/20 16:33:04 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/01 16:54:21 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,22 @@ int	ft_chrcmp_str(const char *str, char *trim)
 		i++;
 	}
 	return (-1);
+}
+
+	// return the position when not alphanumeric char
+int	ft_chrcmp_alphanum(const char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		printf("%c - %i\n", str[i], ft_isalnum(str[i]));
+		if (ft_isalnum(str[i]) == 0)
+		{
+			return (i);
+		}
+		i++;
+	}
+	return (i);
 }

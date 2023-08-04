@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 12:58:45 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/20 13:13:19 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/04 13:14:27 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,9 @@ int		ft_strchr_cnt(const char *s, int c);
 
 		// ft_strchr
 int		ft_str_frst_chr(char *str, char c);
+int		ft_str_chr(char *str, char c);
 int		*ft_str_all_chr(char *str, char c);
+int		ft_strnchr(char *str, char c, size_t n);
 
 		// ft_strrchr
 int		ft_str_lst_chr(const char *s, int c);
@@ -132,8 +134,13 @@ int		free_str_str(char ***s);
 int		ft_frst_chrcmp(const char *s, int c);
 int		ft_lst_chrcmp(const char *s, int c);
 int		ft_chrcmp_str(const char *str, char *trim);
+int		ft_chrcmp_alphanum(const char *str);
 
 		//ft_strlen
 size_t	ft_strlen_array(const void **string);
+
+		//ft_strnstr
+int		ft_strnstr_f(const char *haystack, const char *needle, size_t n);
+int		ft_strnstr_l(const char *haystack, const char *needle, size_t n);
 
 #endif

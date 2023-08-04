@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:00:19 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/20 14:51:26 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/04 13:13:40 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 	// print the struct (or structs) generated frome the buffer
 void	print_prompt(t_prompt *prom)
 {
+	int		i;
+
+	ft_printf("Cosas\n");
 	while (prom)
 	{
 		ft_printf("++------------++\n");
@@ -25,7 +28,15 @@ void	print_prompt(t_prompt *prom)
 		ft_printf("Comando:	%s#\n", prom->command);
 		ft_printf("N_Opciones:	%i#\n", prom->n_options);
 		ft_printf("Opciones:	%s#\n", prom->options);
-		ft_printf("Argumentos:	%s#\n", prom->arguments);
+		ft_printf("N_Argumentos:	%d#\n", prom->n_arguments);
+		if (prom->n_arguments > 0)
+		{
+			i = -1;
+			while (++i < prom->n_arguments)
+				ft_printf("Argumentos:	%s#\n", prom->arguments[i]);
+		}
+		else
+			ft_printf("Argumentos:	(null)#\n");
 		ft_printf("Separación:	%s#\n", prom->sep1);
 		ft_printf("Siguiente:	%p#\n", prom->next);
 		ft_printf("++------------++\n");

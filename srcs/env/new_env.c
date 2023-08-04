@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:54:33 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/07/26 14:32:31 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/04 16:13:42 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ static t_env_var	*copy_env_list(char **env)
 	int			i;
 
 	i = 0;
-	first = new_struct_env(ft_split(env[i++], '='));
+	first = new_struct_env(env[i++]);
 	while (env[i])
 	{
 		if (ft_str_frst_cmp(env[i], "_=") != 0)
-			set_value(first, ft_split(env[i], '='));
+			set_value(first, env[i]);
 		i++;
 	}
 	return (first);
@@ -51,24 +51,6 @@ void	set_value_frst(t_env_var **list, t_env_var *node)
 	*list = node;
 }
 
-void	sort_in_list(t_env_var **list, t_env_var *node)
-{
-	t_env_var	*copy_list;
-
-	if (!*list || ft_strcmp(node->name, (*list)->name) < 0)
-		set_value_frst(list, node);
-	else
-	{
-		copy_list = *list;
-		while (copy_list->next && \
-				ft_strcmp(node->name, copy_list->next->name) >= 0)
-			copy_list = copy_list->next;
-		node->next = copy_list->next;
-		copy_list->next = node;
-	}
-}
-
-
 t_env	*read_env(char **env)
 {
 	t_env		*copy;
@@ -76,7 +58,7 @@ t_env	*read_env(char **env)
 
 	if (!env)
 		return (NULL);
-	copy = (t_env *)ft_calloc(sizeof(*copy), 1);
+	copy = (t_env *)ft_calloc(sizeof(*copy), 2);
 	if (!copy)
 		return (NULL);
 	copy->env = copy_env(env);
@@ -84,6 +66,6 @@ t_env	*read_env(char **env)
 	i = -1;
 	while (env[++i])
 		if (ft_str_frst_cmp(env[i], "_=") == 0)
-			copy->dir = new_struct_env(ft_split(env[i], '='));
+			copy->dir = new_struct_env(env[i]);
 	return (copy);
 }

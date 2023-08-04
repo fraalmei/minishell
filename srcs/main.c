@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/07/25 11:38:13 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/04 17:12:06 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,8 @@ static int	prompt(void)
 	else
 	{
 		add_history(g_ms->buffer);
-		/* g_ms->prompt = buffer_to_list(deep_split(\
-			g_ms->buffer, '|', ' ')); */
-		g_ms->prompt = buffer_to_prom(soft_split(g_ms->buffer));
+		g_ms->prompt = buffer_to_prompt(g_ms->buffer);
 		print_prompt(g_ms->prompt);
-		//soft_split(g_ms->buffer);
-		//free_str (soft_split(g_ms->buffer));
 		free (g_ms->buffer);
 		return (1);
 	}
@@ -60,10 +56,10 @@ static int	init_global(int argc, char **env)
 {
 	if (argc != 1)
 		return (printf("No arguments required\n"), 1);
-	g_ms = (t_mini_class *)ft_calloc(sizeof(*g_ms), 1);
+	g_ms = (t_mini_class *)ft_calloc(sizeof(*g_ms), 2);
 	if (!g_ms)
 		return (1);
-	g_ms->envirorment = read_env (env);
+	g_ms->envirorment = read_env(env);
 	return (0);
 }
 
@@ -76,10 +72,13 @@ int	main(int argc, char **argv, char **env)
 	(void) argv;
 	if (init_global(argc, env))
 		return (1);
+	if (init_signals())
+		return (1);
 	while (prompt())
 	{
 		if (!g_ms->prompt)
 			continue ;
+		//start_executer();
 		actions(g_ms->prompt);
 		free_prompt (g_ms->prompt);
 	}

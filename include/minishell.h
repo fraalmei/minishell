@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:09:03 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/07/26 14:31:38 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/04 13:16:27 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,15 @@
 
 typedef struct s_sig
 {
-	int				exit_status;
+	int				exit_function;
+	int				error_status;
 	int				exit_return;
 }					t_sig;
 
 typedef struct s_env_var
 {
 	char				*name;
+	char				equal;
 	char				*value;
 	struct s_env_var	*next;
 }				t_env_var;
@@ -89,7 +91,8 @@ typedef struct s_prompt
 	char				*command;
 	int					n_options;
 	char				*options;
-	char				*arguments;
+	int					n_arguments;
+	char				**arguments;
 	char				*sep1;
 	struct s_prompt		*next;
 }						t_prompt;
@@ -99,6 +102,7 @@ typedef struct s_mini_class
 	char		*buffer;
 	t_env		*envirorment;
 	t_prompt	*prompt;
+	int			n_prompts;
 	t_sig		*signals;
 }				t_mini_class;
 
@@ -110,7 +114,7 @@ t_mini_class	*g_ms;
 	// signals.c
 void		signals_do(void);
 void		signals_dont(void);
-void		sig_init(void);
+int			init_signals(void);
 
 	// actions.c
 int			get_wd(void);
@@ -125,6 +129,7 @@ t_prompt	*buffer_to_list(char ***s);
 char		***deep_split(char *buffer, char c1, char c2);
 
 	// parse1.c
+t_prompt	*last_prom(t_prompt *prom);
 t_prompt	*buffer_to_prom(char **buffer);
 char		**soft_split(char *buffer);
 
@@ -138,15 +143,20 @@ int			free_global(void);
 	// env/new_env.c
 char		**copy_env(char **env);
 t_env		*read_env(char **env);
-void		sort_in_list(t_env_var **list, t_env_var *node);
 
-	// env/utils_env.c
-int			list_len(t_env_var *first);
-t_env_var	*new_struct_env(char **var);
+	// env
+		//env.c
+t_env		*read_env(char **env);
+
+		//utils_env.c
 char		*get_value(t_env_var *env, char *var);
-void		set_value(t_env_var *env, char **var);
+void		set_value(t_env_var *env, char *var);
 int			get_name(t_env_var *env, char	*var);
+
+		//list_util.c
+int			list_len(t_env_var *first);
 t_env_var	*lst_strct_env(t_env_var *env);
+t_env_var	*new_struct_env(char *var);
 
 	// builtins/env.c
 void		print_env(t_env_var *env);
@@ -162,7 +172,7 @@ int			cd(t_prompt *prompt);
 
 	// builtins/unset.c
 void		remove_node(t_env_var **prev, t_env_var *node);
-int			unset(t_env_var **env, char *name);
+int			unset(t_env_var **env, char **name);
 
 	// builtins/echo.c
 int			echo(t_prompt *prom);
@@ -173,4 +183,22 @@ void		print_str_str(char **string);
 
 	// utils/meta_char.c
 char		*return_wild(char *str, int *i);
+char		*change_wild(char *str);
+
+	//utils/ft_split_trim.c
+size_t		ft_chrlen(const char *s, char c);
+int			ft_scndchrlen(const char *s, char c);
+char		**ft_split(const char *s, char c);
+
+	//utils/parse_prompt_utils.c
+int			ft_str_strlen(char **string);
+t_prompt	*make_prompt_struct(void);
+int			is_redirecction(char *str);
+int			check_quotes(char *str);
+char		**str_strjoin_freeall(char **s1, char *s2);
+
+	//parse_prompt.c
+t_prompt	*buffer_to_prompt(char *buffer);
+t_prompt	*buffer_to_pro(char *buffer);
+
 #endif
