@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   executer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/21 09:36:41 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/17 17:18:32 by cagonzal         ###   ########.fr       */
+/*   Created: 2023/08/03 16:08:09 by cagonzal          #+#    #+#             */
+/*   Updated: 2023/08/07 12:32:49 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#ifndef EXECUTER_H
+# define EXECUTER_H
 
-	// echo con opción -n
-int	echo(t_prompt *prom)
-{
-	char	*swap;
-	int		i;
-	int		j;
+# include <minishell.h>
+# include <errno.h>
 
-	i = -1;
-	j = -1;
-	while (++i == prom->n_arguments)
-	{
-		swap = *prom->arguments;
-		printf("%s", swap);
-		if (swap)
-			while (swap[++j])
-				write(1, &swap[j], 1);
-	}
-	if (prom->options && ft_strcmp(prom->options, "-n") == 0)
-		printf ("");
-	else
-		printf ("\n");
-	return (0);
-}
+//	Executer
+int		is_builtin(char *arg);
+void	launch_single_process(t_prompt prompt);
+void	call_execve(t_prompt *prompt);
+int		ft_lstpromptsize(t_prompt *lst);
+
+#endif

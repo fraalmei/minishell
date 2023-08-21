@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:09:03 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/04 13:16:27 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/17 16:57:44 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <colors.h>
-
 # include <signal.h>
 
+// ----------------------------------------------------------------------------
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
@@ -37,7 +37,7 @@
 # define OUTFILE 1
 # define APPFILE 2
 
-//-----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 # define EMPTY 0
 # define CMD 1
 # define ARG 2

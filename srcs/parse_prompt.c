@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/04 17:13:01 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/07 13:37:01 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,7 @@ t_prompt	*buffer_to_prompt(char *buffer)
 				swap->sep1 = ft_chr_n_join(swap->sep1, &buffer[i], is_redirecction(&buffer[i]));
 				printf("%s\n", swap->sep1);
 				i += is_redirecction(&buffer[i]) - 1;
-				printf("puede que pete aqui 0\n");
 				swap->n_arguments = ft_str_strlen(swap->arguments);
-				printf("puede que pete aqui 1\n");
 				prom = swap;
 			}
 			else
@@ -138,11 +136,8 @@ t_prompt	*buffer_to_prompt(char *buffer)
 				swap->sep1 = ft_chr_n_join(swap->sep1, &buffer[i], is_redirecction(&buffer[i]));
 				printf("%s\n", swap->sep1);
 				i += is_redirecction(&buffer[i]) - 1;
-				printf("puede que pete aqui 2\n");
 				swap->n_arguments = ft_str_strlen(swap->arguments);
-				printf("puede que pete aqui 3\n");
 				last_prom(prom)->next = swap;
-				printf("puede que pete aqui 4\n");
 				swap->prev = last_prom(prom);
 			}
 			printf("puede que pete aqui 5\n");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/04 17:12:06 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/17 16:59:59 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	init_global(int argc, char **env)
 	return (0);
 }
 
-/// @brief 
+/// @brief
 
 /// @return 0 if it works correctly, 1 if an error occur
 int	main(int argc, char **argv, char **env)
@@ -78,9 +78,8 @@ int	main(int argc, char **argv, char **env)
 	{
 		if (!g_ms->prompt)
 			continue ;
-		//start_executer();
 		actions(g_ms->prompt);
-		free_prompt (g_ms->prompt);
+		free_prompt(g_ms->prompt);
 	}
 	free_global();
 	return (0);
