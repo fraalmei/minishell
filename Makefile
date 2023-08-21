@@ -6,7 +6,7 @@
 #    By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/25 17:18:27 by fraalmei          #+#    #+#              #
-#    Updated: 2023/08/07 10:41:47 by cagonzal         ###   ########.fr        #
+#    Updated: 2023/08/21 16:16:42 by cagonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,12 +42,12 @@ LIBS		= -L $(LIBFT_DIR) -lft -lreadline -L $(READ)/lib
 # Directories
 BIN_DIR		= bin
 SRC_DIR		= srcs
-SRCS		= main.c signals.c actions.c pipe.c free.c parse_prompt.c $(ENV) $(BUILTINS) $(UTILS) #$(EXECUTER)
+SRCS		= main.c signals.c actions.c pipe.c free.c parse_prompt.c $(ENV) $(BUILTINS) $(UTILS) $(EXECUTER)
 ENV			= env/new_env.c env/utils_env.c env/list_util.c
 UTILS		= utils/print_things.c utils/meta_char.c utils/ft_split_trim.c utils/parse_prompt_utils.c
 BUILTINS	= builtins/pwd.c builtins/env.c builtins/export.c builtins/exit.c builtins/cd.c \
 				builtins/unset.c builtins/echo.c
-EXECUTER	= executer/call_execve.c executer/executer.c
+EXECUTER	= executer/call_execve.c executer/exec_utils.c executer/executer.c executer/fd_utils.c
 LIBFT_DIR	= libft		# path to libft libft
 INCLUDE_DIR	= include		# path to headers
 

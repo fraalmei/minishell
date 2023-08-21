@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:19:05 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/08/17 16:37:57 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:10:29 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void launch_from_father(t_prompt *prompt)
 
 	stdin_fd = dup(0);
 	stdout_fd = dup(1);
-	dup_to_stdin_stdout(node->file_in, node->file_out);
-	actions(prompt->command, 1);
+	dup_to_stdin_stdout(prompt->infile, prompt->infile);
+	actions(prompt);
 	dup_to_stdin_stdout(stdin_fd, stdout_fd);
 }
 
@@ -69,15 +69,12 @@ void	call_execve(t_prompt *prompt)
 	char	**env;
 	int		err;
 
-
 	env = g_ms->envirorment->env;
-	open_heredoc(prompt);
 	path = get_pathname(prompt->command, env);
-	if (execve(path, &prompt->arguments, env) == -1)
+	if (execve(path, prompt->arguments, env) == -1)
 	{
 		err = errno;
 		free_prompt(prompt);
 		exit(UNKNOWN_COMMAND);
 	}
 }
-z

@@ -6,11 +6,12 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:28:45 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/08/17 16:42:11 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:06:08 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+#include <executer.h>
 
 int	ft_lstpromptsize(t_prompt *lst)
 {

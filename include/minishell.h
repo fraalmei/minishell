@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:09:03 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/17 16:57:44 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:05:22 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <string.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <colors.h>
@@ -87,12 +88,19 @@ typedef struct s_env
 typedef struct s_prompt
 {
 	struct s_prompt		*prev;
+	pid_t				node_pid;
+	int					infile;
+	int					outfile;
 	char				*sep0;
 	char				*command;
 	int					n_options;
 	char				*options;
 	int					n_arguments;
 	char				**arguments;
+	char				*here_doc; // Entrada por heredoc "<<"
+	char				*input_redirect; // Archivo de redirección de entrada "<"
+	char				*output_redirect; // Archivo de redirección de salida ">"
+	char				*append_redirect; // Archivo de redirección de salida(append) ">>""
 	char				*sep1;
 	struct s_prompt		*next;
 }						t_prompt;
@@ -103,6 +111,7 @@ typedef struct s_mini_class
 	t_env		*envirorment;
 	t_prompt	*prompt;
 	int			n_prompts;
+	pid_t		sh_pid;
 	t_sig		*signals;
 }				t_mini_class;
 
@@ -200,5 +209,12 @@ char		**str_strjoin_freeall(char **s1, char *s2);
 	//parse_prompt.c
 t_prompt	*buffer_to_prompt(char *buffer);
 t_prompt	*buffer_to_pro(char *buffer);
+
+	//executer/call_execve.c
+int			ft_strichr(char *str, char c);
+void		launch_from_father(t_prompt *prompt);
+void		call_execve(t_prompt *prompt);
+
+void		start_executer(void);
 
 #endif

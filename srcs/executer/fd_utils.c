@@ -6,16 +6,17 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:24:32 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/08/17 16:26:13 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:06:11 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+#include <executer.h>
 
-void	assing_fd(int *node_fd, int new_fd, int fd)
+void	assing_fd(int *prompt_fd, int new_fd, int fd)
 {
-	if (*node_fd == fd)
-		*node_fd = new_fd;
+	if (*prompt_fd == fd)
+		*prompt_fd = new_fd;
 	else
 		close(new_fd);
 }
@@ -36,17 +37,17 @@ void	dup_to_stdin_stdout(int fd_in, int fd_out)
 	}
 }
 
-void	close_all_fds(t_lst *node)
+void	close_all_fds(t_prompt *prompt)
 {
-	if (node->file_in != 0)
+	if (prompt->infile != 0)
 	{
-		close(node->file_in);
-		node->file_in = 0;
+		close(prompt->infile);
+		prompt->infile = 0;
 	}
-	if (node->file_out != 1)
+	if (prompt->outfile != 1)
 	{
-		close(node->file_out);
-		node->file_out = 1;
+		close(prompt->outfile);
+		prompt->outfile = 1;
 	}
 }
 

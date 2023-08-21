@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/17 16:59:59 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/21 15:57:55 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		if (!g_ms->prompt)
 			continue ;
-		actions(g_ms->prompt);
+		start_executer();
 		free_prompt(g_ms->prompt);
 	}
 	free_global();

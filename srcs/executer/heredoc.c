@@ -6,11 +6,12 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:08:29 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/08/10 09:18:31 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:06:05 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_bonus.h"
+#include <minishell.h>
+#include <executer.h>
 
 void	initheredoc(t_prompt prompt)
 {
