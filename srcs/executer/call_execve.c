@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   call_execve.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:19:05 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/08/28 09:09:53 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/28 11:29:07 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	ft_strichr(char *str, char c)
 		return (i);
 	return (-1);
 }
-void launch_from_father(t_prompt *prompt)
+
+void	launch_from_father(t_prompt *prompt)
 {
 	int		stdin_fd;
 	int		stdout_fd;
@@ -36,42 +37,21 @@ void launch_from_father(t_prompt *prompt)
 	dup_to_stdin_stdout(stdin_fd, stdout_fd);
 }
 
-static char	*get_pathname(char *cmd, char **env)
-{
-	char	*path;
-	char	*dir;
-	char	*bin;
-	int		i;
-
-	i = 0;
-	while (env[i] && ft_strncmp(env[i], "PATH=", 5))
-		i++;
-	if (!env[i])
-		return (cmd);
-	path = env[i] + 5;
-	while (path && ft_strchr(path, ':'))
-	{
-		dir = ft_strndup(path, ft_strichr(path, ':'));
-		bin = ft_strjoin(dir, "/");
-		bin = ft_strjoin(bin, cmd);
-		free(dir);
-		if (access(bin, F_OK) == 0)
-			return (bin);
-		free(bin);
-		path += ft_strichr(path, ':') + 1;
-	}
-	return (cmd);
-}
-
 void	call_execve(t_prompt *prompt)
 {
 	char	*path;
-	char	**env;
 	int		err;
 
-	env = g_ms->envirorment->env;
-	path = get_pathname(prompt->command[0], env);
-	if (execve(path, prompt->arguments, env) == -1)
+	// if Set here_doc redir
+		// .........
+	// else if Set input_redir
+		// .........
+	// if Set output_redir
+		// .........
+	if (!prompt->command)
+		exit(UNKNOWN_COMMAND);
+	path = get_pathname(prompt->command, g_ms->envirorment->env);
+	if (execve(path, prompt->arguments, g_ms->envirorment->env) == -1)
 	{
 		err = errno;
 		free_prompt(prompt);

@@ -6,7 +6,11 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:09:03 by fraalmei          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2023/08/28 11:17:52 by fraalmei         ###   ########.fr       */
+=======
+/*   Updated: 2023/08/23 11:58:51 by cagonzal         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +90,7 @@ typedef struct s_env
 	t_env_var		*dir;
 }					t_env;
 
-typedef struct s_prompt // grep "error" > test.txt << EOF 
+typedef struct s_prompt // grep "error" > test.txt << EOF
 {
 	struct s_prompt		*prev;
 	pid_t				node_pid;
@@ -223,11 +227,6 @@ t_prompt	*last_prom(t_prompt *prom);
 int			swap_word(char *string, char **word, char **swap, int *i, char c);
 char		*read_word(char *string, int *i);
 int			option_gen(t_prompt *prom, char *str, int *i);
-
-	//executer/call_execve.c
-int			ft_strichr(char *str, char c);
-void		launch_from_father(t_prompt *prompt);
-void		call_execve(t_prompt *prompt);
 
 void		start_executer(void);
 

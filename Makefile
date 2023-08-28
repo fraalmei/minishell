@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+         #
+#    By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/25 17:18:27 by fraalmei          #+#    #+#              #
-#    Updated: 2023/08/28 09:15:27 by fraalmei         ###   ########.fr        #
+#    Updated: 2023/08/28 11:29:33 by cagonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,8 +58,8 @@ INCLUDE_DIR	= include		# path to headers
 # if not installed in your user
 # type "brew install readline"
 
-READ		= /System/Volumes/Data/sgoinfre/students/fraalmei/homebrew/Cellar/readline/8.2.1
-# READ		= /System/Volumes/Data/Users/cagonzal/.brew/Cellar/readline/8.2.1/
+# READ		= /System/Volumes/Data/sgoinfre/students/fraalmei/homebrew/Cellar/readline/8.2.1
+READ		= /System/Volumes/Data/Users/cagonzal/.brew/Cellar/readline/8.2.1/
 
 # Convert source files to binary
 OBJS = $(SRCS:%.c=$(BIN_DIR)/%.o)
