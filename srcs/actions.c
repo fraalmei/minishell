@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:18:16 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 11:26:44 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/28 15:50:46 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 	// * if (g_ms->envirorment->dir)
 int	actions(t_prompt *prompt)
 {
-	printf("veamos cuanto pasa\n");
 	if (prompt->command && ft_strcmp(prompt->command, "exit") == 0)
 		exit_shell();
 	else if (prompt->command && ft_strcmp(prompt->command, "pwd") == 0)

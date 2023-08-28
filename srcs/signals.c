@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:09:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/22 17:04:05 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:38:51 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,14 @@ int	init_signals(void)
 	g_ms->signals->error_status = 0;
 	g_ms->signals->exit_return = 0;
 	return (0);
+}
+
+void init_sig_struct(void)
+{
+	g_ms->signals = (t_sig *) ft_calloc(sizeof(g_ms->signals), 1);
+	g_ms->signals->exit_function = 0;
+	g_ms->signals->error_status = 0;
+	g_ms->signals->exit_return = 0;
+	g_ms->signals->lecture_status = 0;
+	g_ms->signals->execution_status = 0;
 }

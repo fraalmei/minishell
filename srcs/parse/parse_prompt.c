@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 12:29:48 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:44:30 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,10 @@ static int	check_end_prom(char *buffer)
 
 static void	get_option_args(char *buffer, int *i, t_prompt *swap)
 {
-	printf("entra\n");
 	if ((buffer[*i] == '-') && (buffer[*i + 1] != ' ') && !swap->arguments)
 		swap->n_options = option_gen(swap, buffer, i);
 	else
 		swap->arguments = str_strjoin_freeall(swap->arguments, read_word(buffer, i));
-	printf("entra\n");
 }
 
 t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
@@ -110,6 +108,8 @@ t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 		}
 		else if (buffer[i] != ' ' && is_redirecction(&buffer[i]) == 0)
 			get_option_args(buffer, &i, swap);
+		/* else if (buffer[i] != ' ' && is_redir(&buffer[i]) != 0)
+			get_redir(buffer, &i, swap); */
 		else if (is_pipe(&buffer[i]) != 0)
 		{
 			if (!prom && is_pipe(&buffer[i]) > 0)
@@ -138,20 +138,16 @@ t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 		i++;
 		//printf("veamos cuanto pasa por aqui %i\n", i);
 	}
+	if (swap->arguments)
+		swap->n_arguments = ft_str_strlen(swap->arguments);
+	else
+		swap->n_arguments = 0;
+	if (swap->n_options > 0)
+		swap->n_arguments -= 1;
 	if (!prom)
-	{
-		if (swap->arguments)
-			swap->n_arguments = ft_str_strlen(swap->arguments);
-		else
-			swap->n_arguments = 0;
 		prom = swap;
-	}
 	else
 	{
-		if (swap->arguments)
-			swap->n_arguments = ft_str_strlen(swap->arguments);
-		else
-			swap->n_arguments = 0;
 		last_prom(prom)->next = swap;
 		swap->prev = last_prom(prom);
 	}

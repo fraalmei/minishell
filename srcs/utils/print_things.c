@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:00:19 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 11:43:35 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:26:13 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	print_prompt(t_prompt *prom)
 {
 	int		i;
 
-	ft_printf("Cosas\n");
 	while (prom)
 	{
 		ft_printf("++------------++\n");

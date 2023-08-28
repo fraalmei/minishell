@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 12:43:46 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:03:09 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	prompt(void)
 	{
 		g_ms->prompt = NULL;
 		free(g_ms->buffer);
+		g_ms->buffer = NULL;
 		return (1);
 	}
 	else
@@ -42,6 +43,7 @@ int	prompt(void)
 		g_ms->prompt = buffer_to_prompt(g_ms->buffer, g_ms->prompt);
 		print_prompt(g_ms->prompt);
 		free (g_ms->buffer);
+		g_ms->buffer = NULL;
 		return (1);
 	}
 	return (0);

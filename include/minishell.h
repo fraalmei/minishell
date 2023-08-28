@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/08/28 13:13:32 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:38:11 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct s_sig
 	int				exit_function;
 	int				error_status;
 	int				exit_return;
+	int				lecture_status;
+	int				execution_status;
 }					t_sig;
 
 typedef struct s_env_var
@@ -92,14 +94,14 @@ typedef struct s_prompt
 	int					infile;
 	int					outfile;
 	char				*sep0;
-	char				*command;
-	int					n_options;
-	int					n_arguments;
-	char				**arguments;
-	char				**here_doc;
-	char				**input_redirect;
-	char				**output_redirect;
-	char				**append_redirect;
+	char				*command; // grep
+	int					n_options; // 0
+	int					n_arguments; // 1
+	char				**arguments; // error
+	char				**here_doc; // Entrada por heredoc "<< EOF"
+	char				**input_redirect; // Archivo de redirección de entrada "<" // NULL
+	char				**output_redirect; // Archivo de redirección de salida ">" // test.txt
+	char				**append_redirect; // Archivo de redirección de salida(append) ">>""
 	char				*sep1;
 	struct s_prompt		*next;
 }						t_prompt;
