@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:08:09 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/08/28 13:09:00 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:15:37 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <errno.h>
 
 	//executer/child_manager.c
+
+	//executer/call_execve.c
+void		call_execve(t_prompt *prompt);
 
 	//executer/exec_utils.c
 int			ft_lstpromptsize(t_prompt *lst);

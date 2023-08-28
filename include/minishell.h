@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/08/28 13:07:36 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:13:32 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,21 +85,21 @@ typedef struct s_env
 	t_env_var		*dir;
 }					t_env;
 
-typedef struct s_prompt // grep "error" > test.txt << EOF
+typedef struct s_prompt
 {
 	struct s_prompt		*prev;
 	pid_t				node_pid;
 	int					infile;
 	int					outfile;
 	char				*sep0;
-	char				*command; // grep
-	int					n_options; // 0
-	int					n_arguments; // 1
-	char				**arguments; // error
-	char				**here_doc; // Entrada por heredoc "<< EOF"
-	char				**input_redirect; // Archivo de redirección de entrada "<" // NULL
-	char				**output_redirect; // Archivo de redirección de salida ">" // test.txt
-	char				**append_redirect; // Archivo de redirección de salida(append) ">>""
+	char				*command;
+	int					n_options;
+	int					n_arguments;
+	char				**arguments;
+	char				**here_doc;
+	char				**input_redirect;
+	char				**output_redirect;
+	char				**append_redirect;
 	char				*sep1;
 	struct s_prompt		*next;
 }						t_prompt;

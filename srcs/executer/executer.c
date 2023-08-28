@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:45:48 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/08/28 11:34:07 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:14:46 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <executer.h>
 
-// void	launch_from_child(t_prompt prompt)
-// {
-// 	g_ms->sh_pid = fork();
-// 	if (g_ms->sh_pid == 0)
-// 		call_execve(&prompt);
-// 	else
-// 	{
-// 		close_all_fds(&prompt);
-// 		// wait_childs();
-// 	}
-// }
+void	launch_from_child(t_prompt *prompt)
+{
+	g_ms->sh_pid = fork();
+	if (g_ms->sh_pid == 0)
+		call_execve(prompt);
+	else
+	{
+		close_all_fds(prompt);
+		// wait_childs();
+	}
+}
 
 void	launch_single_process(t_prompt *prompt)
 {
@@ -32,8 +32,8 @@ void	launch_single_process(t_prompt *prompt)
 	{
 		if (is_builtin(prompt->command))
 			launch_from_father(prompt);
-		// else
-		// 	launch_from_child(prompt);
+		else
+			launch_from_child(prompt);
 	}
 }
 
