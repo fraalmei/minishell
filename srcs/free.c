@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 15:02:58 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 10:51:55 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/28 11:27:08 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,8 @@ int	free_prompt(t_prompt *prom)
 {
 	while (prom)
 	{
-		if ((prom->command[0]))
-		{
-			free (prom->command[0]);
-			if ((prom->command[1]))
-				free (prom->command[1]);
+		if ((prom->command))
 			free (prom->command);
-		}
 		if ((prom->arguments))
 			free_str (prom->arguments);
 		if ((prom->sep1))
