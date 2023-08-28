@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:08:09 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/08/21 16:13:53 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:09:00 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ int			ft_lstpromptsize(t_prompt *lst);
 int			is_builtin(char *arg);
 
 	//executer/executer.c
-void		open_heredoc(t_prompt prompt);
-void		launch_from_child(t_prompt prompt);
+void		open_heredoc(t_prompt *prompt);
+void		launch_from_father(t_prompt *prompt);
+void		launch_from_child(t_prompt *prompt);
 void		launch_single_process(t_prompt *prompt);
 void		start_executer(void);
 
@@ -35,7 +36,10 @@ void		close_all_fds(t_prompt *prompt);
 void		add_flag(size_t *pos, int *flg, int t);
 
 	//executer/heredoc.c
-void		initheredoc(t_prompt prompt);
+void		initheredoc(t_prompt *prompt);
 void		writeheredoc(int fd[2], char *limiter);
+
+	//executer/get_paths.c
+char		*get_pathname(char *cmd, char **env);
 
 #endif

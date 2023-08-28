@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   basics.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 15:15:07 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/03/29 12:24:41 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/28 13:07:04 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ enum e_bool
 {
 	TRUE = 1,
 	FALSE = 0
-}		bool;
+}	bool;
 
 #endif

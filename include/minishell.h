@@ -3,18 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/25 17:09:03 by fraalmei          #+#    #+#             */
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-/*   Updated: 2023/08/28 11:17:52 by fraalmei         ###   ########.fr       */
-=======
-/*   Updated: 2023/08/23 11:58:51 by cagonzal         ###   ########.fr       */
->>>>>>> Stashed changes
-=======
-/*   Updated: 2023/08/28 12:28:37 by fraalmei         ###   ########.fr       */
->>>>>>> a0063a07c6930e9a540b64fc430c8e49fea80990
+/*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
+/*   Updated: 2023/08/28 13:07:36 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +14,6 @@
 # define MINISHELL_H
 
 # include "../libft/libft.h"
-# include <basics.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <sys/types.h>
