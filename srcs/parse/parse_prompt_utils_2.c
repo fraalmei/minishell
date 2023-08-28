@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:55:29 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 13:20:06 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/28 18:40:46 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	option_gen(t_prompt *prom, char *str, int *i)
 	int		l;
 	int		x;
 
-	printf("entra opciones\n");
 	if (!prom->arguments)
 	{
 		prom->arguments = (char **)ft_calloc(sizeof(char *), 2);

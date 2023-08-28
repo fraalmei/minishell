@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 13:44:30 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/28 18:47:57 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,50 +32,21 @@ static int	check_start_prom(char *buffer, t_prompt *prom)
 	return (0);
 }
 
-static int	check_end_prom(char *buffer)
+int	check_end_prom(char *buffer)
 {
-	if (is_redir(buffer) > 0 && !buffer[2])
-		return (1);
+	int		i;
+
+	i = 0;
+	if (is_redir(buffer) > 0)
+	{
+		i += is_redir(buffer);
+		while (buffer[i] && buffer[i] == ' ')
+			i++;
+		if (!buffer[i])
+			return (1);
+	}
 	return (0);
 }
-
-/* static void	end_prom(char *buffer, t_prompt *prom, t_prompt *swap, int *i)
-{
-	if (!prom && is_redirecction(&buffer[*i]) > 0)
-	{
-		swap->sep1 = ft_chr_n_join(swap->sep1, \
-			&buffer[*i], is_redirecction(&buffer[*i]));
-		*i += is_redirecction(&buffer[*i]);
-		swap->n_arguments = ft_str_strlen(swap->arguments);
-		prom = swap;
-	}
-	else if (is_redirecction(&buffer[*i]) > 0)
-	{
-		swap->sep1 = ft_chr_n_join(swap->sep1, \
-			&buffer[*i], is_redirecction(&buffer[*i]));
-		i += is_redirecction(&buffer[*i]);
-		swap->n_arguments = ft_str_strlen(swap->arguments);
-		last_prom(prom)->next = swap;
-		swap->prev = last_prom(prom);
-	}
-	else if (!prom)
-	{
-		if (swap->arguments)
-			swap->n_arguments = ft_str_strlen(swap->arguments);
-		else
-			swap->n_arguments = 0;
-		prom = swap;
-	}
-	else
-	{
-		if (swap->arguments)
-			swap->n_arguments = ft_str_strlen(swap->arguments);
-		else
-			swap->n_arguments = 0;
-		last_prom(prom)->next = swap;
-		swap->prev = last_prom(prom);
-	}
-} */
 
 static void	get_option_args(char *buffer, int *i, t_prompt *swap)
 {
@@ -108,8 +79,8 @@ t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 		}
 		else if (buffer[i] != ' ' && is_redirecction(&buffer[i]) == 0)
 			get_option_args(buffer, &i, swap);
-		/* else if (buffer[i] != ' ' && is_redir(&buffer[i]) != 0)
-			get_redir(buffer, &i, swap); */
+		else if (buffer[i] != ' ' && is_redir(&buffer[i]) != 0)
+			get_redir(buffer, &i, swap);
 		else if (is_pipe(&buffer[i]) != 0)
 		{
 			if (!prom && is_pipe(&buffer[i]) > 0)

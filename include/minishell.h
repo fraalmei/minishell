@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/08/28 16:38:11 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/28 17:40:08 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ int			prompt(void);
 void		signals_do(void);
 void		signals_dont(void);
 int			init_signals(void);
+void		init_sig_struct(void);
 
 	// actions.c
 int			actions(t_prompt *prompt);
@@ -209,6 +210,7 @@ t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom);
 //t_prompt	*buffer_to_prompt(char *buffer);
 
 		// parse.c
+int			check_end_prom(char *buffer);
 t_prompt	*buffer_to_prom(char **buffer);
 char		**soft_split(char *buffer);
 
@@ -224,6 +226,9 @@ t_prompt	*last_prom(t_prompt *prom);
 int			swap_word(char *string, char **word, char **swap, int *i, char c);
 char		*read_word(char *string, int *i);
 int			option_gen(t_prompt *prom, char *str, int *i);
+
+		// parse_redirects.c
+int			get_redir(char *buffer, int *i, t_prompt *swap);
 
 void		start_executer(void);
 

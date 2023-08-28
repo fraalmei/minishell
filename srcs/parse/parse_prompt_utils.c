@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:36:49 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 11:35:02 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/28 17:32:43 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ t_prompt	*make_prompt_struct(void)
 	prom->n_options = 0;
 	prom->n_arguments = 0;
 	prom->arguments = NULL;
+	prom->here_doc = NULL;
+	prom->input_redirect = NULL;
+	prom->output_redirect = NULL;
+	prom->append_redirect = NULL;
 	prom->sep1 = NULL;
 	prom->next = NULL;
 	return (prom);
@@ -111,9 +115,6 @@ t_prompt	*last_prom(t_prompt *prom)
 
 	swap = prom;
 	while (swap->next)
-	{
-		printf("veamos cuantas veces\n");
 		swap = swap->next;
-	}
 	return (swap);
 }

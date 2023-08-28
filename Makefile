@@ -6,7 +6,7 @@
 #    By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/25 17:18:27 by fraalmei          #+#    #+#              #
-#    Updated: 2023/08/28 13:20:42 by fraalmei         ###   ########.fr        #
+#    Updated: 2023/08/28 17:38:25 by fraalmei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ ENV			= env/utils_env.c env/list_util.c env/read_env.c
 UTILS		= utils/print_things.c utils/meta_char.c utils/ft_split_trim.c
 BUILTINS	= builtins/pwd.c builtins/env.c builtins/export.c builtins/exit.c builtins/cd.c \
 				builtins/unset.c builtins/echo.c
-PARSE		= parse/parse_prompt_utils.c parse/parse_prompt.c parse/parse_prompt_utils_2.c
+PARSE		= parse/parse_prompt_utils.c parse/parse_prompt.c parse/parse_prompt_utils_2.c parse/parse_redirects.c
 EXECUTER	= executer/call_execve.c executer/exec_utils.c executer/executer.c \
 				executer/fd_utils.c executer/get_path.c
 LIBFT_DIR	= libft		# path to libft libft
