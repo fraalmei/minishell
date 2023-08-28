@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/21 15:57:55 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/28 10:41:45 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	leaks(void)
 /// and free the buffer
 /// @param  none use the global variable g_ms
 /// @return 1 if the function works correctly, 0 if not
-static int	prompt(void)
+int	prompt(void)
 {
 	signals_do();
 	rl_on_new_line();
@@ -39,7 +39,7 @@ static int	prompt(void)
 	else
 	{
 		add_history(g_ms->buffer);
-		g_ms->prompt = buffer_to_prompt(g_ms->buffer);
+		g_ms->prompt = buffer_to_prompt(g_ms->buffer, g_ms->prompt);
 		print_prompt(g_ms->prompt);
 		free (g_ms->buffer);
 		return (1);
@@ -78,8 +78,10 @@ int	main(int argc, char **argv, char **env)
 	{
 		if (!g_ms->prompt)
 			continue ;
-		start_executer();
+		actions(g_ms->prompt);
+		//start_executer();
 		free_prompt(g_ms->prompt);
+		g_ms->prompt = NULL;
 	}
 	free_global();
 	return (0);

@@ -6,12 +6,23 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 17:42:05 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/04 17:15:00 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:10:43 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include <minishell.h>
+
+	// count how many pointers have "string"
+int	ft_str_strlen(char **string)
+{
+	int	i;
+
+	i = 0;
+	while (string && string[i])
+		i++;
+	return (i);
+}
 
 	// count the number of characcters until thesecond char is finded
 int	ft_scndchrlen(const char *s, char c)

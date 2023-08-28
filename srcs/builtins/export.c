@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:39:59 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/04 12:35:03 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/28 09:18:31 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	export(t_prompt *prompt)
 	if (!prompt->n_options && !prompt->arguments)
 		return (print_sort_list(g_ms->envirorment->frst), 0);
 	else if (prompt->n_options != 0)
-		return (printf("bad option: %s\n", prompt->options), 0);
+		return (printf("bad option: %s\n", prompt->command[1]), 0);
 	i = -1;
 	while (prompt->arguments[++i])
 	{

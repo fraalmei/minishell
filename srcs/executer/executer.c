@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:45:48 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/08/21 16:15:01 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/28 09:10:28 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@
 void	launch_single_process(t_prompt *prompt)
 {
 
-	if (prompt->command)
+	if (prompt->command[0])
 	{
-		if (is_builtin(prompt->command))
+		if (is_builtin(prompt->command[0]))
 			launch_from_father(prompt);
 		// else
 		// 	launch_from_child(prompt);
