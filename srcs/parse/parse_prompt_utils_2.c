@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:55:29 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 11:18:17 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/28 12:34:01 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,16 @@ int	option_gen(t_prompt *prom, char *str, int *i)
 	int		l;
 	int		x;
 
-	if (!prom->command[1])
-		prom->command[1] = (char *)ft_calloc(sizeof(char), 2);
-	if (!prom->command[1])
+	printf("entra opciones\n");
+	if (!prom->arguments)
+	{
+		prom->arguments = (char **)ft_calloc(sizeof(char *), 2);
+		prom->arguments[0] = (char *)ft_calloc(sizeof(char), 2);
+	}
+	if (!prom->arguments || !prom->arguments[0])
 		return (-1);
 	x = 0;
-	l = ft_strlen(prom->command[1]);
+	l = ft_strlen(prom->arguments[0]);
 	while (str[*i] && is_redirecction(&str[*i]) == 0 && str[*i] != ' ')
 	{
 		if (str[*i] == '-' && x < 1)
@@ -75,8 +79,8 @@ int	option_gen(t_prompt *prom, char *str, int *i)
 			g_ms->signals->error_status = 1;
 			return (printf("illegal option -- -\n"), -1);
 		}
-		else if (!ft_strrchr(prom->command[1], str[*i]))
-			prom->command[1] = (l++, ft_chrjoin(prom->command[1], str[*i]));
+		else if (!ft_strrchr(prom->arguments[0], str[*i]))
+			prom->arguments[0] = (l++, ft_chrjoin(prom->arguments[0], str[*i]));
 		*i += 1;
 	}
 	return (l);

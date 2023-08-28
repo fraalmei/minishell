@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 11:13:34 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/28 12:29:48 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,16 @@ static int	check_end_prom(char *buffer)
 	}
 } */
 
+static void	get_option_args(char *buffer, int *i, t_prompt *swap)
+{
+	printf("entra\n");
+	if ((buffer[*i] == '-') && (buffer[*i + 1] != ' ') && !swap->arguments)
+		swap->n_options = option_gen(swap, buffer, i);
+	else
+		swap->arguments = str_strjoin_freeall(swap->arguments, read_word(buffer, i));
+	printf("entra\n");
+}
+
 t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 {
 	t_prompt	*swap;
@@ -92,23 +102,14 @@ t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 	{
 		if (check_start_prom(&buffer[0], prom) != 0)
 			return (free_prompt(prom), free_prompt (swap), write(1, "syntax error near unexpected token ", 36), write(1, &buffer[0], is_pipe(&buffer[i])), write(1, "\n", 1), NULL);
-		else if (!swap->command[0] && buffer[i] != ' ' && is_redirecction(&buffer[i]) == 0)
+		else if (!swap->command && buffer[i] != ' ' && is_redirecction(&buffer[i]) == 0)
 		{
-			swap->command[0] = read_word(buffer, &i);
-			if (swap->command[0] == NULL)
+			swap->command = read_word(buffer, &i);
+			if (swap->command == NULL)
 				return (free (prom), NULL);
-			i++;
-			while (buffer[i] == ' ')
-				i++;
-			if (buffer[i] == '-')
-				swap->n_options = option_gen(swap, buffer, &i);
-			else
-				i--;
 		}
 		else if (buffer[i] != ' ' && is_redirecction(&buffer[i]) == 0)
-		{
-			swap->arguments = str_strjoin_freeall(swap->arguments, read_word(buffer, &i));
-		}
+			get_option_args(buffer, &i, swap);
 		else if (is_pipe(&buffer[i]) != 0)
 		{
 			if (!prom && is_pipe(&buffer[i]) > 0)

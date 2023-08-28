@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:19:05 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/08/28 09:09:53 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/28 11:33:41 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	call_execve(t_prompt *prompt)
 	int		err;
 
 	env = g_ms->envirorment->env;
-	path = get_pathname(prompt->command[0], env);
+	path = get_pathname(prompt->command, env);
 	if (execve(path, prompt->arguments, env) == -1)
 	{
 		err = errno;

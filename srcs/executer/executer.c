@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:45:48 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/08/28 09:10:28 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/28 11:34:07 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	launch_single_process(t_prompt *prompt)
 
 	if (prompt->command[0])
 	{
-		if (is_builtin(prompt->command[0]))
+		if (is_builtin(prompt->command))
 			launch_from_father(prompt);
 		// else
 		// 	launch_from_child(prompt);

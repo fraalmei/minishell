@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:09:03 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 11:17:52 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/28 12:28:37 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ typedef struct s_prompt // grep "error" > test.txt << EOF
 	int					infile;
 	int					outfile;
 	char				*sep0;
-	char				**command; // grep
+	char				*command; // grep
 	int					n_options; // 0
 	int					n_arguments; // 1
 	char				**arguments; // error

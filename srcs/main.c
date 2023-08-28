@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 10:41:45 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/28 11:35:56 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		if (!g_ms->prompt)
 			continue ;
-		actions(g_ms->prompt);
+		//actions(g_ms->prompt);
 		//start_executer();
 		free_prompt(g_ms->prompt);
 		g_ms->prompt = NULL;
