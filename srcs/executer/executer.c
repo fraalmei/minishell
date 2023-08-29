@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:45:48 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/08/28 13:14:46 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/29 11:56:43 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	launch_from_child(t_prompt *prompt)
 	else
 	{
 		close_all_fds(prompt);
-		// wait_childs();
+		prompt->node_pid = g_ms->sh_pid;
+		wait_childs();
 	}
 }
 
 void	launch_single_process(t_prompt *prompt)
 {
-
-	if (prompt->command[0])
+	if (prompt->command)
 	{
 		if (is_builtin(prompt->command))
 			launch_from_father(prompt);
@@ -42,9 +42,9 @@ void	start_executer(void)
 	g_ms->n_prompts = ft_lstpromptsize(g_ms->prompt);
 	if (g_ms->n_prompts == 1)
 		launch_single_process(g_ms->prompt);
-	// else
-	// {
-	// 	launch_mult_process(g_ms->prompt);
-	// 	wait_childs();
-	// }
+	else
+	{
+		launch_pipe_process(g_ms->prompt, g_ms->n_prompts);
+		wait_childs();
+	}
 }

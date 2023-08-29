@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:08:09 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/08/28 13:15:37 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/08/29 11:45:14 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <errno.h>
 
 	//executer/child_manager.c
+void		launch_pipe_process(t_prompt *prompt, int index);
+void		prepare_exec(t_prompt *prompt, int fd[2], int auxfd[2], int node);
+void		handle_pipes(t_prompt *prompt, int npip[2], int opip[2], int node);
+void		wait_childs(void);
 
 	//executer/call_execve.c
 void		call_execve(t_prompt *prompt);

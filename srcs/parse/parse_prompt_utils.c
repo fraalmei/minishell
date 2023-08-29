@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_prompt_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:36:49 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 17:32:43 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/08/29 11:06:42 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ t_prompt	*make_prompt_struct(void)
 		return (NULL);
 	prom->prev = NULL;
 	prom->sep0 = NULL;
+	prom->infile = STDIN;
+	prom->outfile = STDOUT;
+	prom->b_success = FALSE;
 	prom->command = NULL;
 	prom->n_options = 0;
 	prom->n_arguments = 0;
@@ -34,9 +37,11 @@ t_prompt	*make_prompt_struct(void)
 	return (prom);
 }
 
-/// @brief check the next 2 characters of the string to know if its a redirecction
+/// @brief check the next 2 characters of the string to know
+///			if its a redirecction
 /// @param str the string to check
-/// @return a int (0 if is not a redirecction, 1 if is 1 char or 2 if is 2 chars)
+/// @return a int (0 if is not a redirecction, 1 if is 1 char
+///			or 2 if is 2 chars)
 int	is_redirecction(char *str)
 {
 	if (!str)
