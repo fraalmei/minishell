@@ -29,7 +29,7 @@ size_t	ft_strlen_array(const void **string)
 	int	i;
 
 	i = 0;
-	while (string[i] != '\0')
+	while (string[i])
 		i++;
 	return (i);
 }
