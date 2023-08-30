@@ -12,6 +12,10 @@
 
 #include "libft.h"
 
+#ifndef UINTPTR
+# define uintptr_t unsigned long long int
+#endif
+
 static int	ft_putstr(char *s)
 {
 	int		len;
