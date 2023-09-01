@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 17:01:31 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 19:17:52 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/01 08:14:28 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,18 @@
 static char	**redir_join(char *buffer, int *i, char **redir)
 {
 	redir = str_strjoin_freeall(redir, ft_strndup (&buffer[*i], is_redir(&buffer[*i])));
+	print_str_str(redir);
 	*i += is_redir(&buffer[*i]);
-	while(buffer[*i] == ' ')
+	while (buffer[*i] == ' ')
 		*i += 1;
 	redir = str_strjoin_freeall(redir, read_word(buffer, i));
+	*i += 1;
+	while (buffer[*i] && is_redirecction(&buffer[*i]) == 0)
+		*i += 1;
 	return (redir);
 }
 
-int get_redir(char *buffer, int *i, t_prompt *swap)
+int	get_redir(char *buffer, int *i, t_prompt *swap)
 {
 	if (check_end_prom(&buffer[*i]) != 0)
 		return (0);
