@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:55:29 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 18:40:46 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/02 17:39:42 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,18 @@
 
 int	swap_word(char *string, char **word, char **swap, int *i, char c)
 {
-	if (string[*i] == '$' && (c == 34 || c == '\0'))
+	if (string[*i] == '$' && string[*i + 1] == '?')
+	{
+		printf("entra\n");
+		*word = ft_chrjoin(*word, string[*i]);
+		*word = ft_chrjoin(*word, string[*i + 1]);
+		*i += 2;
+	}
+	if (string[*i] == '$' && string[*i + 1] == '$')
+	{
+		*i += 2;
+	}
+	else if (string[*i] == '$' && (c == 34 || c == '\0'))
 	{
 		*swap = return_wild(string, &*i);
 		*i += 1;
@@ -55,32 +66,31 @@ char	*read_word(char *string, int *i)
 	return (word);
 }
 
-int	option_gen(t_prompt *prom, char *str, int *i)
+int	option_gen(t_prompt *prm, char *st, int *i)
 {
-	int		l;
-	int		x;
+	int		x[2];
 
-	if (!prom->arguments)
+	if (!prm->arguments)
 	{
-		prom->arguments = (char **)ft_calloc(sizeof(char *), 2);
-		prom->arguments[0] = (char *)ft_calloc(sizeof(char), 2);
+		prm->arguments = (char **)ft_calloc(sizeof(char *), 2);
+		prm->arguments[0] = (char *)ft_calloc(sizeof(char), 2);
 	}
-	if (!prom->arguments || !prom->arguments[0])
+	if (!prm->arguments || !prm->arguments[0])
 		return (-1);
-	x = 0;
-	l = ft_strlen(prom->arguments[0]);
-	while (str[*i] && is_redirecction(&str[*i]) == 0 && str[*i] != ' ')
+	x[0] = 0;
+	x[1] = ft_strlen(prm->arguments[0]);
+	while (st[*i] && is_redirecction(&st[*i]) == 0 && st[*i] != ' ')
 	{
-		if (str[*i] == '-' && x < 1)
-			x++;
+		if (st[*i] == '-' && x < 1)
+			x[0]++;
 		else if (x > 1)
 		{
 			g_ms->signals->error_status = 1;
 			return (printf("illegal option -- -\n"), -1);
 		}
-		else if (!ft_strrchr(prom->arguments[0], str[*i]))
-			prom->arguments[0] = (l++, ft_chrjoin(prom->arguments[0], str[*i]));
+		else if (!ft_strrchr(prm->arguments[0], st[*i]))
+			prm->arguments[0] = (x[1]++, ft_chrjoin(prm->arguments[0], st[*i]));
 		*i += 1;
 	}
-	return (l);
+	return (x[1]);
 }

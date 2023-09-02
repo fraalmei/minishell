@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/02 12:45:38 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/02 14:35:32 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	prompt(void)
 	g_ms->buffer = ft_strtrim_onefree(readline(BCYAN"minishell>"WHITE), \
 		" \t\n\v\f\r");
 	if (!g_ms->buffer)
-		printf ("exit\n");
+		(printf ("exit\n"), exit_shell());
 	else if (ft_strcmp(g_ms->buffer, "") == 0)
 	{
 		g_ms->prompt = NULL;

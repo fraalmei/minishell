@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:40:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/04 12:36:12 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/02 13:23:29 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ int	cd(t_prompt *prompt)
 	DIR	*dir;
 
 	dir = opendir(prompt->arguments[0]);
-	if (dir == NULL)
+	if (!dir)
+	{
 		return (printf ("no such file or directory: %s\n", \
 			prompt->arguments[0]), ERROR);
-	else
-		return (chdir(prompt->arguments[0]));
+	}
+	return (chdir(prompt->arguments[0]));
 }

@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/02 12:45:22 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/02 17:35:05 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,12 @@ t_prompt	*make_prompt_struct(void);
 int			is_redirecction(char *str);
 int			check_quotes(char *str);
 
+		/// utils/prompt_struct.c
+int			is_redirecction(char *str);
+int			is_pipe(char *str);
+int			is_redir(char *str);
+int			check_quotes(char *str);
+
 	///	 parse
 		///	 parse_prompt.c
 int			num_prom(t_prompt *prom);
@@ -222,16 +228,12 @@ char		**soft_split(char *buffer);
 
 		///	 parse_prompt_utils.c
 t_prompt	*make_prompt_struct(void);
-int			is_redirecction(char *str);
-int			is_pipe(char *str);
-int			is_redir(char *str);
-int			check_quotes(char *str);
 t_prompt	*last_prom(t_prompt *prom);
 
 		///	 parse_prompt_utils_2.c
 int			swap_word(char *string, char **word, char **swap, int *i, char c);
 char		*read_word(char *string, int *i);
-int			option_gen(t_prompt *prom, char *str, int *i);
+int			option_gen(t_prompt *prm, char *st, int *i);
 
 		///	 parse_redirects.c
 int			get_redir(char *buffer, int *i, t_prompt *swap);
