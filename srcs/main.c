@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/29 10:32:58 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/02 12:27:36 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ int	main(int argc, char **argv, char **env)
 	{
 		if (!g_ms->prompt)
 			continue ;
-		// actions(g_ms->prompt);
+		//actions(g_ms->prompt);
+		if (g_ms->prompt->command && g_ms->prompt->arguments == NULL)
+			add_args (g_ms->prompt);
 		start_executer();
 		free_prompt(g_ms->prompt);
 		g_ms->prompt = NULL;
