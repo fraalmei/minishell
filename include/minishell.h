@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/08/29 11:31:12 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/02 12:28:06 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,10 @@ typedef struct s_prompt
 	int					n_options;
 	int					n_arguments;
 	char				**arguments;
-	char				**here_doc;			/* Heredoc*/
-	char				**input_redirect;	/* Infile */
-	char				**output_redirect;	/* Outfile */
-	char				**append_redirect;	/* Outfile(Append) */
+	char				**here_doc;
+	char				**input_redirect;
+	char				**output_redirect;
+	char				**append_redirect;
 	char				*sep1;
 	struct s_prompt		*next;
 }						t_prompt;
@@ -133,6 +133,7 @@ int			init_signals(void);
 void		init_sig_struct(void);
 
 	///	 actions.c
+int		add_args(t_prompt *prompt);
 int			actions(t_prompt *prompt);
 
 	///	 pipe.c
