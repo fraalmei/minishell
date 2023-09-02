@@ -6,15 +6,15 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:18:16 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/02 12:28:08 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/02 12:45:28 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	add_args(t_prompt *prompt)
+int	add_args(t_prompt *prompt, char *str)
 {
-	prompt->arguments = str_strjoin_freeall(prompt->arguments, ft_strdup("."));
+	prompt->arguments = str_strjoin_freeall(prompt->arguments, ft_strdup(str));
 	prompt->n_arguments = 1;
 	return (0);
 }
@@ -44,6 +44,6 @@ int	actions(t_prompt *prompt)
 	else if (prompt->command && ft_strcmp(prompt->command, "echo") == 0)
 		echo(g_ms->prompt);
 	else if (prompt->command && prompt->arguments == NULL)
-		add_args (prompt);
+		add_args (prompt, ".");
 	return (0);
 }

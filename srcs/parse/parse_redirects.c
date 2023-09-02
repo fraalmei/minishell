@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 17:01:31 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/01 08:14:28 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/02 12:31:11 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static char	**redir_join(char *buffer, int *i, char **redir)
 	*i += 1;
 	while (buffer[*i] && is_redirecction(&buffer[*i]) == 0)
 		*i += 1;
+	*i -= 1;
 	return (redir);
 }
 

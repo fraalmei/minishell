@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/02 12:28:06 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/02 12:45:22 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ int			init_signals(void);
 void		init_sig_struct(void);
 
 	///	 actions.c
-int		add_args(t_prompt *prompt);
+int			add_args(t_prompt *prompt, char *str);
 int			actions(t_prompt *prompt);
 
 	///	 pipe.c
