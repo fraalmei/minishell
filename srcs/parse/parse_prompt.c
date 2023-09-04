@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/04 11:30:27 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/04 12:50:40 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,12 @@ static void	get_option_args(char *buffer, int *i, t_prompt *swap)
 	if ((buffer[*i] == '-') && (buffer[*i + 1] != ' ') && !swap->arguments)
 		swap->n_options = option_gen(swap, buffer, i);
 	else
-		swap->arguments = str_strjoin_freeall(swap->arguments, read_word(buffer, i));
+	{
+		if (!swap->arguments)
+			add_args (g_ms->prompt, "-");
+		swap->arguments = \
+			str_strjoin_freeall(swap->arguments, read_word(buffer, i));
+	}
 }
 
 t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
@@ -70,8 +75,11 @@ t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 	while (buffer[i])
 	{
 		if (check_start_prom(&buffer[0], prom) != 0)
-			return (free_prompt(prom), free_prompt (swap), write(1, "syntax error near unexpected token ", 36), write(1, &buffer[0], is_pipe(&buffer[i])), write(1, "\n", 1), NULL);
-		else if (!swap->command && buffer[i] != ' ' && is_redirecction(&buffer[i]) == 0)
+			return (free_prompt(prom), free_prompt (swap), write(1, \
+				"syntax error near unexpected token ", 36), write(1, \
+				&buffer[0], is_pipe(&buffer[i])), write(1, "\n", 1), NULL);
+		else if (!swap->command && buffer[i] != ' ' && \
+			is_redirecction(&buffer[i]) == 0)
 		{
 			swap->command = read_word(buffer, &i);
 			if (swap->command == NULL)
@@ -105,9 +113,9 @@ t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 			i--;
 		}
 		if (check_end_prom(&buffer[i]) != 0)
-			return (free_prompt(prom), free_prompt (swap), write(1, "syntax error near unexpected token `newline'\n", 46), NULL);
+			return (free_prompt(prom), free_prompt (swap), write(1, \
+				"syntax error near unexpected token `newline'\n", 46), NULL);
 		i++;
-		//printf("veamos cuanto pasa por aqui %i\n", i);
 	}
 	if (swap->arguments)
 		swap->n_arguments = ft_str_strlen(swap->arguments);
