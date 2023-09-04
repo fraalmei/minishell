@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/02 17:35:05 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/04 14:01:10 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,10 +133,9 @@ int			init_signals(void);
 void		init_sig_struct(void);
 
 	///	 actions.c
-int			add_args(t_prompt *prompt, char *str);
 int			actions(t_prompt *prompt);
 
-	///	 pipe.c
+	///	 pipe.c#
 char		*getpath(char *cmd, char **env);
 int			exec(char *cmd, char **env);
 
@@ -165,6 +164,7 @@ int			get_name(t_env_var *env, char	*var);
 		///	 list_util.c
 int			list_len(t_env_var *first);
 t_env_var	*lst_strct_env(t_env_var *env);
+char		**env_to_strstr(t_env_var *frst);
 t_env_var	*new_struct_env(char *var);
 
 	///	 builtins
