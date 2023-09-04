@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/04 13:55:06 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:21:23 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	check_end_prom(char *buffer)
 
 static void	get_option_args(char *buffer, int *i, t_prompt *swap)
 {
-	if ((buffer[*i] == '-') && (buffer[*i + 1] != ' ') && !swap->arguments)
+	if ((buffer[*i] == '-') && (buffer[*i + 1] != ' ') && !swap->arguments[2])
 		swap->n_options = option_gen(swap, buffer, i);
 	else
 		swap->arguments = \
@@ -100,7 +100,7 @@ t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 				swap->sep1 = ft_chr_n_join(swap->sep1, \
 					&buffer[i], is_pipe(&buffer[i]));
 				i += is_pipe(&buffer[i]);
-				swap->n_arguments = ft_str_strlen(swap->arguments);
+				swap->n_arguments = ft_str_strlen(swap->arguments) - 1;
 				last_prom(prom)->next = swap;
 				swap->prev = last_prom(prom);
 			}

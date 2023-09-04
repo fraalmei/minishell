@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:55:29 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/04 11:27:51 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:08:51 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,12 @@ int	option_gen(t_prompt *prm, char *st, int *i)
 {
 	int		x[2];
 
-	if (!prm->arguments)
-	{
-		prm->arguments = (char **)ft_calloc(sizeof(char *), 2);
-		prm->arguments[0] = (char *)ft_calloc(sizeof(char), 2);
-	}
-	if (!prm->arguments || !prm->arguments[0])
+	if (!prm->arguments[1])
+		prm->arguments[1] = (char *)ft_calloc(sizeof(char), 2);
+	if (!prm->arguments[1])
 		return (-1);
 	x[0] = 0;
-	x[1] = ft_strlen(prm->arguments[0]);
+	x[1] = ft_strlen(prm->arguments[1]);
 	while (st[*i] && is_redirecction(&st[*i]) == 0 && st[*i] != ' ')
 	{
 		if (st[*i] == '-' && x[0] < 1)
@@ -87,8 +84,8 @@ int	option_gen(t_prompt *prm, char *st, int *i)
 			g_ms->signals->error_status = 1;
 			return (printf("illegal option -- -\n"), -1);
 		}
-		else if (!ft_strrchr(prm->arguments[0], st[*i]))
-			prm->arguments[0] = (x[1]++, ft_chrjoin(prm->arguments[0], st[*i]));
+		else if (!ft_strrchr(prm->arguments[1], st[*i]))
+			prm->arguments[1] = (x[1]++, ft_chrjoin(prm->arguments[1], st[*i]));
 		*i += 1;
 	}
 	return (x[1]);
