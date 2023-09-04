@@ -6,18 +6,11 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:18:16 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/02 13:28:42 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/04 13:56:27 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-int	add_args(t_prompt *prompt, char *str)
-{
-	prompt->arguments = str_strjoin_freeall(prompt->arguments, ft_strdup(str));
-	prompt->n_arguments = 1;
-	return (0);
-}
 
 	// check the buffer command
 	// * if (sizeof(g_ms->envirorment->dir) == sizeof(t_env_var))
@@ -45,7 +38,5 @@ int	actions(t_prompt *prompt)
 			unset(&g_ms->envirorment->frst, prompt->arguments);
 	else if (prompt->command && ft_strcmp(prompt->command, "echo") == 0)
 		g_ms->signals->execution_status = echo(g_ms->prompt);
-	else if (prompt->command && !prompt->arguments)
-		add_args (prompt, ".");
 	return (0);
 }
