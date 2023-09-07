@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:19:05 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/08/28 13:15:05 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/07 15:17:02 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	launch_from_father(t_prompt *prompt)
 
 	stdin_fd = dup(0);
 	stdout_fd = dup(1);
-	dup_to_stdin_stdout(prompt->infile, prompt->infile);
+	dup_to_stdin_stdout(prompt->infile, prompt->outfile);
 	actions(prompt);
 	dup_to_stdin_stdout(stdin_fd, stdout_fd);
 }
@@ -42,14 +42,9 @@ void	call_execve(t_prompt *prompt)
 	char	*path;
 	int		err;
 
-	// if Set here_doc redir
-		// .........
-	// else if Set input_redir
-		// .........
-	// if Set output_redir
-		// .........
-	if (!prompt->command)
-		exit(UNKNOWN_COMMAND);
+	// if (!prompt->command)
+	// 	exit(UNKNOWN_COMMAND);
+	dup_to_stdin_stdout(prompt->infile, prompt->outfile);
 	path = get_pathname(prompt->command, g_ms->envirorment->env);
 	if (execve(path, prompt->arguments, g_ms->envirorment->env) == -1)
 	{
