@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 19:14:34 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/04/21 13:21:33 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/07 10:59:26 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,22 @@ char	*ft_strtrim_onefree(char *s1, char const *set)
 	i = ft_strlen(s1);
 	while (i && ft_strchr(set, s1[i]))
 		i--;
+	s = ft_substr(s1, j, i + 1);
+	return (free (s1), (char *)s);
+}
+
+char	*ft_strtrim_frst_onefree(char *s1, char const *set)
+{
+	char			*s;
+	unsigned int	i;
+	unsigned int	j;
+
+	if (set == NULL || s1 == NULL)
+		return (NULL);
+	j = 0;
+	while (s1[j] && ft_strchr(set, s1[j]))
+		j++;
+	i = ft_strlen(s1);
 	s = ft_substr(s1, j, i + 1);
 	return (free (s1), (char *)s);
 }
