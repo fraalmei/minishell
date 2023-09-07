@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 12:58:45 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/07 13:11:06 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/07 14:59:15 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <errno.h>
 # include <limits.h>
 # include <fcntl.h>
 
@@ -23,6 +24,10 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
 # endif
+
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
 
 	// basic structure of "t_list"
 	// its defined a struct type "t_list"
@@ -144,4 +149,5 @@ size_t	ft_strlen_array(const void **string);
 int		ft_strnstr_f(const char *haystack, const char *needle, size_t n);
 int		ft_strnstr_l(const char *haystack, const char *needle, size_t n);
 
+void	ft_error(int error, char *argument);
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+         #
+#    By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/25 17:18:27 by fraalmei          #+#    #+#              #
-#    Updated: 2023/09/02 17:26:03 by fraalmei         ###   ########.fr        #
+#    Updated: 2023/09/07 15:01:11 by cagonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,8 +48,8 @@ UTILS		= utils/print_things.c utils/meta_char.c utils/ft_split_trim.c utils/sepa
 BUILTINS	= builtins/pwd.c builtins/env.c builtins/export.c builtins/exit.c builtins/cd.c \
 				builtins/unset.c builtins/echo.c
 PARSE		= parse/parse_prompt_utils.c parse/parse_prompt.c parse/parse_prompt_utils_2.c parse/parse_redirects.c
-EXECUTER	= executer/call_execve.c executer/child_manager.c executer/exec_utils.c \
-				executer/executer.c executer/fd_utils.c executer/get_path.c
+EXECUTER	= executer/call_execve.c executer/child_manager.c executer/exec_utils.c executer/executer.c \
+				executer/fd_utils.c executer/get_path.c executer/open_fd.c
 SIGNALS		= signals/signals.c
 LIBFT_DIR	= libft		# path to libft libft
 INCLUDE_DIR	= include		# path to headers
@@ -60,8 +60,12 @@ INCLUDE_DIR	= include		# path to headers
 # if not installed in your user
 # type "brew install readline"
 
-READ		= /System/Volumes/Data/sgoinfre/students/fraalmei/homebrew/Cellar/readline/8.2.1
-# READ		= /System/Volumes/Data/Users/cagonzal/.brew/Cellar/readline/8.2.1/
+ifeq ($(USER), fraalmei)
+	READ		= /System/Volumes/Data/sgoinfre/students/fraalmei/homebrew/Cellar/readline/8.2.1
+endif
+ifeq ($(USER), cagonzal)
+	READ		= /System/Volumes/Data/Users/cagonzal/.brew/Cellar/readline/8.2.1/
+endif
 
 # Convert source files to binary
 OBJS = $(SRCS:%.c=$(BIN_DIR)/%.o)
