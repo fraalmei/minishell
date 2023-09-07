@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:08:09 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/07 14:52:26 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/07 15:29:31 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void		writeheredoc(int fd[2], char *limiter);
 char		*get_pathname(char *cmd, char **env);
 
 	//executer/open_fd.c
-
+void		ft_inredir(t_prompt *prompt);
+void		ft_outredir(t_prompt *prompt);
 int			openfile(char *filename, int mode);
 
 #endif

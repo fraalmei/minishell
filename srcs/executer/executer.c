@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:45:48 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/07 15:13:35 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/07 15:31:20 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,35 +28,10 @@ void	launch_from_child(t_prompt *prompt)
 
 void	launch_single_process(t_prompt *prompt)
 {
-	int	i;
-
 	if (prompt->input_redirect)
-	{
-		i = -1;
-		while (prompt->input_redirect[++i])
-			prompt->infile = openfile(prompt->input_redirect[i], INFILE);
-	}
+		ft_inredir(prompt);
 	if (prompt->output_redirect)
-	{
-		i = -1;
-		while (prompt->output_redirect[++i])
-		{
-			if (prompt->output_redirect[i][1] != '>')
-			{
-				prompt->output_redirect[i] = ft_strtrim_frst_onefree(\
-					prompt->output_redirect[i], ">");
-				prompt->outfile = openfile(prompt->output_redirect[i] \
-						, OUTFILE);
-			}
-			else
-			{
-				prompt->output_redirect[i] = ft_strtrim_frst_onefree(\
-					prompt->output_redirect[i], ">>");
-				prompt->outfile = openfile(prompt->output_redirect[i] \
-						, APPFILE);
-			}
-		}
-	}
+		ft_outredir(prompt);
 	if (prompt->command)
 	{
 		if (is_builtin(prompt->command))
