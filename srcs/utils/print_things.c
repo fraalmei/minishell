@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:00:19 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/04 16:30:52 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/07 13:31:28 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,6 @@ void	print_prompt(t_prompt *prom)
 		else
 			ft_printf("Argumentos:	(null)#\n");
 		i = 0;
-		if (prom->here_doc)
-			while (prom->here_doc[i] != NULL)
-				ft_printf("here_doc:	%s#\n", prom->here_doc[i++]);
-		i = 0;
 		if (prom->input_redirect)
 			while (prom->input_redirect[i] != NULL)
 				ft_printf("input_redirect:	%s#\n", prom->input_redirect[i++]);
@@ -53,10 +49,6 @@ void	print_prompt(t_prompt *prom)
 		if (prom->output_redirect)
 			while (prom->output_redirect[i] != NULL)
 				ft_printf("output_redirect:	%s#\n", prom->output_redirect[i++]);
-		i = 0;
-		if (prom->append_redirect)
-			while (prom->append_redirect[i] != NULL)
-				ft_printf("append_redirect:	%s#\n", prom->append_redirect[i++]);
 		ft_printf("Separación:	%s#\n", prom->sep1);
 		ft_printf("Siguiente:	%p#\n", prom->next);
 		ft_printf("++------------++\n");

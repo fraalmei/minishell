@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 15:02:58 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/31 09:26:16 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/07 13:30:38 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,10 @@ int	free_prompt(t_prompt *prom)
 			free_str (prom->arguments);
 		if ((prom->sep1))
 			free(prom->sep1);
-		if ((prom->here_doc))
-			free_str(prom->here_doc);
 		if ((prom->input_redirect))
 			free_str(prom->input_redirect);
 		if ((prom->output_redirect))
 			free_str(prom->output_redirect);
-		if ((prom->append_redirect))
-			free_str(prom->append_redirect);
 		free (prom);
 		prom = prom->next;
 	}

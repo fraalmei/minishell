@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/04 14:01:10 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/07 13:30:08 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,8 @@ typedef struct s_prompt
 	int					n_options;
 	int					n_arguments;
 	char				**arguments;
-	char				**here_doc;
-	char				**input_redirect;
-	char				**output_redirect;
-	char				**append_redirect;
+	char				**input_redirect; // "test" // ">>test"         
+	char				**output_redirect; // "> test" // ">> test"
 	char				*sep1;
 	struct s_prompt		*next;
 }						t_prompt;

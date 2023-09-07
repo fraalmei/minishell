@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 16:08:35 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/04 16:13:35 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:38:15 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,30 @@ t_env_var	*lst_strct_env(t_env_var *env)
 {
 	while (env->next)
 		env = env->next;
+	return (env);
+}
+
+static char	*env_to_str(t_env_var *frst)
+{
+	char	*env;
+	char	*swap;
+
+	swap = ft_chrjoin(frst->name, frst->equal);
+	env = ft_strjoin_onefree(swap, frst->value);
+	return (env);
+}
+
+char	**env_to_strstr(t_env_var *frst)
+{
+	char	**env;
+
+	env = NULL;
+	while (frst->next)
+	{
+		env = str_strjoin_freeall(env, env_to_str(frst));
+		frst = frst->next;
+	}
+	env = str_strjoin_freeall(env, env_to_str(frst));
 	return (env);
 }
 

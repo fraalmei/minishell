@@ -6,10 +6,9 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 17:42:05 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/02 12:28:32 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/04 15:28:54 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include <minishell.h>
 
@@ -43,6 +42,10 @@ int	ft_scndchrlen(const char *s, char c)
 		return (-1);
 }
 
+/// @brief join a string to a string array
+/// @param s1 
+/// @param s2 
+/// @return 
 char	**str_strjoin_freeall(char **s1, char *s2)
 {
 	char	**str;
