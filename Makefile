@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+         #
+#    By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/25 17:18:27 by fraalmei          #+#    #+#              #
-#    Updated: 2023/09/08 10:11:57 by cagonzal         ###   ########.fr        #
+#    Updated: 2023/09/08 17:37:37 by fraalmei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
