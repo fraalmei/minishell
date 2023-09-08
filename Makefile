@@ -6,7 +6,7 @@
 #    By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/25 17:18:27 by fraalmei          #+#    #+#              #
-#    Updated: 2023/09/07 15:01:11 by cagonzal         ###   ########.fr        #
+#    Updated: 2023/09/08 10:11:57 by cagonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ BUILTINS	= builtins/pwd.c builtins/env.c builtins/export.c builtins/exit.c built
 				builtins/unset.c builtins/echo.c
 PARSE		= parse/parse_prompt_utils.c parse/parse_prompt.c parse/parse_prompt_utils_2.c parse/parse_redirects.c
 EXECUTER	= executer/call_execve.c executer/child_manager.c executer/exec_utils.c executer/executer.c \
-				executer/fd_utils.c executer/get_path.c executer/open_fd.c
+				executer/fd_utils.c executer/get_path.c executer/heredoc.c executer/open_fd.c
 SIGNALS		= signals/signals.c
 LIBFT_DIR	= libft		# path to libft libft
 INCLUDE_DIR	= include		# path to headers

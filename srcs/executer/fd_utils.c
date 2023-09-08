@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:24:32 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/07 15:14:44 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/08 12:10:02 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	close_all_fds(t_prompt *prompt)
 	}
 	if (prompt->outfile != 1)
 	{
-		printf("Entra en outfile\n");
 		close(prompt->outfile);
 		prompt->outfile = 1;
 	}

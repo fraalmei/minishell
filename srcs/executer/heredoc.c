@@ -6,52 +6,66 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:08:29 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/08/21 16:06:05 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/08 12:54:45 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <executer.h>
 
-void	initheredoc(t_prompt prompt)
+void	ft_heredoc(void)
 {
-	int		fd[2];
-	pid_t	pid;
+	int			i;
+	t_prompt	*aux;
 
-	if (n_arguments < 1)
-		return (write(1, "syntax error near unexpected token ", 36), write(1, \
-		"\n", 1), NULL);
-	if
-	pipe(fd);
-	pid = fork();
-	if (pid < 0)
-		ft_error(errno, NULL);
-	if (pid == 0)
-		writeheredoc(fd, argv[2]);
-	else
+	aux = g_ms->prompt;
+	while (aux)
 	{
-		dup2(fd[0], STDIN);
-		close(fd[1]);
-		close(fd[0]);
-		waitpid(pid, NULL, 0);
+		i = -1;
+		if (aux->input_redirect)
+		{
+			while (aux->input_redirect[++i])
+			{
+				if (aux->input_redirect[i][1] == '<')
+				{
+					aux->input_redirect[i] = ft_strtrim_frst_onefree(\
+						aux->input_redirect[i], "<<");
+					aux->input_redirect[i] = initheredoc(\
+						aux->input_redirect[i]);
+				}
+			}
+		}
+		aux = aux->next;
 	}
 }
 
-void	writeheredoc(int fd[2], char *limiter)
+char	*initheredoc(char *limiter)
 {
+	limiter = writeheredoc(limiter);
+	return (limiter);
+}
+
+char	*writeheredoc(char *limiter)
+{
+	int		fd;
+	char	*redir;
 	char	*line;
 
-	while (1)
+	redir = ft_strjoin("./tmp/", limiter);
+	fd = open(redir, O_CREAT | O_WRONLY | O_TRUNC, 0666);
+	// Make Signals work
+	if (fd < 0)
+		return (NULL);
+	line = readline("> ");
+	while (ft_strncmp(line, limiter, ft_strlen(limiter)) != 0)
 	{
-		ft_printf("pipex here_doc> ");
-		line = get_next_line(STDIN);
-		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
-		{
-			close(fd[1]);
-			close(fd[0]);
-			exit(EXIT_SUCCESS);
-		}
-		ft_putstr_fd(line, fd[STDOUT]);
-		free(line);
+		// Expanded Vars
+		ft_putstr_fd(line, fd);
+		write(fd, "\n", 1);
+		line = (free(line), NULL);
+		line = readline("> ");
 	}
+	line = (free(line), NULL);
+	close(fd);
+	return (redir);
 }

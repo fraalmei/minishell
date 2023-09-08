@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:08:09 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/07 15:29:31 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/08 11:57:48 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ void		close_all_fds(t_prompt *prompt);
 void		add_flag(size_t *pos, int *flg, int t);
 
 	//executer/heredoc.c
-void		initheredoc(t_prompt *prompt);
-void		writeheredoc(int fd[2], char *limiter);
+void		ft_heredoc(void);
+char		*initheredoc(char *limiter);
+char		*writeheredoc(char *limiter);
 
 	//executer/get_paths.c
 char		*get_pathname(char *cmd, char **env);
