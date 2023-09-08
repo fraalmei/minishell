@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/07 14:40:02 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/08 18:01:48 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ t_env_var	*copy_env_list(char **env);
 char		*get_value(t_env_var *env, char *var);
 void		set_value(t_env_var *env, char *var);
 int			get_name(t_env_var *env, char	*var);
+int			incr_shll_lvl(t_env_var *env);
 
 		///	 list_util.c
 int			list_len(t_env_var *first);

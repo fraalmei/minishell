@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 11:23:41 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/07/28 18:00:49 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/08 18:01:10 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,19 @@ int	get_name(t_env_var *env, char	*var)
 		swap = swap->next;
 	}
 	return (1);
+}
+
+int	incr_shll_lvl(t_env_var *env)
+{
+	int		i;
+	char	*swap;
+	char	*lvl;
+
+	i = ft_atoi(get_value(env, "SHLVL"));
+	i++;
+	lvl = ft_itoa(i);
+	swap = ft_strjoin(ft_strdup("SHLVL="), lvl);
+	free (lvl);
+	set_value(env, swap);
+	return (0);
 }
