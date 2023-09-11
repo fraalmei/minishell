@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:39:59 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/11 12:07:36 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/11 19:16:57 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,18 +89,24 @@ int	export(t_prompt *prompt)
 	if (prompt->n_options == 0 && prompt->n_arguments == 1)
 		return (print_sort_list(g_ms->envirorment->frst), 0);
 	else if (prompt->n_options != 0)
-		return (printf("bad option: %s\n", prompt->arguments[0]), 0);
+		return (print_error(prompt->arguments[0], 2), 0);
 	i = 0;
 	while (prompt->arguments[++i])
 	{
+		printf("%s\n", prompt->arguments[i]);
 		if (!prompt->arguments[i])
 			return (0);
-		if (ft_str_chr(prompt->arguments[i], '=') >= 0)
+		if (ft_str_chr(prompt->arguments[i], '=') != 0)
 			splt = ft_split(prompt->arguments[i], '=');
+		else
+		{
+			print_error(prompt->arguments[i], 1);
+			continue ;
+		}
 		if (ft_str_lst_chr(splt[0], ' ') > 0 && !splt[1])
-			return (printf("bad assigment\n"), free_str(splt), 0);
+			return (print_error(NULL, 1), free_str(splt), 0);
 		else if (ft_str_lst_chr(splt[0], ' ') > 0)
-			return (printf("%s not found\n", splt[1]), free_str(splt), 0);
+			return (print_error(splt[1], 1), free_str(splt), 0);
 		if (get_name(g_ms->envirorment->frst, splt[0]))
 		{
 			printf("actions set\n");

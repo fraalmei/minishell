@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:00:19 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/07 13:31:28 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:26:46 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,19 @@ void	print_prompt(t_prompt *prom)
 		ft_printf("++------------++\n");
 		prom = prom->next;
 	}
+}
+
+int	print_error(char *str, int i)
+{
+	if (i == 0)
+		printf("export: `%s': not a valid identifier\n", str);
+	else if (i == 1)
+		printf("%s not found\n", str);
+	else if (i == 2)
+		printf("bad option: %s\n", str);
+	else if (i == 3)
+		printf("bad assigment\n");
+	return (0);
 }
 
 void	print_str_str(char **string)
