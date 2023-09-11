@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:39:59 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/28 11:31:53 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/11 12:07:36 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static t_env_var	*get_less_node(t_env_var *list, t_env_var *last)
 	if (!last)
 	{
 		ret = list;
-		while (list->next)
+		while (list)
 		{
 			if (ft_strcmp(ret->name, list->name) >= 0)
 				ret = list;
@@ -41,7 +41,7 @@ static t_env_var	*get_less_node(t_env_var *list, t_env_var *last)
 	else
 	{
 		ret = NULL;
-		while (list->next)
+		while (list)
 		{
 			if (ft_strcmp(last->name, list->name) < 0)
 			{
@@ -86,11 +86,11 @@ int	export(t_prompt *prompt)
 	int			i;
 
 	splt = NULL;
-	if (!prompt->n_options && !prompt->arguments)
+	if (prompt->n_options == 0 && prompt->n_arguments == 1)
 		return (print_sort_list(g_ms->envirorment->frst), 0);
 	else if (prompt->n_options != 0)
 		return (printf("bad option: %s\n", prompt->arguments[0]), 0);
-	i = -1;
+	i = 0;
 	while (prompt->arguments[++i])
 	{
 		if (!prompt->arguments[i])

@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:39:55 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/08/04 12:16:43 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/11 12:26:03 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,13 @@
 void	remove_node(t_env_var **prev, t_env_var *node)
 {
 	if ((*prev) == node)
-	{
 		(*prev) = node->next;
-		node->next = NULL;
-		free_env_var(node);
-	}
 	else if (node->next)
-	{
 		(*prev)->next = node->next;
-		node->next = NULL;
-		free_env_var(node);
-	}
 	else
-	{
 		(*prev)->next = NULL;
-		node->next = NULL;
-		free_env_var(node);
-	}
+	node->next = NULL;
+	free_env_var(node);
 }
 
 	// busca el nombre en env y export y los elimina
