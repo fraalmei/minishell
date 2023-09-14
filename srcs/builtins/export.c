@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:39:59 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/14 13:24:44 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:05:00 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,15 @@ static void	print_export(t_env_var	*env)
 {
 	ft_printf("declare -x %s", env->name);
 	if (env->equal)
+	{
 		ft_printf("=");
-	if (env->value)
-		ft_printf("\"%s\"\n", env->value);
+		if (env->value)
+			ft_printf("\"%s\"\n", env->value);
+		else
+			ft_printf("\"\"\n");
+	}
 	else
-		ft_printf("\"\"\n");
+		ft_printf("\n");
 }
 
 static t_env_var	*get_less_node(t_env_var *list, t_env_var *last)
@@ -64,13 +68,11 @@ static void	print_sort_list(t_env_var *list)
 	i = list_len(list);
 	swap = get_less_node(list, NULL);
 	print_export (swap);
-	while (--i)
+	while (--i >= 0)
 	{
 		swap = get_less_node(list, swap);
 		print_export(swap);
 	}
-	swap = get_less_node(list, swap);
-	print_export(swap);
 }
 
 	// export ->muestra las variables de entorno en orden alfabetico
@@ -95,7 +97,6 @@ int	export(t_prompt *prompt)
 	i = 0;
 	while (prompt->arguments[++i])
 	{
-		printf("%s\n", prompt->arguments[i]);
 		if (!prompt->arguments[i])
 			return (0);
 		if (ft_str_chr(prompt->arguments[i], '=') != 0)
@@ -105,18 +106,11 @@ int	export(t_prompt *prompt)
 			print_error(prompt->arguments[i], 1);
 			continue ;
 		}
-		if (ft_str_lst_chr(splt[0], ' ') > 0 && !splt[1])
+		if (ft_str_chr(splt[0], ' ') > 0 && !splt[1])
 			return (print_error(NULL, 1), free_str(splt), 0);
-		else if (ft_str_lst_chr(splt[0], ' ') > 0)
+		else if (ft_str_chr(splt[0], ' ') > 0)
 			return (print_error(splt[1], 1), free_str(splt), 0);
-		if (get_name(g_ms->envirorment->frst, splt[0]))
-		{
-			printf("actions set\n");
-			set_value(g_ms->envirorment->frst, prompt->arguments[i]);
-		}
-		else
-			lst_strct_env(g_ms->envirorment->frst)->next = \
-				new_struct_env(prompt->arguments[i]);
+		set_value(g_ms->envirorment->frst, prompt->arguments[i]);
 	}
 	return (0);
 }

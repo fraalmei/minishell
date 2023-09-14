@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 16:08:35 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/04 16:38:15 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/14 13:53:25 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ t_env_var	*new_struct_env(char *var)
 	}
 	else
 	{
+		printf("entra \n");
 		env->name = var;
 		env->equal = 0;
 		env->value = NULL;
