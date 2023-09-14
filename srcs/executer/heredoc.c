@@ -6,18 +6,20 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:08:29 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/08 12:54:45 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/14 10:50:56 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <executer.h>
 
+
 void	ft_heredoc(void)
 {
 	int			i;
 	t_prompt	*aux;
 
+	mkdir("./tmp/", S_IRWXU | S_IRWXG | S_IRWXO);
 	aux = g_ms->prompt;
 	while (aux)
 	{
@@ -30,8 +32,9 @@ void	ft_heredoc(void)
 				{
 					aux->input_redirect[i] = ft_strtrim_frst_onefree(\
 						aux->input_redirect[i], "<<");
-					aux->input_redirect[i] = initheredoc(\
+					aux->input_redirect[i] = writeheredoc(\
 						aux->input_redirect[i]);
+					system("leaks -q minishell");
 				}
 			}
 		}
@@ -39,10 +42,25 @@ void	ft_heredoc(void)
 	}
 }
 
-char	*initheredoc(char *limiter)
+char	*ft_expand_vars(char *line)
 {
-	limiter = writeheredoc(limiter);
-	return (limiter);
+	int		i;
+	char	*str;
+	char	*value;
+
+	i = -1;
+	while (line[++i])
+	{
+		if (line[i] == '$' && line[i + 1] == ' ')
+		{
+			str = ft_strjoin(str, return_wild(line, ft_str_frst_chr('$')));
+			while (line[i] != ' ')
+				i++;
+		}
+		else
+			str = ft_chrjoin(line[i]);
+	}
+	return (line);
 }
 
 char	*writeheredoc(char *limiter)
@@ -53,19 +71,18 @@ char	*writeheredoc(char *limiter)
 
 	redir = ft_strjoin("./tmp/", limiter);
 	fd = open(redir, O_CREAT | O_WRONLY | O_TRUNC, 0666);
-	// Make Signals work
+	signals_dont();
 	if (fd < 0)
 		return (NULL);
 	line = readline("> ");
-	while (ft_strncmp(line, limiter, ft_strlen(limiter)) != 0)
+	while (line && ft_strncmp(line, limiter, ft_strlen(limiter)) != 0)
 	{
-		// Expanded Vars
+
 		ft_putstr_fd(line, fd);
 		write(fd, "\n", 1);
-		line = (free(line), NULL);
+		free(line);
 		line = readline("> ");
 	}
-	line = (free(line), NULL);
-	close(fd);
-	return (redir);
+	(free(line), free(limiter));
+	return (close(fd), redir);
 }
