@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:39:59 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/14 10:44:22 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/14 13:24:44 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ static void	print_sort_list(t_env_var *list)
 		swap = get_less_node(list, swap);
 		print_export(swap);
 	}
+	swap = get_less_node(list, swap);
+	print_export(swap);
 }
 
 	// export ->muestra las variables de entorno en orden alfabetico
