@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:54:33 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/04 16:35:31 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/08 18:03:22 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ t_env	*read_env(char **env)
 	print_str_str(cha);
 	printf("%p\n", cha);
 	free_str(cha); */
+	incr_shll_lvl(copy->frst);
 	return (copy);
 }
 
