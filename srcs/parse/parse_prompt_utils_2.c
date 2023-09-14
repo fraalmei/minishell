@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:55:29 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/14 13:18:03 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:16:10 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,9 @@ int	swap_word(char *string, char **word, int *i, char c)
 
 	if (string[*i] == '$' && string[*i + 1] == '?')
 	{
-		*word = ft_chrjoin(*word, string[*i]);
-		*word = ft_chrjoin(*word, string[*i + 1]);
+		*word = ft_strjoin_allfree(*word, ft_itoa(g_ms->signals->exit_return));
 		*i += 2;
 	}
-	/* else if (string[*i] == '$' && string[*i + 1] == '$')
-	{
-		*i += 2;
-	} */
 	else if (string[*i] == '$' && (c == 34 || c == '\0'))
 	{
 		swap = return_wild(string, &*i);
