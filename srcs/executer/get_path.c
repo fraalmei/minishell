@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:55:50 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/08/28 11:39:14 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/14 13:20:23 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ char	*get_pathname(char *cmd, char **env)
 		{
 			if (i >= strlen(paths) - 5)
 			{
-				printf("Entra aquí");
 				free(dest);
 				return (NULL);
 			}
