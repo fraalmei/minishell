@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/04 16:31:45 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/14 13:11:56 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 			is_redirecction(&buffer[i]) == 0)
 		{
 			swap->command = read_word(buffer, &i);
+			swap->arguments[0] = ft_strdup(swap->command);
 			if (swap->command == NULL)
 				return (free (prom), NULL);
 		}

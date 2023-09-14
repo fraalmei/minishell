@@ -6,15 +6,17 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:55:29 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/04 16:38:32 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/14 13:09:53 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include <minishell.h>
 
-int	swap_word(char *string, char **word, char **swap, int *i, char c)
+int	swap_word(char *string, char **word, int *i, char c)
 {
+	static char	*swap;
+
 	if (string[*i] == '$' && string[*i + 1] == '?')
 	{
 		*word = ft_chrjoin(*word, string[*i]);
@@ -27,10 +29,10 @@ int	swap_word(char *string, char **word, char **swap, int *i, char c)
 	} */
 	else if (string[*i] == '$' && (c == 34 || c == '\0'))
 	{
-		*swap = return_wild(string, &*i);
+		swap = return_wild(string, &*i);
 		*i += 1;
 		if (swap)
-			*word = ft_strjoin_onefree(*word, *swap);
+			*word = ft_strjoin_onefree(*word, swap);
 	}
 	else
 	{
@@ -40,26 +42,25 @@ int	swap_word(char *string, char **word, char **swap, int *i, char c)
 	return (0);
 }
 
-char	*read_word(char *string, int *i)
+char	*read_word(char *buffer, int *i)
 {
 	char	*word;
-	char	*swap;
 	char	c;
 
 	word = (char *)ft_calloc(sizeof(char), 2);
-	while (string[*i] && string[*i] != ' ' && is_redirecction(&string[*i]) == 0)
+	while (buffer[*i] && buffer[*i] != ' ' && is_redirecction(&buffer[*i]) == 0)
 	{
 		c = '\0';
-		if (string[*i] == 39 || string[*i] == 34)
+		if (buffer[*i] == 39 || buffer[*i] == 34)
 		{
-			c = string[*i];
+			c = buffer[*i];
 			*i += 1;
-			while (string[*i] && string[*i] != c)
-				swap_word(string, &word, &swap, i, c);
+			while (buffer[*i] && buffer[*i] != c)
+				swap_word(buffer, &word, i, c);
 			*i += 1;
 		}
 		else
-			swap_word(string, &word, &swap, i, c);
+			swap_word(buffer, &word, i, c);
 	}
 	*i -= 1;
 	return (word);

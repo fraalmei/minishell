@@ -231,7 +231,7 @@ t_prompt	*make_prompt_struct(void);
 t_prompt	*last_prom(t_prompt *prom);
 
 		///	 parse_prompt_utils_2.c
-int			swap_word(char *string, char **word, char **swap, int *i, char c);
+int			swap_word(char *string, char **word, int *i, char c);
 char		*read_word(char *string, int *i);
 int			option_gen(t_prompt *prm, char *st, int *i);
 

@@ -50,6 +50,8 @@ char	*ft_strtrim_onefree(char *s1, char const *set)
 	return (free (s1), (char *)s);
 }
 
+	// erase all chars of "s1" at star
+	// and return the result freeing s1
 char	*ft_strtrim_frst_onefree(char *s1, char const *set)
 {
 	char			*s;
