@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:08:29 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/14 10:50:56 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:28:07 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,17 @@ char	*ft_expand_vars(char *line)
 {
 	int		i;
 	char	*str;
-	char	*value;
 
 	i = -1;
+	str = ft_calloc(1, 1);
 	while (line[++i])
 	{
-		if (line[i] == '$' && line[i + 1] == ' ')
-		{
-			str = ft_strjoin(str, return_wild(line, ft_str_frst_chr('$')));
-			while (line[i] != ' ')
-				i++;
-		}
+		if (line[i] == '$')
+			str = ft_strjoin_onefree(str, return_wild(line, &i));
 		else
-			str = ft_chrjoin(line[i]);
+			str = ft_chrjoin(str, line[i]);
 	}
-	return (line);
+	return (free(line), str);
 }
 
 char	*writeheredoc(char *limiter)
@@ -75,9 +71,9 @@ char	*writeheredoc(char *limiter)
 	if (fd < 0)
 		return (NULL);
 	line = readline("> ");
-	while (line && ft_strncmp(line, limiter, ft_strlen(limiter)) != 0)
+	while (line && ft_strncmp(line, limiter, ft_strlen(limiter)))
 	{
-
+		line = ft_expand_vars(line);
 		ft_putstr_fd(line, fd);
 		write(fd, "\n", 1);
 		free(line);

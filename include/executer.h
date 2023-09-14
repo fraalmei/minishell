@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:08:09 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/14 10:33:05 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/14 11:27:34 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		add_flag(size_t *pos, int *flg, int t);
 
 	//executer/heredoc.c
 void		ft_heredoc(void);
-char		*initheredoc(char *limiter);
+char		*ft_expand_vars(char *line);
 char		*writeheredoc(char *limiter);
 
 	//executer/get_paths.c
