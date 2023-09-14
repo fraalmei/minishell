@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:08:29 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/14 12:28:07 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/14 13:30:00 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	ft_heredoc(void)
 						aux->input_redirect[i], "<<");
 					aux->input_redirect[i] = writeheredoc(\
 						aux->input_redirect[i]);
-					system("leaks -q minishell");
 				}
 			}
 		}
