@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:55:29 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/14 17:10:41 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:26:40 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	swap_word(char *string, char **word, int *i, char c)
 	{
 		swap = return_wild(string, &*i);
 		if (!swap && ft_str_chr(&string[*i + 1], '}') < 0)
-			return (-1);
+			return (printf("}: bad substitution\n"), -1);
 		*i += 1;
 		if (swap)
 			*word = ft_strjoin_onefree(*word, swap);
