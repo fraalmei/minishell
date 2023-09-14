@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:09:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/14 15:16:21 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:13:10 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,16 @@ void	signals_dont(void)
 
 int	init_signals(void)
 {
-	g_ms->signals = (t_sig *)ft_calloc(sizeof(t_sig), 2);
+	if (!g_ms->signals)
+	{
+		g_ms->signals = (t_sig *)ft_calloc(sizeof(t_sig), 2);
+		g_ms->signals->status_code = 0;
+	}
 	if (!g_ms->signals)
 		return (1);
-	g_ms->signals->exit_function = 0;
+	g_ms->signals->lst_stat_cod = g_ms->signals->status_code;
+	g_ms->signals->status_code = 0;
 	g_ms->signals->error_status = 0;
-	g_ms->signals->exit_return = 3;
+	g_ms->signals->exit_return = 0;
 	return (0);
-}
-
-void	init_sig_struct(void)
-{
-	g_ms->signals = (t_sig *) ft_calloc(sizeof(g_ms->signals), 1);
-	g_ms->signals->exit_function = 0;
-	g_ms->signals->error_status = 0;
-	g_ms->signals->exit_return = 3;
-	g_ms->signals->lecture_status = 0;
-	g_ms->signals->execution_status = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/11 15:17:03 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:10:47 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,10 @@
 
 typedef struct s_sig
 {
-	int				exit_function;
-	int				error_status;
+	int				status_code;
 	int				exit_return;
-	int				lecture_status;
-	int				execution_status;
+	int				error_status;
+	int				lst_stat_cod;
 }					t_sig;
 
 typedef struct s_env_var

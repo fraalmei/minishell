@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:36:49 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/14 13:05:07 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/14 16:37:23 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,33 @@ t_prompt	*last_prom(t_prompt *prom)
 	while (swap->next)
 		swap = swap->next;
 	return (swap);
+}
+
+int	num_prom(t_prompt *prom)
+{
+	int	i;
+
+	i = 1;
+	while (prom->next)
+	{
+		i++;
+		prom = prom->next;
+	}
+	return (i);
+}
+
+int	check_end_prom(char *buffer)
+{
+	int		i;
+
+	i = 0;
+	if (is_redir(buffer) > 0)
+	{
+		i += is_redir(buffer);
+		while (buffer[i] && buffer[i] == ' ')
+			i++;
+		if (!buffer[i])
+			return (1);
+	}
+	return (0);
 }

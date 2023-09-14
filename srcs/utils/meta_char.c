@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:57:24 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/14 15:13:58 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:07:27 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,6 @@ char	*return_wild(char *str, int *i)
 		if (x == -1)
 			return (NULL);
 		name = ft_substr(&str[*i], 2, x - 2);
-		value = get_value(g_ms->envirorment->frst, name);
-		free (name);
-		*i += x;
-		return (value);
 	}
 	else
 		return ("$");

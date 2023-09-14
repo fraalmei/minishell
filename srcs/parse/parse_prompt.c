@@ -6,45 +6,16 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/14 13:11:56 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:05:48 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	num_prom(t_prompt *prom)
-{
-	int	i;
-
-	i = 1;
-	while (prom->next)
-	{
-		i++;
-		prom = prom->next;
-	}
-	return (i);
-}
-
 static int	check_start_prom(char *buffer, t_prompt *prom)
 {
 	if (prom != NULL && is_pipe(buffer) > 0)
 		return (1);
-	return (0);
-}
-
-int	check_end_prom(char *buffer)
-{
-	int		i;
-
-	i = 0;
-	if (is_redir(buffer) > 0)
-	{
-		i += is_redir(buffer);
-		while (buffer[i] && buffer[i] == ' ')
-			i++;
-		if (!buffer[i])
-			return (1);
-	}
 	return (0);
 }
 
@@ -55,6 +26,25 @@ static void	get_option_args(char *buffer, int *i, t_prompt *swap)
 	else
 		swap->arguments = \
 			str_strjoin_freeall(swap->arguments, read_word(buffer, i));
+}
+
+static t_prompt	*add_prompt(t_prompt *prom, t_prompt *swap)
+{
+	if (swap->arguments)
+		swap->n_arguments = ft_str_strlen(swap->arguments);
+	else
+		swap->n_arguments = 0;
+	if (swap->n_options > 0)
+		swap->n_arguments -= 1;
+	if (!prom)
+		return (swap);
+	else
+	{
+		last_prom(prom)->next = swap;
+		swap->prev = last_prom(prom);
+	}
+	g_ms->n_prompts = num_prom(prom);
+	return (prom);
 }
 
 t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
@@ -70,6 +60,8 @@ t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 		return (NULL);
 	while (buffer[i])
 	{
+		if (g_ms->signals->status_code != 0)
+			return (free_prompt(prom), free_prompt(swap), NULL);
 		if (check_start_prom(&buffer[0], prom) != 0)
 			return (free_prompt(prom), free_prompt (swap), write(1, \
 				"syntax error near unexpected token ", 36), write(1, \
@@ -114,19 +106,6 @@ t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 				"syntax error near unexpected token `newline'\n", 46), NULL);
 		i++;
 	}
-	if (swap->arguments)
-		swap->n_arguments = ft_str_strlen(swap->arguments);
-	else
-		swap->n_arguments = 0;
-	if (swap->n_options > 0)
-		swap->n_arguments -= 1;
-	if (!prom)
-		prom = swap;
-	else
-	{
-		last_prom(prom)->next = swap;
-		swap->prev = last_prom(prom);
-	}
-	g_ms->n_prompts = num_prom(prom);
+	prom = add_prompt(prom, swap);
 	return (prom);
 }

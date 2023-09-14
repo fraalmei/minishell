@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:55:29 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/14 15:16:10 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:10:41 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ int	swap_word(char *string, char **word, int *i, char c)
 
 	if (string[*i] == '$' && string[*i + 1] == '?')
 	{
-		*word = ft_strjoin_allfree(*word, ft_itoa(g_ms->signals->exit_return));
+		*word = ft_strjoin_allfree(*word, ft_itoa(g_ms->signals->lst_stat_cod));
 		*i += 2;
 	}
 	else if (string[*i] == '$' && (c == 34 || c == '\0'))
 	{
 		swap = return_wild(string, &*i);
+		if (!swap && ft_str_chr(&string[*i + 1], '}') < 0)
+			return (-1);
 		*i += 1;
 		if (swap)
 			*word = ft_strjoin_onefree(*word, swap);
@@ -51,11 +53,13 @@ char	*read_word(char *buffer, int *i)
 			c = buffer[*i];
 			*i += 1;
 			while (buffer[*i] && buffer[*i] != c)
-				swap_word(buffer, &word, i, c);
+				if (swap_word(buffer, &word, i, c) != 0)
+					return (g_ms->signals->status_code++, free(word), NULL);
 			*i += 1;
 		}
 		else
-			swap_word(buffer, &word, i, c);
+			if (swap_word(buffer, &word, i, c) != 0)
+				return (g_ms->signals->status_code++, free(word), NULL);
 	}
 	*i -= 1;
 	return (word);
