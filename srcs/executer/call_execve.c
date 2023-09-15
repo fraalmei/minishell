@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   call_execve.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:19:05 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/15 10:36:20 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:43:12 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	call_execve(t_prompt *prompt)
 	char	*path;
 	int		err;
 
-	signals_dont();
+	signals_in_process();
 	dup_to_stdin_stdout(prompt->infile, prompt->outfile);
 	path = get_pathname(prompt->command, g_ms->envirorment->env);
 	if (execve(path, prompt->arguments, g_ms->envirorment->env) == -1)

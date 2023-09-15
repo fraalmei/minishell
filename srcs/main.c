@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/14 16:08:10 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:45:07 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	leaks(void)
 /// @return 1 if the function works correctly, 0 if not
 int	prompt(void)
 {
-	signals_do();
+	signals_in_prompt();
 	rl_on_new_line();
 	g_ms->buffer = ft_strtrim_onefree(readline(BCYAN"minishell>"WHITE), \
 		" \t\n\v\f\r");

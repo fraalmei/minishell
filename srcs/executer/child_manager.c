@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:20:08 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/15 12:04:09 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:44:26 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	wait_childs(void)
 	{
 		state = 0;
 		g_ms->sh_pid = tmp->node_pid;
-		signals_do();
+		signals_in_prompt();
 		waitpid(tmp->node_pid, &state, 0);
 		tmp = tmp->next;
 	}

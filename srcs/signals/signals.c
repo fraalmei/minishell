@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:09:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/14 17:13:10 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:44:07 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	signal_int(int code)
 	// SIGTSTP => ctrl-Z
 /// @brief calling the main signals to asign an action when they're called
 /// @param  no need
-void	signals_do(void)
+void	signals_in_prompt(void)
 {
 	signal(SIGINT, signal_int);
 	signal(SIGQUIT, SIG_IGN);
@@ -39,7 +39,7 @@ void	signals_do(void)
 }
 
 	// dejar de ignorar las seññales
-void	signals_dont(void)
+void	signals_in_process(void)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_IGN);

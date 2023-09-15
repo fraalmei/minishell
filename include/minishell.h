@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/15 10:39:36 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/15 13:44:29 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,8 @@ t_mini_class	*g_ms;
 int			prompt(void);
 
 	///	 signals.c
-void		signals_do(void);
-void		signals_dont(void);
+void		signals_in_prompt(void);
+void		signals_in_process(void);
 int			init_signals(void);
 void		init_sig_struct(void);
 
@@ -220,7 +220,6 @@ int			check_quotes(char *str);
 		///	 parse_prompt.c
 int			num_prom(t_prompt *prom);
 t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom);
-///	t_prompt	*buffer_to_prompt(char *buffer);
 
 		///	 parse.c
 int			check_end_prom(char *buffer);
