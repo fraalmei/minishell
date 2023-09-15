@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 12:29:45 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/04 11:16:26 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/15 11:16:36 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static t_prompt	*create_prompt_struct(char *comm, char *opt, char *arg)
 		return (NULL);
 	prom->prev = NULL;
 	prom->sep0 = NULL;
+	prom->b_success = SUCCESS;
 	prom->command = comm;
 	prom->arguments = &arg;
 	prom->sep1 = NULL;

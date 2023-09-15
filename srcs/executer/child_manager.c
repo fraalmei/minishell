@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:20:08 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/15 10:49:11 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/15 12:04:09 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,32 @@ void	copy_pipe(int *in, int *out)
 
 void	prepare_exec(t_prompt *prompt, int pipefd[2], int auxfd[2])
 {
+	printf("Entra en b_success\n");
 	if (prompt->input_redirect)
-		(ft_inredir(prompt), assing_fd(&prompt->infile, auxfd[0], INFILE));
+		ft_inredir(prompt);
 	if (prompt->output_redirect)
-		(ft_outredir(prompt), assing_fd(&prompt->outfile, pipefd[1], OUTFILE));
+		ft_outredir(prompt);
+	if (prompt->sep0[0] == '|')
+		assing_fd(&prompt->infile, pipefd[0], INFILE);
+	if (prompt->sep1[0] == '|')
+		assing_fd(&prompt->outfile, auxfd[1], OUTFILE);
+	printf("Continúa en b_success\n");
 	if (prompt->command)
 	{
+		printf("Entra en pregunta si command\n");
 		if (is_builtin(prompt->command))
 		{
+			printf("Entra en builtin\n");
 			dup_to_stdin_stdout(prompt->infile, prompt->outfile);
 			actions(prompt);
 		}
 		else
+		{
+			printf("Entra en call_execve\n");
 			call_execve(prompt);
+		}
 	}
+	printf("Sale de prepare exec\n");
 }
 
 void	wait_childs(void)
@@ -87,7 +99,7 @@ void	wait_childs(void)
 	{
 		state = 0;
 		g_ms->sh_pid = tmp->node_pid;
-		// signals_do();
+		signals_do();
 		waitpid(tmp->node_pid, &state, 0);
 		tmp = tmp->next;
 	}

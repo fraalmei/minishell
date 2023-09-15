@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:24:32 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/08 12:10:02 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/15 11:23:35 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 void	assing_fd(int *prompt_fd, int new_fd, int fd)
 {
 	if (*prompt_fd == fd)
-		*prompt_fd = new_fd;
+		(printf("Entra en prompt_fd == fd\n"), *prompt_fd = new_fd);
 	else
-		close(new_fd);
+		(printf("Entra en assign_fd else\n"), close(new_fd));
 }
 
 void	dup_to_stdin_stdout(int fd_in, int fd_out)

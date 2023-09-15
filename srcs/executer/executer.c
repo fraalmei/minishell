@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:45:48 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/15 10:50:26 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/15 12:05:24 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,10 @@ void	start_executer(void)
 	g_ms->n_prompts = ft_lstpromptsize(g_ms->prompt);
 	if (g_ms->n_prompts == 1)
 		launch_single_process(g_ms->prompt);
-	else
-	{
-		launch_pipe_process(g_ms->prompt);
-		wait_childs();
-	}
+	// else
+	// {
+	// 	printf("Entra en Multiple\n");
+	// 	launch_pipe_process(g_ms->prompt);
+	// 	wait_childs();
+	// }
 }

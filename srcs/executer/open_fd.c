@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 14:43:02 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/14 13:30:24 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/15 11:20:23 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_inredir(t_prompt *prompt)
 {
 	int	i;
 
+	printf("Entra en in_redir\n");
 	i = -1;
 	while (prompt->input_redirect[++i])
 		prompt->infile = openfile(prompt->input_redirect[i], INFILE);
@@ -25,6 +26,7 @@ void	ft_outredir(t_prompt *prompt)
 {
 	int	i;
 
+	printf("Entra en out_redir\n");
 	i = -1;
 	while (prompt->output_redirect[++i])
 	{
