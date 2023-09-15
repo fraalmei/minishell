@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:08:29 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/15 13:43:44 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/15 14:08:46 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ char	*writeheredoc(char *limiter)
 
 	redir = ft_strjoin("./tmp/", limiter);
 	fd = open(redir, O_CREAT | O_WRONLY | O_TRUNC, 0666);
-	signals_in_process();
 	if (fd < 0)
 		return (NULL);
 	line = readline("> ");

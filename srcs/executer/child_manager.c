@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:20:08 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/15 13:44:26 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/15 14:35:49 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	launch_pipe_process(t_prompt *prompt)
 	t_prompt	*tmp;
 
 	tmp = prompt;
+	ft_heredoc();
 	while (tmp)
 	{
 		if (!tmp->sep1)
@@ -43,50 +44,35 @@ void	launch_pipe_process(t_prompt *prompt)
 
 void	handle_pipes(t_prompt *prompt, int pipefd[2], int auxfd[2])
 {
-	if (prompt->sep1)
+	if (!prompt->sep0)
 		close(auxfd[0]);
-	if (!prompt->sep1)
+	else
 	{
 		close(pipefd[1]);
-		copy_pipe(pipefd, auxfd);
+		auxfd[0] = pipefd[0];
+		auxfd[1] = pipefd[1];
 	}
 	close_all_fds(prompt);
 }
 
-void	copy_pipe(int *in, int *out)
-{
-	out[0] = in[0];
-	out[1] = in[1];
-}
-
 void	prepare_exec(t_prompt *prompt, int pipefd[2], int auxfd[2])
 {
-	printf("Entra en b_success\n");
-	if (prompt->input_redirect)
-		ft_inredir(prompt);
-	if (prompt->output_redirect)
-		ft_outredir(prompt);
-	if (prompt->sep0[0] == '|')
-		assing_fd(&prompt->infile, pipefd[0], INFILE);
-	if (prompt->sep1[0] == '|')
-		assing_fd(&prompt->outfile, auxfd[1], OUTFILE);
-	printf("Continúa en b_success\n");
+	// (void)auxfd;
+	// (void)pipefd;
+	if (prompt->sep0)
+		assing_fd(&prompt->infile, auxfd[0], INFILE);
+	if (prompt->sep1)
+		assing_fd(&prompt->outfile, pipefd[1], OUTFILE);
 	if (prompt->command)
 	{
-		printf("Entra en pregunta si command\n");
 		if (is_builtin(prompt->command))
 		{
-			printf("Entra en builtin\n");
 			dup_to_stdin_stdout(prompt->infile, prompt->outfile);
 			actions(prompt);
 		}
 		else
-		{
-			printf("Entra en call_execve\n");
 			call_execve(prompt);
-		}
 	}
-	printf("Sale de prepare exec\n");
 }
 
 void	wait_childs(void)
@@ -104,9 +90,3 @@ void	wait_childs(void)
 		tmp = tmp->next;
 	}
 }
-/*
-	if (prompt->b_success == TRUE)
-		prepare_exec(tmp, fd, auxfd, prompt);
-	else
-		exit(0);
-*/
