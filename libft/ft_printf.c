@@ -6,15 +6,15 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 12:33:07 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/07 15:27:30 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/15 09:40:10 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-#ifndef UINTPTR
+/* #ifndef UINTPTR
 # define uintptr_t unsigned long long int
-#endif
+#endif */
 
 static int	ft_putstr(char *s)
 {

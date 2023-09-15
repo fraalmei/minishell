@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:39:59 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/14 14:12:00 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/15 10:58:11 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	print_sort_list(t_env_var *list)
 	i = list_len(list);
 	swap = get_less_node(list, NULL);
 	print_export (swap);
-	while (--i >= 0)
+	while (--i > 0)
 	{
 		swap = get_less_node(list, swap);
 		print_export(swap);

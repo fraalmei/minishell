@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/14 17:10:47 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/15 10:39:36 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,9 +154,11 @@ void		set_value_frst(t_env_var **list, t_env_var *node);
 t_env_var	*copy_env_list(char **env);
 
 		///	 utils_env.c
+int			free_one_env_var(t_env_var *env, char *var);
 char		*get_value(t_env_var *env, char *var);
 void		set_value(t_env_var *env, char *var);
-int			get_name(t_env_var *env, char	*var);
+int			get_name(t_env_var *env, char *var);
+t_env_var	*get_env(t_env_var *env, char *var);
 int			incr_shll_lvl(t_env_var *env);
 
 		///	 list_util.c
@@ -182,7 +184,7 @@ int			cd(t_prompt *prompt);
 int			get_wd(void);
 
 		///	 builtins/unset.c
-void		remove_node(t_env_var **prev, t_env_var *node);
+int			remove_node(t_env_var *prev, char *var);
 int			unset(t_env_var **env, char **name);
 
 		///	 builtins/echo.c

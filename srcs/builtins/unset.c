@@ -6,52 +6,44 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:39:55 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/14 13:04:13 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/15 10:40:14 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	remove_node(t_env_var **prev, t_env_var *node)
+int	remove_node(t_env_var *env, char *var)
 {
-	if ((*prev) == node)
-		(*prev) = node->next;
-	else if (node->next)
-		(*prev)->next = node->next;
-	else
-		(*prev)->next = NULL;
-	node->next = NULL;
-	free_env_var(node);
+	t_env_var	*swap1;
+	t_env_var	*swap2;
+
+	if (!env)
+		return (0);
+	swap1 = env;
+	while (swap1->next)
+	{
+		if (ft_strcmp(swap1->name, var) == 0)
+		{
+			free (swap1->name);
+			if (swap1->value)
+				free (swap1->value);
+			swap2->next = swap1->next;
+			free (swap1);
+			return (0);
+		}
+		swap2 = swap1;
+		swap1 = swap1->next;
+	}
+	return (0);
 }
 
 	// busca el nombre en env y export y los elimina
 int	unset(t_env_var **env, char **name)
 {
-	t_env_var	*prev;
-	t_env_var	*node;
 	int			i;
 
 	i = -1;
 	while (name[++i])
-	{
-		if (get_name((*env), name[i]))
-		{
-			node = *env;
-			if (ft_strcmp((*env)->name, name[i]) == 0)
-			{
-				remove_node(env, node);
-				return (0);
-			}
-			while (node)
-			{
-				if (ft_strcmp(node->name, name[i]) == 0)
-				{
-					return (remove_node(&prev, node), 0);
-				}
-				prev = node;
-				node = prev->next;
-			}
-		}
-	}
+		remove_node(*env, name[i]);
 	return (0);
 }
