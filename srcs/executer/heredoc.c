@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:08:29 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/14 13:30:00 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/15 10:44:40 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_heredoc(void)
 
 	mkdir("./tmp/", S_IRWXU | S_IRWXG | S_IRWXO);
 	aux = g_ms->prompt;
-	while (aux)
+	while (aux->sep1)
 	{
 		i = -1;
 		if (aux->input_redirect)

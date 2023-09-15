@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 10:04:38 by vpujalte          #+#    #+#             */
-/*   Updated: 2023/09/07 15:00:22 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/15 09:38:32 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,7 @@
 void	ft_error(int error, char *argument)
 {
 	if (error >= 0)
-	{
-		// ft_putstr_fd("pipex: ", STDERR);
-		// ft_putstr_fd(strerror(error), STDERR);
-		// ft_putstr_fd(": ", STDERR);
-		// ft_putstr_fd(argument, STDERR);
-		// ft_putstr_fd("\n", STDERR);
 		exit(errno);
-	}
 	else
 	{
 		if (error == -1)
@@ -38,3 +31,14 @@ void	ft_error(int error, char *argument)
 		exit(0);
 	}
 }
+
+/*
+{
+	ft_putstr_fd("pipex: ", STDERR);
+	ft_putstr_fd(strerror(error), STDERR);
+	ft_putstr_fd(": ", STDERR);
+	ft_putstr_fd(argument, STDERR);
+	ft_putstr_fd("\n", STDERR);
+	exit(errno);
+}
+*/
