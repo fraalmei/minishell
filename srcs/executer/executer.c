@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:45:48 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/15 14:12:01 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/21 10:15:32 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	launch_single_process(t_prompt *prompt)
 
 void	start_executer(void)
 {
-	ft_heredoc();
+	// ft_heredoc();
 	ft_redir();
 	g_ms->n_prompts = ft_lstpromptsize(g_ms->prompt);
 	if (g_ms->n_prompts == 1)

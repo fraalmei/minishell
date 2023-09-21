@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:08:09 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/15 10:22:40 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/18 14:20:34 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 	//executer/child_manager.c
 void		launch_pipe_process(t_prompt *prompt);
-void		prepare_exec(t_prompt *prompt, int pipefd[2], int auxfd[2]);
+void		prepare_exec(t_prompt *prompt, int pipefd[2], int file);
 void		handle_pipes(t_prompt *prompt, int pipefd[2], int auxfd[2]);
 void		copy_pipe(int *pipe_in, int *pipe_out);
 void		wait_childs(void);
