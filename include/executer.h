@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:08:09 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/18 14:20:34 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/22 15:56:41 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <errno.h>
 
 	//executer/child_manager.c
-void		launch_pipe_process(t_prompt *prompt);
-void		prepare_exec(t_prompt *prompt, int pipefd[2], int file);
+void		launch_pipe_process(t_prompt *prompt, int node);
+void		prepare_exec(t_prompt *prompt, int pipefd[2], int auxfd[2]);
 void		handle_pipes(t_prompt *prompt, int pipefd[2], int auxfd[2]);
 void		copy_pipe(int *pipe_in, int *pipe_out);
 void		wait_childs(void);
@@ -31,9 +31,9 @@ int			ft_lstpromptsize(t_prompt *lst);
 int			is_builtin(char *arg);
 
 	//executer/executer.c
-void		open_heredoc(t_prompt *prompt);
-void		launch_from_father(t_prompt *prompt);
+void		ft_redir(void);
 void		launch_from_child(t_prompt *prompt);
+void		launch_from_father(t_prompt *prompt);
 void		launch_single_process(t_prompt *prompt);
 void		start_executer(void);
 
