@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:00:19 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/14 13:40:36 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/22 13:42:58 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	print_prompt(t_prompt *prom)
 		if (prom->output_redirect)
 			while (prom->output_redirect[i] != NULL)
 				ft_printf("output_redirect:	%s#\n", prom->output_redirect[i++]);
+		ft_printf("Posición dwe prompt:	%i#\n", prom->pos_p);
 		ft_printf("Separación:	%s#\n", prom->sep1);
 		ft_printf("Siguiente:	%p#\n", prom->next);
 		ft_printf("++------------++\n");

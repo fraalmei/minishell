@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/15 11:20:45 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/22 13:43:46 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 			}
 			swap = make_prompt_struct();
 			swap->sep0 = last_prom(prom)->sep1;
+			swap->pos_p += last_prom(prom)->pos_p;
 			i--;
 		}
 		if (check_end_prom(&buffer[i]) != 0)

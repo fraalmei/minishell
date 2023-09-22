@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/15 13:44:29 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/22 13:24:57 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ typedef struct s_prompt
 	char				**arguments;
 	char				**input_redirect;
 	char				**output_redirect;
+	int					pos_p;	// position prompt
 	char				*sep1;
 	struct s_prompt		*next;
 }						t_prompt;
@@ -182,9 +183,10 @@ int			cd(t_prompt *prompt);
 
 		///	 builtins/pwd.c
 int			get_wd(void);
+char		*get_wd_char(void);
 
 		///	 builtins/unset.c
-int			remove_node(t_env_var *prev, char *var);
+int			remove_node(t_env_var **env, char *var);
 int			unset(t_env_var **env, char **name);
 
 		///	 builtins/echo.c
