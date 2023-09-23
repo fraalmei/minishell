@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/22 13:24:57 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/23 15:11:22 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ typedef struct s_prompt
 	char				**arguments;
 	char				**input_redirect;
 	char				**output_redirect;
-	int					pos_p;	// position prompt
+	int					pos_p;
 	char				*sep1;
 	struct s_prompt		*next;
 }						t_prompt;

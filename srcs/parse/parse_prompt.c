@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/22 13:43:46 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/23 12:34:14 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,19 @@ static int	check_start_prom(char *buffer, t_prompt *prom)
 
 static void	get_option_args(char *buffer, int *i, t_prompt *swap)
 {
+	printf("dpnde rebienta 2 \n");
 	if ((buffer[*i] == '-') && (buffer[*i + 1] != ' ') && !swap->arguments[2])
+	{
+		printf("dpnde rebienta 2 \n");
 		swap->n_options = option_gen(swap, buffer, i);
+	}
 	else
+	{
+		printf("dpnde rebienta 2 \n");
 		swap->arguments = \
 			str_strjoin_freeall(swap->arguments, read_word(buffer, i));
+	}
+	printf("donde rebienta 2 \n");
 }
 
 static t_prompt	*add_prompt(t_prompt *prom, t_prompt *swap)
@@ -47,6 +55,80 @@ static t_prompt	*add_prompt(t_prompt *prom, t_prompt *swap)
 	return (prom);
 }
 
+static t_prompt	*add_nwprom(char *buff, t_prompt **prom, t_prompt *swap, int *i)
+{
+	if (!*prom && is_pipe(&buff[*i]) > 0)
+	{
+		swap->sep1 = ft_chr_n_join(swap->sep1, \
+			&buff[*i], is_pipe(&buff[*i]));
+		i += is_pipe(&buff[*i]);
+		swap->n_arguments = ft_str_strlen(swap->arguments);
+		*prom = swap;
+	}
+	else if (is_pipe(&buff[*i]) > 0)
+	{
+		swap->sep1 = ft_chr_n_join(swap->sep1, \
+			&buff[*i], is_pipe(&buff[*i]));
+		i += is_pipe(&buff[*i]);
+		swap->n_arguments = ft_str_strlen(swap->arguments) - 1;
+		last_prom(*prom)->next = swap;
+		swap->prev = last_prom(*prom);
+	}
+	swap = make_prompt_struct();
+	swap->sep0 = last_prom(*prom)->sep1;
+	swap->pos_p += last_prom(*prom)->pos_p;
+	*i -= 1;
+	return (swap);
+}
+
+/* static int	ride_buffer(char *buff, t_prompt **prom, t_prompt *swap, int *i)
+{
+	printf("entra \n");
+	if (g_ms->signals->status_code != 0)
+	{
+		printf("g_ms->signals->status_code \n");
+		return (free_prompt(*prom), free_prompt(swap), 1);
+	}
+	if (check_start_prom(&buff[0], *prom) != 0)
+	{
+		printf("check_start_prom \n");
+		return (free_prompt(*prom), free_prompt (swap), write(1, \
+			"syntax error near unexpected token ", 36), write(1, \
+			&buff[0], is_pipe(&buff[*i])), write(1, "\n", 1), 1);
+	}
+	else if (!swap->command && buff[*i] != ' ' && \
+		is_redirecction(&buff[*i]) == 0)
+	{
+		printf("is_redirecction 1 \n");
+		swap->command = read_word(buff, i);
+		swap->arguments[0] = ft_strdup(swap->command);
+		if (swap->command == NULL)
+			return (free (*prom), 1);
+	}
+	else if (buff[*i] != ' ' && is_redirecction(&buff[*i]) == 0)
+	{
+		get_option_args(buff, i, swap);
+		printf("is_redirecction 2 \n");
+	}
+	else if (buff[*i] != ' ' && is_redir(&buff[*i]) != 0)
+	{
+		printf("is_redir \n");
+		get_redir(buff, i, swap);
+	}
+	else if (is_pipe(&buff[*i]) != 0)
+	{
+		printf("is_pipe \n");
+		swap = add_nwprom(buff, prom, swap, i);
+	}
+	if (check_end_prom(&buff[*i]) != 0)
+	{
+		printf("check_end_prom \n");
+		return (free_prompt(*prom), free_prompt (swap), write(1, \
+			"syntax error near unexpected token `newline'\n", 46), 1);
+	}
+	return (0);
+} */
+
 t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 {
 	t_prompt	*swap;
@@ -60,6 +142,11 @@ t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 		return (NULL);
 	while (buffer[i])
 	{
+		/* if (ride_buffer(buffer, &prom, swap, &i))
+		{
+			printf("NULL \n");
+			return (NULL);
+		} */
 		if (g_ms->signals->status_code != 0)
 			return (free_prompt(prom), free_prompt(swap), NULL);
 		if (check_start_prom(&buffer[0], prom) != 0)
@@ -79,29 +166,7 @@ t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 		else if (buffer[i] != ' ' && is_redir(&buffer[i]) != 0)
 			get_redir(buffer, &i, swap);
 		else if (is_pipe(&buffer[i]) != 0)
-		{
-			if (!prom && is_pipe(&buffer[i]) > 0)
-			{
-				swap->sep1 = ft_chr_n_join(swap->sep1, \
-					&buffer[i], is_pipe(&buffer[i]));
-				i += is_pipe(&buffer[i]);
-				swap->n_arguments = ft_str_strlen(swap->arguments);
-				prom = swap;
-			}
-			else if (is_pipe(&buffer[i]) > 0)
-			{
-				swap->sep1 = ft_chr_n_join(swap->sep1, \
-					&buffer[i], is_pipe(&buffer[i]));
-				i += is_pipe(&buffer[i]);
-				swap->n_arguments = ft_str_strlen(swap->arguments) - 1;
-				last_prom(prom)->next = swap;
-				swap->prev = last_prom(prom);
-			}
-			swap = make_prompt_struct();
-			swap->sep0 = last_prom(prom)->sep1;
-			swap->pos_p += last_prom(prom)->pos_p;
-			i--;
-		}
+			swap = add_nwprom(buffer, &prom, swap, &i);
 		if (check_end_prom(&buffer[i]) != 0)
 			return (free_prompt(prom), free_prompt (swap), write(1, \
 				"syntax error near unexpected token `newline'\n", 46), NULL);

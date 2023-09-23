@@ -6,33 +6,35 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:57:24 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/14 17:07:27 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:22:34 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-	// imprime los valores de las variables globales cuando se incluye $
-	// $? no implementado
-char	*return_wild(char *str, int *i)
+/// @brief return the value of a global variable when a $ is finded
+/// @param buffer the buffer of the line
+/// @param i the position in the buffer
+/// @return the value of the variable if exist
+char	*return_wild(char *buffer, int *i)
 {
 	int		x;
 	char	*name;
 	char	*value;
 
 	x = *i;
-	if (str[x + 1] != ' ' && str[x + 1] && ft_isalnum(str[x + 1]))
-		x = ft_chrcmp_alphanum(&str[x + 1]);
-	else if (str[x + 1] == '{' && str[x + 1])
+	if (buffer[x + 1] != ' ' && buffer[x + 1] && ft_isalnum(buffer[x + 1]))
+		x = ft_chrcmp_alphanum(&buffer[x + 1]);
+	else if (buffer[x + 1] == '{' && buffer[x + 1])
 	{
-		x = ft_str_chr(&str[x], '}');
+		x = ft_str_chr(&buffer[x], '}');
 		if (x == -1)
 			return (NULL);
-		name = ft_substr(&str[*i], 2, x - 2);
+		name = ft_substr(&buffer[*i], 2, x - 2);
 	}
 	else
 		return ("$");
-	name = ft_substr(str, *i + 1, x);
+	name = ft_substr(buffer, *i + 1, x);
 	value = get_value(g_ms->envirorment->frst, name);
 	free (name);
 	*i += x;
