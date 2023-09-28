@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:45:48 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/22 15:57:13 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/28 12:02:15 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,5 @@ void	start_executer(void)
 		launch_single_process(g_ms->prompt);
 	else
 		launch_pipe_process(g_ms->prompt, g_ms->n_prompts);
+	g_ms->sh_pid = 0;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   call_execve.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:19:05 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/15 13:43:12 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:21:35 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	launch_from_father(t_prompt *prompt)
 	stdin_fd = dup(0);
 	stdout_fd = dup(1);
 	dup_to_stdin_stdout(prompt->infile, prompt->outfile);
-	actions(prompt);
+	actions(prompt, 1);
 	dup_to_stdin_stdout(stdin_fd, stdout_fd);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:18:16 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/15 10:39:23 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:20:57 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 	// * if (sizeof(g_ms->envirorment->dir) == sizeof(t_env_var))
 	// 	the if condition dont work if only check the existence of "dir"
 	// * if (g_ms->envirorment->dir)
-int	actions(t_prompt *prompt)
+void	actions(t_prompt *prompt, int type)
 {
 	if (prompt->command && ft_strcmp(prompt->command, "exit") == 0)
 		exit_shell();
@@ -38,5 +38,6 @@ int	actions(t_prompt *prompt)
 			unset(&g_ms->envirorment->frst, prompt->arguments);
 	else if (prompt->command && ft_strcmp(prompt->command, "echo") == 0)
 		g_ms->signals->status_code = echo(g_ms->prompt);
-	return (0);
+	if (type == 0)
+		exit (0);
 }

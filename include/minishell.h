@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/25 18:29:59 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:08:00 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int			init_signals(void);
 void		init_sig_struct(void);
 
 	///	 actions.c
-int			actions(t_prompt *prompt);
+void		actions(t_prompt *prompt, int type);
 
 	///	 pipe.c#
 char		*getpath(char *cmd, char **env);

@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:08:09 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/22 15:56:41 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/28 12:46:35 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 void		launch_pipe_process(t_prompt *prompt, int node);
 void		prepare_exec(t_prompt *prompt, int pipefd[2], int auxfd[2]);
 void		handle_pipes(t_prompt *prompt, int pipefd[2], int auxfd[2]);
-void		copy_pipe(int *pipe_in, int *pipe_out);
+int			*copy_pipe(int pipe_in[2]);
 void		wait_childs(void);
 
 	//executer/call_execve.c
