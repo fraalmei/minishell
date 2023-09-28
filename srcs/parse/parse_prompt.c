@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/28 11:38:41 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/28 11:45:37 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,30 +54,32 @@ static void	add_last_prompt(t_prompt **prom, t_prompt *swap)
 	g_ms->n_prompts = num_prom(*prom);
 }
 
-/* static void	add_prom(char *buff, t_prompt **prom, t_prompt **swap, int *i)
+static t_prompt	*add_prom(char *buff, t_prompt **prom, t_prompt *swap, int *i)
 {
 	if (!*prom && is_pipe(&buff[*i]) > 0)
 	{
-		(*swap)->sep1 = ft_chr_n_join((*swap)->sep1, \
+		swap->sep1 = ft_chr_n_join(swap->sep1, \
 			&buff[*i], is_pipe(&buff[*i]));
 		i += is_pipe(&buff[*i]);
-		(*swap)->n_arguments = ft_str_strlen((*swap)->arguments);
-		*prom = *swap;
+		swap->n_arguments = ft_str_strlen(swap->arguments);
+		*prom = swap;
+		swap = NULL;
 	}
 	else if (is_pipe(&buff[*i]) > 0)
 	{
-		(*swap)->sep1 = ft_chr_n_join((*swap)->sep1, \
+		swap->sep1 = ft_chr_n_join(swap->sep1, \
 			&buff[*i], is_pipe(&buff[*i]));
 		i += is_pipe(&buff[*i]);
-		(*swap)->n_arguments = ft_str_strlen((*swap)->arguments) - 1;
-		last_prom(*prom)->next = *swap;
-		(*swap)->prev = last_prom(*prom);
+		swap->n_arguments = ft_str_strlen(swap->arguments) - 1;
+		last_prom(*prom)->next = swap;
+		swap->prev = last_prom(*prom);
 	}
-	*swap = new_prompt_struct();
-	(*swap)->sep0 = last_prom(*prom)->sep1;
-	(*swap)->pos_p += last_prom(*prom)->pos_p;
+	swap = new_prompt_struct();
+	swap->sep0 = last_prom(*prom)->sep1;
+	swap->pos_p += last_prom(*prom)->pos_p;
 	*i -= 1;
-} */
+	return (swap);
+}
 
 /* static int	ride_buffer(char *buff, t_prompt **prom, t_prompt **swap, int *i)
 {
@@ -156,7 +158,7 @@ static void	add_last_prompt(t_prompt **prom, t_prompt *swap)
 	return (prom);
 } */
 
-static t_prompt	*add_nwprom(char *buff, t_prompt **prom, t_prompt *swap, int *i)
+/* static t_prompt	*add_nwprom(char *buff, t_prompt **prom, t_prompt *swap, int *i)
 {
 	if (!*prom && is_pipe(&buff[*i]) > 0)
 	{
@@ -180,7 +182,7 @@ static t_prompt	*add_nwprom(char *buff, t_prompt **prom, t_prompt *swap, int *i)
 	swap->pos_p += last_prom(*prom)->pos_p;
 	*i -= 1;
 	return (swap);
-}
+} */
 
 /* static int	ride_buffer(char *buff, t_prompt **prom, t_prompt *swap, int *i)
 {
@@ -267,7 +269,7 @@ t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 		else if (buffer[i] != ' ' && is_redir(&buffer[i]) != 0)
 			get_redir(buffer, &i, swap);
 		else if (is_pipe(&buffer[i]) != 0)
-			swap = add_nwprom(buffer, &prom, swap, &i);
+			swap = add_prom(buffer, &prom, swap, &i);
 		if (check_end_prom(&buffer[i]) != 0)
 			return (free_prompt(prom), free_prompt (swap), write(1, \
 				"syntax error near unexpected token `newline'\n", 46), NULL);
