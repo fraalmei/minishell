@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 16:08:35 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/15 09:27:25 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/23 13:54:13 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,28 +58,31 @@ char	**env_to_strstr(t_env_var *frst)
 	return (env);
 }
 
+static t_env_var	*struct_env(char *name, char eq, char *value)
+{
+	t_env_var	*env;
+
+	env = (t_env_var *)ft_calloc(sizeof(*env), 2);
+	if (!env)
+		return (NULL);
+	env->name = name;
+	env->equal = eq;
+	env->value = value;
+	return (env);
+}
+
 t_env_var	*new_struct_env(char *var)
 {
 	t_env_var	*env;
 	char		**swap;
 
-	env = (t_env_var *)ft_calloc(sizeof(*env), 2);
-	if (!env)
-		return (NULL);
+	swap = NULL;
+	swap = ft_split(var, '=');
 	if (ft_str_chr(var, '=') >= 0)
-	{
-		swap = ft_split(var, '=');
-		env->name = swap[0];
-		env->equal = '=';
-		env->value = swap[1];
-		free(swap);
-	}
+		env = struct_env(swap[0], '=', swap[1]);
 	else
-	{
-		env->name = var;
-		env->equal = 0;
-		env->value = NULL;
-	}
+		env = struct_env(*swap, 0, NULL);
+	free(swap);
 	env->next = NULL;
 	return (env);
 }

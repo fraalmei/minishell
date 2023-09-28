@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:00:19 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/22 13:42:58 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/25 12:33:30 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,38 +20,38 @@ void	print_prompt(t_prompt *prom)
 	while (prom)
 	{
 		ft_printf("++------------++\n");
-		ft_printf("Puntero propio:	%p#\n", prom);
-		ft_printf("Anterior:	%p#\n", prom->prev);
-		ft_printf("Separación:	%s#\n", prom->sep0);
-		ft_printf("Dirección:	%p#\n", prom);
-		ft_printf("Comando:	%s#\n", prom->command);
-		ft_printf("N_Opciones:	%i#\n", prom->n_options);
+		ft_printf("Puntero propio:		%p#\n", prom);
+		ft_printf("Anterior:		%p#\n", prom->prev);
+		ft_printf("Separación:		%s#\n", prom->sep0);
+		ft_printf("Dirección:		%p#\n", prom);
+		ft_printf("Comando:		%s#\n", prom->command);
+		ft_printf("N_Opciones:		%i#\n", prom->n_options);
 		if (prom->n_options > 0)
 		{
-			ft_printf("Opciones:	%s#\n", prom->arguments[1]);
+			ft_printf("Opciones:		%s#\n", prom->arguments[1]);
 			i = 0;
 		}
 		else
 			i = -1;
-		ft_printf("N_Argumentos:	%d#\n", prom->n_arguments);
+		ft_printf("N_Argumentos:		%d#\n", prom->n_arguments);
 		if (prom->n_arguments > 0)
 		{
 			while (++i <= prom->n_arguments)
-				ft_printf("Argumentos:	%s#\n", prom->arguments[i]);
+				ft_printf("Argumentos:		%s#\n", prom->arguments[i]);
 		}
 		else
-			ft_printf("Argumentos:	(null)#\n");
+			ft_printf("Argumentos:		(null)#\n");
 		i = 0;
 		if (prom->input_redirect)
 			while (prom->input_redirect[i] != NULL)
-				ft_printf("input_redirect:	%s#\n", prom->input_redirect[i++]);
+				ft_printf("input_redirect:		%s#\n", prom->input_redirect[i++]);
 		i = 0;
 		if (prom->output_redirect)
 			while (prom->output_redirect[i] != NULL)
-				ft_printf("output_redirect:	%s#\n", prom->output_redirect[i++]);
-		ft_printf("Posición dwe prompt:	%i#\n", prom->pos_p);
-		ft_printf("Separación:	%s#\n", prom->sep1);
-		ft_printf("Siguiente:	%p#\n", prom->next);
+				ft_printf("output_redirect:		%s#\n", prom->output_redirect[i++]);
+		ft_printf("Posición de prompt:	%i#\n", prom->pos_p);
+		ft_printf("Separación:		%s#\n", prom->sep1);
+		ft_printf("Siguiente:		%p#\n", prom->next);
 		ft_printf("++------------++\n");
 		prom = prom->next;
 	}

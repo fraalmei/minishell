@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/23 15:11:22 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/25 18:29:59 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,7 @@ t_prompt	*buffer_to_prom(char **buffer);
 char		**soft_split(char *buffer);
 
 		///	 parse_prompt_utils.c
-t_prompt	*make_prompt_struct(void);
+t_prompt	*new_prompt_struct(void);
 t_prompt	*last_prom(t_prompt *prom);
 
 		///	 parse_prompt_utils_2.c

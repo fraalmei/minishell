@@ -6,13 +6,13 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:36:49 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/22 13:40:35 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/25 18:19:04 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_prompt	*make_prompt_struct(void)
+t_prompt	*new_prompt_struct(void)
 {
 	t_prompt	*prom;
 
@@ -27,7 +27,6 @@ t_prompt	*make_prompt_struct(void)
 	prom->command = NULL;
 	prom->n_options = 0;
 	prom->n_arguments = 0;
-	prom->arguments = NULL;
 	prom->arguments = (char **)ft_calloc(sizeof(char *), 3);
 	prom->input_redirect = NULL;
 	prom->output_redirect = NULL;
