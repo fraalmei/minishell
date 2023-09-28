@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:20:08 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/28 15:22:27 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:54:23 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,29 @@
 
 void	launch_pipe_process(t_prompt *prompt, int i)
 {
-	int		pipefd[2];
-	int		*oldpipefd;
+	int			pipefd[2];
+	int			oldpipefd[2];
+	t_prompt	*tmp;
 
-	oldpipefd = NULL;
+	tmp = prompt;
 	while (i > 0)
 	{
-		pipe(pipefd);
+		if (i != 1)
+			pipe(pipefd);
 		g_ms->sh_pid = fork();
 		if (g_ms->sh_pid == 0)
 		{
-			close(pipefd[0]);
-			if (prompt->b_success == SUCCESS)
-				prepare_exec(prompt, pipefd, oldpipefd);
+			if (i != 1)
+				close(pipefd[0]);
+			if (tmp->b_success == SUCCESS)
+				prepare_exec(tmp, pipefd, oldpipefd);
 			else
 				exit(0);
 		}
 		else
-		{
-			handle_pipes(prompt, pipefd, oldpipefd);
-			close_all_fds(prompt);
-		}
-		prompt = prompt->next;
+			(handle_pipes(tmp, pipefd, oldpipefd), close_all_fds(tmp));
+		tmp->node_pid = g_ms->sh_pid;
+		tmp = tmp->next;
 		i--;
 	}
 	wait_childs();
@@ -44,27 +45,22 @@ void	launch_pipe_process(t_prompt *prompt, int i)
 
 void	handle_pipes(t_prompt *prompt, int new_pip[2], int old_pip[2])
 {
-	close(new_pip[1]);
 	if (prompt->pos_p != 1)
-	{
-		close((old_pip)[0]);
-		free(old_pip);
-	}
+		close(old_pip[0]);
 	if (prompt->pos_p != g_ms->n_prompts)
-		close(new_pip[0]);
-	else
-		old_pip = copy_pipe(new_pip);
+	{
+		close(new_pip[1]);
+		copy_pipe(new_pip, old_pip);
+	}
+	close_all_fds(prompt);
 }
 
-int	*copy_pipe(int pipe_in[2])
+void	copy_pipe(int *pipe_in, int *pipe_out)
 {
-	int	*pipe_out;
-
-	pipe_out = malloc(sizeof(int) * 2);
 	pipe_out[0] = pipe_in[0];
 	pipe_out[1] = pipe_in[1];
-	return (pipe_out);
 }
+
 
 void	prepare_exec(t_prompt *prompt, int pipefd[2], int oldpipefd[2])
 {
@@ -101,40 +97,50 @@ void	wait_childs(void)
 }
 
 
+// int	*copy_pipe(int pipe_in[2])
+// {
+// 	int	*pipe_out;
+
+// 	pipe_out = malloc(sizeof(int) * 2);
+// 	pipe_out[0] = pipe_in[0];
+// 	pipe_out[1] = pipe_in[1];
+// 	return (pipe_out);
+// }
+
+	// close(new_pip[1]);
 	// if (prompt->pos_p != 1)
-	// 	close(old_pip[0]);
-	// if (prompt->pos_p != g_ms->n_prompts)
 	// {
-	// 	close(new_pip[1]);
-	// 	copy_pipe(new_pip, old_pip);
+	// 	close((old_pip)[0]);
+	// 	free(old_pip);
 	// }
-	// close_all_fds(prompt);
+	// if (prompt->pos_p != g_ms->n_prompts)
+	// 	close(new_pip[0]);
+	// else
+	// 	old_pip = copy_pipe(new_pip);
 
-	// int			pipefd[2];
-	// int			oldpipefd[2];
-	// t_prompt	*tmp;
 
-	// tmp = prompt;
+
+	// int		pipefd[2];
+	// int		*oldpipefd;
+
+	// oldpipefd = NULL;
 	// while (i > 0)
 	// {
-	// 	if (i != 1)
-	// 		pipe(pipefd);
+	// 	pipe(pipefd);
 	// 	g_ms->sh_pid = fork();
 	// 	if (g_ms->sh_pid == 0)
 	// 	{
-	// 		if (i != 1)
-	// 			close(pipefd[0]);
-	// 		if (tmp->b_success == SUCCESS)
-	// 			prepare_exec(tmp, pipefd, oldpipefd);
+	// 		close(pipefd[0]);
+	// 		if (prompt->b_success == SUCCESS)
+	// 			prepare_exec(prompt, pipefd, oldpipefd);
 	// 		else
 	// 			exit(0);
 	// 	}
 	// 	else
 	// 	{
-	// 		handle_pipes(tmp, pipefd, oldpipefd);
-	// 		close_all_fds(tmp);
+	// 		handle_pipes(prompt, pipefd, oldpipefd);
+	// 		close_all_fds(prompt);
 	// 	}
-	// 	tmp->node_pid = g_ms->sh_pid;
-	// 	tmp = tmp->next;
+	// 	prompt = prompt->next;
 	// 	i--;
 	// }
