@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2023/09/28 15:38:59 by cagonzal         ###   ########.fr       */
-=======
-/*   Updated: 2023/09/25 15:15:49 by fraalmei         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2023/09/29 19:06:50 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +70,7 @@ static int	init_global(int argc, char **env)
 /// @return 0 if it works correctly, 1 if an error occur
 int	main(int argc, char **argv, char **env)
 {
-	// atexit(leaks);
+	//atexit(leaks);
 	(void) argv;
 	if (init_global(argc, env))
 		return (1);
@@ -85,8 +81,7 @@ int	main(int argc, char **argv, char **env)
 		init_signals();
 		if (!g_ms->prompt)
 			continue ;
-		//start_executer();
-		actions(g_ms->prompt);
+		start_executer();
 		free_prompt(g_ms->prompt);
 		g_ms->prompt = NULL;
 	}

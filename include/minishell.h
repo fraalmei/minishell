@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/28 15:08:00 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:00:10 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,7 @@ t_prompt	*new_prompt_struct(void);
 t_prompt	*last_prom(t_prompt *prom);
 
 		///	 parse_prompt_utils_2.c
-int			swap_word(char *string, char **word, int *i, char c);
+int			reading_word(char *buffer, char **word, int *i, char c);
 char		*read_word(char *string, int *i);
 int			option_gen(t_prompt *prm, char *st, int *i);
 
@@ -241,5 +241,10 @@ int			option_gen(t_prompt *prm, char *st, int *i);
 int			get_redir(char *buffer, int *i, t_prompt *swap);
 
 void		start_executer(void);
+
+		/// parse_opt_args.c
+int			check_start_prom(char *buffer, t_prompt *prom);
+void		get_option_args(char *buffer, int *i, t_prompt *swap);
+
 
 #endif

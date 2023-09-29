@@ -6,34 +6,46 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:55:29 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/29 10:52:22 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:07:48 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include <minishell.h>
 
-int	swap_word(char *string, char **word, int *i, char c)
+static int	swap_word(char *buffer, char **word, int *i)
 {
 	static char	*swap;
 
-	if (string[*i] == '$' && string[*i + 1] == '?')
+	swap = return_wild(buffer, &*i);
+	*i += 1;
+	if (swap)
+		*word = ft_strjoin_onefree(*word, swap);
+	return (0);
+}
+
+int	reading_word(char *buffer, char **word, int *i, char c)
+{
+	if (buffer[*i] == '$' && buffer[*i + 1] == '?')
 	{
 		*word = ft_strjoin_allfree(*word, ft_itoa(g_ms->signals->lst_stat_cod));
 		*i += 2;
 	}
-	else if (string[*i] == '$' && (c == 34 || c == '\0'))
+	else if (buffer[*i] == '$' && (c == 34 || c == '\0'))
 	{
-		if (!swap && string[*i + 1] == '{' && ft_str_chr(&string[*i + 1], '}') < 0)
-			return (printf("}: bad substitution\n"), -1);
-		swap = return_wild(string, &*i);
-		*i += 1;
-		if (swap)
-			*word = ft_strjoin_onefree(*word, swap);
+		if (buffer[*i + 1] == '{')
+		{
+			if (ft_str_chr(&buffer[*i + 1], '}') < 0)
+				return (printf("}: bad substitution\n"), -1);
+			*i += 1;
+			swap_word(buffer, word, i);
+			*i += 1;
+		}
+		else
+			swap_word(buffer, word, i);
 	}
 	else
 	{
-		*word = ft_chrjoin(*word, string[*i]);
+		*word = ft_chrjoin(*word, buffer[*i]);
 		*i += 1;
 	}
 	return (0);
@@ -52,44 +64,14 @@ char	*read_word(char *buffer, int *i)
 		{
 			c = buffer[*i];
 			*i += 1;
-			while (buffer[*i] && buffer[*i] != c)
-				if (swap_word(buffer, &word, i, c) != 0)
-					return (g_ms->signals->status_code++, free(word), NULL);
+			if (reading_word(buffer, &word, i, c) != 0)
+				return (g_ms->signals->status_code++, free(word), NULL);
 			*i += 1;
 		}
 		else
-			if (swap_word(buffer, &word, i, c) != 0)
+			if (reading_word(buffer, &word, i, c) != 0)
 				return (g_ms->signals->status_code++, free(word), NULL);
 	}
 	*i -= 1;
 	return (word);
-}
-
-int	option_gen(t_prompt *prm, char *st, int *i)
-{
-	int		x[2];
-
-	if (!prm->arguments[1])
-	{
-		prm->arguments[1] = (char *)ft_calloc(sizeof(char), 2);
-		prm->arguments[1] = ft_chrjoin(prm->arguments[1], '-');
-	}
-	if (!prm->arguments[1])
-		return (-1);
-	x[0] = 0;
-	x[1] = ft_strlen(prm->arguments[1]) - 1;
-	while (st[*i] && is_redirecction(&st[*i]) == 0 && st[*i] != ' ')
-	{
-		if (st[*i] == '-' && x[0] < 1)
-			x[0]++;
-		else if (x[0] > 1)
-		{
-			g_ms->signals->error_status = 1;
-			return (printf("illegal option -- -\n"), -1);
-		}
-		else if (!ft_strrchr(prm->arguments[1], st[*i]))
-			prm->arguments[1] = (x[1]++, ft_chrjoin(prm->arguments[1], st[*i]));
-		*i += 1;
-	}
-	return (x[1]);
 }

@@ -6,27 +6,11 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/29 10:01:17 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/29 17:57:57 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-static int	check_start_prom(char *buffer, t_prompt *prom)
-{
-	if (prom != NULL && is_pipe(buffer) > 0)
-		return (1);
-	return (0);
-}
-
-static void	get_option_args(char *buffer, int *i, t_prompt *swap)
-{
-	if ((buffer[*i] == '-') && (buffer[*i + 1] != ' ') && !swap->arguments[2])
-		swap->n_options = option_gen(swap, buffer, i);
-	else
-		swap->arguments = \
-			str_strjoin_freeall(swap->arguments, read_word(buffer, i));
-}
 
 static void	add_last_prompt(t_prompt **prom, t_prompt *swap)
 {
