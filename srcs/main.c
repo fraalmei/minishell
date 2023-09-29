@@ -6,7 +6,11 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2023/09/28 15:38:59 by cagonzal         ###   ########.fr       */
+=======
+/*   Updated: 2023/09/25 15:15:49 by fraalmei         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +85,8 @@ int	main(int argc, char **argv, char **env)
 		init_signals();
 		if (!g_ms->prompt)
 			continue ;
-		start_executer();
+		//start_executer();
+		actions(g_ms->prompt);
 		free_prompt(g_ms->prompt);
 		g_ms->prompt = NULL;
 	}

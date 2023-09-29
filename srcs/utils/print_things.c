@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:00:19 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/25 12:33:30 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/29 10:50:03 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,8 @@ void	print_prompt(t_prompt *prom)
 		ft_printf("Comando:		%s#\n", prom->command);
 		ft_printf("N_Opciones:		%i#\n", prom->n_options);
 		if (prom->n_options > 0)
-		{
 			ft_printf("Opciones:		%s#\n", prom->arguments[1]);
-			i = 0;
-		}
-		else
-			i = -1;
+		i = -1;
 		ft_printf("N_Argumentos:		%d#\n", prom->n_arguments);
 		if (prom->n_arguments > 0)
 		{
