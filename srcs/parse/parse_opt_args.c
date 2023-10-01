@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_opt_args.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:57:09 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/29 19:15:25 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/01 00:19:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	option_gen(t_prompt *prm, char *st, int *i)
 		else if (x[0] > 1)
 		{
 			g_ms->signals->error_status = 1;
-			return (printf("illegal option -- -\n"), -1);
+			return (print_error(NULL, 6), -1);
 		}
 		else if (!ft_strrchr(prm->arguments[1], st[*i]))
 			prm->arguments[1] = (x[1]++, ft_chrjoin(prm->arguments[1], st[*i]));

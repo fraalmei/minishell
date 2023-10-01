@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/29 19:00:10 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/30 21:35:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,7 @@ char		**str_strjoin_freeall(char **s1, char *s2);
 
 		///	utils/parse_prompt_utils.c
 t_prompt	*make_prompt_struct(void);
+void 		ignore_no_p(char *buffer, int *i);
 int			is_redirecction(char *str);
 int			check_quotes(char *str);
 

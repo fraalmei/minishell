@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/29 17:57:57 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/01 11:47:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,26 +60,30 @@ static t_prompt	*add_prom(char *buff, t_prompt **prom, t_prompt *swap, int *i)
 static int	ride_buffer(char *buff, t_prompt **prom, t_prompt **swap, int *i)
 {
 	if (check_start_prom(&buff[0], *prom) != 0)
-		return (free_prompt(*prom), free_prompt (*swap), write(1, \
-			"syntax error near unexpected token ", 36), write(1, \
-			&buff[0], is_pipe(&buff[*i])), write(1, "\n", 1), -1);
+		return (free_prompt(*prom), free_prompt (*swap), print_error(ft_strndup(&buff[*i], is_pipe(&buff[*i])), 2), -1);
 	if (!(*swap)->command && buff[*i] != ' ' && is_redirecction(&buff[*i]) == 0)
 	{
+		
+		printf ("comando1 %s\n", &buff[*i]);
 		(*swap)->command = read_word(buff, i);
+		printf ("comando2 %s\n", &buff[*i]);
 		(*swap)->arguments[0] = ft_strdup((*swap)->command);
 		if ((*swap)->command == NULL)
 			return (free (*prom), -1);
 	}
-	else if (buff[*i] != ' ' && is_redirecction(&buff[*i]) == 0)
+	ignore_no_p(buff, i);
+	if (buff[*i] && is_redirecction(&buff[*i]) == 0)
 		get_option_args(buff, i, *swap);
-	else if (buff[*i] != ' ' && is_redir(&buff[*i]) != 0)
+	else if (buff[*i] && is_redir(&buff[*i]) != 0)
 		get_redir(buff, i, *swap);
-	else if (is_pipe(&buff[*i]) != 0)
+	else if (buff[*i] && is_pipe(&buff[*i]) != 0)
 		*swap = add_prom(buff, prom, *swap, i);
 	if (check_end_prom(&buff[*i]) != 0)
-		return (free_prompt(*prom), free_prompt (*swap), write(1, \
-			"syntax error near unexpected token `newline'\n", 46), -1);
-	*i += 1;
+		return (free_prompt(*prom), free_prompt (*swap), \
+			print_error(NULL, 5), -1);
+	//printf ("pasa1 %s\n", &buff[*i]);
+	//*i += 1;
+	//printf ("pasa2 %s\n", &buff[*i]);
 	return (0);
 }
 
@@ -89,6 +93,7 @@ t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 	int			i;
 
 	i = 0;
+	signals_in_process();
 	if (check_quotes(buffer))
 		return (printf("Comillas abiertas\n"), NULL);
 	swap = new_prompt_struct();
@@ -96,8 +101,6 @@ t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 		return (NULL);
 	while (buffer[i])
 	{
-		if (g_ms->signals->status_code != 0)
-			return (free_prompt(prom), free_prompt(swap), NULL);
 		if (ride_buffer(buffer, &prom, &swap, &i))
 			return (NULL);
 		if (g_ms->signals->status_code != 0)

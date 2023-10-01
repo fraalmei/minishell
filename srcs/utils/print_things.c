@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_things.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:00:19 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/29 10:50:03 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/01 00:20:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,18 @@ int	print_error(char *str, int i)
 	else if (i == 1)
 		printf("%s not found\n", str);
 	else if (i == 2)
-		printf("bad option: %s\n", str);
+		printf("syntax error near unexpected token `%s'\n", str);
 	else if (i == 3)
 		printf("bad assigment\n");
+	else if (i == 4)
+		printf("bad option: %s\n", str);
+	else if (i == 5)
+		printf("syntax error near unexpected token `newline'\n");
+	else if (i == 6)
+		printf("illegal option -- -\n");
+	if (str)
+		free (str);
+	g_ms->signals->status_code = i;
 	return (0);
 }
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_prompt_utils_2.c                             :+:      :+:    :+:   */
+/*   parse_word.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:55:29 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/29 19:07:48 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/01 11:48:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ char	*read_word(char *buffer, int *i)
 			if (reading_word(buffer, &word, i, c) != 0)
 				return (g_ms->signals->status_code++, free(word), NULL);
 	}
-	*i -= 1;
+	//*i -= 1;
 	return (word);
 }
