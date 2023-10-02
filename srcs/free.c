@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 15:02:58 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/22 16:22:32 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/29 14:27:26 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+#include <direct.h>
 
 	// free the t_promt struct (or structs) generated from the buffer
 int	free_prompt(t_prompt *prom)
@@ -75,5 +76,6 @@ int	free_global(void)
 	if (!g_ms->prompt)
 		free (g_ms->prompt);
 	free_signals(g_ms->signals);
+	rmdir(TMP_PATH);
 	return (0);
 }

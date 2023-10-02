@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/28 15:08:00 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/09/29 14:19:57 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@
 
 # define FALSE 0
 # define TRUE 1
+
+# define TMP_PATH "./tmp/"
 
 # define BUFF_SIZE 4096
 # define EXPANSION -36
