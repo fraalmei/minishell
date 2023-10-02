@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/02 13:11:49 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/02 15:21:54 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ static int	ride_buffer(char *buff, t_prompt **prom, t_prompt **swap, int *i)
 		(*swap)->arguments[0] = ft_strdup((*swap)->command);
 		if ((*swap)->command == NULL)
 			return (free (*prom), -1);
+		//ignore_no_p(buff, i);
 	}
-	ignore_no_p(buff, i);
-	if (buff[*i] && is_redirecction(&buff[*i]) == 0)
+	else if (buff[*i] && is_redirecction(&buff[*i]) == 0)
 		get_option_args(buff, i, *swap);
 	else if (buff[*i] && is_redir(&buff[*i]) != 0)
 		get_redir(buff, i, *swap);
@@ -81,7 +81,7 @@ static int	ride_buffer(char *buff, t_prompt **prom, t_prompt **swap, int *i)
 		return (free_prompt(*prom), free_prompt (*swap), \
 			print_error(NULL, 5), -1);
 	//printf ("pasa1 %s\n", &buff[*i]);
-	//*i += 1;
+	*i += 1;
 	//printf ("pasa2 %s\n", &buff[*i]);
 	return (0);
 }
