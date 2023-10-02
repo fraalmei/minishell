@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:39:55 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/29 10:44:51 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/29 12:34:52 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,9 @@
 
 static int	free_node(t_env_var *env)
 {
-	env->name = NULL;
 	free(env->name);
 	if (env->value)
-	{
-		env->value = NULL;
 		free (env->value);
-	}
-	env = NULL;
 	free (env);
 	return (0);
 }
@@ -61,8 +56,6 @@ int	unset(t_env_var **env, char **name)
 
 	i = -1;
 	while (name[++i])
-	{
 		remove_node(env, name[i]);
-	}
 	return (0);
 }

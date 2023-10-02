@@ -6,11 +6,26 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:57:24 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/22 16:22:34 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/29 12:53:15 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+	// return the position when not alphanumeric char
+static int	ft_chrcmp_env_forbid(const char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isalnum(str[i]) == 0 && str[i] != 95)
+			return (i);
+		i++;
+	}
+	return (i);
+}
 
 /// @brief return the value of a global variable when a $ is finded
 /// @param buffer the buffer of the line
@@ -23,8 +38,9 @@ char	*return_wild(char *buffer, int *i)
 	char	*value;
 
 	x = *i;
-	if (buffer[x + 1] != ' ' && buffer[x + 1] && ft_isalnum(buffer[x + 1]))
-		x = ft_chrcmp_alphanum(&buffer[x + 1]);
+	if (buffer[x + 1] != ' ' && buffer[x + 1] && \
+			ft_chrcmp_env_forbid(&buffer[x + 1]))
+		x = ft_chrcmp_env_forbid(&buffer[x + 1]);
 	else if (buffer[x + 1] == '{' && buffer[x + 1])
 	{
 		x = ft_str_chr(&buffer[x], '}');

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_prompt_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:36:49 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/25 18:19:04 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/09/30 21:35:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ t_prompt	*new_prompt_struct(void)
 	prom->next = NULL;
 	return (prom);
 }
+
+void ignore_no_p(char *buffer, int *i)
+{
+	while (buffer[*i] == ' ' || buffer[*i] == '\t')
+		*i += 1;
+}
+
+
 
 /// @brief guess it
 /// @param prom the first t_prompt of the list
