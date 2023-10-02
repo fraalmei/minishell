@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/25 17:18:27 by fraalmei          #+#    #+#              #
-#    Updated: 2023/09/30 19:32:58 by marvin           ###   ########.fr        #
+#    Updated: 2023/10/02 13:45:02 by fraalmei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ RM		= /bin/rm -f
 
 #	flags
 #------------------------------------------------------------------------------
-CFLAGS		= #-Wall -Werror -Wextra #-pedantic
+CFLAGS		= -Wall -Werror -Wextra #-pedantic
 
 LEAK_FLAGS	= -fsanitize=address -g3
 
@@ -43,7 +43,7 @@ LIBS		= -L $(LIBFT_DIR) -lft -lreadline -L $(READ)/lib
 BIN_DIR		= bin
 SRC_DIR		= srcs
 SRCS		= main.c actions.c free.c $(ENV) $(BUILTINS) $(UTILS) $(EXECUTER) $(PARSE) $(SIGNALS)
-ENV			= env/utils_env.c env/list_util.c env/read_env.c
+ENV			= env/utils_env.c env/list_util.c env/read_env.c env/list_util2.c
 UTILS		= utils/print_things.c utils/meta_char.c utils/ft_split_trim.c utils/separation.c
 BUILTINS	= builtins/pwd.c builtins/env.c builtins/export.c builtins/exit.c builtins/cd.c \
 				builtins/unset.c builtins/echo.c

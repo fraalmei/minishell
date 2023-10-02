@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:54:33 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/08 18:03:22 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/02 13:41:12 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_env	*read_env(char **env)
 
 	if (!env)
 		return (NULL);
+	if (!env[0])
+		return (ignored_env());
 	copy = (t_env *)ft_calloc(sizeof(*copy), 2);
 	if (!copy)
 		return (NULL);
@@ -32,6 +34,7 @@ t_env	*read_env(char **env)
 		if (ft_str_frst_cmp(env[i], "_=") == 0)
 			copy->dir = new_struct_env(env[i]);
 	incr_shll_lvl(copy->frst);
+	free (env);
 	return (copy);
 }
 

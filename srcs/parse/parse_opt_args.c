@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_opt_args.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:57:09 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/01 00:19:50 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/02 13:12:43 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,5 @@ void	get_option_args(char *buffer, int *i, t_prompt *swap)
 		swap->n_options = option_gen(swap, buffer, i);
 	else
 		swap->arguments = \
-			str_strjoin_freeall(swap->arguments, read_word(buffer, i));
+			str_strjoin_freeall(swap->arguments, read_word(buffer, i, '1'));
 }

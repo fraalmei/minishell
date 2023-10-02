@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 15:02:58 by fraalmei          #+#    #+#             */
 /*   Updated: 2023/10/02 11:12:35 by cagonzal         ###   ########.fr       */
@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <executer.h>
+#include <direct.h>
 
 	// free the t_promt struct (or structs) generated from the buffer
 int	free_prompt(t_prompt *prom)

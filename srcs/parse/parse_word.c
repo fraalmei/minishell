@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_word.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:55:29 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/01 11:48:30 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/02 13:11:09 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static int	swap_word(char *buffer, char **word, int *i)
 	return (0);
 }
 
-int	reading_word(char *buffer, char **word, int *i, char c)
+int	reading_word(char *buffer, char **word, int *i, char c[2])
 {
 	if (buffer[*i] == '$' && buffer[*i + 1] == '?')
 	{
 		*word = ft_strjoin_allfree(*word, ft_itoa(g_ms->signals->lst_stat_cod));
 		*i += 2;
 	}
-	else if (buffer[*i] == '$' && (c == 34 || c == '\0'))
+	else if (buffer[*i] == '$' && (c[0] == 34 || c[0] == '\0') && c[1] != '0')
 	{
 		if (buffer[*i + 1] == '{')
 		{
@@ -51,18 +51,19 @@ int	reading_word(char *buffer, char **word, int *i, char c)
 	return (0);
 }
 
-char	*read_word(char *buffer, int *i)
+char	*read_word(char *buffer, int *i, char s)
 {
 	char	*word;
-	char	c;
+	char	c[2];
 
+	c[1] = s;
 	word = (char *)ft_calloc(sizeof(char), 2);
 	while (buffer[*i] && buffer[*i] != ' ' && is_redirecction(&buffer[*i]) == 0)
 	{
-		c = '\0';
+		c[0] = '\0';
 		if (buffer[*i] == 39 || buffer[*i] == 34)
 		{
-			c = buffer[*i];
+			c[0] = buffer[*i];
 			*i += 1;
 			if (reading_word(buffer, &word, i, c) != 0)
 				return (g_ms->signals->status_code++, free(word), NULL);

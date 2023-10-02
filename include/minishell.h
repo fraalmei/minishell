@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/02 10:42:20 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/02 13:39:53 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,8 +167,11 @@ int			incr_shll_lvl(t_env_var *env);
 		///	 list_util.c
 int			list_len(t_env_var *first);
 t_env_var	*lst_strct_env(t_env_var *env);
-char		**env_to_strstr(t_env_var *frst);
+char		**env_to_strstr(t_env *env);
 t_env_var	*new_struct_env(char *var);
+
+		/// list_util2.c
+t_env		*ignored_env(void);
 
 	///	 builtins
 		///	 builtins/env.c
@@ -211,7 +214,7 @@ char		**str_strjoin_freeall(char **s1, char *s2);
 
 		///	utils/parse_prompt_utils.c
 t_prompt	*make_prompt_struct(void);
-void 		ignore_no_p(char *buffer, int *i);
+void		ignore_no_p(char *buffer, int *i);
 int			is_redirecction(char *str);
 int			check_quotes(char *str);
 
@@ -236,9 +239,11 @@ t_prompt	*new_prompt_struct(void);
 t_prompt	*last_prom(t_prompt *prom);
 
 		///	 parse_prompt_utils_2.c
-int			reading_word(char *buffer, char **word, int *i, char c);
-char		*read_word(char *string, int *i);
 int			option_gen(t_prompt *prm, char *st, int *i);
+
+		/// parse_word.c
+int			reading_word(char *buffer, char **word, int *i, char c[2]);
+char		*read_word(char *string, int *i, char s);
 
 		///	 parse_redirects.c
 int			get_redir(char *buffer, int *i, t_prompt *swap);
