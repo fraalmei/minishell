@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:19:05 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/28 15:21:35 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/02 13:39:54 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,17 @@ void	launch_from_father(t_prompt *prompt)
 void	call_execve(t_prompt *prompt)
 {
 	char	*path;
+	char	**env;
 	int		err;
 
 	signals_in_process();
 	dup_to_stdin_stdout(prompt->infile, prompt->outfile);
-	path = get_pathname(prompt->command, g_ms->envirorment->env);
-	if (execve(path, prompt->arguments, g_ms->envirorment->env) == -1)
+	env = env_to_strstr(g_ms->envirorment->frst);
+	path = get_pathname(prompt->command, env);
+	if (execve(path, prompt->arguments, NULL) == -1)
 	{
 		err = errno;
+		ft_error(-1, prompt->command);
 		free_prompt(prompt);
 		exit(UNKNOWN_COMMAND);
 	}
