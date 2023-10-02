@@ -6,11 +6,69 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 14:43:02 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/15 14:08:38 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/02 11:27:13 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <executer.h>
+
+/*
+ * @brief Create a directory using execve.
+ *
+ * This function creates a directory specified by `path`
+ * using the `mkdir` command.
+ *
+ * @param path The path to the directory to be created.
+ * @return 0 on success, or an error code on failure.
+ */
+int	ft_create_directory(void)
+{
+	char	*command;
+	char	*args[3];
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		command = "/bin/mkdir";
+		args[0] = command;
+		args[1] = TMP_PATH;
+		args[2] = NULL;
+		execve(command, args, NULL);
+	}
+	else
+		waitpid(pid, NULL, 0);
+	return (0);
+}
+
+/* @brief Remove a directory using execve.
+ *
+ * This function removes a directory specified by `path`
+ * using the `rmdir` command.
+ *
+ * @param path The path to the directory to be removed.
+ * @return 0 on success, or an error code on failure.
+ */
+int	ft_remove_directory(void)
+{
+	char	*command;
+	char	*args[4];
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		command = "/bin/rm";
+		args[0] = command;
+		args[1] = "-rf";
+		args[2] = TMP_PATH;
+		args[3] = NULL;
+		execve(command, args, NULL);
+	}
+	else
+		waitpid(pid, NULL, 0);
+	return (0);
+}
 
 void	ft_inredir(t_prompt *prompt)
 {
@@ -46,7 +104,7 @@ void	ft_outredir(t_prompt *prompt)
 
 }
 
-int	openfile(char *filename, int mode)
+int	openfile(char	*filename, int mode)
 {
 	if (mode == INFILE)
 	{

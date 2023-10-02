@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:08:09 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/28 15:53:38 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/02 11:10:35 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ char		*writeheredoc(char *limiter);
 char		*get_pathname(char *cmd, char **env);
 
 	//executer/open_fd.c
+int			ft_create_directory(void);
+int			ft_remove_directory(void);
 void		ft_inredir(t_prompt *prompt);
 void		ft_outredir(t_prompt *prompt);
 int			openfile(char *filename, int mode);

@@ -6,12 +6,12 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 15:02:58 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/02 10:42:09 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/02 11:12:35 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <direct.h>
+#include <executer.h>
 
 	// free the t_promt struct (or structs) generated from the buffer
 int	free_prompt(t_prompt *prom)
@@ -70,12 +70,12 @@ int	free_signals(t_sig *sig)
 
 int	free_global(void)
 {
+	ft_remove_directory();
 	if (!g_ms->buffer)
 		free (g_ms->buffer);
 	free_env (g_ms->envirorment);
 	if (!g_ms->prompt)
 		free (g_ms->prompt);
 	free_signals(g_ms->signals);
-	rmdir(TMP_PATH);
 	return (0);
 }

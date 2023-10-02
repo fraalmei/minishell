@@ -6,11 +6,12 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/02 10:42:28 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/02 11:17:57 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+#include <executer.h>
 
 void	leaks(void)
 {
@@ -56,6 +57,7 @@ int	prompt(void)
 /// @return 0 if it works correctly, 1 if an error occur
 static int	init_global(int argc, char **env)
 {
+	ft_create_directory();
 	if (argc != 1)
 		return (printf("No arguments required\n"), 1);
 	g_ms = (t_mini_class *)ft_calloc(sizeof(*g_ms), 2);
