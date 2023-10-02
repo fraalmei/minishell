@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_things.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:00:19 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/01 00:20:09 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/02 15:56:00 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	print_error(char *str, int i)
 	else if (i == 4)
 		printf("bad option: %s\n", str);
 	else if (i == 5)
-		printf("syntax error near unexpected token `newline'\n");
+		printf("syntax error near `%s'\n", str);
 	else if (i == 6)
 		printf("illegal option -- -\n");
 	if (str)

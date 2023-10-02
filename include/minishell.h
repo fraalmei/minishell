@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/02 13:39:53 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:12:47 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,8 +242,8 @@ t_prompt	*last_prom(t_prompt *prom);
 int			option_gen(t_prompt *prm, char *st, int *i);
 
 		/// parse_word.c
-int			reading_word(char *buffer, char **word, int *i, char c[2]);
-char		*read_word(char *string, int *i, char s);
+int			reading_word(char *buffer, char **word, int *i, char c);
+char		*read_word(char *string, int *i);
 
 		///	 parse_redirects.c
 int			get_redir(char *buffer, int *i, t_prompt *swap);

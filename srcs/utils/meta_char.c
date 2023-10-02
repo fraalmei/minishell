@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:57:24 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/29 12:53:15 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:32:33 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ static int	ft_chrcmp_env_forbid(const char *str)
 	}
 	return (i);
 }
+
+/* if (buffer[*i] == '$' && buffer[*i + 1] == '?')
+	{
+		*word = ft_strjoin_allfree(*word, ft_itoa(g_ms->signals->status_code));
+		*i += 2;
+	}
+	else  */
 
 /// @brief return the value of a global variable when a $ is finded
 /// @param buffer the buffer of the line
@@ -48,6 +55,8 @@ char	*return_wild(char *buffer, int *i)
 			return (NULL);
 		name = ft_substr(&buffer[*i], 2, x - 2);
 	}
+	else if (buffer[*i + 1] == '?')
+		return (i[0]++, ft_itoa(g_ms->signals->lst_stat_cod));
 	else
 		return ("$");
 	name = ft_substr(buffer, *i + 1, x);

@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/02 15:21:54 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:15:06 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,7 @@ static int	ride_buffer(char *buff, t_prompt **prom, t_prompt **swap, int *i)
 		return (free_prompt(*prom), free_prompt (*swap), print_error(ft_strndup(&buff[*i], is_pipe(&buff[*i])), 2), -1);
 	if (!(*swap)->command && buff[*i] != ' ' && is_redirecction(&buff[*i]) == 0)
 	{
-		printf ("comando1 %s\n", &buff[*i]);
-		(*swap)->command = read_word(buff, i, '1');
-		printf ("comando2 %s\n", &buff[*i]);
+		(*swap)->command = read_word(buff, i);
 		(*swap)->arguments[0] = ft_strdup((*swap)->command);
 		if ((*swap)->command == NULL)
 			return (free (*prom), -1);

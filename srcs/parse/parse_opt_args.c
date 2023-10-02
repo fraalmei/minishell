@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:57:09 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/02 13:12:43 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:29:58 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,10 @@ int	option_gen(t_prompt *prm, char *st, int *i)
 	x[1] = ft_strlen(prm->arguments[1]) - 1;
 	while (st[*i] && is_redirecction(&st[*i]) == 0 && st[*i] != ' ')
 	{
-		if (st[*i] == '-' && x[0] < 1)
+		if (st[*i] == '-')
 			x[0]++;
 		else if (x[0] > 1)
-		{
-			g_ms->signals->error_status = 1;
 			return (print_error(NULL, 6), -1);
-		}
 		else if (!ft_strrchr(prm->arguments[1], st[*i]))
 			prm->arguments[1] = (x[1]++, ft_chrjoin(prm->arguments[1], st[*i]));
 		*i += 1;
@@ -54,5 +51,5 @@ void	get_option_args(char *buffer, int *i, t_prompt *swap)
 		swap->n_options = option_gen(swap, buffer, i);
 	else
 		swap->arguments = \
-			str_strjoin_freeall(swap->arguments, read_word(buffer, i, '1'));
+			str_strjoin_freeall(swap->arguments, read_word(buffer, i));
 }
