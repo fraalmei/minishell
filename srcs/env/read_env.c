@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:54:33 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/02 13:41:12 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:02:21 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_env	*read_env(char **env)
 		if (ft_str_frst_cmp(env[i], "_=") == 0)
 			copy->dir = new_struct_env(env[i]);
 	incr_shll_lvl(copy->frst);
-	free (env);
+	//free (env);
 	return (copy);
 }
 
