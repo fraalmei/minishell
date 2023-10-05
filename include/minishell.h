@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/02 16:12:47 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/05 10:43:19 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ int			incr_shll_lvl(t_env_var *env);
 		///	 list_util.c
 int			list_len(t_env_var *first);
 t_env_var	*lst_strct_env(t_env_var *env);
-char		**env_to_strstr(t_env *env);
+void		env_to_strstr(t_env *env, char ***envg);
 t_env_var	*new_struct_env(char *var);
 
 		/// list_util2.c

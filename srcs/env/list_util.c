@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 16:08:35 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/02 13:43:56 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/05 10:42:43 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char	*env_to_str(t_env_var *frst)
 	return (env);
 }
 
-char	**env_to_strstr(t_env *env)
+void	env_to_strstr(t_env *env, char ***envg)
 {
 	char	**str;
 
@@ -56,7 +56,8 @@ char	**env_to_strstr(t_env *env)
 	}
 	str = str_strjoin_freeall(str, env_to_str(env->frst));
 	str = str_strjoin_freeall(str, env_to_str(env->dir));
-	return (str);
+	free_str(*envg);
+	*envg = str;
 }
 
 static t_env_var	*struct_env(char *name, char eq, char *value)
