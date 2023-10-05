@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 10:04:38 by vpujalte          #+#    #+#             */
-/*   Updated: 2023/10/02 13:37:18 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/02 15:39:17 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_error(int error, char *argument)
 		{
 			ft_putstr_fd("minishell: ", STDERR);
 			ft_putstr_fd(argument, STDERR);
-			ft_putstr_fd(": No such file or directory", STDERR);
+			ft_putstr_fd(": command not found", STDERR);
 			ft_putstr_fd("\n", STDERR);
 		}
 		if (error == -2)
