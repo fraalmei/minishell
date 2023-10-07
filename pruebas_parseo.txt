@@ -1,0 +1,9 @@
+$USER "$USER" '$USER' $"USER" $'USER'
+$USERcosas cosas$USER "$USERcosas" "cosas$USER" '$USERcosas' 'cosas$USER'
+"$USER-cosas" '$USER-cosas' "$USER cosas" '$USER cosas'
+"'$USER' $USER" '"$USER" $USER'
+veamos que polladas sale por aqui
+veamos -lo -p -o argumento1 argumento2 argumento3
+veamos -lo -p -o argumento1 > argumento2 > argumento3
+veamos -lo -p -o argumento1>argumento2>argumento3
+veamos -lo -p -o argumento1>argumento2>argumento3<argumento4<argumento5<<argumento6<<argumento7>>argumento8>>argumento9

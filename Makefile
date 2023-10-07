@@ -6,7 +6,7 @@
 #    By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/25 17:18:27 by fraalmei          #+#    #+#              #
-#    Updated: 2023/10/02 13:45:02 by fraalmei         ###   ########.fr        #
+#    Updated: 2023/10/05 17:50:22 by fraalmei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,11 +44,11 @@ BIN_DIR		= bin
 SRC_DIR		= srcs
 SRCS		= main.c actions.c free.c $(ENV) $(BUILTINS) $(UTILS) $(EXECUTER) $(PARSE) $(SIGNALS)
 ENV			= env/utils_env.c env/list_util.c env/read_env.c env/list_util2.c
-UTILS		= utils/print_things.c utils/meta_char.c utils/ft_split_trim.c utils/separation.c
+UTILS		= utils/print_things.c utils/ft_split_trim.c utils/separation.c
 BUILTINS	= builtins/pwd.c builtins/env.c builtins/export.c builtins/exit.c builtins/cd.c \
 				builtins/unset.c builtins/echo.c
 PARSE		= parse/parse_prompt_utils.c parse/parse_prompt.c parse/parse_word.c \
-				parse/parse_redirects.c parse/parse_opt_args.c
+				parse/parse_redirects.c parse/parse_opt_args.c parse/parse_sustitution.c
 EXECUTER	= executer/call_execve.c executer/child_manager.c executer/exec_utils.c executer/executer.c \
 				executer/fd_utils.c executer/get_path.c executer/heredoc.c executer/open_fd.c
 SIGNALS		= signals/signals.c

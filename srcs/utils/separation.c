@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   separation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 17:18:17 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/15 09:40:53 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/07 14:01:52 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ int	is_redir(char *str)
 	return (0);
 }
 
+/// @brief check if the "str"  have open quotes
+/// @param str the buffer of the prompt
+/// @return 0 if its ok
 int	check_quotes(char *str)
 {
 	int		i;

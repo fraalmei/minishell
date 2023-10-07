@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 17:42:05 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/25 18:30:06 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/07 15:33:21 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	**str_strjoin_freeall(char **s1, char *s2)
 	int		i;
 
 	if (!s1)
-		s1 = (char **)ft_calloc(sizeof(char *), 2);
+		s1 = (char **)ft_calloc(sizeof(char *), 1);
 	if (!s1)
 		return (NULL);
 	str_len = ft_str_strlen(s1);

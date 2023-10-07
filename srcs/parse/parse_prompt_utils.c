@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_prompt_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:36:49 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/30 21:35:34 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/05 13:42:59 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_prompt	*new_prompt_struct(void)
 	return (prom);
 }
 
-void ignore_no_p(char *buffer, int *i)
+void	ignore_no_p(char *buffer, int *i)
 {
 	while (buffer[*i] == ' ' || buffer[*i] == '\t')
 		*i += 1;

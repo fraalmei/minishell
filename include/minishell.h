@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/05 10:48:27 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/07 12:41:59 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,10 +203,6 @@ void		print_prompt(t_prompt *prom);
 void		print_str_str(char **string);
 int			print_error(char *str, int i);
 
-		///	 utils/meta_char.c
-char		*return_wild(char *str, int *i);
-char		*change_wild(char *str);
-
 		///	utils/ft_split_trim.c
 int			ft_str_strlen(char **string);
 int			ft_scndchrlen(const char *s, char c);
@@ -216,7 +212,6 @@ char		**str_strjoin_freeall(char **s1, char *s2);
 t_prompt	*make_prompt_struct(void);
 void		ignore_no_p(char *buffer, int *i);
 int			is_redirecction(char *str);
-int			check_quotes(char *str);
 
 		/// utils/prompt_struct.c
 int			is_redirecction(char *str);
@@ -238,12 +233,9 @@ char		**soft_split(char *buffer);
 t_prompt	*new_prompt_struct(void);
 t_prompt	*last_prom(t_prompt *prom);
 
-		///	 parse_prompt_utils_2.c
-int			option_gen(t_prompt *prm, char *st, int *i);
-
 		/// parse_word.c
 int			reading_word(char *buffer, char **word, int *i, char c);
-char		*read_word(char *string, int *i);
+char		*read_word(char *buffer, int *i);
 
 		///	 parse_redirects.c
 int			get_redir(char *buffer, int *i, t_prompt *swap);
@@ -252,7 +244,11 @@ void		start_executer(void);
 
 		/// parse_opt_args.c
 int			check_start_prom(char *buffer, t_prompt *prom);
+int			option_gen(t_prompt *prm, char *st, int *i);
 void		get_option_args(char *buffer, int *i, t_prompt *swap);
 
+		/// parse_sustitution.c
+char		*return_wild(char *str, int *i);
+void		change_dollars_buffer(void);
 
 #endif

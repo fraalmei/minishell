@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:57:09 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/02 17:29:58 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:27:58 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	option_gen(t_prompt *prm, char *st, int *i)
 
 void	get_option_args(char *buffer, int *i, t_prompt *swap)
 {
-	if ((buffer[*i] == '-') && (buffer[*i + 1] != ' ') && !swap->arguments[2])
+	if ((buffer[*i] == '-') && (buffer[*i + 1] != ' ') && !swap->arguments[2] && (ft_strcmp(swap->command, "echo") == 0 && buffer[*i + 1] == 'n'))
 		swap->n_options = option_gen(swap, buffer, i);
 	else
 		swap->arguments = \

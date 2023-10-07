@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:00:19 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/02 15:56:00 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/07 20:34:24 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,10 @@ void	print_prompt(t_prompt *prom)
 		ft_printf("N_Opciones:		%i#\n", prom->n_options);
 		if (prom->n_options > 0)
 			ft_printf("Opciones:		%s#\n", prom->arguments[1]);
-		i = -1;
 		ft_printf("N_Argumentos:		%d#\n", prom->n_arguments);
-		if (prom->n_arguments > 0)
-		{
-			while (++i <= prom->n_arguments)
-				ft_printf("Argumentos:		%s#\n", prom->arguments[i]);
-		}
-		else
-			ft_printf("Argumentos:		(null)#\n");
+		i = 0;
+		while (prom->arguments[i])
+			ft_printf("Argumentos:		%s#\n", prom->arguments[i++]);
 		i = 0;
 		if (prom->input_redirect)
 			while (prom->input_redirect[i] != NULL)
@@ -56,22 +51,27 @@ void	print_prompt(t_prompt *prom)
 int	print_error(char *str, int i)
 {
 	if (i == 0)
-		printf("export: `%s': not a valid identifier\n", str);
+		g_ms->signals->status_code = (printf("export: `%s': not a valid identifier\n", str), i);
 	else if (i == 1)
-		printf("%s not found\n", str);
+		g_ms->signals->status_code = (printf(": bad substitution\n"), i);
+	else if (i == 7)
+		g_ms->signals->status_code = (printf("%s not found\n", str), i);
 	else if (i == 2)
-		printf("syntax error near unexpected token `%s'\n", str);
+		g_ms->signals->status_code = (printf("syntax error near unexpected token `%s'\n", str), i);
 	else if (i == 3)
-		printf("bad assigment\n");
+		g_ms->signals->status_code = (printf("bad assigment\n"), i);
 	else if (i == 4)
-		printf("bad option: %s\n", str);
+		g_ms->signals->status_code = (printf("bad option: %s\n", str), i);
 	else if (i == 5)
-		printf("syntax error near `%s'\n", str);
+		g_ms->signals->status_code = (printf("syntax error near `%s'\n", str), i);
 	else if (i == 6)
-		printf("illegal option -- -\n");
+		g_ms->signals->status_code = (printf("illegal option -- -\n"), i);
+	else if (i == 10)
+		g_ms->signals->status_code = (printf("Comillas abiertas\n"), i);
+	else if (i == 11)
+		g_ms->signals->status_code = (printf("$%s: ambiguous redirect\n", str), 1);
 	if (str)
 		free (str);
-	g_ms->signals->status_code = i;
 	return (0);
 }
 

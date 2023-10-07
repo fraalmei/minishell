@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/02 11:17:57 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/06 10:59:23 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	prompt(void)
 	rl_on_new_line();
 	g_ms->buffer = ft_strtrim_onefree(readline(BCYAN"minishell>"WHITE), \
 		" \t\n\v\f\r");
+	add_history(g_ms->buffer);
+	change_buffer_dollars();
 	if (!g_ms->buffer)
 		(printf ("exit\n"), exit_shell());
 	else if (ft_strcmp(g_ms->buffer, "") == 0)
@@ -40,7 +42,6 @@ int	prompt(void)
 	}
 	else
 	{
-		add_history(g_ms->buffer);
 		g_ms->prompt = buffer_to_prompt(g_ms->buffer, g_ms->prompt);
 		print_prompt(g_ms->prompt);
 		free (g_ms->buffer);

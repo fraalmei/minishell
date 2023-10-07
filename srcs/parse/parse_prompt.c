@@ -6,12 +6,18 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/02 16:15:06 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/07 15:50:04 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+/// @brief Add the last prompt to the linked list of prompts.
+/// This function appends the provided `swap` prompt to the end
+/// of the linked list of prompts represented by the `prom` parameter.
+/// It also calculates the number of arguments in the prompt.
+/// @param prom A pointer to a pointer to the linked list of prompts.
+/// @param swap The prompt to be added to the end of the list.
 static void	add_last_prompt(t_prompt **prom, t_prompt *swap)
 {
 	if (swap->arguments)
@@ -24,12 +30,22 @@ static void	add_last_prompt(t_prompt **prom, t_prompt *swap)
 		*prom = swap;
 	else
 	{
+		swap->arguments[swap->n_arguments] = NULL;
 		last_prom(*prom)->next = swap;
 		swap->prev = last_prom(*prom);
 	}
 	g_ms->n_prompts = num_prom(*prom);
 }
 
+/// @brief Add a prompt to the linked list of prompts based on pipe symbols.
+/// This function adds a prompt to the linked list of prompts
+/// based on the presence of pipe symbols ('|') in the command buffer.
+/// It handles the creation and connection of prompts.
+/// @param buff The command buffer.
+/// @param prom A pointer to a pointer to the linked list of prompts.
+/// @param swap The prompt to be added.
+/// @param i A pointer to the iterator position in the command buffer.
+/// @return The updated prompt pointer.
 static t_prompt	*add_prom(char *buff, t_prompt **prom, t_prompt *swap, int *i)
 {
 	if (!*prom && is_pipe(&buff[*i]) > 0)
@@ -57,17 +73,28 @@ static t_prompt	*add_prom(char *buff, t_prompt **prom, t_prompt *swap, int *i)
 	return (swap);
 }
 
+/// @brief Process the command buffer to extract prompts and their contents.
+/// This function processes the command buffer,
+/// extracts prompts, and their contents (commands,
+/// arguments, options, and redirections),
+/// and populates the linked list of prompts.
+/// @param buff The command buffer.
+/// @param prom A pointer to a pointer to the linked list of prompts.
+/// @param swap A pointer to the current prompt being processed.
+/// @param i A pointer to the iterator position in the command buffer.
+/// @return 0 on success, -1 on error.
 static int	ride_buffer(char *buff, t_prompt **prom, t_prompt **swap, int *i)
 {
+	printf("start char: %c\n", buff[*i]);
 	if (check_start_prom(&buff[0], *prom) != 0)
-		return (free_prompt(*prom), free_prompt (*swap), print_error(ft_strndup(&buff[*i], is_pipe(&buff[*i])), 2), -1);
+		return (free_prompt(*prom), free_prompt (*swap), \
+			print_error(ft_strndup(&buff[*i], is_pipe(&buff[*i])), 2), -1);
 	if (!(*swap)->command && buff[*i] != ' ' && is_redirecction(&buff[*i]) == 0)
 	{
 		(*swap)->command = read_word(buff, i);
 		(*swap)->arguments[0] = ft_strdup((*swap)->command);
 		if ((*swap)->command == NULL)
 			return (free (*prom), -1);
-		//ignore_no_p(buff, i);
 	}
 	else if (buff[*i] && is_redirecction(&buff[*i]) == 0)
 		get_option_args(buff, i, *swap);
@@ -78,12 +105,18 @@ static int	ride_buffer(char *buff, t_prompt **prom, t_prompt **swap, int *i)
 	if (check_end_prom(&buff[*i]) != 0)
 		return (free_prompt(*prom), free_prompt (*swap), \
 			print_error(NULL, 5), -1);
-	//printf ("pasa1 %s\n", &buff[*i]);
-	*i += 1;
-	//printf ("pasa2 %s\n", &buff[*i]);
+	if (ft_strlen(&buff[*i]) > 0 && buff[*i] == ' ')
+		*i += 1;
 	return (0);
 }
 
+/// @brief Convert a command buffer to a linked list of prompts.
+/// This function converts a command buffer into a linked list of prompts,
+/// where each prompt represents a portion of the command buffer with commands,
+/// arguments, options, and redirections.
+/// @param buffer The command buffer to be processed.
+/// @param prom The initial linked list of prompts (can be NULL).
+/// @return A pointer to the linked list of prompts or NULL on error.
 t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 {
 	t_prompt	*swap;
@@ -91,8 +124,6 @@ t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 
 	i = 0;
 	signals_in_process();
-	if (check_quotes(buffer))
-		return (printf("Comillas abiertas\n"), NULL);
 	swap = new_prompt_struct();
 	if (!swap)
 		return (NULL);
@@ -106,25 +137,3 @@ t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 	add_last_prompt(&prom, swap);
 	return (prom);
 }
-		/* if (check_start_prom(&buffer[0], prom) != 0)
-			return (free_prompt(prom), free_prompt (swap), write(1, \
-				"syntax error near unexpected token ", 36), write(1, \
-				&buffer[0], is_pipe(&buffer[i])), write(1, "\n", 1), NULL);
-		else if (!swap->command && buffer[i] != ' ' && \
-			is_redirecction(&buffer[i]) == 0)
-		{
-			swap->command = read_word(buffer, &i);
-			swap->arguments[0] = ft_strdup(swap->command);
-			if (swap->command == NULL)
-				return (free (prom), NULL);
-		}
-		else if (buffer[i] != ' ' && is_redirecction(&buffer[i]) == 0)
-			get_option_args(buffer, &i, swap);
-		else if (buffer[i] != ' ' && is_redir(&buffer[i]) != 0)
-			get_redir(buffer, &i, swap);
-		else if (is_pipe(&buffer[i]) != 0)
-			swap = add_prom(buffer, &prom, swap, &i);
-		if (check_end_prom(&buffer[i]) != 0)
-			return (free_prompt(prom), free_prompt (swap), write(1, \
-				"syntax error near unexpected token `newline'\n", 46), NULL);
-		i++; */

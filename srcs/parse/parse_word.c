@@ -6,49 +6,26 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:55:29 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/02 17:11:08 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/07 15:24:49 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int	swap_word(char *buffer, char **word, int *i)
-{
-	static char	*swap;
-
-	printf("swap_word %c\n", buffer[*i]);
-	swap = return_wild(buffer, &*i);
-	*i += 1;
-	if (swap)
-		*word = ft_strjoin_onefree(*word, swap);
-	return (0);
-}
-
-int	reading_word(char *buffer, char **word, int *i, char c)
-{
-	//printf("veamos fiojslknwesidguvhljnqwf %c\n", buffer[*i]);
-	if (buffer[*i] == '$' && (c == 34 || c == '\0'))
-	{
-		//printf("entramos %c\n", buffer[*i]);
-		if (buffer[*i + 1] == '{')
-		{
-			if (ft_str_chr(&buffer[*i + 1], '}') < 0)
-				return (printf("}: bad substitution\n"), -1);
-			*i += 1;
-			swap_word(buffer, word, i);
-			*i += 1;
-		}
-		else
-			swap_word(buffer, word, i);
-	}
-	else
-	{
-		*word = ft_chrjoin(*word, buffer[*i]);
-		*i += 1;
-	}
-	return (0);
-}
-
+/// @brief Read and extract a word from the command buffer.
+/// This function reads a word from the command buffer
+/// starting at the specified position (i) and
+/// returns the extracted word as a dynamically allocated string.
+/// A word is defined as a sequence of characters
+/// that are not spaces or redirection symbols.
+/// @param buffer The original command buffer containing words and symbols.
+/// @param i A pointer to the iterator position in the original command buffer.
+/// @return A dynamically allocated string containing the extracted word.
+/// @note The function expects `buffer`
+/// to contain the command with words and symbols.
+/// @note It updates `i` to the next position after the extracted word.
+/// @note The function handles both single and double quotes
+/// as well as redirection symbols.
 char	*read_word(char *buffer, int *i)
 {
 	char	*word;
@@ -57,20 +34,17 @@ char	*read_word(char *buffer, int *i)
 	word = (char *)ft_calloc(sizeof(char), 2);
 	while (buffer[*i] && buffer[*i] != ' ' && is_redirecction(&buffer[*i]) == 0)
 	{
-		c = '\0';
 		if (buffer[*i] == 39 || buffer[*i] == 34)
 		{
-			printf("veamos %s\n", word);
 			c = buffer[*i];
-			*i += 1;
-			if (reading_word(buffer, &word, i, c) != 0)
-				return (g_ms->signals->status_code++, free(word), NULL);
-			*i += 1;
+			i[0]++;
+			while (buffer[*i] && buffer[*i] != c)
+				word = ft_chrjoin(word, buffer[i[0]++]);
 		}
 		else
-			if (reading_word(buffer, &word, i, c) != 0)
-				return (g_ms->signals->status_code++, free(word), NULL);
+			word = ft_chrjoin(word, buffer[*i]);
+		i[0]++;
 	}
-	//*i -= 1;
+	printf("%s\n", word);
 	return (word);
 }

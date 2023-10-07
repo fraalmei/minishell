@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   call_execve.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:19:05 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/02 15:38:22 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/05 11:04:09 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,11 @@ void	launch_from_father(t_prompt *prompt)
 void	call_execve(t_prompt *prompt)
 {
 	char	*path;
-	char	**env;
 
 	signals_in_process();
 	dup_to_stdin_stdout(prompt->infile, prompt->outfile);
-	env = env_to_strstr(g_ms->envirorment);
-	path = get_pathname(prompt->command, env);
+	env_to_strstr(g_ms->envirorment);
+	path = get_pathname(prompt->command, g_ms->envirorment->env);
 	if (execve(path, prompt->arguments, NULL) == -1)
 	{
 		g_ms->signals->status_code = UNKNOWN_COMMAND;
