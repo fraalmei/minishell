@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 17:01:31 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/08 05:50:38 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/08 11:23:37 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	get_redir(char *buffer, int *i, t_prompt *swap)
 	}
 	while ((buffer[*i] == '-') && (buffer[*i + 1] != ' '))
 	{
+		if (check_opt_builtins(swap))
+			return (1);
 		swap->n_options = option_gen(swap, buffer, i);
 		ignore_no_p(buffer, i);
 	}

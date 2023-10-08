@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/08 00:57:44 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/08 11:24:12 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,6 +243,7 @@ int			get_redir(char *buffer, int *i, t_prompt *swap);
 void		start_executer(void);
 
 		/// parse_opt_args.c
+int			check_opt_builtins(t_prompt *swap);
 int			check_start_prom(char *buffer, t_prompt *prom);
 int			option_gen(t_prompt *prm, char *st, int *i);
 void		get_option_args(char *buffer, int *i, t_prompt *swap);

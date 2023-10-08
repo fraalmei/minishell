@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/08 06:12:24 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/08 10:26:43 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ static int	ride_buffer(char *buff, t_prompt **prom, t_prompt **swap, int *i)
 			print_error(NULL, 5), -1);
 	/* if (ft_strlen(&buff[*i]) > 0 && buff[*i] == ' ')
 		*i += 1; */
-	printf("%i %c %i\n", *i, buff[*i], is_pipe(&buff[*i]));
 	ignore_no_p(buff, i);
 	return (0);
 }

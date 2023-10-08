@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:57:09 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/08 04:06:55 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/08 12:11:13 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,18 @@ int	check_start_prom(char *buffer, t_prompt *prom)
 	if (prom != NULL && is_pipe(buffer) > 0)
 		return (1);
 	return (0);
+}
+
+int	check_opt_builtins(t_prompt *swap)
+{
+	if (ft_strcmp(swap->command, "cd") == 0 || \
+			ft_strcmp(swap->command, "env") == 0 || \
+			ft_strcmp(swap->command, "exit") == 0 || \
+			ft_strcmp(swap->command, "export") == 0 || \
+			ft_strcmp(swap->command, "pwd") == 0 || \
+			ft_strcmp(swap->command, "unset") == 0)
+		return (print_error(NULL, 12), 0);
+	return (1);
 }
 
 int	option_gen(t_prompt *prm, char *st, int *i)
@@ -50,7 +62,7 @@ static int	check_opt_echo(char *buffer, int i, t_prompt *swap)
 	int		r;
 
 	r = 0;
-	if (ft_strcmp(swap->command, "echo") == 0)
+	if (ft_strcmp(swap->command, "echo") == 0 && !swap->arguments[1])
 	{
 		if (ft_strncmp(&buffer[i], "--n", 3) == 0)
 			r = 0;
@@ -68,9 +80,13 @@ void	get_option_args(char *buffer, int *i, t_prompt *swap)
 {
 	if (check_opt_echo(buffer, *i, swap))
 		swap->n_options = option_gen(swap, buffer, i);
-	if (ft_strcmp(swap->command, "echo") && (buffer[*i] == '-') && \
+	else if (ft_strcmp(swap->command, "echo") && (buffer[*i] == '-') && \
 			(buffer[*i + 1] != ' ') && !swap->arguments[2])
+	{
+		if (check_opt_builtins(swap))
+			return ;
 		swap->n_options = option_gen(swap, buffer, i);
+	}
 	else
 		swap->arguments = \
 			str_strjoin_freeall(swap->arguments, read_word(buffer, i));

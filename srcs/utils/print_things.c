@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:00:19 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/07 20:34:24 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/08 11:08:25 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	print_error(char *str, int i)
 		g_ms->signals->status_code = (printf("Comillas abiertas\n"), i);
 	else if (i == 11)
 		g_ms->signals->status_code = (printf("$%s: ambiguous redirect\n", str), 1);
+	else if (i == 12)
+		g_ms->signals->status_code = (printf("No se aceptan opciones\n"), 1);
 	if (str)
 		free (str);
 	return (0);
