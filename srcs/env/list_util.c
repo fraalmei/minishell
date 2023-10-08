@@ -6,33 +6,11 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 16:08:35 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/05 10:50:19 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/08 16:05:30 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-int	list_len(t_env_var *first)
-{
-	int			i;
-	t_env_var	*swap;
-
-	i = 0;
-	swap = first;
-	while (swap->next)
-	{
-		swap = swap->next;
-		i++;
-	}
-	return (i);
-}
-
-t_env_var	*lst_strct_env(t_env_var *env)
-{
-	while (env->next)
-		env = env->next;
-	return (env);
-}
 
 static char	*env_to_str(t_env_var *frst)
 {

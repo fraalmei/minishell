@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 12:33:07 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/06/07 15:27:30 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/08 16:01:13 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 #ifndef UINTPTR
-# define uintptr_t unsigned long long int
+# define UINTPTR unsigned long long int
 #endif
 
 static int	ft_putstr(char *s)

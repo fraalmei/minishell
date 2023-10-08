@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:36:49 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/05 13:42:59 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/08 16:13:54 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	ignore_no_p(char *buffer, int *i)
 	while (buffer[*i] == ' ' || buffer[*i] == '\t')
 		*i += 1;
 }
-
-
 
 /// @brief guess it
 /// @param prom the first t_prompt of the list

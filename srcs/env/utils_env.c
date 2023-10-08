@@ -6,31 +6,31 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 11:23:41 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/02 13:22:08 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/08 16:00:10 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	set_value(t_env_var *env, char *var)
+void	set_value(t_env_var **env, char *var)
 {
 	char	**swap;
 
 	if (!env)
-		env = new_struct_env(var);
+		*env = new_struct_env(var);
 	else
 	{
 		swap = ft_split(var, '=');
-		if (get_env(env, swap[0]))
+		if (get_env(*env, swap[0]))
 		{
 			if (ft_str_chr(var, '=') >= 0)
 			{
-				remove_node(&env, swap[0]);
-				lst_strct_env(env)->next = new_struct_env(var);
+				remove_node(env, swap[0]);
+				lst_strct_env(*env)->next = new_struct_env(var);
 			}
 		}
 		else
-			lst_strct_env(env)->next = new_struct_env(var);
+			lst_strct_env(*env)->next = new_struct_env(var);
 		free_str (swap);
 	}
 }
@@ -83,13 +83,16 @@ t_env_var	*get_env(t_env_var *env, char *var)
 	return (swap);
 }
 
-int	incr_shll_lvl(t_env_var *env)
+int	incr_shll_lvl(t_env_var **env)
 {
 	int		i;
 	char	*swap;
 	char	*lvl;
 
-	i = ft_atoi(get_value(env, "SHLVL"));
+	if (get_value(*env, "SHLVL") != NULL)
+		i = ft_atoi(get_value(*env, "SHLVL"));
+	else
+		i = 0;
 	i++;
 	lvl = ft_itoa(i);
 	swap = ft_strjoin_onefree(ft_strdup("SHLVL="), lvl);

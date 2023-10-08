@@ -6,19 +6,19 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:40:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/29 12:34:07 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/08 13:42:02 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <dirent.h>
 
-static int	change_dir_env(t_env_var *env, char *dir)
+static int	change_dir_env(t_env_var **env, char *dir)
 {
 	char	*str;
 
 	str = ft_strjoin_allfree(ft_strdup("OLDPWD="), \
-		ft_strdup(get_value(env, "PWD")));
+		ft_strdup(get_value(*env, "PWD")));
 	set_value(env, str);
 	free (str);
 	str = ft_strjoin_allfree(ft_strdup("PWD="), dir);
@@ -43,6 +43,6 @@ int	cd(t_prompt *prompt)
 			prompt->arguments[1]), ERROR);
 	}
 	i = chdir(prompt->arguments[1]);
-	change_dir_env(g_ms->envirorment->frst, get_wd_char());
+	change_dir_env(&g_ms->envirorment->frst, get_wd_char());
 	return (i);
 }

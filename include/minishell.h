@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/08 11:24:12 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/08 16:08:40 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,19 +159,20 @@ t_env_var	*copy_env_list(char **env);
 		///	 utils_env.c
 int			free_one_env_var(t_env_var *env, char *var);
 char		*get_value(t_env_var *env, char *var);
-void		set_value(t_env_var *env, char *var);
+void		set_value(t_env_var **env, char *var);
 int			get_name(t_env_var *env, char *var);
 t_env_var	*get_env(t_env_var *env, char *var);
-int			incr_shll_lvl(t_env_var *env);
+int			incr_shll_lvl(t_env_var **env);
 
 		///	 list_util.c
-int			list_len(t_env_var *first);
-t_env_var	*lst_strct_env(t_env_var *env);
 void		env_to_strstr(t_env *env);
 t_env_var	*new_struct_env(char *var);
 
 		/// list_util2.c
+int			list_len(t_env_var *first);
+t_env_var	*lst_strct_env(t_env_var *env);
 t_env		*ignored_env(void);
+int			ft_chrcmp_env_forbid(const char *str);
 
 	///	 builtins
 		///	 builtins/env.c
@@ -245,7 +246,7 @@ void		start_executer(void);
 		/// parse_opt_args.c
 int			check_opt_builtins(t_prompt *swap);
 int			check_start_prom(char *buffer, t_prompt *prom);
-int			option_gen(t_prompt *prm, char *st, int *i);
+int			option_gen(t_prompt *prm, char *buffer, int *i);
 void		get_option_args(char *buffer, int *i, t_prompt *swap);
 
 		/// parse_sustitution.c

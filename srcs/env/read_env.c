@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:54:33 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/02 14:02:21 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/08 16:16:52 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,16 @@ t_env	*read_env(char **env)
 	copy = (t_env *)ft_calloc(sizeof(*copy), 2);
 	if (!copy)
 		return (NULL);
-	copy->env = copy_env(env);
 	copy->frst = copy_env_list(env);
 	i = -1;
 	while (env[++i])
 		if (ft_str_frst_cmp(env[i], "_=") == 0)
 			copy->dir = new_struct_env(env[i]);
-	incr_shll_lvl(copy->frst);
-	//free (env);
+	incr_shll_lvl(&copy->frst);
 	return (copy);
 }
 
-char	**copy_env(char **env)
+/* char	**copy_env(char **env)
 {
 	char	**copy;
 	int		i;
@@ -53,7 +51,7 @@ char	**copy_env(char **env)
 	while (env[++i])
 		copy[i] = ft_strdup(env[i]);
 	return (copy);
-}
+} */
 
 t_env_var	*copy_env_list(char **env)
 {
@@ -65,7 +63,7 @@ t_env_var	*copy_env_list(char **env)
 	while (env[i])
 	{
 		if (ft_str_frst_cmp(env[i], "_=") != 0)
-			set_value(first, env[i]);
+			set_value(&first, env[i]);
 		i++;
 	}
 	return (first);

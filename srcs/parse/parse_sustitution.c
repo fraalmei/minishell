@@ -6,34 +6,11 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:13:46 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/08 05:04:58 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/08 16:13:15 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-/// @brief Compares characters in a string to determine if any
-/// forbidden characters are present.
-/// This function iterates through the characters in the given string 
-/// and checks if each character is an alphanumeric character (letters / digits)
-/// or an underscore (ASCII 95). If a forbidden character is encountered,
-/// the function returns the position of that character in the string.
-/// @param str A pointer to the null-terminated string to be checked.
-/// @return The position of the first forbidden character encountered,
-/// or the length of the string if no forbidden characters are found.
-static int	ft_chrcmp_env_forbid(const char *str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (ft_isalnum(str[i]) == 0 && str[i] != 95)
-			return (i);
-		i++;
-	}
-	return (i);
-}
 
 static int	ft_check_dolar_redir(char *buffer, int i)
 {
@@ -142,9 +119,9 @@ static void	ride_quotes(char *buffer, char **swap, int *i)
 	char	c;
 
 	c = buffer[*i];
+	*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
 	if (c == 34)
 	{
-		*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
 		while (buffer[*i] != c)
 		{
 			if (ft_check_dolar_redir(g_ms->buffer, *i) == -1)
@@ -160,7 +137,6 @@ static void	ride_quotes(char *buffer, char **swap, int *i)
 	}
 	else if (c == 39)
 	{
-		*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
 		while (buffer[*i] != c)
 			*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
 		*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
@@ -201,8 +177,14 @@ void	change_dollars_buffer(void)
 				return ;
 			else if (ft_check_heredoc_no_sust(g_ms->buffer, &i, &swap))
 				continue ;
-			else if (g_ms->buffer[i] == '$')
+			else if (g_ms->buffer[i] == '$' && g_ms->buffer[i + 1] != '?')
 				swap = ft_strjoin_onefree(swap, return_wild(g_ms->buffer, &i));
+			else if (g_ms->buffer[i] == '$' && g_ms->buffer[i + 1] == '?')
+			{
+				swap = ft_strjoin_allfree(swap, \
+					ft_itoa(g_ms->signals->lst_stat_cod));
+				i += 2;
+			}
 			else
 				swap = ft_chrjoin(swap, g_ms->buffer[i++]);
 		}
