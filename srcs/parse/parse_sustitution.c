@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:13:46 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/07 20:54:33 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/08 05:04:58 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,48 @@ static int	ft_check_dolar_redir(char *buffer, int i)
 	int		x;
 	char	*name;
 
-	x = 0;
-	x = ft_chrcmp_env_forbid(&buffer[i]);
-	if (x == 0)
-		name = "";
+	if (is_redir(&buffer[i]) == 0)
+		return (0);
+	else if (is_redir(&buffer[i]) > 0 && ((buffer[i] == '<' && \
+		buffer[i + 1] == '<') || (buffer[i] == '<' && buffer[i - 1] == '<')))
+		return (0);
 	else
-		name = ft_substr(buffer, i, x);
-	if (buffer[i] != '<' && buffer[i + 1] != '<')
 		i += is_redir(&buffer[i]);
+	ignore_no_p(buffer, &i);
+	if (buffer[i] == '$')
+	{
+		i++;
+		x = ft_chrcmp_env_forbid(&buffer[i]);
+		if (x == 0)
+			name = "";
+		else
+			name = ft_substr(buffer, i, x);
+		if (ft_str_chr(get_value(g_ms->envirorment->frst, name), ' ') >= 0)
+			return (print_error(name, 11), -1);
+	}
+	return (0);
+}
+
+static int	ft_check_heredoc_no_sust(char *buffer, int *i, char **swap)
+{
+	int		l;
+	int		sw;
+
+	if (is_redir(&buffer[*i]) == 2 && ((buffer[*i] == '<' && \
+		buffer[*i + 1] == '<') || (buffer[*i] == '<' && buffer[*i - 1] == '<')))
+		l = is_redir(&buffer[*i]);
 	else
 		return (0);
-	ignore_no_p(buffer, &i);
-	if (buffer[i])
+	sw = *i + l;
+	ignore_no_p(buffer, &sw);
+	if (buffer[sw] == '$')
 	{
-		if (g_ms->buffer[i] == '$')
-			if (ft_str_chr(get_value(g_ms->envirorment->frst, name), ' '))
-				return (print_error(name, 11), -1);
+		sw++;
+		l = ft_chrcmp_env_forbid(&buffer[sw]);
+		sw += l;
+		while (*i != sw)
+			*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
+		return (1);
 	}
 	return (0);
 }
@@ -121,7 +147,11 @@ static void	ride_quotes(char *buffer, char **swap, int *i)
 		*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
 		while (buffer[*i] != c)
 		{
-			if (buffer[*i] == '$')
+			if (ft_check_dolar_redir(g_ms->buffer, *i) == -1)
+				return ;
+			else if (ft_check_heredoc_no_sust(g_ms->buffer, i, swap))
+				continue ;
+			else if (buffer[*i] == '$')
 				*swap = ft_strjoin_onefree(*swap, return_wild(buffer, i));
 			else
 				*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
@@ -167,9 +197,11 @@ void	change_dollars_buffer(void)
 			ride_quotes(g_ms->buffer, &swap, &i);
 		else
 		{
-			if (ft_check_dolar_redir(g_ms->buffer, i == -1))
+			if (ft_check_dolar_redir(g_ms->buffer, i) == -1)
 				return ;
-			if (g_ms->buffer[i] == '$')
+			else if (ft_check_heredoc_no_sust(g_ms->buffer, &i, &swap))
+				continue ;
+			else if (g_ms->buffer[i] == '$')
 				swap = ft_strjoin_onefree(swap, return_wild(g_ms->buffer, &i));
 			else
 				swap = ft_chrjoin(swap, g_ms->buffer[i++]);

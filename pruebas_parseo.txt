@@ -6,4 +6,23 @@ veamos que polladas sale por aqui
 veamos -lo -p -o argumento1 argumento2 argumento3
 veamos -lo -p -o argumento1 > argumento2 > argumento3
 veamos -lo -p -o argumento1>argumento2>argumento3
+veamos -lo -p -o argumento1 > argumento2 > argumento3 < argumento4 < argumento5 << argumento6 << argumento7 >> argumento8 >> argumento9
 veamos -lo -p -o argumento1>argumento2>argumento3<argumento4<argumento5<<argumento6<<argumento7>>argumento8>>argumento9
+export nombre="a b" | ls < $nombre
+export nombre="a b" | ls << $nombre
+export nombre="a b" | ls > $nombre
+export nombre="a b" | ls >> $nombre
+export nombre="a b" | ls<$nombre
+export nombre="a b" | ls<<$nombre
+export nombre="a b" | ls>$nombre
+export nombre="a b" | ls>>$nombre
+export nombre="a b" | ls < "$nombre"
+export nombre="a b" | ls << "$nombre"
+export nombre="a b" | ls > "$nombre"
+export nombre="a b" | ls >> "$nombre"
+export nombre="a b" | ls<"$nombre"
+export nombre="a b" | ls<<"$nombre"
+export nombre="a b" | ls>"$nombre"
+export nombre="a b" | ls>>"$nombre"
+cat | ls << $nombre
+

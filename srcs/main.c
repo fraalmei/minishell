@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/06 10:59:23 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/08 01:49:12 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	prompt(void)
 	g_ms->buffer = ft_strtrim_onefree(readline(BCYAN"minishell>"WHITE), \
 		" \t\n\v\f\r");
 	add_history(g_ms->buffer);
-	change_buffer_dollars();
 	if (!g_ms->buffer)
 		(printf ("exit\n"), exit_shell());
 	else if (ft_strcmp(g_ms->buffer, "") == 0)
@@ -42,6 +41,7 @@ int	prompt(void)
 	}
 	else
 	{
+		change_dollars_buffer();
 		g_ms->prompt = buffer_to_prompt(g_ms->buffer, g_ms->prompt);
 		print_prompt(g_ms->prompt);
 		free (g_ms->buffer);

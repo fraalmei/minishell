@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:57:09 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/07 16:27:58 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/08 04:06:55 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,31 @@ int	option_gen(t_prompt *prm, char *st, int *i)
 	return (x[1]);
 }
 
+static int	check_opt_echo(char *buffer, int i, t_prompt *swap)
+{
+	int		r;
+
+	r = 0;
+	if (ft_strcmp(swap->command, "echo") == 0)
+	{
+		if (ft_strncmp(&buffer[i], "--n", 3) == 0)
+			r = 0;
+		if (ft_strncmp(&buffer[i], "-n", 2) == 0 && !ft_isalpha(buffer[i + 2]))
+			r = 1;
+		if (ft_strncmp(&buffer[i], "\"-n\"", 4) == 0 && !ft_isalpha(buffer[i + 2]))
+			r = 1;
+		if (ft_strncmp(&buffer[i], "'""-n""'", 4) == 0 && !ft_isalpha(buffer[i + 2]))
+			r = 1;
+	}
+	return (r);
+}
+
 void	get_option_args(char *buffer, int *i, t_prompt *swap)
 {
-	if ((buffer[*i] == '-') && (buffer[*i + 1] != ' ') && !swap->arguments[2] && (ft_strcmp(swap->command, "echo") == 0 && buffer[*i + 1] == 'n'))
+	if (check_opt_echo(buffer, *i, swap))
+		swap->n_options = option_gen(swap, buffer, i);
+	if (ft_strcmp(swap->command, "echo") && (buffer[*i] == '-') && \
+			(buffer[*i + 1] != ' ') && !swap->arguments[2])
 		swap->n_options = option_gen(swap, buffer, i);
 	else
 		swap->arguments = \

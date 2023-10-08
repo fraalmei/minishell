@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/07 15:50:04 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/08 06:12:24 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static t_prompt	*add_prom(char *buff, t_prompt **prom, t_prompt *swap, int *i)
 	{
 		swap->sep1 = ft_chr_n_join(swap->sep1, \
 			&buff[*i], is_pipe(&buff[*i]));
-		i += is_pipe(&buff[*i]);
+		*i += is_pipe(&buff[*i]);
 		swap->n_arguments = ft_str_strlen(swap->arguments);
 		*prom = swap;
 		swap = NULL;
@@ -61,7 +61,7 @@ static t_prompt	*add_prom(char *buff, t_prompt **prom, t_prompt *swap, int *i)
 	{
 		swap->sep1 = ft_chr_n_join(swap->sep1, \
 			&buff[*i], is_pipe(&buff[*i]));
-		i += is_pipe(&buff[*i]);
+		*i += is_pipe(&buff[*i]);
 		swap->n_arguments = ft_str_strlen(swap->arguments) - 1;
 		last_prom(*prom)->next = swap;
 		swap->prev = last_prom(*prom);
@@ -69,7 +69,7 @@ static t_prompt	*add_prom(char *buff, t_prompt **prom, t_prompt *swap, int *i)
 	swap = new_prompt_struct();
 	swap->sep0 = last_prom(*prom)->sep1;
 	swap->pos_p += last_prom(*prom)->pos_p;
-	*i -= 1;
+	i[0]++;
 	return (swap);
 }
 
@@ -85,7 +85,6 @@ static t_prompt	*add_prom(char *buff, t_prompt **prom, t_prompt *swap, int *i)
 /// @return 0 on success, -1 on error.
 static int	ride_buffer(char *buff, t_prompt **prom, t_prompt **swap, int *i)
 {
-	printf("start char: %c\n", buff[*i]);
 	if (check_start_prom(&buff[0], *prom) != 0)
 		return (free_prompt(*prom), free_prompt (*swap), \
 			print_error(ft_strndup(&buff[*i], is_pipe(&buff[*i])), 2), -1);
@@ -105,8 +104,10 @@ static int	ride_buffer(char *buff, t_prompt **prom, t_prompt **swap, int *i)
 	if (check_end_prom(&buff[*i]) != 0)
 		return (free_prompt(*prom), free_prompt (*swap), \
 			print_error(NULL, 5), -1);
-	if (ft_strlen(&buff[*i]) > 0 && buff[*i] == ' ')
-		*i += 1;
+	/* if (ft_strlen(&buff[*i]) > 0 && buff[*i] == ' ')
+		*i += 1; */
+	printf("%i %c %i\n", *i, buff[*i], is_pipe(&buff[*i]));
+	ignore_no_p(buff, i);
 	return (0);
 }
 
