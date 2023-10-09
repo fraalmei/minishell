@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:20:08 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/09/28 15:54:23 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/09 13:01:57 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	launch_pipe_process(t_prompt *prompt, int i)
 	t_prompt	*tmp;
 
 	tmp = prompt;
-	while (i > 0)
+	while (--i > 0)
 	{
 		if (i != 1)
 			pipe(pipefd);
@@ -38,7 +38,6 @@ void	launch_pipe_process(t_prompt *prompt, int i)
 			(handle_pipes(tmp, pipefd, oldpipefd), close_all_fds(tmp));
 		tmp->node_pid = g_ms->sh_pid;
 		tmp = tmp->next;
-		i--;
 	}
 	wait_childs();
 }
