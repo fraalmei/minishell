@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:13:46 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/08 16:13:15 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/09 13:51:54 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,9 @@ char	*return_wild(char *buffer, int *i)
 
 	i[0]++;
 	x = ft_chrcmp_env_forbid(&buffer[*i]);
+	//printf("%i\n", x);
 	if (x == 0)
-		return ("");
+		return ("$");
 	name = ft_substr(buffer, *i, x);
 	value = get_value(g_ms->envirorment->frst, name);
 	free (name);
