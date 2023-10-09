@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:55:29 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/08 11:43:50 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/09 10:26:24 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,5 @@ char	*read_word(char *buffer, int *i)
 			word = ft_chrjoin(word, buffer[*i]);
 		i[0]++;
 	}
-	printf("%s\n", word);
 	return (word);
 }

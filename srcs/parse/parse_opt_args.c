@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:57:09 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/08 16:15:03 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/08 16:54:42 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	check_opt_echo(char *buffer, int i, t_prompt *swap)
 		if (ft_strncmp(&buffer[i], "\"-n\"", 4) == 0 && \
 				!ft_isalpha(buffer[i + 2]))
 			r = 1;
-		if (ft_strncmp(&buffer[i], "'""-n""'", 4) == 0 && \
+		if (ft_strncmp(&buffer[i], "'-n'", 4) == 0 && \
 				!ft_isalpha(buffer[i + 2]))
 			r = 1;
 	}
