@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:22:28 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/08 16:08:28 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/09 11:16:53 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,9 @@ int	list_len(t_env_var *first)
 
 t_env_var	*lst_strct_env(t_env_var *env)
 {
-	t_env_var	*swap;
-
-	swap = env;
-	while (swap->next)
-		swap = swap->next;
-	return (swap);
+	while (env->next)
+		env = env->next;
+	return (env);
 }
 
 t_env	*ignored_env(void)
@@ -44,7 +41,7 @@ t_env	*ignored_env(void)
 
 	env = (t_env *)ft_calloc(sizeof(*env), 2);
 	env->env = NULL;
-	set_value(&first, ft_strjoin(ft_strdup("PWD="), get_wd_char()));
+	first = new_struct_env(ft_strjoin(ft_strdup("PWD="), get_wd_char()));
 	env->frst = first;
 	set_value(&first, "SHLVL=1");
 	env->dir = new_struct_env("_=/usr/bin/env");
