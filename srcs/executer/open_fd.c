@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 14:43:02 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/02 14:02:23 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/19 11:13:21 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,15 @@ int	ft_create_directory(void)
 	return (0);
 }
 
+/**
+ * @brief Remove a directory using execve.
+ *
+ * This function removes a directory specified by `TMP_PATH`
+ * using the `rm -rf` command.
+ * If the directory does not exist, it does nothing.
+ *
+ * @return 0 on success, or an error code on failure.
+ */
 int	ft_remove_directory(void)
 {
 	char	*command;
@@ -110,15 +119,6 @@ void	ft_outredir(t_prompt *prompt)
 
 }
 
-/**
- * @brief Remove a directory using execve.
- *
- * This function removes a directory specified by `TMP_PATH`
- * using the `rm -rf` command.
- * If the directory does not exist, it does nothing.
- *
- * @return 0 on success, or an error code on failure.
- */
 int	openfile(char	*filename, int mode)
 {
 	if (mode == INFILE)
