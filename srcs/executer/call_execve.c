@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   call_execve.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:19:05 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/07 20:59:05 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/19 17:06:51 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	launch_from_father(t_prompt *prompt)
 void	call_execve(t_prompt *prompt)
 {
 	char	*path;
+	int		err;
 
 	signals_in_process();
 	dup_to_stdin_stdout(prompt->infile, prompt->outfile);
@@ -47,9 +48,10 @@ void	call_execve(t_prompt *prompt)
 	path = get_pathname(prompt->command, g_ms->envirorment->env);
 	if (execve(path, prompt->arguments, NULL) == -1)
 	{
-		g_ms->signals->status_code = UNKNOWN_COMMAND;
+		err = errno;
 		ft_error(-1, prompt->command);
+		close_all_fds(prompt);
 		free_prompt(prompt);
-		exit(g_ms->signals->status_code);
+		exit(err);
 	}
 }

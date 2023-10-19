@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:28:45 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/08/29 10:21:15 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:51:33 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,14 @@ int	is_builtin(char *arg)
 		return (1);
 	else
 		return (0);
+}
+
+void	ft_set_errstatus(int state)
+{
+	if (WIFSIGNALED(state))
+		g_ms->signals->status_code = WTERMSIG(state) + 128;
+	else if (WIFSTOPPED(state))
+		g_ms->signals->status_code = WSTOPSIG(state);
+	else if (WIFEXITED(state))
+		g_ms->signals->status_code = WEXITSTATUS(state);
 }

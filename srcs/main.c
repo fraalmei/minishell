@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/09 12:53:38 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/19 17:05:21 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,9 @@ int	main(int argc, char **argv, char **env)
 		if (!g_ms->prompt)
 			continue ;
 		start_executer();
-		free_prompt(g_ms->prompt);
-		g_ms->prompt = NULL;
+		if (g_ms->prompt)
+			g_ms->prompt = (free_prompt(g_ms->prompt), NULL);
+		printf("Status Code %i\n", g_ms->signals->status_code);
 	}
 	free_global();
 	return (0);

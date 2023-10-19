@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:08:09 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/02 11:10:35 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:51:54 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void		call_execve(t_prompt *prompt);
 	//executer/exec_utils.c
 int			ft_lstpromptsize(t_prompt *lst);
 int			is_builtin(char *arg);
+void		ft_set_errstatus(int state);
 
 	//executer/executer.c
 void		ft_redir(void);

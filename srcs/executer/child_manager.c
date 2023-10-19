@@ -6,7 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:20:08 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/09 13:01:57 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:49:48 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,18 @@ void	prepare_exec(t_prompt *prompt, int pipefd[2], int oldpipefd[2])
 
 void	wait_childs(void)
 {
-	int			state;
+	int			status;
 	t_prompt	*tmp;
 
 	tmp = g_ms->prompt;
 	while (tmp)
 	{
-		state = 0;
+		status = 0;
 		g_ms->sh_pid = tmp->node_pid;
 		signals_in_prompt();
-		waitpid(tmp->node_pid, &state, 0);
+		waitpid(tmp->node_pid, &status, 0);
+		if (tmp->next == NULL)
+			ft_set_errstatus(status);
 		tmp = tmp->next;
 	}
 }
