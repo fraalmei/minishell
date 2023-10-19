@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:39:59 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/08 13:53:26 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/19 11:02:44 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,19 @@ static t_env_var	*get_less_node(t_env_var *list, t_env_var *last)
 				ret = list;
 			list = list->next;
 		}
+		return (ret);
 	}
-	else
+	ret = NULL;
+	while (list)
 	{
-		ret = NULL;
-		while (list)
+		if (ft_strcmp(last->name, list->name) < 0)
 		{
-			if (ft_strcmp(last->name, list->name) < 0)
-			{
-				if (!ret)
-					ret = list;
-				else if (ft_strcmp(ret->name, list->name) >= 0)
-					ret = list;
-			}
-			list = list->next;
+			if (!ret)
+				ret = list;
+			else if (ft_strcmp(ret->name, list->name) >= 0)
+				ret = list;
 		}
+		list = list->next;
 	}
 	return (ret);
 }
@@ -89,30 +87,29 @@ static void	print_sort_list(t_env_var *list)
 int	export(t_prompt *prompt)
 {
 	char		**splt;
-	int			i;
+	int			i[2];
 
 	splt = NULL;
 	if (prompt->n_options == 0 && prompt->n_arguments == 1)
 		return (print_sort_list(g_ms->envirorment->frst), 0);
 	else if (prompt->n_options != 0)
 		return (print_error(prompt->arguments[0], 2), 0);
-	i = 0;
-	while (prompt->arguments[++i])
+	i[0] = 0;
+	while (prompt->arguments[++i[0]])
 	{
-		if (!prompt->arguments[i])
+		i[1] = 0;
+		if (!prompt->arguments[i[0]])
 			return (0);
-		if (ft_str_chr(prompt->arguments[i], '=') != 0)
-			splt = ft_split(prompt->arguments[i], '=');
+		if (ft_str_chr(prompt->arguments[i[0]], '=') != 0)
+			splt = ft_split(prompt->arguments[i[0]], '=');
 		else
-		{
-			print_error(prompt->arguments[i], 1);
-			continue ;
-		}
-		if (ft_str_chr(splt[0], ' ') > 0 && !splt[1])
+			(print_error(prompt->arguments[i[0]], 1), i[1]++);
+		if (ft_str_chr(splt[0], ' ') > 0 && !splt[1] && i[1] == 0)
 			return (print_error(NULL, 1), free_str(splt), 0);
-		else if (ft_str_chr(splt[0], ' ') > 0)
+		else if (ft_str_chr(splt[0], ' ') > 0 && i[1] == 0)
 			return (print_error(splt[1], 1), free_str(splt), 0);
-		set_value(&g_ms->envirorment->frst, prompt->arguments[i]);
+		set_value(&g_ms->envirorment->frst, prompt->arguments[i[0]]);
+		free_str(splt);
 	}
 	return (0);
 }

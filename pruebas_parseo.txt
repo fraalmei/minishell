@@ -25,4 +25,3 @@ export nombre="a b" | ls<<"$nombre"
 export nombre="a b" | ls>"$nombre"
 export nombre="a b" | ls>>"$nombre"
 cat | ls << $nombre
-

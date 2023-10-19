@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 11:23:41 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/08 16:00:10 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/19 11:02:27 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ void	set_value(t_env_var **env, char *var)
 		swap = ft_split(var, '=');
 		if (get_env(*env, swap[0]))
 		{
+			printf ("hay variable %s\n", var);
 			if (ft_str_chr(var, '=') >= 0)
 			{
+				printf ("no entra %s\n", var);
 				remove_node(env, swap[0]);
 				lst_strct_env(*env)->next = new_struct_env(var);
 			}

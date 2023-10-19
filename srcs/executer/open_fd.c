@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_fd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 14:43:02 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/02 14:02:23 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/08 16:15:43 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ void	ft_outredir(t_prompt *prompt)
 					, APPFILE);
 		}
 	}
-
 }
 
 /**

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   child_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:20:08 by cagonzal          #+#    #+#             */
 /*   Updated: 2023/10/09 13:01:57 by cagonzal         ###   ########.fr       */
@@ -60,7 +60,6 @@ void	copy_pipe(int *pipe_in, int *pipe_out)
 	pipe_out[1] = pipe_in[1];
 }
 
-
 void	prepare_exec(t_prompt *prompt, int pipefd[2], int oldpipefd[2])
 {
 	if (prompt->pos_p != 1)
@@ -94,7 +93,6 @@ void	wait_childs(void)
 		tmp = tmp->next;
 	}
 }
-
 
 // int	*copy_pipe(int pipe_in[2])
 // {

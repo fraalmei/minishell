@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:19:05 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/07 20:59:05 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/19 11:01:32 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	call_execve(t_prompt *prompt)
 		g_ms->signals->status_code = UNKNOWN_COMMAND;
 		ft_error(-1, prompt->command);
 		free_prompt(prompt);
+		printf("%i\n", g_ms->signals->status_code);
 		exit(g_ms->signals->status_code);
 	}
 }

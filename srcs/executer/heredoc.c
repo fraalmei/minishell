@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:08:29 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/02 11:17:31 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/08 16:15:55 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <executer.h>
-
 
 void	ft_heredoc(void)
 {
