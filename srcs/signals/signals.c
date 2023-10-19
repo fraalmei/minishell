@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:09:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/09 11:33:48 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/19 18:21:00 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ int	init_signals(void)
 	if (!g_ms->signals)
 	{
 		g_ms->signals = (t_sig *)ft_calloc(sizeof(t_sig), 2);
+		if (!g_ms->signals)
+			return (1);
 		g_ms->signals->status_code = 0;
 	}
-	if (!g_ms->signals)
-		return (1);
 	g_ms->signals->lst_stat_cod = g_ms->signals->status_code;
 	g_ms->signals->status_code = 0;
 	g_ms->signals->error_status = 0;

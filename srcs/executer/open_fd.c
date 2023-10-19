@@ -6,7 +6,11 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 14:43:02 by cagonzal          #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2023/10/19 17:15:15 by cagonzal         ###   ########.fr       */
+=======
+/*   Updated: 2023/10/19 12:49:34 by fraalmei         ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
