@@ -6,15 +6,7 @@
 /*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:19:05 by cagonzal          #+#    #+#             */
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-/*   Updated: 2023/10/19 17:06:51 by cagonzal         ###   ########.fr       */
-=======
-/*   Updated: 2023/10/19 11:01:32 by fraalmei         ###   ########.fr       */
->>>>>>> 1fac7cafe3d338624d98bbc29b6b56f473520e1b
-=======
-/*   Updated: 2023/10/19 13:59:19 by fraalmei         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2023/10/20 10:05:32 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +50,11 @@ void	call_execve(t_prompt *prompt)
 	{
 		err = errno;
 		ft_error(-1, prompt->command);
-<<<<<<< Updated upstream
 		close_all_fds(prompt);
 		free_prompt(prompt);
 		exit(err);
-=======
 		init_signals();
 		// free_prompt(prompt);
 		exit(g_ms->signals->status_code);
->>>>>>> Stashed changes
 	}
 }

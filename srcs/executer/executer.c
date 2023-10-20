@@ -3,16 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:45:48 by cagonzal          #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2023/10/19 17:15:24 by cagonzal         ###   ########.fr       */
-=======
-/*   Updated: 2023/10/19 13:53:50 by fraalmei         ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2023/10/20 10:04:48 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include <minishell.h>
 #include <executer.h>
