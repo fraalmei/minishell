@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:09:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/20 11:57:51 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/20 14:01:47 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static void	signal_int(int code)
 	(void) code;
 	//ft_printf(BCYAN"minishell>");
 	ft_printf("\n");
-	rl_on_new_line();
 	rl_replace_line("", 0);
+	rl_on_new_line();
 	rl_redisplay();
 }
 
@@ -42,7 +42,7 @@ void	signals_in_prompt(void)
 void	signals_in_process(void)
 {
 	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, SIG_DFL);
 	signal(SIGTSTP, SIG_DFL);
 	signal(SIGTERM, SIG_DFL);
 	signal(SIGSTOP, SIG_DFL);
@@ -50,6 +50,7 @@ void	signals_in_process(void)
 
 int	init_signals(void)
 {
+	signals_in_prompt();
 	if (!g_ms->signals)
 	{
 		g_ms->signals = (t_sig *)ft_calloc(sizeof(t_sig), 2);
