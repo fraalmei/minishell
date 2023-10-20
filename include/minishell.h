@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/19 16:51:36 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/20 12:07:55 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ void		print_env(t_env_var *env);
 int			export(t_prompt *prompt);
 
 		///	 builtins/exit.c
-int			exit_shell(void);
+int			exit_shell(t_prompt *prompt);
 
 		///	 builtins/cd.c
 int			cd(t_prompt *prompt);

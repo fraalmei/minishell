@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:18:16 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/19 18:07:35 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/20 12:18:38 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void	actions(t_prompt *prompt, int type)
 {
 	if (prompt->command && ft_strcmp(prompt->command, "exit") == 0)
-		exit_shell();
+		exit_shell(prompt);
 	else if (prompt->command && ft_strcmp(prompt->command, "pwd") == 0)
 		g_ms->signals->status_code = get_wd();
 	else if (prompt->command && ft_strcmp(prompt->command, "env") == 0)

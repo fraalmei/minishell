@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 12:58:45 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/07 14:59:15 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/20 12:35:52 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,4 +150,9 @@ int		ft_strnstr_f(const char *haystack, const char *needle, size_t n);
 int		ft_strnstr_l(const char *haystack, const char *needle, size_t n);
 
 void	ft_error(int error, char *argument);
+
+		//ft_islanum.c
+int		ft_isnum(int c);
+int		ft_is_str_num(char *str);
+
 #endif

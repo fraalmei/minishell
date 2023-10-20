@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   call_execve.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:19:05 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/20 10:05:32 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/19 17:19:14 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,5 @@ void	call_execve(t_prompt *prompt)
 		close_all_fds(prompt);
 		free_prompt(prompt);
 		exit(err);
-		init_signals();
-		// free_prompt(prompt);
-		exit(g_ms->signals->status_code);
 	}
 }

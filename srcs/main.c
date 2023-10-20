@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/19 18:20:02 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/20 12:18:15 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	prompt(void)
 		" \t\n\v\f\r");
 	add_history(g_ms->buffer);
 	if (!g_ms->buffer)
-		(printf ("exit\n"), exit_shell());
+		(printf ("exit\n"), exit_shell(NULL));
 	else if (ft_strcmp(g_ms->buffer, "") == 0)
 	{
 		g_ms->prompt = NULL;
@@ -74,7 +74,7 @@ static int	init_global(int argc, char **env)
 /// @return 0 if it works correctly, 1 if an error occur
 int	main(int argc, char **argv, char **env)
 {
-	//atexit(leaks);
+	atexit(leaks);
 	(void) argv;
 	if (init_global(argc, env))
 		return (1);
@@ -87,7 +87,6 @@ int	main(int argc, char **argv, char **env)
 		start_executer();
 		if (g_ms->prompt)
 			g_ms->prompt = (free_prompt(g_ms->prompt), NULL);
-		//printf("Status Code %i\n", g_ms->signals->status_code);
 	}
 	free_global();
 	return (0);

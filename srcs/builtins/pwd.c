@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:40:03 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/09/18 12:13:43 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/20 11:25:08 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,8 @@ char	*get_wd_char(void)
 	buffer = (char *)ft_calloc(sizeof(char *), 1024);
 	if (!buffer)
 		return (NULL);
-	return (getcwd(buffer, 1024));
+	getcwd(buffer, 1024);
+	if (!buffer)
+		return (NULL);
+	return (buffer);
 }
