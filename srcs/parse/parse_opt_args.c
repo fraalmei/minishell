@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:57:09 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/20 17:51:36 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/21 20:11:02 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	get_option_args(char *buffer, int *i, t_prompt *swap)
 {
 	if (check_opt_echo(buffer, *i, swap))
 		swap->n_options = option_gen(swap, buffer, i);
-	else if (ft_strcmp(swap->command, "echo") && (buffer[*i] == '-') && \
+	else if (ft_strcmp(swap->command, "echo") && ft_strcmp(swap->command, "cd") && (buffer[*i] == '-') && \
 			(buffer[*i + 1] != ' ') && !swap->arguments[2] ) // && ft_strcmp(swap->arguments[1], "-") != 0 
 	{
 		if (check_opt_builtins(swap))

@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 16:08:35 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/09 11:06:54 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/21 19:50:19 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,13 @@ static t_env_var	*struct_env(char *name, char eq, char *value)
 		return (NULL);
 	env->name = name;
 	env->equal = eq;
-	env->value = value;
+	if (eq == '=')
+	{
+		if (value != NULL)
+			env->value = value;
+		else
+			env->value = "";
+	}
 	return (env);
 }
 

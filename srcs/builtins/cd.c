@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:40:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/21 18:45:40 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/21 20:11:02 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,20 @@ static int	change_dir_env(t_env_var **env, char *dir)
 	return (0);
 }
 
-/* static char	*cd_check_args(char **args)
+static char	*cd_check_oldpwd(void)
 {
-	int		i;
-	//char	*sust;
-	//int		l;
+	char	*home;
 
-	i = 0;
-	//sust = NULL;
-	while (args[++i])
-		return (args[i]);
-	return (NULL);
-} */
+	home = get_value(g_ms->envirorment->frst, "OLDPWD");
+	if (!home)
+	{
+		ft_printf_fd (2, "cd: OLDPWD not set\n");
+		g_ms->signals->status_code = 1;
+		return (NULL);
+	}
+	ft_printf("%s\n", home);
+	return (home);
+}
 
 static char	*cd_check_home(void)
 {
@@ -47,7 +49,7 @@ static char	*cd_check_home(void)
 	home = get_value(g_ms->envirorment->frst, "HOME");
 	if (!home)
 	{
-		printf ("cd: HOME not set\n");
+		ft_printf_fd (2, "cd: HOME not set\n");
 		g_ms->signals->status_code = 1;
 		return (NULL);
 	}
@@ -68,7 +70,9 @@ int	cd(t_prompt *prompt)
 	arg = prompt->arguments[1];
 	if (!arg)
 		arg = cd_check_home();
-	if (!arg || ft_strcmp(arg, "") == 0)
+	if (ft_strcmp(arg, "-") == 0)
+		arg = cd_check_oldpwd();
+	if (!arg)
 		return (1);
 	dir = opendir(arg);
 	if (!dir)
