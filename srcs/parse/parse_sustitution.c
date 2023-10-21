@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:13:46 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/09 13:51:54 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:41:08 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,42 +63,6 @@ static int	ft_check_heredoc_no_sust(char *buffer, int *i, char **swap)
 	return (0);
 }
 
-/// @brief Return the value of a variable or an empty string
-/// from the command buffer.
-/// This function is responsible for extracting the value of a variable
-/// from the command buffer
-/// or returning an empty string if the variable is not found.
-/// It is typically used to handle
-/// variable expansion within the command buffer.
-/// @param buffer The original command buffer containing variables.
-/// @param i A pointer to the iterator position in the original command buffer.
-/// @return The value of the variable or an empty string
-/// if the variable is not found.
-/// @note The function expects `buffer` to contain the command with variables.
-/// @note It updates `i` to the next position after the variable.
-/// @note The function relies on helper functions
-/// like `ft_chrcmp_env_forbid`, `ft_substr`,
-/// and `get_value` to identify and retrieve variable values.
-char	*return_wild(char *buffer, int *i)
-{
-	int		x;
-	char	*name;
-	char	*value;
-
-	i[0]++;
-	x = ft_chrcmp_env_forbid(&buffer[*i]);
-	//printf("%i\n", x);
-	if (x == 0)
-		return ("$");
-	name = ft_substr(buffer, *i, x);
-	value = get_value(g_ms->envirorment->frst, name);
-	free (name);
-	*i += x;
-	if (!value)
-		return ("");
-	return (value);
-}
-
 /// @brief Handle quoted sections within the command buffer.
 /// This function is responsible for processing quoted sections
 /// within the command buffer.
@@ -130,7 +94,7 @@ static void	ride_quotes(char *buffer, char **swap, int *i)
 			else if (ft_check_heredoc_no_sust(g_ms->buffer, i, swap))
 				continue ;
 			else if (buffer[*i] == '$')
-				*swap = ft_strjoin_onefree(*swap, return_wild(buffer, i));
+				*swap = ft_strjoin_onefree(*swap, pre_return_wild(buffer, i));
 			else
 				*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
 		}
@@ -179,7 +143,7 @@ void	change_dollars_buffer(void)
 			else if (ft_check_heredoc_no_sust(g_ms->buffer, &i, &swap))
 				continue ;
 			else if (g_ms->buffer[i] == '$' && g_ms->buffer[i + 1] != '?')
-				swap = ft_strjoin_onefree(swap, return_wild(g_ms->buffer, &i));
+				swap = ft_strjoin_onefree(swap, pre_return_wild(g_ms->buffer, &i));
 			else if (g_ms->buffer[i] == '$' && g_ms->buffer[i + 1] == '?')
 			{
 				swap = ft_strjoin_allfree(swap, \

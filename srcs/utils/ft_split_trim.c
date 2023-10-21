@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 17:42:05 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/09 11:32:00 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/21 10:46:57 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,16 @@ int	ft_scndchrlen(const char *s, char c)
 		return (i);
 	else
 		return (-1);
+}
+
+char	*ft_last_string(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (str[i - 1]);
 }
 
 /// @brief join a string to a string array

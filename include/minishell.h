@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/20 12:07:55 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/21 16:06:14 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,7 @@ int			print_error(char *str, int i);
 
 		///	utils/ft_split_trim.c
 int			ft_str_strlen(char **string);
+char		*ft_last_string(char **str);
 int			ft_scndchrlen(const char *s, char c);
 char		**str_strjoin_freeall(char **s1, char *s2);
 
@@ -235,6 +236,9 @@ t_prompt	*new_prompt_struct(void);
 t_prompt	*last_prom(t_prompt *prom);
 
 		/// parse_word.c
+int			read_word_simple_q_off(char **word);
+char		*return_wild(char *str, int *i);
+char		*pre_return_wild(char *buffer, int *i);
 int			reading_word(char *buffer, char **word, int *i, char c);
 char		*read_word(char *buffer, int *i);
 
@@ -250,7 +254,6 @@ int			option_gen(t_prompt *prm, char *buffer, int *i);
 void		get_option_args(char *buffer, int *i, t_prompt *swap);
 
 		/// parse_sustitution.c
-char		*return_wild(char *str, int *i);
 void		change_dollars_buffer(void);
 
 #endif

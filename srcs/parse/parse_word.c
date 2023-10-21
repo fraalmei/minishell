@@ -6,11 +6,75 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:55:29 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/09 11:27:34 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/21 16:10:00 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	read_word_simple_q_off(char **word)
+{
+	if (*word[0] == 39 && *word[ft_strlen(*word)] == 39)
+	{
+		*word = ft_strtrim_onefree(*word, "'");
+		return (1);
+	}
+	return (0);
+}
+
+/// @brief Return the value of a variable or an empty string
+/// from the command buffer.
+/// This function is responsible for extracting the value of a variable
+/// from the command buffer
+/// or returning an empty string if the variable is not found.
+/// It is typically used to handle
+/// variable expansion within the command buffer.
+/// @param buffer The original command buffer containing variables.
+/// @param i A pointer to the iterator position in the original command buffer.
+/// @return The value of the variable or an empty string
+/// if the variable is not found.
+/// @note The function expects `buffer` to contain the command with variables.
+/// @note It updates `i` to the next position after the variable.
+/// @note The function relies on helper functions
+/// like `ft_chrcmp_env_forbid`, `ft_substr`,
+/// and `get_value` to identify and retrieve variable values.
+char	*return_wild(char *buffer, int *i)
+{
+	int		x;
+	char	*name;
+	char	*value;
+
+	i[0]++;
+	x = ft_chrcmp_env_forbid(&buffer[*i]);
+	if (x == 0)
+		return ("$");
+	name = ft_substr(buffer, *i, x);
+	value = get_value(g_ms->envirorment->frst, name);
+	free (name);
+	*i += x;
+	if (!value)
+		return ("");
+	return (value);
+}
+
+char	*pre_return_wild(char *buffer, int *i)
+{
+	int		x;
+	char	*name;
+	char	*value;
+
+	i[0]++;
+	x = ft_chrcmp_env_forbid(&buffer[*i]);
+	if (x == 0)
+		return ("$");
+	name = ft_substr(buffer, *i, x);
+	value = get_value(g_ms->envirorment->frst, name);
+	free (name);
+	if (!value)
+		return ("$");
+	*i += x;
+	return (value);
+}
 
 /// @brief Read and extract a word from the command buffer.
 /// This function reads a word from the command buffer
@@ -34,7 +98,7 @@ char	*read_word(char *buffer, int *i)
 	word = (char *)ft_calloc(sizeof(char), 2);
 	while (buffer[*i] && buffer[*i] != ' ' && is_redirecction(&buffer[*i]) == 0)
 	{
-		if (buffer[*i] == 39 || buffer[*i] == 34)
+		if (buffer[*i] == 34)
 		{
 			c = buffer[*i];
 			i[0]++;
@@ -47,3 +111,25 @@ char	*read_word(char *buffer, int *i)
 	}
 	return (word);
 }
+
+/*char	*read_word(char *buffer, int *i)
+{
+	char	*word;
+	char	c;
+
+	word = (char *)ft_calloc(sizeof(char), 2);
+	while (buffer[*i] && buffer[*i] != ' ' && is_redirecction(&buffer[*i]) == 0)
+	{
+		if (buffer[*i] == 39 || buffer[*i] == 34)
+		{
+			c = buffer[*i];
+			i[0]++;
+			while (buffer[*i] && buffer[*i] != c)
+				word = ft_chrjoin(word, buffer[i[0]++]);
+		}
+		else
+			word = ft_chrjoin(word, buffer[*i]);
+		i[0]++;
+	}
+	return (word);
+}*/
