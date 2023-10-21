@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 10:04:38 by vpujalte          #+#    #+#             */
-/*   Updated: 2023/10/02 15:39:17 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:35:41 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,25 @@
 
 void	ft_error(int error, char *argument)
 {
-	if (error >= 0)
-		exit(errno);
-	else
+	if (error == -1)
 	{
-		if (error == -1)
-		{
-			ft_putstr_fd("minishell: ", STDERR);
-			ft_putstr_fd(argument, STDERR);
-			ft_putstr_fd(": command not found", STDERR);
-			ft_putstr_fd("\n", STDERR);
-		}
-		if (error == -2)
-			ft_putstr_fd("minishell: Invalid number of arguments\n", STDERR);
-		if (error == -3)
-			ft_putstr_fd("minishell: Error at dup2\n", STDERR);
+		ft_putstr_fd("minishell: ", STDERR);
+		ft_putstr_fd(argument, STDERR);
+		ft_putstr_fd(": command not found\n", STDERR);
 	}
+	else if (error == -2)
+	{
+		ft_putstr_fd("minishell: ", STDERR);
+		ft_putstr_fd(" error in dup2\n", STDERR);
+	}
+	else if (error == -2)
+	{
+		ft_putstr_fd("minishell: cd: ", STDERR);
+		ft_putstr_fd(argument, STDERR);
+		ft_putstr_fd(" No such file or directory\n", STDERR);
+	}
+	else if (error == -4)
+		ft_putstr_fd("minishell: Error at dup2\n", STDERR);
 }
 
 /*

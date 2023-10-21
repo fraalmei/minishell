@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:40:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/21 16:10:00 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:45:40 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,18 @@ static int	change_dir_env(t_env_var **env, char *dir)
 	return (0);
 }
 
-static char	*cd_check_args(char **args)
+/* static char	*cd_check_args(char **args)
 {
 	int		i;
-	char	*sust;
-	int		l;
+	//char	*sust;
+	//int		l;
 
 	i = 0;
-	sust = NULL;
+	//sust = NULL;
 	while (args[++i])
-	{
-		if (args[i][0] == '$')
-		{
-			l = 0;
-			sust = return_wild(args[i], &l);
-			if (ft_strcmp(sust, ""))
-				return (read_word_simple_q_off(&sust), sust);
-		}
-		else
-			return (args[i]);
-	}
+		return (args[i]);
 	return (NULL);
-}
+} */
 
 static char	*cd_check_home(void)
 {
@@ -59,8 +49,10 @@ static char	*cd_check_home(void)
 	{
 		printf ("cd: HOME not set\n");
 		g_ms->signals->status_code = 1;
+		return (NULL);
 	}
-	return (home);
+	else
+		return (home);
 }
 
 	// funcion cd
@@ -73,14 +65,14 @@ int	cd(t_prompt *prompt)
 	char	*arg;
 	int		i;
 
-	arg = cd_check_args(prompt->arguments);
+	arg = prompt->arguments[1];
 	if (!arg)
 		arg = cd_check_home();
-	if (!arg)
+	if (!arg || ft_strcmp(arg, "") == 0)
 		return (1);
 	dir = opendir(arg);
 	if (!dir)
-		return (printf ("no such file or directory: %s\n", arg), ERROR);
+		return (ft_error(-3, arg), ERROR);
 	closedir(dir);
 	i = chdir(arg);
 	change_dir_env(&g_ms->envirorment->frst, get_wd_char());

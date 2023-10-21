@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:55:29 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/21 16:10:00 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:16:37 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 
 int	read_word_simple_q_off(char **word)
 {
-	if (*word[0] == 39 && *word[ft_strlen(*word)] == 39)
+	char	*swap;
+
+	swap = *word;
+	if (swap[0] == 39 && swap[0] == swap[ft_strlen(swap) - 1])
 	{
-		*word = ft_strtrim_onefree(*word, "'");
+		printf("%s\n", swap);
+		*word = ft_strtrim_onefree(swap, "'");
 		return (1);
 	}
 	return (0);
@@ -70,9 +74,9 @@ char	*pre_return_wild(char *buffer, int *i)
 	name = ft_substr(buffer, *i, x);
 	value = get_value(g_ms->envirorment->frst, name);
 	free (name);
-	if (!value)
-		return ("$");
 	*i += x;
+	if (!value)
+		return ("");
 	return (value);
 }
 
@@ -98,7 +102,7 @@ char	*read_word(char *buffer, int *i)
 	word = (char *)ft_calloc(sizeof(char), 2);
 	while (buffer[*i] && buffer[*i] != ' ' && is_redirecction(&buffer[*i]) == 0)
 	{
-		if (buffer[*i] == 34)
+		if (buffer[*i] == 39 || buffer[*i] == 34)
 		{
 			c = buffer[*i];
 			i[0]++;
@@ -106,7 +110,7 @@ char	*read_word(char *buffer, int *i)
 				word = ft_chrjoin(word, buffer[i[0]++]);
 		}
 		else
-			word = ft_chrjoin(word, buffer[*i]);
+		word = ft_chrjoin(word, buffer[*i]);
 		i[0]++;
 	}
 	return (word);

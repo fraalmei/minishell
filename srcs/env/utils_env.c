@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 11:23:41 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/19 17:18:34 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/21 17:03:50 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ char	*get_value(t_env_var *env, char	*var)
 			return (NULL);
 		swap = swap->next;
 	}
+	if (!swap->value)
+		return ("");
 	return (swap->value);
 }
 
