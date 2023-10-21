@@ -46,8 +46,10 @@ void	call_execve(t_prompt *prompt)
 	dup_to_stdin_stdout(prompt->infile, prompt->outfile);
 	env_to_strstr(g_ms->envirorment);
 	path = get_pathname(prompt->command, g_ms->envirorment->env);
+	printf("Entra en call_execve |%s|\n", path);
 	if (execve(path, prompt->arguments, NULL) == -1)
 	{
+		printf("Entra en fallo de call_execve\n");
 		err = errno;
 		ft_error(-1, prompt->command);
 		close_all_fds(prompt);

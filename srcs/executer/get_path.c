@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:55:50 by cagonzal          #+#    #+#             */
 /*   Updated: 2023/10/21 20:33:36 by cagonzal         ###   ########.fr       */
@@ -76,7 +76,11 @@ char	*get_pathname(char *cmd, char **env)
 
 	i = 5;
 	if ((access(cmd, F_OK)) != -1)
+	{
+		printf("Acceso directo\n");
 		return (cmd);
+	}
+	printf("No accede\n");
 	dest = NULL;
 	paths = get_pathlocation(env);
 	if (paths)
@@ -84,6 +88,7 @@ char	*get_pathname(char *cmd, char **env)
 		i = create_probable_str(&dest, cmd, paths, i);
 		while ((access(dest, F_OK)) == -1)
 		{
+			printf("|%s|\n", dest);
 			if (i >= strlen(paths) - 5)
 			{
 				free(dest);
