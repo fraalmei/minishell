@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 14:54:18 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/07/31 17:52:54 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/22 00:29:36 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	ft_str_chr(char *str, char c)
 		return (i);
 }
 
+	// count the amount of 'c' of 'n' chars in "str"
 int	ft_strnchr(char *str, char c, size_t n)
 {
 	size_t	i;
@@ -68,7 +69,7 @@ int	ft_strnchr(char *str, char c, size_t n)
 		return (i);
 }
 
-	// find and return the positions os the coincidences of 'c' in 's'
+	// find and return the positions of the coincidences of 'c' in 's'
 int	*ft_str_all_chr(char *str, char c)
 {
 	int		i;

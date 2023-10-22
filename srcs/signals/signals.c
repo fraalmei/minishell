@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:09:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/20 14:01:47 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/22 17:50:55 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	signal_int(int code)
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
+	g_ms->signals->ctrl_c_status = 1;
 }
 
 	// signals control
@@ -60,7 +61,7 @@ int	init_signals(void)
 	}
 	g_ms->signals->lst_stat_cod = g_ms->signals->status_code;
 	g_ms->signals->status_code = 0;
-	g_ms->signals->error_status = 0;
+	g_ms->signals->ctrl_c_status = 0;
 	g_ms->signals->exit_return = 0;
 	return (0);
 }

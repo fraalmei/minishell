@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:13:46 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/22 05:26:16 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/22 16:07:26 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,18 @@ static int	ft_check_dolar_redir(char *buffer, int i)
 			name = ft_substr(buffer, i, x);
 		if (ft_str_chr(get_value(g_ms->envirorment->frst, name), ' ') >= 0)
 			return (print_error(name, 11), -1);
+	}
+	return (0);
+}
+
+static int	ft_counter_bar(char *buffer, int *i)
+{
+	if (buffer[*i] == 92)
+	{
+		if (buffer[*i + 1] == 34)
+			i[0]++;
+		else if (buffer[*i + 1] == 92)
+			i[0]++;
 	}
 	return (0);
 }
@@ -84,17 +96,14 @@ static void	ride_quotes(char *buffer, char **swap, int *i)
 	char	c;
 
 	c = buffer[*i];
-	//*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
 	i[0]++;
 	if (buffer[*i] == c)
-	{
-		i[0]++;
-		return ;
-	}
-	if (c == 34)
+		*swap = ft_chr_n_join(*swap, &g_ms->buffer[i[0] - 1], 2);
+	else if (c == 34)
 	{
 		while (buffer[*i] != c)
 		{
+			ft_counter_bar(g_ms->buffer, i);
 			if (ft_check_dolar_redir(g_ms->buffer, *i) == -1)
 				return ;
 			else if (ft_check_heredoc_no_sust(g_ms->buffer, i, swap))
@@ -104,14 +113,10 @@ static void	ride_quotes(char *buffer, char **swap, int *i)
 			else
 				*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
 		}
-		//*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
 	}
 	else if (c == 39)
-	{
 		while (buffer[*i] != c)
 			*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
-		//*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
-	}
 	i[0]++;
 }
 
@@ -164,6 +169,5 @@ void	change_dollars_buffer(void)
 	if (g_ms->signals->status_code != 0)
 		return ;
 	printf("%s#\n", swap);
-	free (g_ms->buffer);
-	g_ms->buffer = swap;
+	g_ms->buffer = (free (g_ms->buffer), swap);
 }

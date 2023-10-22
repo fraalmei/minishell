@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 15:02:58 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/09 11:33:09 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:22:45 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,6 @@ int	free_global(void)
 	if (!g_ms->prompt)
 		free (g_ms->prompt);
 	free_signals(g_ms->signals);
+	rl_clear_history();
 	return (0);
 }

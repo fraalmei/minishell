@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 17:23:27 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/20 12:51:29 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/22 17:21:47 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,16 @@ int	ft_isnum(int c)
 
 int	ft_is_str_num(char *str)
 {
+	int		i;
+
 	if (!str)
 		return (1);
-	while (str)
+	i = 0;
+	while (str[i])
 	{
-		if (!ft_isnum(*str))
+		if (!ft_isnum(str[i]))
 			return (1);
-		str++;
+		i++;
 	}
 	return (0);
 }

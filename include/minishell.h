@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/22 00:45:27 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/22 17:42:50 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_sig
 {
 	int				status_code;
 	int				exit_return;
-	int				error_status;
+	int				ctrl_c_status;
 	int				lst_stat_cod;
 }					t_sig;
 
@@ -90,6 +90,7 @@ typedef struct s_env
 	char			**env;
 	t_env_var		*frst;
 	t_env_var		*dir;
+	char			*per_dir;
 }					t_env;
 
 typedef struct s_prompt
