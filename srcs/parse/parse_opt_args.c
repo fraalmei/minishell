@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:57:09 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/21 20:11:02 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/22 01:46:49 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,24 @@ static int	check_opt_echo(char *buffer, int i, t_prompt *swap)
 	int		r;
 
 	r = 0;
-	if (ft_strcmp(swap->command, "echo") == 0 && !swap->arguments[1])
+	if (ft_strcmp(swap->command, "echo") == 0 && ((!swap->arguments[1] && \
+		!swap->arguments[2]) || (ft_strcmp(swap->arguments[1], "-n") == 0 && \
+		!swap->arguments[2])))
 	{
-		if (ft_strncmp(&buffer[i], "--n", 3) == 0)
+		if (ft_strncmp(&buffer[i], "--", 2) == 0)
 			r = 0;
-		if (ft_strncmp(&buffer[i], "-n", 2) == 0 && !ft_isalpha(buffer[i + 2]))
+		else if (buffer[i] == '-')
+		{
+			i++;
+			while (buffer[i] && ft_isalpha(buffer[i]))
+			{
+				if (buffer[i] == 'n')
+					i++;
+				else
+					return (0);
+			}
 			r = 1;
-		if (ft_strncmp(&buffer[i], "\"-n\"", 4) == 0 && \
-				!ft_isalpha(buffer[i + 2]))
-			r = 1;
-		if (ft_strncmp(&buffer[i], "'-n'", 4) == 0 && \
-				!ft_isalpha(buffer[i + 2]))
-			r = 1;
+		}
 	}
 	return (r);
 }

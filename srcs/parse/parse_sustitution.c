@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:13:46 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/21 15:41:08 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/22 05:26:16 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,13 @@ static void	ride_quotes(char *buffer, char **swap, int *i)
 	char	c;
 
 	c = buffer[*i];
-	*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
+	//*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
+	i[0]++;
+	if (buffer[*i] == c)
+	{
+		i[0]++;
+		return ;
+	}
 	if (c == 34)
 	{
 		while (buffer[*i] != c)
@@ -94,18 +100,19 @@ static void	ride_quotes(char *buffer, char **swap, int *i)
 			else if (ft_check_heredoc_no_sust(g_ms->buffer, i, swap))
 				continue ;
 			else if (buffer[*i] == '$')
-				*swap = ft_strjoin_onefree(*swap, pre_return_wild(buffer, i));
+				*swap = ft_strjoin_onefree(*swap, return_wild(buffer, i));
 			else
 				*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
 		}
-		*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
+		//*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
 	}
 	else if (c == 39)
 	{
 		while (buffer[*i] != c)
 			*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
-		*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
+		//*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
 	}
+	i[0]++;
 }
 
 /// @brief Update the command buffer by expanding and handling 
@@ -143,7 +150,7 @@ void	change_dollars_buffer(void)
 			else if (ft_check_heredoc_no_sust(g_ms->buffer, &i, &swap))
 				continue ;
 			else if (g_ms->buffer[i] == '$' && g_ms->buffer[i + 1] != '?')
-				swap = ft_strjoin_onefree(swap, pre_return_wild(g_ms->buffer, &i));
+				swap = ft_strjoin_onefree(swap, return_wild(g_ms->buffer, &i));
 			else if (g_ms->buffer[i] == '$' && g_ms->buffer[i + 1] == '?')
 			{
 				swap = ft_strjoin_allfree(swap, \

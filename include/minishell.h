@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/21 16:06:14 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/22 00:45:27 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,10 +147,7 @@ int			free_signals(t_sig *sig);
 int			free_global(void);
 
 	///	 env
-		///	 env.c
-t_env		*read_env(char **env);
-
-		///	 env/new_env.c
+		///	 env/read_env.c
 t_env		*read_env(char **env);
 char		**copy_env(char **env);
 void		set_value_frst(t_env_var **list, t_env_var *node);
@@ -165,7 +162,7 @@ t_env_var	*get_env(t_env_var *env, char *var);
 int			incr_shll_lvl(t_env_var **env);
 
 		///	 list_util.c
-void		env_to_strstr(t_env *env);
+char		**env_to_strstr(t_env *env);
 t_env_var	*new_struct_env(char *var);
 
 		/// list_util2.c
@@ -238,7 +235,7 @@ t_prompt	*last_prom(t_prompt *prom);
 		/// parse_word.c
 int			read_word_simple_q_off(char **word);
 char		*return_wild(char *str, int *i);
-char		*pre_return_wild(char *buffer, int *i);
+//char		*pre_return_wild(char *buffer, int *i);
 int			reading_word(char *buffer, char **word, int *i, char c);
 char		*read_word(char *buffer, int *i);
 

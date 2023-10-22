@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:55:29 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/21 18:16:37 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/22 01:41:34 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	read_word_simple_q_off(char **word)
 	swap = *word;
 	if (swap[0] == 39 && swap[0] == swap[ft_strlen(swap) - 1])
 	{
-		printf("%s\n", swap);
 		*word = ft_strtrim_onefree(swap, "'");
 		return (1);
 	}
@@ -61,7 +60,7 @@ char	*return_wild(char *buffer, int *i)
 	return (value);
 }
 
-char	*pre_return_wild(char *buffer, int *i)
+/* char	*pre_return_wild(char *buffer, int *i)
 {
 	int		x;
 	char	*name;
@@ -78,7 +77,7 @@ char	*pre_return_wild(char *buffer, int *i)
 	if (!value)
 		return ("");
 	return (value);
-}
+} */
 
 /// @brief Read and extract a word from the command buffer.
 /// This function reads a word from the command buffer
@@ -110,7 +109,7 @@ char	*read_word(char *buffer, int *i)
 				word = ft_chrjoin(word, buffer[i[0]++]);
 		}
 		else
-		word = ft_chrjoin(word, buffer[*i]);
+			word = ft_chrjoin(word, buffer[*i]);
 		i[0]++;
 	}
 	return (word);

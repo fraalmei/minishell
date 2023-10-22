@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:00:19 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/21 18:28:12 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/22 05:36:27 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	print_prompt(t_prompt *prom)
 		if (prom->n_options > 0)
 			ft_printf("Opciones:		%s#\n", prom->arguments[1]);
 		ft_printf("N_Argumentos:		%d#\n", prom->n_arguments);
-		i = 0;
-		while (prom->arguments[i])
-			ft_printf("Argumentos:		%s#\n", prom->arguments[i++]);
-		i = 0;
+		i = -1;
+		while (prom->arguments[++i])
+			ft_printf("Argumentos:		%s		%p#\n", prom->arguments[i], prom->arguments[i]);
+		i = -1;
 		if (prom->input_redirect)
-			while (prom->input_redirect[i] != NULL)
-				ft_printf("input_redirect:		%s#\n", prom->input_redirect[i++]);
+			while (prom->input_redirect[++i] != NULL)
+				ft_printf("input_redirect:		%s		%p#\n", prom->input_redirect[i], prom->input_redirect[i]);
 		i = 0;
 		if (prom->output_redirect)
 			while (prom->output_redirect[i] != NULL)
@@ -51,7 +51,7 @@ void	print_prompt(t_prompt *prom)
 int	print_error(char *str, int i)
 {
 	if (i == 0)
-		g_ms->signals->status_code = (printf("export: `%s': not a valid identifier\n", str), i);
+		g_ms->signals->status_code = (printf("export: `%s': not a valid identifier\n", str), 1);
 	else if (i == 1)
 		g_ms->signals->status_code = (printf(": bad substitution\n"), i);
 	else if (i == 7)
@@ -74,9 +74,11 @@ int	print_error(char *str, int i)
 		g_ms->signals->status_code = (printf("No se aceptan opciones\n"), 1);
 	else if (i == 13)
 		g_ms->signals->status_code = (printf("%s: too many arguments\n", str), 1);
+	else if (i == 127)
+		g_ms->signals->status_code = (printf("%s: command not found\n", str), i);
 	if (str)
 		free (str);
-	return (0);
+	return (g_ms->signals->status_code);
 }
 
 void	print_str_str(char **string)
