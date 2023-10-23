@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:39:59 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/22 13:46:18 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/23 16:53:43 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int	export(t_prompt *prompt)
 			return (print_error(splt[1], 1), free_str(splt), 0);
 		if (prompt->arguments[i][0] != '_' && prompt->arguments[i][1] != '=')
 			set_value(&g_ms->envirorment->frst, prompt->arguments[i]);
+		free_str(splt);
 	}
 	return (0);
 }

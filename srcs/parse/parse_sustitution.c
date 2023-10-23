@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:13:46 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/22 16:07:26 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/23 07:51:08 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,8 @@ static void	ride_quotes(char *buffer, char **swap, int *i)
 	char	c;
 
 	c = buffer[*i];
-	i[0]++;
-	if (buffer[*i] == c)
-		*swap = ft_chr_n_join(*swap, &g_ms->buffer[i[0] - 1], 2);
-	else if (c == 34)
+	*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
+	if (c == 34)
 	{
 		while (buffer[*i] != c)
 		{
@@ -117,6 +115,7 @@ static void	ride_quotes(char *buffer, char **swap, int *i)
 	else if (c == 39)
 		while (buffer[*i] != c)
 			*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
+	*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
 	i[0]++;
 }
 

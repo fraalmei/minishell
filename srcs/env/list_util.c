@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 16:08:35 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/21 22:27:38 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/23 15:45:22 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static t_env_var	*struct_env(char *name, char eq, char *value)
 		if (value != NULL)
 			env->value = value;
 		else
-			env->value = "";
+			env->value = ft_strdup("");
 	}
 	return (env);
 }

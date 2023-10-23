@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:40:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/21 22:27:26 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/23 16:52:42 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,19 @@ static int	change_dir_env(t_env_var **env, char *dir)
 {
 	char	*str;
 
-	str = ft_strjoin_allfree(ft_strdup("OLDPWD="), \
-		ft_strdup(get_value(*env, "PWD")));
+	if (get_value(*env, "PWD"))
+		str = ft_strjoin_allfree(ft_strdup("OLDPWD="), \
+			ft_strdup(get_value(*env, "PWD")));
+	else
+	{
+		str = ft_strjoin_allfree(ft_strdup("OLDPWD="), \
+			get_wd_char());
+	}
 	set_value(env, str);
 	free (str);
 	str = ft_strjoin_allfree(ft_strdup("PWD="), dir);
-	set_value(env, str);
+	if (get_env(*env, "PWD"))
+		set_value(env, str);
 	free (str);
 	return (0);
 }
