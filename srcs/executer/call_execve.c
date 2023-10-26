@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   call_execve.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:19:05 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/21 20:33:18 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/22 03:05:58 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ void	call_execve(t_prompt *prompt)
 	dup_to_stdin_stdout(prompt->infile, prompt->outfile);
 	env_to_strstr(g_ms->envirorment);
 	path = get_pathname(prompt->command, g_ms->envirorment->env);
-	printf("Entra en call_execve |%s|\n", path);
 	if (execve(path, prompt->arguments, NULL) == -1)
 	{
-		printf("Entra en fallo de call_execve\n");
 		err = errno;
 		ft_error(-1, prompt->command);
 		close_all_fds(prompt);

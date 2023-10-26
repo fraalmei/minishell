@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:20:08 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/21 20:33:22 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:12:00 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	copy_pipe(int *pipe_in, int *pipe_out)
 	pipe_out[1] = pipe_in[1];
 }
 
-
 void	prepare_exec(t_prompt *prompt, int pipefd[2], int oldpipefd[2])
 {
 	if (prompt->pos_p != 1)
@@ -96,52 +95,3 @@ void	wait_childs(void)
 		tmp = tmp->next;
 	}
 }
-
-
-// int	*copy_pipe(int pipe_in[2])
-// {
-// 	int	*pipe_out;
-
-// 	pipe_out = malloc(sizeof(int) * 2);
-// 	pipe_out[0] = pipe_in[0];
-// 	pipe_out[1] = pipe_in[1];
-// 	return (pipe_out);
-// }
-
-	// close(new_pip[1]);
-	// if (prompt->pos_p != 1)
-	// {
-	// 	close((old_pip)[0]);
-	// 	free(old_pip);
-	// }
-	// if (prompt->pos_p != g_ms->n_prompts)
-	// 	close(new_pip[0]);
-	// else
-	// 	old_pip = copy_pipe(new_pip);
-
-
-
-	// int		pipefd[2];
-	// int		*oldpipefd;
-
-	// oldpipefd = NULL;
-	// while (i > 0)
-	// {
-	// 	pipe(pipefd);
-	// 	g_ms->sh_pid = fork();
-	// 	if (g_ms->sh_pid == 0)
-	// 	{
-	// 		close(pipefd[0]);
-	// 		if (prompt->b_success == SUCCESS)
-	// 			prepare_exec(prompt, pipefd, oldpipefd);
-	// 		else
-	// 			exit(0);
-	// 	}
-	// 	else
-	// 	{
-	// 		handle_pipes(prompt, pipefd, oldpipefd);
-	// 		close_all_fds(prompt);
-	// 	}
-	// 	prompt = prompt->next;
-	// 	i--;
-	// }
