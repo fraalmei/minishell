@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:09:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/22 17:50:55 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:33:17 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 static void	signal_int(int code)
 {
 	(void) code;
-	//ft_printf(BCYAN"minishell>");
 	ft_printf("\n");
 	rl_replace_line("", 0);
 	rl_on_new_line();

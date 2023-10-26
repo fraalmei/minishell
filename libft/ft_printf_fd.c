@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 12:33:07 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/21 18:48:25 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:21:47 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	ft_putstr(char *s, int fd)
 	if (!s)
 		return (ft_putstr("(null)", fd));
 	while (*s)
-		len += write(1, &*s++, fd);
+		len += write(fd, &*s++, 1);
 	return (len);
 }
 
@@ -44,7 +44,7 @@ static int	ft_putnbr(long long int nbr, long long int i, char *base, int fd)
 	}
 	if (nbr >= i)
 		len += ft_putnbr(nbr / i, i, base, fd);
-	len += write(1, &base[nbr % i], fd);
+	len += write(fd, &base[nbr % i], 1);
 	return (len);
 }
 
@@ -56,7 +56,7 @@ static int	ft_putptr(uintptr_t nbr, unsigned int i, char *base, int fd)
 	len = 0;
 	if (nbr >= i)
 		len += ft_putnbr(nbr / i, i, base, fd);
-	len += write(1, &base[nbr % i], fd);
+	len += write(fd, &base[nbr % i], 1);
 	return (len);
 }
 
@@ -70,7 +70,7 @@ static int	ft_selector(char str, va_list args, int fd)
 	if (str == 'c')
 	{
 		c = va_arg(args, int);
-		len += write(1, &c, 1);
+		len += write(fd, &c, 1);
 	}
 	else if (str == 's')
 		len += ft_putstr(va_arg(args, char *), fd);
@@ -86,7 +86,7 @@ static int	ft_selector(char str, va_list args, int fd)
 	else if (str == 'X')
 		len += ft_putnbr(va_arg(args, UNS_INT), 16, "0123456789ABCDEF", fd);
 	else if (str == '%')
-		len += write(1, "%", fd);
+		len += write(fd, "%", 1);
 	return (len);
 }
 
@@ -102,7 +102,7 @@ int	ft_printf_fd(int fd, char const *str, ...)
 	while (*str)
 	{
 		if (*str != '%')
-			len += write(1, str++, fd);
+			len += write(fd, str++, 1);
 		else
 		{
 			str++;
@@ -111,7 +111,7 @@ int	ft_printf_fd(int fd, char const *str, ...)
 				|| *str == 'X' || *str == '%')
 				len += ft_selector(*str, args, fd);
 			else if (*str != '\0')
-				len += write(1, str, fd);
+				len += write(fd, str, 1);
 			else
 				break ;
 			str++;

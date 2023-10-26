@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:13:46 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/23 07:51:08 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:32:38 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ static void	ride_quotes(char *buffer, char **swap, int *i)
 		while (buffer[*i] != c)
 			*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
 	*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
-	i[0]++;
 }
 
 /// @brief Update the command buffer by expanding and handling 

@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/23 17:14:57 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:25:50 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,8 @@ int	prompt(void)
 	}
 	else
 	{
-		add_history(g_ms->buffer);
-		change_dollars_buffer();
+		(add_history(g_ms->buffer), change_dollars_buffer());
 		g_ms->prompt = buffer_to_prompt(g_ms->buffer, g_ms->prompt);
-		print_prompt(g_ms->prompt);
 		free (g_ms->buffer);
 		g_ms->buffer = NULL;
 		return (1);
@@ -76,7 +74,6 @@ static int	init_global(int argc, char **env)
 /// @return 0 if it works correctly, 1 if an error occur
 int	main(int argc, char **argv, char **env)
 {
-	atexit(leaks);
 	(void) argv;
 	if (init_global(argc, env))
 		return (1);
@@ -94,4 +91,6 @@ int	main(int argc, char **argv, char **env)
 	return (0);
 }
 
-	//system("leaks -q minishell");
+	// atexit(leaks);
+	// system("leaks -q minishell");
+	// print_prompt(g_ms->prompt);

@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:00:19 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/22 05:36:27 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:35:53 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,18 @@ void	print_prompt(t_prompt *prom)
 		ft_printf("N_Argumentos:		%d#\n", prom->n_arguments);
 		i = -1;
 		while (prom->arguments[++i])
-			ft_printf("Argumentos:		%s		%p#\n", prom->arguments[i], prom->arguments[i]);
+			ft_printf("Argumentos:		%s		%p#\n",
+				prom->arguments[i], prom->arguments[i]);
 		i = -1;
 		if (prom->input_redirect)
 			while (prom->input_redirect[++i] != NULL)
-				ft_printf("input_redirect:		%s		%p#\n", prom->input_redirect[i], prom->input_redirect[i]);
+				ft_printf("input_redirect:		%s		%p#\n",
+					prom->input_redirect[i], prom->input_redirect[i]);
 		i = 0;
 		if (prom->output_redirect)
 			while (prom->output_redirect[i] != NULL)
-				ft_printf("output_redirect:		%s#\n", prom->output_redirect[i++]);
+				ft_printf("output_redirect:		%s#\n",
+					prom->output_redirect[i++]);
 		ft_printf("Posición de prompt:	%i#\n", prom->pos_p);
 		ft_printf("Separación:		%s#\n", prom->sep1);
 		ft_printf("Siguiente:		%p#\n", prom->next);
