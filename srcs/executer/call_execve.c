@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:19:05 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/22 03:05:58 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/26 19:44:58 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	call_execve(t_prompt *prompt)
 	if (execve(path, prompt->arguments, NULL) == -1)
 	{
 		err = errno;
-		ft_error(-1, prompt->command);
+		ft_error(-1, prompt->command, NULL); // he puesto NULL no se que mensaje de error da
 		close_all_fds(prompt);
 		free_prompt(prompt);
 		exit(err);

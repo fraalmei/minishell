@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 10:04:38 by vpujalte          #+#    #+#             */
-/*   Updated: 2023/10/26 14:05:15 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/26 19:46:59 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int	ft_error(int error, char *str, char *msg_error)
 {
+	(void) msg_error;
 	if (error == 0)
 		ft_printf_fd(STDERR, "export: `%s': not a valid identifier\n", str);
 	else if (error == 1)
@@ -59,6 +60,7 @@ int	ft_error(int error, char *str, char *msg_error)
 */
 int	ft_q_error(int error, char *msg_error)
 {
+	(void) msg_error;
 	if (error == 10)
 		ft_printf_fd(STDERR, Q_ERR_01);
 	else if (error == 11)
@@ -69,16 +71,18 @@ int	ft_q_error(int error, char *msg_error)
 		ft_printf_fd(STDERR, Q_ERR_04);
 	else if (error == 127)
 		ft_printf_fd(STDERR, Q_ERR_05);
+	return (0);
 }
 
 int	ft_t_error(int error, char *msg_error)
 {
+	(void) msg_error;
 	if (error == 5)
 		ft_printf_fd(STDERR, T_ERR_01);
 	else if (error == 6)
 		ft_printf_fd(STDERR, T_ERR_02);
 	else if (error == 10)
-		ft_printf_fd(STDERR, T_ERR_03, str);
+		ft_printf_fd(STDERR, T_ERR_03);
 	else if (error == 11)
 		ft_printf_fd(STDERR, T_ERR_04);
 	else if (error == 12)
@@ -87,4 +91,5 @@ int	ft_t_error(int error, char *msg_error)
 		ft_printf_fd(STDERR, T_ERR_06);
 	else if (error == 127)
 		ft_printf_fd(STDERR, T_ERR_07);
+	return (0);
 }

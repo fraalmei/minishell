@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:40:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/26 13:19:01 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/26 19:53:54 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,13 @@ int	cd(t_prompt *prompt)
 	arg = prompt->arguments[1];
 	if (!arg)
 		arg = cd_check_home();
-	if (ft_strcmp(arg, "-") == 0)
+	else if (ft_strcmp(arg, "-") == 0)
 		arg = cd_check_oldpwd();
 	if (!arg)
 		return (1);
 	dir = opendir(arg);
 	if (!dir)
-		return (ft_error(-3, arg), ERROR);
+		return (ft_error(127, arg, NULL), ERROR);
 	closedir(dir);
 	i = chdir(arg);
 	arg = get_wd_char();
