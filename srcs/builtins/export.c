@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:39:59 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/23 16:53:43 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/27 13:55:44 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@ static void	print_export(t_env_var	*env)
 		ft_printf("\n");
 }
 
-static t_env_var	*get_less_node(t_env_var *list, t_env_var *last)
+static t_env_var	*prtlssnd(t_env_var *list, t_env_var *last, t_env_var *ret)
 {
-	t_env_var	*ret;
-
 	if (!last)
 	{
 		ret = list;
@@ -41,21 +39,18 @@ static t_env_var	*get_less_node(t_env_var *list, t_env_var *last)
 				ret = list;
 			list = list->next;
 		}
+		return (ret);
 	}
-	else
+	while (list)
 	{
-		ret = NULL;
-		while (list)
+		if (ft_strcmp(last->name, list->name) < 0)
 		{
-			if (ft_strcmp(last->name, list->name) < 0)
-			{
-				if (!ret)
-					ret = list;
-				else if (ft_strcmp(ret->name, list->name) >= 0)
-					ret = list;
-			}
-			list = list->next;
+			if (!ret)
+				ret = list;
+			else if (ft_strcmp(ret->name, list->name) >= 0)
+				ret = list;
 		}
+		list = list->next;
 	}
 	return (ret);
 }
@@ -66,15 +61,41 @@ static void	print_sort_list(t_env_var *list)
 	int			i;
 
 	i = list_len(list);
-	swap = get_less_node(list, NULL);
+	swap = prtlssnd(list, NULL, NULL);
 	print_export (swap);
 	while (--i > 0)
 	{
-		swap = get_less_node(list, swap);
+		swap = prtlssnd(list, swap, NULL);
 		print_export(swap);
 	}
-	swap = get_less_node(list, swap);
+	swap = prtlssnd(list, swap, NULL);
 	print_export(swap);
+}
+
+static int	check_args(char **args, int *i)
+{
+	char		**splt;
+
+	splt = NULL;
+	if (!args[*i])
+		return (1);
+	else if (args[*i][0] == '=')
+		return (print_error(ft_strdup(args[*i]), 1));
+	else if (ft_str_chr(args[*i], '=') != 0)
+		splt = ft_split(args[*i], '=');
+	else
+	{
+		print_error(args[*i], 1);
+		return (0);
+	}
+	if (ft_str_chr(splt[0], ' ') > 0 && !splt[1])
+		return (print_error(NULL, 1), free_str(splt), 1);
+	else if (ft_str_chr(splt[0], ' ') > 0)
+		return (print_error(splt[1], 1), free_str(splt), 1);
+	if (args[*i][0] != '_' && args[*i][1] != '=')
+		set_value(&g_ms->envirorment->frst, args[*i]);
+	free_str(splt);
+	return (0);
 }
 
 	// export ->muestra las variables de entorno en orden alfabetico
@@ -88,10 +109,9 @@ static void	print_sort_list(t_env_var *list)
 	// export nombre = -> zsh: bad assignment
 int	export(t_prompt *prompt)
 {
-	char		**splt;
 	int			i;
+	int			e;
 
-	splt = NULL;
 	if (prompt->n_options == 0 && prompt->n_arguments == 1)
 		return (print_sort_list(g_ms->envirorment->frst), 0);
 	else if (prompt->n_options != 0)
@@ -99,24 +119,9 @@ int	export(t_prompt *prompt)
 	i = 0;
 	while (prompt->arguments[++i])
 	{
-		if (!prompt->arguments[i])
-			return (0);
-		else if (prompt->arguments[i][0] == '=')
-			return (print_error(ft_strdup(prompt->arguments[i]), 0));
-		else if (ft_str_chr(prompt->arguments[i], '=') != 0)
-			splt = ft_split(prompt->arguments[i], '=');
-		else
-		{
-			print_error(prompt->arguments[i], 1);
-			continue ;
-		}
-		if (ft_str_chr(splt[0], ' ') > 0 && !splt[1])
-			return (print_error(NULL, 1), free_str(splt), 0);
-		else if (ft_str_chr(splt[0], ' ') > 0)
-			return (print_error(splt[1], 1), free_str(splt), 0);
-		if (prompt->arguments[i][0] != '_' && prompt->arguments[i][1] != '=')
-			set_value(&g_ms->envirorment->frst, prompt->arguments[i]);
-		free_str(splt);
+		e = check_args(prompt->arguments, &i);
+		if (e)
+			return (e);
 	}
 	return (0);
 }

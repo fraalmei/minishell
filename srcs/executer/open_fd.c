@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 14:43:02 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/26 19:45:40 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/27 10:25:35 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,19 +123,19 @@ int	openfile(char	*filename, int mode)
 	if (mode == INFILE)
 	{
 		if (open (filename, O_RDONLY) < 0)
-			ft_error(errno, filename, NULL); // nidea de que error va aqui
+			ft_t_error(7, filename);
 		return (open (filename, O_RDONLY));
 	}
 	else if (mode == OUTFILE)
 	{
 		if (open (filename, O_CREAT | O_WRONLY | O_TRUNC, 0644) < 0)
-			ft_error(errno, filename, NULL); // nidea de que error va aqui
+			ft_t_error(7, filename);
 		return (open (filename, O_CREAT | O_WRONLY | O_TRUNC, 0644));
 	}
 	else if (mode == APPFILE)
 	{
 		if (open (filename, O_CREAT | O_WRONLY | O_APPEND, 0644) < 0)
-			ft_error(errno, filename, NULL); // nidea de que error va aqui
+			ft_t_error(7, filename);
 		return (open (filename, O_CREAT | O_WRONLY | O_APPEND, 0644));
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:19:05 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/26 19:44:58 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/27 10:05:14 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,16 @@ void	launch_from_father(t_prompt *prompt)
 void	call_execve(t_prompt *prompt)
 {
 	char	*path;
-	int		err;
 
 	signals_in_process();
 	dup_to_stdin_stdout(prompt->infile, prompt->outfile);
 	env_to_strstr(g_ms->envirorment);
 	path = get_pathname(prompt->command, g_ms->envirorment->env);
-	if (execve(path, prompt->arguments, NULL) == -1)
+	if (execve(path, prompt->arguments, g_ms->envirorment->env) == -1)
 	{
-		err = errno;
-		ft_error(-1, prompt->command, NULL); // he puesto NULL no se que mensaje de error da
+		g_ms->signals->status_code = ft_q_error(127, prompt->command);
 		close_all_fds(prompt);
 		free_prompt(prompt);
-		exit(err);
+		exit(127);
 	}
 }

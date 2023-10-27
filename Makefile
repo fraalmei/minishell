@@ -6,7 +6,7 @@
 #    By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/25 17:18:27 by fraalmei          #+#    #+#              #
-#    Updated: 2023/10/07 21:06:27 by fraalmei         ###   ########.fr        #
+#    Updated: 2023/10/27 13:58:10 by fraalmei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,9 @@ RM		= /bin/rm -f
 
 #	flags
 #------------------------------------------------------------------------------
-CFLAGS		= -Wall -Werror -Wextra #-pedantic
+CFLAGS		= -Wall -Werror -Wextra
 
-LEAK_FLAGS	= -fsanitize=address -g3
+LEAK_FLAGS	= -fsanitize=address -g3 -pedantic
 
 INCLUDES	= -I $(INCLUDE_DIR) -I $(READ)/include
 

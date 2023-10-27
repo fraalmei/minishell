@@ -6,12 +6,12 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:00:19 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/26 13:35:53 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/27 13:56:18 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
+/* 
 	// print the struct (or structs) generated frome the buffer
 void	print_prompt(t_prompt *prom)
 {
@@ -49,7 +49,7 @@ void	print_prompt(t_prompt *prom)
 		ft_printf("++------------++\n");
 		prom = prom->next;
 	}
-}
+} */
 
 int	print_error(char *str, int i)
 {

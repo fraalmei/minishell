@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:24:32 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/21 20:33:33 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/10/27 10:14:31 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void	dup_to_stdin_stdout(int fd_in, int fd_out)
 	if (fd_in != 0)
 	{
 		if (dup2(fd_in, 0) == -1)
-			exit(2);
+			(ft_t_error(5, NULL), exit(2));
 		close(fd_in);
 	}
 	if (fd_out != 1)
 	{
 		if (dup2(fd_out, 1) == -1)
-			exit(2);
+			(ft_t_error(5, NULL), exit(2));
 		close(fd_out);
 	}
 }
