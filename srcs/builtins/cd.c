@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:40:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/27 13:55:05 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:45:50 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ int	cd(t_prompt *prompt)
 		return (1);
 	dir = opendir(arg);
 	if (!dir)
-		return (ft_error(127, ft_strdup(arg), NULL), ERROR);
+		return (ft_printf_fd(STDERR, \
+		"minishell: cd: %s No such file or directory\n", arg), 127);
 	closedir(dir);
 	i = chdir(arg);
 	arg = get_wd_char();

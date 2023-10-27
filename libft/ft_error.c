@@ -6,12 +6,33 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 10:04:38 by vpujalte          #+#    #+#             */
-/*   Updated: 2023/10/27 13:57:23 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:09:20 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "../include/mshellmsg.h"
+
+static int	t_error_2(int error, char *str, char *argument)
+{
+	(void)argument;
+	if (error == 5)
+		ft_printf_fd(STDERR, "syntax error near `%s'\n", str);
+	else if (error == 6)
+		ft_printf_fd(STDERR, "illegal option -- -\n");
+	else if (error == 10)
+		ft_printf_fd(STDERR, "Open quotes\n");
+	else if (error == 11)
+		ft_printf_fd(STDERR, "$%s: ambiguous redirect\n", str);
+	else if (error == 12)
+		ft_printf_fd(STDERR, "No options acepted\n");
+	else if (error == 13)
+		ft_printf_fd(STDERR, "%s: too many strs\n", str);
+	else if (error == 127)
+		ft_printf_fd(STDERR, "minishell: cd: %s No such file or directory\n",
+			str);
+	return (0);
+}
 
 int	t_error(int error, char *str, char *argument)
 {
@@ -28,21 +49,8 @@ int	t_error(int error, char *str, char *argument)
 		ft_printf_fd(STDERR, "bad assigment\n");
 	else if (error == 4)
 		ft_printf_fd(STDERR, "bad option: %s\n", str);
-	else if (error == 5)
-		ft_printf_fd(STDERR, "syntax error near `%s'\n", str);
-	else if (error == 6)
-		ft_printf_fd(STDERR, "illegal option -- -\n");
-	else if (error == 10)
-		ft_printf_fd(STDERR, "Comillas abiertas\n");
-	else if (error == 11)
-		ft_printf_fd(STDERR, "$%s: ambiguous redirect\n", str);
-	else if (error == 12)
-		ft_printf_fd(STDERR, "No se aceptan opciones\n");
-	else if (error == 13)
-		ft_printf_fd(STDERR, "%s: too many strs\n", str);
-	else if (error == 127)
-		ft_printf_fd(STDERR, "minishell: cd: %s No such file or directory\n",
-			str);
+	else
+		t_error_2(error, str, argument);
 	if (str)
 		free (str);
 	return (error);
