@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:55:29 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/27 13:32:54 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/30 09:09:21 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ char	*return_wild(char *buffer, int *i)
 
 	i[0]++;
 	x = ft_chrcmp_env_forbid(&buffer[*i]);
-	if (x == 0)
+	if (x == 0 && i[0] == ' ')
 		return ("$");
+	else if (x == 0)
+		return ("");
 	name = ft_substr(buffer, *i, x);
 	value = get_value(g_ms->envirorment->frst, name);
 	free (name);
@@ -77,6 +79,19 @@ char	*return_wild(char *buffer, int *i)
 char	*read_word(char *buffer, int *i)
 {
 	char	*word;
+
+	word = (char *)ft_calloc(sizeof(char), 2);
+	while (buffer[*i] && buffer[*i] != ' ' && is_redirecction(&buffer[*i]) == 0)
+	{
+		word = ft_chrjoin(word, buffer[*i]);
+		i[0]++;
+	}
+	return (word);
+}
+
+/* char	*read_word(char *buffer, int *i)
+{
+	char	*word;
 	char	c;
 
 	word = (char *)ft_calloc(sizeof(char), 2);
@@ -90,8 +105,8 @@ char	*read_word(char *buffer, int *i)
 				word = ft_chrjoin(word, buffer[i[0]++]);
 		}
 		else
-			word = ft_chrjoin(word, buffer[*i]);
+		word = ft_chrjoin(word, buffer[*i]);
 		i[0]++;
 	}
 	return (word);
-}
+} */

@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/08 16:14:10 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/30 09:08:48 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ static t_prompt	*add_prom(char *buff, t_prompt **prom, t_prompt *swap, int *i)
 /// @return 0 on success, -1 on error.
 static int	ride_buffer(char *buff, t_prompt **prom, t_prompt **swap, int *i)
 {
+	ignore_no_p(buff, i);
 	if (check_start_prom(&buff[0], *prom) != 0)
 		return (free_prompt(*prom), free_prompt (*swap), \
 			print_error(ft_strndup(&buff[*i], is_pipe(&buff[*i])), 2), -1);

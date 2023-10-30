@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 11:23:41 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/23 16:52:20 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/30 08:21:55 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,16 @@ char	*get_value(t_env_var *env, char	*var)
 	if (!env)
 		return (NULL);
 	swap = env;
-	while (ft_strcmp(swap->name, var) != 0)
+	while (swap && ft_strcmp(swap->name, var) != 0)
 	{
-		if (!swap->next)
-			return (NULL);
 		swap = swap->next;
 	}
-	return (swap->value);
+	if (swap)
+		return (swap->value);
+	else if (!swap && ft_strcmp(g_ms->envirorment->dir->name, var) == 0)
+		return (g_ms->envirorment->dir->value);
+	else
+		return (NULL);
 }
 
 int	get_name(t_env_var *env, char *var)
