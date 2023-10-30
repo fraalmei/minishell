@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 12:58:45 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/30 10:27:10 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:51:25 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,9 +151,9 @@ size_t	ft_strlen_array(const void **string);
 int		ft_strnstr_f(const char *haystack, const char *needle, size_t n);
 int		ft_strnstr_l(const char *haystack, const char *needle, size_t n);
 
-void	ft_error(int error, char *str, char *msg_error);
-void	ft_q_error(int error, char *msg_error);
-void	ft_t_error(int error, char *msg_error);
+int		ft_error(int error, char *str, char *msg_error);
+int		ft_q_error(int error, char *msg_error);
+int		ft_t_error(int error, char *msg_error);
 
 		//ft_islanum.c
 int		ft_isnum(int c);

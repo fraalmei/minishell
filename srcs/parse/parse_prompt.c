@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/30 11:55:09 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/30 16:21:18 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static int	ride_buffer(char *buff, t_prompt **prom, t_prompt **swap, int *i)
 	ignore_no_p(buff, i);
 	if (check_start_prom(&buff[0], *prom) > 0)
 		return (free_prompt(*prom), free_prompt (*swap), \
-			print_error(ft_strndup(&buff[*i], is_pipe(&buff[*i])), 2), -1);
+			print_error(2, ft_strndup(&buff[*i], is_pipe(&buff[*i])), 2), -1);
 	if (!(*swap)->command && buff[*i] != ' ' && is_redirecction(&buff[*i]) == 0)
 	{
 		(*swap)->command = read_word(buff, i);

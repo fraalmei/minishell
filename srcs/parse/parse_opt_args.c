@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:57:09 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/30 11:55:01 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/30 16:42:07 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_opt_builtins(t_prompt *swap)
 			ft_strcmp(swap->command, "export") == 0 || \
 			ft_strcmp(swap->command, "pwd") == 0 || \
 			ft_strcmp(swap->command, "unset") == 0)
-		return (print_error(NULL, 12), 1);
+		return (print_error(12, NULL, 12), 1);
 	return (0);
 }
 

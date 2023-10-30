@@ -6,14 +6,14 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:00:19 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/30 11:06:24 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/30 16:33:43 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 	// print the struct (or structs) generated frome the buffer
-void	print_prompt(t_prompt *prom)
+/* void	print_prompt(t_prompt *prom)
 {
 	int		i;
 
@@ -49,9 +49,18 @@ void	print_prompt(t_prompt *prom)
 		ft_printf("++------------++\n");
 		prom = prom->next;
 	}
+} */
+
+int	print_error(int error, char *str, int st_cod)
+{
+	ft_t_error(error, str);
+	g_ms->signals->status_code = st_cod;
+	if (str)
+		free (str);
+	return (0);
 }
 
-static int	print_error_2(char *str, int i)
+/* static int	print_error_2(char *str, int i)
 {
 	if (i == 6)
 		g_ms->signals->status_code = (printf("illegal option -- -\n"), i);
@@ -60,13 +69,6 @@ static int	print_error_2(char *str, int i)
 	else if (i == 11)
 		g_ms->signals->status_code = \
 			(printf("$%s: ambiguous redirect\n", str), 1);
-	else if (i == 12)
-		g_ms->signals->status_code = (printf("No se aceptan opciones\n"), 1);
-	else if (i == 13)
-		g_ms->signals->status_code = \
-			(printf("%s: too many arguments\n", str), 1);
-	else if (i == 127)
-		g_ms->signals->status_code = (printf("%s: command not found\n", str), i);
 	return (0);
 }
 
@@ -75,13 +77,8 @@ int	print_error(char *str, int i)
 	if (i == 0)
 		g_ms->signals->status_code = \
 			(printf("export: `%s': not a valid identifier\n", str), 1);
-	else if (i == 1)
-		g_ms->signals->status_code = (printf(": bad substitution\n"), i);
 	else if (i == 7)
 		g_ms->signals->status_code = (printf("%s not found\n", str), i);
-	else if (i == 2)
-		g_ms->signals->status_code = \
-			(printf("syntax error near unexpected token `%s'\n", str), i);
 	else if (i == 3)
 		g_ms->signals->status_code = (printf("bad assigment\n"), i);
 	else if (i == 4)
@@ -91,7 +88,7 @@ int	print_error(char *str, int i)
 	if (str)
 		free (str);
 	return (g_ms->signals->status_code);
-}
+} */
 
 void	print_str_str(char **string)
 {

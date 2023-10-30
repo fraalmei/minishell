@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 10:04:38 by vpujalte          #+#    #+#             */
-/*   Updated: 2023/10/30 11:08:33 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:51:48 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../include/minishell.h"
 #include "../include/mshellmsg.h"
 
-static void	t_error_2(int error, char *str)
+static int	t_error_2(int error, char *str)
 {
 	if (error == 5)
 		ft_printf_fd(STDERR, "syntax error near `%s'\n", str);
@@ -31,10 +31,10 @@ static void	t_error_2(int error, char *str)
 	else if (error == 127)
 		ft_printf_fd(STDERR, "minishell: cd: %s No such file or directory\n",
 			str);
-	g_ms->signals->status_code = error;
+	return (error);
 }
 
-void	t_error(int error, char *str)
+int	t_error(int error, char *str)
 {
 	if (error == 0)
 		ft_printf_fd(STDERR, "export: `%s': not a valid identifier\n", str);
@@ -52,10 +52,10 @@ void	t_error(int error, char *str)
 		t_error_2(error, str);
 	if (str)
 		free (str);
-	g_ms->signals->status_code = error;
+	return (error);
 }
 
-void	ft_q_error(int error, char *argument)
+int	ft_q_error(int error, char *argument)
 {
 	if (!argument)
 		(void) argument;
@@ -67,12 +67,11 @@ void	ft_q_error(int error, char *argument)
 		ft_printf_fd(STDERR, Q_ERR_03);
 	else if (error == 127)
 		ft_printf_fd(STDERR, Q_ERR_127, argument);
-	g_ms->signals->status_code = error;
+	return (error);
 }
 
-void	ft_t_error(int error, char *argument)
+int	ft_t_error(int error, char *argument)
 {
-	printf ("%i\n", error);
 	if (!argument)
 		(void) argument;
 	if (error == 1)
@@ -93,5 +92,5 @@ void	ft_t_error(int error, char *argument)
 		ft_printf_fd(STDERR, T_ERR_08);
 	else if (error == 258)
 		ft_printf_fd(STDERR, T_ERR_258);
-	g_ms->signals->status_code = error;
+	return (error);
 }

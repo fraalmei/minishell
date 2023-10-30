@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:18:16 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/30 11:55:55 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/30 16:02:40 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void	actions(t_prompt *prompt, int type)
 {
 	if (prompt->n_arguments == 0)
-		print_error("", 127);
+		print_error(127, "", 127);
 	else if (prompt->command && ft_strcmp(prompt->command, "exit") == 0)
 		exit_shell(prompt);
 	else if (prompt->command && ft_strcmp(prompt->command, "pwd") == 0)
