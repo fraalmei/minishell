@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:13:46 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/30 09:30:18 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/30 10:28:53 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ void	change_dollars_buffer(void)
 
 	i = 0;
 	if (check_quotes(g_ms->buffer) == -1)
-		g_ms->signals->status_code = ft_q_error(1, NULL);
+		ft_q_error(1, NULL);
 	swap = (char *)ft_calloc(sizeof(char), 2);
 	while (g_ms->buffer[i] && g_ms->signals->status_code == 0)
 	{

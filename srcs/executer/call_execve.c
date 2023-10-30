@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:19:05 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/27 10:05:14 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/30 10:28:10 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	call_execve(t_prompt *prompt)
 	path = get_pathname(prompt->command, g_ms->envirorment->env);
 	if (execve(path, prompt->arguments, g_ms->envirorment->env) == -1)
 	{
-		g_ms->signals->status_code = ft_q_error(127, prompt->command);
+		ft_q_error(127, prompt->command);
 		close_all_fds(prompt);
 		free_prompt(prompt);
 		exit(127);

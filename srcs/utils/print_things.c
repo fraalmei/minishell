@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:00:19 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/30 08:41:58 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/30 11:06:24 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,6 @@ int	print_error(char *str, int i)
 		g_ms->signals->status_code = (printf("bad assigment\n"), i);
 	else if (i == 4)
 		g_ms->signals->status_code = (printf("bad option: %s\n", str), i);
-	else if (i == 5)
-		g_ms->signals->status_code = \
-			(printf("syntax error near `%s'\n", str), i);
 	else
 		print_error_2(str, i);
 	if (str)

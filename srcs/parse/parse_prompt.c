@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/30 09:08:48 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/30 11:55:09 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static t_prompt	*add_prom(char *buff, t_prompt **prom, t_prompt *swap, int *i)
 static int	ride_buffer(char *buff, t_prompt **prom, t_prompt **swap, int *i)
 {
 	ignore_no_p(buff, i);
-	if (check_start_prom(&buff[0], *prom) != 0)
+	if (check_start_prom(&buff[0], *prom) > 0)
 		return (free_prompt(*prom), free_prompt (*swap), \
 			print_error(ft_strndup(&buff[*i], is_pipe(&buff[*i])), 2), -1);
 	if (!(*swap)->command && buff[*i] != ' ' && is_redirecction(&buff[*i]) == 0)
@@ -104,7 +104,7 @@ static int	ride_buffer(char *buff, t_prompt **prom, t_prompt **swap, int *i)
 		*swap = add_prom(buff, prom, *swap, i);
 	if (check_end_prom(&buff[*i]) != 0)
 		return (free_prompt(*prom), free_prompt (*swap), \
-			print_error(NULL, 5), -1);
+			ft_t_error(258, NULL), -1);
 	ignore_no_p(buff, i);
 	return (0);
 }

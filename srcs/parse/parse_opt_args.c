@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:57:09 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/26 13:31:25 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/10/30 11:55:01 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_start_prom(char *buffer, t_prompt *prom)
 {
-	if (prom != NULL && is_pipe(buffer) > 0)
+	if (prom == NULL && is_pipe(buffer) > 0)
 		return (1);
 	return (0);
 }
