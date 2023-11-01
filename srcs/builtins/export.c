@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:39:59 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/30 15:58:17 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/01 17:45:53 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ static int	check_args(char **args, int *i)
 	splt = NULL;
 	if (!args[*i])
 		return (1);
-	else if (args[*i][0] == '=')
-		return (print_error(1, ft_strdup(args[*i]), 1));
+	else if (ft_isalpha(args[*i][0]) == 0)
+		return (print_error(0, ft_strdup(args[*i]), 1));
 	else if (ft_str_chr(args[*i], '=') != 0)
 		splt = ft_split(args[*i], '=');
 	else
@@ -88,11 +88,9 @@ static int	check_args(char **args, int *i)
 		print_error(1, args[*i], 1);
 		return (0);
 	}
-	if (ft_str_chr(splt[0], ' ') > 0 && !splt[1])
-		return (print_error(1, NULL, 1), free_str(splt), 1);
-	else if (ft_str_chr(splt[0], ' ') > 0)
-		return (print_error(1, splt[1], 1), free_str(splt), 1);
-	if (args[*i][0] != '_' && args[*i][1] != '=')
+	if (ft_str_chr(splt[0], ' ') > 0)
+		return (print_error(0, ft_strdup(args[*i]), 1), free_str(splt), 0);
+	if (ft_strncmp(args[*i], "_=", 2))
 		set_value(&g_ms->envirorment->frst, args[*i]);
 	free_str(splt);
 	return (0);
@@ -110,7 +108,6 @@ static int	check_args(char **args, int *i)
 int	export(t_prompt *prompt)
 {
 	int			i;
-	int			e;
 
 	if (prompt->n_options == 0 && prompt->n_arguments == 1)
 		return (print_sort_list(g_ms->envirorment->frst), 0);
@@ -118,10 +115,6 @@ int	export(t_prompt *prompt)
 		return (print_error(2, prompt->arguments[0], 1), 0);
 	i = 0;
 	while (prompt->arguments[++i])
-	{
-		e = check_args(prompt->arguments, &i);
-		if (e)
-			return (e);
-	}
+		check_args(prompt->arguments, &i);
 	return (0);
 }

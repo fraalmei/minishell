@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 10:04:38 by vpujalte          #+#    #+#             */
-/*   Updated: 2023/10/30 17:51:48 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/01 18:00:06 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ static int	t_error_2(int error, char *str)
 	else if (error == 127)
 		ft_printf_fd(STDERR, "minishell: cd: %s No such file or directory\n",
 			str);
+	else if (error == 258)
+		return (ft_printf_fd(STDERR, T_ERR_258, str));
 	return (error);
 }
 
-int	t_error(int error, char *str)
+int	ft_error(int error, char *str)
 {
 	if (error == 0)
 		ft_printf_fd(STDERR, "export: `%s': not a valid identifier\n", str);
@@ -50,47 +52,41 @@ int	t_error(int error, char *str)
 		ft_printf_fd(STDERR, "bad option: %s\n", str);
 	else
 		t_error_2(error, str);
-	if (str)
-		free (str);
 	return (error);
 }
 
 int	ft_q_error(int error, char *argument)
 {
-	if (!argument)
-		(void) argument;
 	if (error == 1)
-		ft_printf_fd(STDERR, Q_ERR_01);
+		return (ft_printf_fd(STDERR, Q_ERR_01));
 	else if (error == 2)
-		ft_printf_fd(STDERR, Q_ERR_02);
+		return (ft_printf_fd(STDERR, Q_ERR_02));
 	else if (error == 3)
-		ft_printf_fd(STDERR, Q_ERR_03);
+		return (ft_printf_fd(STDERR, Q_ERR_03));
 	else if (error == 127)
-		ft_printf_fd(STDERR, Q_ERR_127, argument);
-	return (error);
+		return (ft_printf_fd(STDERR, Q_ERR_127, argument));
+	return (0);
 }
 
 int	ft_t_error(int error, char *argument)
 {
-	if (!argument)
-		(void) argument;
 	if (error == 1)
-		ft_printf_fd(STDERR, T_ERR_01);
+		return (ft_printf_fd(STDERR, T_ERR_01));
 	else if (error == 2)
-		ft_printf_fd(STDERR, T_ERR_02);
+		return (ft_printf_fd(STDERR, T_ERR_02));
 	else if (error == 3)
-		ft_printf_fd(STDERR, T_ERR_03);
+		return (ft_printf_fd(STDERR, T_ERR_03));
 	else if (error == 4)
-		ft_printf_fd(STDERR, T_ERR_04);
+		return (ft_printf_fd(STDERR, T_ERR_04));
 	else if (error == 5)
-		ft_printf_fd(STDERR, T_ERR_05);
+		return (ft_printf_fd(STDERR, T_ERR_05));
 	else if (error == 6)
-		ft_printf_fd(STDERR, T_ERR_06);
+		return (ft_printf_fd(STDERR, T_ERR_06));
 	else if (error == 7)
-		ft_printf_fd(STDERR, T_ERR_07, argument);
+		return (ft_printf_fd(STDERR, T_ERR_07, argument));
 	else if (error == 8)
-		ft_printf_fd(STDERR, T_ERR_08);
+		return (ft_printf_fd(STDERR, T_ERR_08));
 	else if (error == 258)
-		ft_printf_fd(STDERR, T_ERR_258);
-	return (error);
+		return (ft_printf_fd(STDERR, T_ERR_258));
+	return (0);
 }

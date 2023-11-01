@@ -6,14 +6,14 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:00:19 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/30 16:33:43 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/01 17:37:57 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 	// print the struct (or structs) generated frome the buffer
-/* void	print_prompt(t_prompt *prom)
+void	print_prompt(t_prompt *prom)
 {
 	int		i;
 
@@ -49,46 +49,16 @@
 		ft_printf("++------------++\n");
 		prom = prom->next;
 	}
-} */
+}
 
 int	print_error(int error, char *str, int st_cod)
 {
-	ft_t_error(error, str);
+	ft_error(error, str);
 	g_ms->signals->status_code = st_cod;
 	if (str)
 		free (str);
 	return (0);
 }
-
-/* static int	print_error_2(char *str, int i)
-{
-	if (i == 6)
-		g_ms->signals->status_code = (printf("illegal option -- -\n"), i);
-	else if (i == 10)
-		g_ms->signals->status_code = (printf("Comillas abiertas\n"), i);
-	else if (i == 11)
-		g_ms->signals->status_code = \
-			(printf("$%s: ambiguous redirect\n", str), 1);
-	return (0);
-}
-
-int	print_error(char *str, int i)
-{
-	if (i == 0)
-		g_ms->signals->status_code = \
-			(printf("export: `%s': not a valid identifier\n", str), 1);
-	else if (i == 7)
-		g_ms->signals->status_code = (printf("%s not found\n", str), i);
-	else if (i == 3)
-		g_ms->signals->status_code = (printf("bad assigment\n"), i);
-	else if (i == 4)
-		g_ms->signals->status_code = (printf("bad option: %s\n", str), i);
-	else
-		print_error_2(str, i);
-	if (str)
-		free (str);
-	return (g_ms->signals->status_code);
-} */
 
 void	print_str_str(char **string)
 {

@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 14:24:10 by irodrigo          #+#    #+#             */
-/*   Updated: 2023/10/30 10:33:49 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/01 16:39:12 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define GN_MSG_03	"minishell: exit: "
 
 // error shell msg constants
-# define Q_ERR_01	"unclosed quotes were found on command\n"
+# define Q_ERR_01	"unclosed quotes\n"
 # define Q_ERR_02	"Scripting commands and functions are not implemented\n"
 # define Q_ERR_03	"Or command not implemented or pipe number error\n"
 # define Q_ERR_127	"minishell: %s: command not found\n"

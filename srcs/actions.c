@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:18:16 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/30 16:02:40 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/01 17:58:23 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	actions(t_prompt *prompt, int type)
 		g_ms->signals->status_code = 0;
 	}
 	else if (prompt->command && ft_strcmp(prompt->command, "export") == 0)
-		g_ms->signals->status_code = export(prompt);
+		export(prompt);
 	else if (prompt->command && ft_strcmp(prompt->command, "cd") == 0)
 		g_ms->signals->status_code = cd(prompt);
 	else if (prompt->command && ft_strcmp(prompt->command, "unset") == 0)

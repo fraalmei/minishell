@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 11:23:41 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/30 08:21:55 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/01 17:05:30 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ char	*get_value(t_env_var *env, char	*var)
 		return (NULL);
 	swap = env;
 	while (swap && ft_strcmp(swap->name, var) != 0)
-	{
 		swap = swap->next;
-	}
 	if (swap)
 		return (swap->value);
 	else if (!swap && ft_strcmp(g_ms->envirorment->dir->name, var) == 0)

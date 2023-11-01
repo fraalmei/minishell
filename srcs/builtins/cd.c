@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 09:40:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/30 09:42:28 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/01 10:53:22 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int	cd(t_prompt *prompt)
 		arg = cd_check_oldpwd();
 	if (!arg)
 		return (1);
+	else if (ft_strcmp(arg, "") == 0)
+		return (0);
 	dir = opendir(arg);
 	if (!dir)
 		return (ft_printf_fd(STDERR, \

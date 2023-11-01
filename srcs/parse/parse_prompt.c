@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/30 16:21:18 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/01 17:23:33 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ static int	ride_buffer(char *buff, t_prompt **prom, t_prompt **swap, int *i)
 		*swap = add_prom(buff, prom, *swap, i);
 	if (check_end_prom(&buff[*i]) != 0)
 		return (free_prompt(*prom), free_prompt (*swap), \
-			ft_t_error(258, NULL), -1);
+			print_error(258, ft_strdup("newline"), 258), -1);
 	ignore_no_p(buff, i);
 	return (0);
 }
