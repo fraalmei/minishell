@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 14:24:10 by irodrigo          #+#    #+#             */
-/*   Updated: 2023/11/01 16:39:12 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/02 10:37:03 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@
 
 # define M_ERR_01	"Couldn't allocate memory for shell implementation\n"
 
-# define T_ERR_01	"syntax error near unexpected token `'"
-# define T_ERR_02	"found forbiden char `"
+# define T_ERR_01	"syntax error near unexpected token `'\n"
+# define T_ERR_02	"found forbiden char `\n"
 # define T_ERR_03	"%s: numeric argument required\n"
 # define T_ERR_04	"too many arguments\n"
-# define T_ERR_05	"error in dup2"
-# define T_ERR_06	"error in execve"
+# define T_ERR_05	"No such file or directory\n"
+//# define T_ERR_05	"error in dup2\n"
+# define T_ERR_06	"error in execve\n"
 # define T_ERR_07	"minishell: %s Permission denied\n"
 # define T_ERR_08	"$%s: ambiguous redirect\n"
 # define T_ERR_258	"syntax error near unexpected token `%s'\n"
