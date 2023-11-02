@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/11/01 17:37:40 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/02 10:19:44 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int	main(int argc, char **argv, char **env)
 		return (1);
 	while (prompt())
 	{
-		print_prompt(g_ms->prompt);
 		free (g_ms->buffer);
 		if (!g_ms->prompt)
 			continue ;

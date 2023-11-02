@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:13:46 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/11/01 16:17:58 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/02 10:25:43 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,12 @@ static void	ride_quotes(char *buffer, char **swap, int *i)
 		{
 			if (buffer[*i] == 92 && buffer[*i + 1] == 92)
 				i[0]++;
-			else if (ft_check_dolar_redir(g_ms->buffer, *i) == -1)
+			if (ft_check_dolar_redir(g_ms->buffer, *i) == -1)
 				return ;
 			else if (ft_check_heredoc_no_sust(g_ms->buffer, i, swap))
 				continue ;
-			else if (buffer[*i] == '$')
+			else if (buffer[*i] == '$' && buffer[*i + 1] != ' ' && \
+					buffer[*i + 1])
 				*swap = ft_strjoin_onefree(*swap, return_wild(buffer, i));
 			else
 				*swap = ft_chrjoin(*swap, g_ms->buffer[i[0]++]);
@@ -121,13 +122,15 @@ static int	ride_out_quotes(char *buffer, char **swap, int *i)
 {
 	if (buffer[*i] == 92 && buffer[*i + 1] == 92)
 		i[0]++;
-	else if (ft_check_dolar_redir(buffer, *i) == -1)
+	if (ft_check_dolar_redir(buffer, *i) == -1)
 		return (1);
 	else if (ft_check_heredoc_no_sust(buffer, i, swap))
 		return (0);
-	else if (buffer[*i] == '$' && buffer[*i + 1] != '?')
+	else if (buffer[*i] == '$' && buffer[*i + 1] != '?' && \
+			buffer[*i + 1] != ' ' && buffer[*i + 1])
 		*swap = ft_strjoin_onefree(*swap, return_wild(buffer, i));
-	else if (buffer[*i] == '$' && buffer[*i + 1] == '?')
+	else if (buffer[*i] == '$' && buffer[*i + 1] == '?' && \
+			buffer[*i + 1] != ' ' && buffer[*i + 1])
 		*swap = (i[0]++, i[0]++, ft_strjoin_allfree(*swap, \
 			ft_itoa(g_ms->signals->lst_stat_cod)));
 	else
@@ -171,15 +174,3 @@ void	change_dollars_buffer(void)
 }
 
 	//printf("%s#\n", swap);
-
-/* if (ft_check_dolar_redir(g_ms->buffer, i) == -1)
-				return ;
-			else if (ft_check_heredoc_no_sust(g_ms->buffer, &i, &swap))
-				continue ;
-			else if (g_ms->buffer[i] == '$' && g_ms->buffer[i + 1] != '?')
-				swap = ft_strjoin_onefree(swap, return_wild(g_ms->buffer, &i));
-			else if (g_ms->buffer[i] == '$' && g_ms->buffer[i + 1] == '?')
-				swap = (i++, i++, ft_strjoin_allfree(swap, \
-					ft_itoa(g_ms->signals->lst_stat_cod)));
-			else
-				swap = ft_chrjoin(swap, g_ms->buffer[i++]); */

@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/11/01 17:55:31 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/02 08:50:30 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ int			ft_chrcmp_env_forbid(const char *str);
 	///	 builtins
 		///	 builtins/env.c
 void		print_env(t_env_var *env);
+int			ft_env(void);
 
 		///	 builtins/export.c
 int			export(t_prompt *prompt);

@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 10:04:38 by vpujalte          #+#    #+#             */
-/*   Updated: 2023/11/01 18:00:06 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/02 09:36:30 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	ft_error(int error, char *str)
 		ft_printf_fd(STDERR, "bad assigment\n");
 	else if (error == 4)
 		ft_printf_fd(STDERR, "bad option: %s\n", str);
+	else if (error == 8)
+		ft_printf_fd(STDERR, "found forbiden char `%s'\n", str);
 	else
 		t_error_2(error, str);
 	return (error);
