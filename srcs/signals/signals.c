@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:09:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/26 13:33:17 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/03 18:52:47 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,24 @@
 /// @param code signal code not used but needed to create the function
 static void	signal_int(int code)
 {
-	(void) code;
-	ft_printf("\n");
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-	g_ms->signals->ctrl_c_status = 1;
+	if (code == SIGINT)
+	{
+		ft_printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+		g_ms->signals->status_code = 130;
+	}
 }
+
+/* {
+	(void) code;
+	ft_printf(BCYAN"minishell>");
+	ft_printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+} */
 
 	// signals control
 	// SIGINT => ctrl-C

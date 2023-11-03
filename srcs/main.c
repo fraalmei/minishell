@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/11/02 10:34:47 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/03 18:53:24 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,10 @@ int	prompt(void)
 		g_ms->buffer = ft_strtrim_onefree(readline(""), " \t\n\v\f\r");
 	if (!g_ms->buffer)
 		(printf ("exit\n"), exit_shell(NULL));
-	else if (ft_strcmp(g_ms->buffer, "") == 0)
-	{
-		g_ms->prompt = NULL;
-		free(g_ms->buffer);
-		g_ms->buffer = NULL;
-		return (1);
-	}
 	else
 	{
-		(add_history(g_ms->buffer), change_dollars_buffer());
+		if (ft_strcmp(g_ms->buffer, "") != 0)
+			(add_history(g_ms->buffer), change_dollars_buffer());
 		g_ms->prompt = buffer_to_prompt(g_ms->buffer, g_ms->prompt);
 		free (g_ms->buffer);
 		g_ms->buffer = NULL;
