@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:54:33 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/27 08:10:02 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/04 16:27:06 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,16 @@ t_env	*read_env(char **env)
 	t_env		*copy;
 	int			i;
 
-	if (!env)
-		return (NULL);
-	if (!env[0])
-		return (ignored_env());
 	copy = (t_env *)ft_calloc(sizeof(*copy), 2);
 	if (!copy)
 		return (NULL);
 	copy->env = copy_env(env);
 	copy->frst = copy_env_list(env);
 	i = -1;
-	while (env[++i])
+	while (*env != NULL && env[++i])
 		if (ft_str_frst_cmp(env[i], "_=") == 0)
 			copy->dir = new_struct_env(env[i]);
-	incr_shll_lvl(&copy->frst);
+	ignored_env(copy);
 	return (copy);
 }
 
@@ -42,6 +38,8 @@ char	**copy_env(char **env)
 	char	**copy;
 	int		i;
 
+	if (!env)
+		return ((char **)ft_calloc(sizeof(char **), 1));
 	i = 0;
 	while (env[i])
 		i++;
@@ -59,6 +57,8 @@ t_env_var	*copy_env_list(char **env)
 	t_env_var	*first;
 	int			i;
 
+	if (!*env)
+		return (NULL);
 	i = 0;
 	first = new_struct_env(env[i++]);
 	while (env[i])

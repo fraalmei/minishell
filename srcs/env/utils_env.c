@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 11:23:41 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/11/02 10:25:18 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/04 16:25:54 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	set_value(t_env_var **env, char *var)
 {
 	char	**swap;
 
-	if (!env)
+	if (!*env)
 		*env = new_struct_env(var);
 	else
 	{

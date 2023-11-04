@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:22:28 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/10/30 08:23:40 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/04 16:37:45 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,27 @@ t_env_var	*lst_strct_env(t_env_var *env)
 	return (env);
 }
 
-t_env	*ignored_env(void)
+t_env	*ignored_env(t_env *env)
 {
-	t_env		*env;
-	t_env_var	*first;
+	char	*swap1;
 
-	env = (t_env *)ft_calloc(sizeof(*env), 2);
-	env->env = NULL;
-	first = new_struct_env(ft_strjoin(ft_strdup("PWD="), get_wd_char()));
-	env->frst = first;
-	set_value(&first, "SHLVL=1");
-	env->dir = new_struct_env("_=/usr/bin/env");
+	if (!env)
+	{
+		env = (t_env *)ft_calloc(sizeof(*env), 2);
+		env = NULL;
+	}
+	if (!get_env(env->frst, "PWD"))
+	{
+		swap1 = ft_strjoin_allfree(ft_strdup("PWD="), get_wd_char());
+		set_value(&env->frst, swap1);
+		free (swap1);
+	}
+	if (!get_env(env->frst, "SHLVL"))
+		set_value(&env->frst, "SHLVL=1");
+	else
+		incr_shll_lvl(&env->frst);
+	if (!env->dir)
+		env->dir = new_struct_env("_=/usr/bin/env");
 	return (env);
 }
 

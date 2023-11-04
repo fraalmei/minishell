@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/11/02 08:50:30 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/04 15:47:52 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ t_env_var	*new_struct_env(char *var);
 		/// list_util2.c
 int			list_len(t_env_var *first);
 t_env_var	*lst_strct_env(t_env_var *env);
-t_env		*ignored_env(void);
+t_env		*ignored_env(t_env *env);
 int			ft_chrcmp_env_forbid(const char *str);
 
 	///	 builtins

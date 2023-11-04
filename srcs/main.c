@@ -6,12 +6,28 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/11/03 18:53:24 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/04 16:38:37 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <executer.h>
+
+void	print_welcome(void)
+{
+	printf("\n%s", GREEN);
+	printf("#######################################################\n");
+	printf("#   __     __    __    __    __          __           #\n");
+	printf("#  /  \\   |  |  |  |  |     |     |  |  |    |    |   #\n");
+	printf("# |       |  |  |  |  |     |     |  |  |    |    |   #\n");
+	printf("# |       |  |  |  |  |__   |__   |__|  |__  |    |   #\n");
+	printf("# |       |__|  |  |     |     |  |  |  |    |    |   #\n");
+	printf("# |       |  |  |  |     |     |  |  |  |    |    |   #\n");
+	printf("#  \\__/   |  |  |__|   __|   __|  |  |  |__  |__  |__ #\n");
+	printf("#                                                     #\n");
+	printf("#######################################################\n\n");
+	printf("\n%s", WHITE);
+}
 
 void	leaks(void)
 {
@@ -27,14 +43,11 @@ int	prompt(void)
 {
 	init_signals();
 	rl_on_new_line();
-	if (g_ms->signals->lst_stat_cod != 130)
-		g_ms->buffer = ft_strtrim_onefree(readline(BCYAN"minishell>"WHITE), \
+	g_ms->buffer = ft_strtrim_onefree(readline(BCYAN"minishell>"WHITE), \
 		" \t\n\v\f\r");
-	else
-		g_ms->buffer = ft_strtrim_onefree(readline(""), " \t\n\v\f\r");
 	if (!g_ms->buffer)
 		(printf ("exit\n"), exit_shell(NULL));
-	else
+	else if (g_ms->buffer)
 	{
 		if (ft_strcmp(g_ms->buffer, "") != 0)
 			(add_history(g_ms->buffer), change_dollars_buffer());
@@ -68,6 +81,7 @@ static int	init_global(int argc, char **env)
 /// @return 0 if it works correctly, 1 if an error occur
 int	main(int argc, char **argv, char **env)
 {
+	print_welcome();
 	(void) argv;
 	if (init_global(argc, env))
 		return (1);
