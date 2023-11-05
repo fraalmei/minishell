@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:13:46 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/11/02 10:25:43 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/03 14:07:38 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	ft_check_dolar_redir(char *buffer, int i)
 		else
 			name = ft_substr(buffer, i, x);
 		if (ft_str_chr(get_value(g_ms->envirorment->frst, name), ' ') >= 0)
-			return (ft_error(11, name), -1);
+			return (print_error(11, name, 1), -1);
 	}
 	return (0);
 }

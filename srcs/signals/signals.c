@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:09:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/11/03 18:52:47 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/05 17:46:35 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,47 +16,30 @@
 /// @param code signal code not used but needed to create the function
 static void	signal_int(int code)
 {
-	if (code == SIGINT)
-	{
-		ft_printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-		g_ms->signals->status_code = 130;
-	}
-}
-
-/* {
 	(void) code;
-	ft_printf(BCYAN"minishell>");
 	ft_printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
-} */
+	g_ms->signals->status_code = 130;
+}
 
 	// signals control
 	// SIGINT => ctrl-C
-	// SIGTSTP => ctrl-Z
+	// SIGQUIT => ctrl-4
 /// @brief calling the main signals to asign an action when they're called
 /// @param  no need
 void	signals_in_prompt(void)
 {
 	signal(SIGINT, signal_int);
 	signal(SIGQUIT, SIG_IGN);
-	signal(SIGTSTP, SIG_IGN);
-	signal(SIGTERM, SIG_IGN);
-	signal(SIGSTOP, SIG_IGN);
 }
 
-	// dejar de ignorar las seññales
+	// stop ignoring signals
 void	signals_in_process(void)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-	signal(SIGTSTP, SIG_DFL);
-	signal(SIGTERM, SIG_DFL);
-	signal(SIGSTOP, SIG_DFL);
 }
 
 int	init_signals(void)

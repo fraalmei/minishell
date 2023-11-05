@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/11/04 15:47:52 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/05 13:31:48 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <readline/history.h>
 # include "colors.h"
 # include <signal.h>
+# include <sys/ioctl.h>
 ///	# include <executer.h>
 
 ///	 ----------------------------------------------------------------

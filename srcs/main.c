@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/11/04 16:38:37 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/05 18:13:03 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	print_welcome(void)
 	printf("#  \\__/   |  |  |__|   __|   __|  |  |  |__  |__  |__ #\n");
 	printf("#                                                     #\n");
 	printf("#######################################################\n\n");
+	printf("------------------||HYDRA DOMINATUS||------------------\n");
 	printf("\n%s", WHITE);
 }
 
@@ -42,9 +43,8 @@ void	leaks(void)
 int	prompt(void)
 {
 	init_signals();
-	rl_on_new_line();
 	g_ms->buffer = ft_strtrim_onefree(readline(BCYAN"minishell>"WHITE), \
-		" \t\n\v\f\r");
+		" \n\t\r\v\f");
 	if (!g_ms->buffer)
 		(printf ("exit\n"), exit_shell(NULL));
 	else if (g_ms->buffer)
