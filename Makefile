@@ -6,7 +6,7 @@
 #    By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/25 17:18:27 by fraalmei          #+#    #+#              #
-#    Updated: 2023/11/05 17:53:16 by fraalmei         ###   ########.fr        #
+#    Updated: 2023/11/09 15:48:58 by fraalmei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,9 @@ CFLAGS		= -Wall -Werror -Wextra
 
 LEAK_FLAGS	= -fsanitize=address -g3 -pedantic
 
-INCLUDES	= -I $(INCLUDE_DIR) $(INC1)
+INCLUDES	= -I $(INCLUDE_DIR) -I $(READ)/include
 
-LIBS		= -L $(LIBFT_DIR) -lft -lreadline $(LIB1)
+LIBS		= -L $(LIBFT_DIR) -lft -lreadline -L $(READ)/lib
 
 #------------------------------------------------------------------------------
 
@@ -61,12 +61,12 @@ INCLUDE_DIR	= include		# path to headers
 # if not installed in your user
 # type "brew install readline"
 
-READ1		= /System/Volumes/Data/Users/$(USER)/.brew/Cellar/readline/8.2.1
-READ2		= /Users/$(USER)/.brew/opt/readline
-READ3		= /System/Volumes/Data/sgoinfre/students/$(USER)/homebrew/Cellar/readline/8.2.1
-
-LIB1		= -L $(READ1)/lib -L $(READ2)/lib -L $(READ3)/lib
-INC1		= -I $(READ1)/include -I $(READ2)/include -I $(READ3)/include
+ifeq ($(USER), fraalmei)
+	READ		= /System/Volumes/Data/sgoinfre/students/fraalmei/homebrew/Cellar/readline/8.2.1
+endif
+ifeq ($(USER), cagonzal)
+	READ		= /System/Volumes/Data/Users/cagonzal/.brew/Cellar/readline/8.2.1/
+endif
 
 # Convert source files to binary
 OBJS = $(SRCS:%.c=$(BIN_DIR)/%.o)
@@ -114,3 +114,7 @@ fclean: clean
 	@echo "\033[0m"
 
 .PHONY: $(LIBFT) all clean fclean re
+
+
+
+
