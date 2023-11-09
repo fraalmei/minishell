@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/11/02 13:58:24 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:31:22 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ static void	add_last_prompt(t_prompt **prom, t_prompt *swap)
 		swap->n_arguments = ft_str_strlen(swap->arguments);
 	else
 		swap->n_arguments = 0;
-	if (swap->n_options > 0)
-		swap->n_arguments -= 1;
 	if (!*prom)
 		*prom = swap;
 	else
@@ -101,7 +99,7 @@ static int	ride_buffer(char *buff, t_prompt **prom, t_prompt **swap, int *i)
 		get_redir(buff, i, *swap);
 	else if (buff[*i] && is_pipe(&buff[*i]) != 0)
 		*swap = add_prom(buff, prom, *swap, i);
-	if (check_end_prom(&buff[*i]) != 0)
+	else if (check_end_prom(&buff[*i]) != 0)
 		return (free_prompt(*prom), free_prompt (*swap), \
 			print_error(258, ft_strdup("newline"), 258), -1);
 	ignore_no_p(buff, i);
