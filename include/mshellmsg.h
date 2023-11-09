@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mshellmsg.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 14:24:10 by irodrigo          #+#    #+#             */
-/*   Updated: 2023/11/02 10:37:03 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:23:06 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 // general interest msg constants
 # define GN_MSG_01  "exit\n"
-# define GN_MSG_02	"Minishell: "
+# define GN_MSG_02	"minishell: "
 # define GN_MSG_03	"minishell: exit: "
 
 // error shell msg constants
@@ -31,10 +31,11 @@
 # define T_ERR_03	"%s: numeric argument required\n"
 # define T_ERR_04	"too many arguments\n"
 # define T_ERR_05	"No such file or directory\n"
-//# define T_ERR_05	"error in dup2\n"
+/* # define T_ERR_05	"error in dup2\n" */
 # define T_ERR_06	"error in execve\n"
 # define T_ERR_07	"minishell: %s Permission denied\n"
 # define T_ERR_08	"$%s: ambiguous redirect\n"
+# define T_ERR_09	"minishell: %s Permission denied\n"
 # define T_ERR_258	"syntax error near unexpected token `%s'\n"
 
 // other msg shell constants
