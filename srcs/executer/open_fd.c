@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_fd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 14:43:02 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/27 10:25:35 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:40:10 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,23 +120,29 @@ void	ft_outredir(t_prompt *prompt)
 
 int	openfile(char	*filename, int mode)
 {
+	int	fd;
+
+	fd = -1;
 	if (mode == INFILE)
 	{
-		if (open (filename, O_RDONLY) < 0)
-			ft_t_error(7, filename);
-		return (open (filename, O_RDONLY));
+		if (access(filename, R_OK) != 0)
+			ft_file_err(filename);
+		fd = open(filename, O_RDONLY);
 	}
 	else if (mode == OUTFILE)
 	{
-		if (open (filename, O_CREAT | O_WRONLY | O_TRUNC, 0644) < 0)
-			ft_t_error(7, filename);
-		return (open (filename, O_CREAT | O_WRONLY | O_TRUNC, 0644));
+		if (access(filename, R_OK) == 0)
+			unlink(filename);
+		fd = open(filename, O_RDWR | O_CREAT, S_IRWXU);
 	}
 	else if (mode == APPFILE)
 	{
-		if (open (filename, O_CREAT | O_WRONLY | O_APPEND, 0644) < 0)
-			ft_t_error(7, filename);
-		return (open (filename, O_CREAT | O_WRONLY | O_APPEND, 0644));
+		if (access(filename, W_OK) == 0)
+			fd = open(filename, O_RDWR | O_APPEND);
+		else
+			fd = open(filename, O_RDWR | O_CREAT, S_IRWXU);
 	}
-	return (0);
+	if (fd == -1 && mode != INFILE)
+		ft_file_err(filename);
+	return (fd);
 }

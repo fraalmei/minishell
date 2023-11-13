@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:24:32 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/27 10:14:31 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:37:16 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ void	assing_fd(int *prompt_fd, int new_fd, int fd)
 
 void	dup_to_stdin_stdout(int fd_in, int fd_out)
 {
+	if (fd_in == -1)
+		return ;
+	if (fd_out == -1)
+		return ;
 	if (fd_in != 0)
 	{
 		if (dup2(fd_in, 0) == -1)

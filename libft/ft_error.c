@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 10:04:38 by vpujalte          #+#    #+#             */
-/*   Updated: 2023/11/02 09:36:30 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:23:22 by cagonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,18 @@ int	ft_t_error(int error, char *argument)
 		return (ft_printf_fd(STDERR, T_ERR_07, argument));
 	else if (error == 8)
 		return (ft_printf_fd(STDERR, T_ERR_08));
+	else if (error == 9)
+		return (ft_printf_fd(STDERR, T_ERR_09, argument));
 	else if (error == 258)
 		return (ft_printf_fd(STDERR, T_ERR_258));
 	return (0);
+}
+
+void	ft_file_err(char *file)
+{
+	ft_putstr_fd(GN_MSG_02, 2);
+	ft_putstr_fd(file, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(strerror(errno), 2);
+	ft_putstr_fd("\n", 2);
 }

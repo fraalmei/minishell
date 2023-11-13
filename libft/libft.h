@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 12:58:45 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/11/01 14:12:27 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/09 09:50:51 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,14 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct s_lista
+{
+	void			*content;
+	size_t			content_size;
+	int				i;
+	struct s_lista	*next;
+}					t_lista;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -154,6 +162,7 @@ int		ft_strnstr_l(const char *haystack, const char *needle, size_t n);
 int		ft_error(int error, char *str);
 int		ft_q_error(int error, char *msg_error);
 int		ft_t_error(int error, char *msg_error);
+void	ft_file_err(char *file);
 
 		//ft_islanum.c
 int		ft_isnum(int c);
