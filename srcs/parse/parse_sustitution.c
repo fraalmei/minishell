@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:13:46 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/11/03 14:07:38 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/13 11:52:18 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,6 @@ static int	ft_check_dolar_redir(char *buffer, int i)
 	}
 	return (0);
 }
-
-/* static int	ft_counter_bar(char *buffer, int *i)
-{
-	if (buffer[*i] == 92)
-	{
-		if (buffer[*i + 1] == 92)
-			i[0]++;
-	}
-	return (0);
-} */
 
 static int	ft_check_heredoc_no_sust(char *buffer, int *i, char **swap)
 {

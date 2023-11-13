@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:08:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/11/09 16:30:55 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/13 11:53:12 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ void	print_welcome(void)
 	printf("#  \\__/   |  |  |__|   __|   __|  |  |  |__  |__  |__ #\n");
 	printf("#                                                     #\n");
 	printf("#######################################################\n\n");
-	printf("------------------||HYDRA DOMINATUS||------------------\n");
+	printf("--------------||WE ARE DOOMED ALPHARIUS||--------------\n");
 	printf("\n%s", WHITE);
 }
+
+	//printf("------------------||HYDRA DOMINATUS||------------------\n");
 
 void	leaks(void)
 {
