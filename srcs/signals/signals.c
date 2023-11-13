@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:09:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/11/13 12:05:19 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/13 13:59:59 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,15 @@
 static void	signal_int(int code)
 {
 	(void) code;
-	printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	if (g_ms->sh_pid == 0)
+	{
+		ft_printf_fd(2, "\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	else
+		ft_printf_fd(2, "\n");
 	g_ms->signals->lst_stat_cod = 130;
 }
 
