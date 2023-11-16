@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 15:40:44 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/11/13 11:51:43 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/16 13:19:35 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ t_prompt	*buffer_to_prompt(char *buffer, t_prompt *prom)
 	int			i;
 
 	i = 0;
-	signals_in_process();
+	signals_on(1);
 	swap = new_prompt_struct();
 	if (!swap)
 		return (NULL);

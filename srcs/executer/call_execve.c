@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:19:05 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/11/09 13:38:24 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/16 16:07:42 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	call_execve(t_prompt *prompt)
 {
 	char	*path;
 
-	signals_in_process();
+	signals_on(1);
 	dup_to_stdin_stdout(prompt->infile, prompt->outfile);
 	env_to_strstr(g_ms->envirorment);
 	path = get_pathname(prompt->command, g_ms->envirorment->env);

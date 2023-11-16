@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 16:08:09 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/19 17:15:08 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/11/16 15:56:31 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void		add_flag(size_t *pos, int *flg, int t);
 	//executer/heredoc.c
 void		ft_heredoc(void);
 char		*ft_expand_vars(char *line);
+void		*w_hdoc_cycle(char *limiter, int fd);
 char		*writeheredoc(char *limiter);
 
 	//executer/get_paths.c
@@ -57,6 +58,6 @@ int			ft_create_directory(void);
 int			ft_remove_directory(void);
 void		ft_inredir(t_prompt *prompt);
 void		ft_outredir(t_prompt *prompt);
-int			openfile(char *filename, int mode);
+int			openfile(t_prompt *prompt, char *filename, int mode);
 
 #endif

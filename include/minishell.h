@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:07:33 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/11/13 11:55:40 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/16 15:16:21 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_sig
 	int				status_code;
 	int				exit_return;
 	int				lst_stat_cod;
+	int				hdoc_cod;
 }					t_sig;
 
 typedef struct s_env_var
@@ -128,8 +129,7 @@ t_mini_class	*g_ms;
 int			prompt(void);
 
 	///	 signals.c
-void		signals_in_prompt(void);
-void		signals_in_process(void);
+void		signals_on(int i);
 int			init_signals(void);
 void		init_sig_struct(void);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 17:08:29 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/21 20:33:39 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/11/16 16:20:21 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,25 +56,40 @@ char	*ft_expand_vars(char *line)
 	return (free(line), str);
 }
 
+void	*w_hdoc_cycle(char *limiter, int fd)
+{
+	char	*buffer;
+
+	buffer = readline("> ");
+	while (buffer && ft_strcmp(buffer, limiter))
+	{
+		buffer = ft_expand_vars(buffer);
+		(ft_putstr_fd(buffer, fd), write(fd, "\n", 1), free(buffer));
+		buffer = readline("> ");
+	}
+	if (!buffer)
+		exit(1);
+	(free(buffer), free(limiter));
+	exit(0);
+}
+
 char	*writeheredoc(char *limiter)
 {
+	int		status;
 	int		fd;
 	char	*redir;
-	char	*line;
 
+	status = 0;
 	redir = ft_strjoin("./tmp/", limiter);
 	fd = open(redir, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 	if (fd < 0)
 		return (NULL);
-	line = readline("> ");
-	while (line && ft_strncmp(line, limiter, ft_strlen(limiter)))
-	{
-		line = ft_expand_vars(line);
-		ft_putstr_fd(line, fd);
-		write(fd, "\n", 1);
-		free(line);
-		line = readline("> ");
-	}
-	(free(line), free(limiter));
+	g_ms->sh_pid = fork();
+	if (g_ms->sh_pid == 0)
+		w_hdoc_cycle(limiter, fd);
+	else
+		(signals_on(2), waitpid(g_ms->sh_pid, &status, 0));
+	if (status != 0)
+		g_ms->signals->hdoc_cod = 2;
 	return (close(fd), redir);
 }

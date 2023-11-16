@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 15:45:48 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/22 03:06:41 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/16 16:21:09 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,12 @@ void	launch_single_process(t_prompt *prompt)
 void	start_executer(void)
 {
 	ft_heredoc();
+	if ((g_ms->signals->lst_stat_cod == 130 && g_ms->signals->hdoc_cod == 1)
+		|| g_ms->signals->hdoc_cod == 2)
+	{
+		g_ms->signals->hdoc_cod = 0;
+		return ;
+	}
 	ft_redir();
 	g_ms->n_prompts = ft_lstpromptsize(g_ms->prompt);
 	if (g_ms->n_prompts == 1)

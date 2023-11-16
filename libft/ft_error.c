@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 10:04:38 by vpujalte          #+#    #+#             */
-/*   Updated: 2023/11/09 16:23:22 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/11/16 10:35:18 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,12 @@ int	ft_t_error(int error, char *argument)
 	return (0);
 }
 
-void	ft_file_err(char *file)
+int	ft_file_err(char *file)
 {
 	ft_putstr_fd(GN_MSG_02, 2);
 	ft_putstr_fd(file, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putstr_fd("\n", 2);
+	return (ERROR);
 }

@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:00:19 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/11/13 12:04:09 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/16 15:10:02 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	print_error(int error, char *str, int st_cod)
 {
 	ft_error(error, str);
 	g_ms->signals->status_code = st_cod;
-	if (str)
+	if (!str)
 		free (str);
 	return (0);
 }

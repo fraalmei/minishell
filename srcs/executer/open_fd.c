@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_fd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonzal <cagonzal@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 14:43:02 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/11/09 16:40:10 by cagonzal         ###   ########.fr       */
+/*   Updated: 2023/11/16 10:38:32 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	ft_inredir(t_prompt *prompt)
 
 	i = -1;
 	while (prompt->input_redirect[++i])
-		prompt->infile = openfile(prompt->input_redirect[i], INFILE);
+		prompt->infile = openfile(prompt, prompt->input_redirect[i], INFILE);
 }
 
 void	ft_outredir(t_prompt *prompt)
@@ -105,20 +105,20 @@ void	ft_outredir(t_prompt *prompt)
 		{
 			prompt->output_redirect[i] = ft_strtrim_frst_onefree(\
 				prompt->output_redirect[i], ">");
-			prompt->outfile = openfile(prompt->output_redirect[i] \
+			prompt->outfile = openfile(prompt, prompt->output_redirect[i] \
 					, OUTFILE);
 		}
 		else
 		{
 			prompt->output_redirect[i] = ft_strtrim_frst_onefree(\
 				prompt->output_redirect[i], ">>");
-			prompt->outfile = openfile(prompt->output_redirect[i] \
+			prompt->outfile = openfile(prompt, prompt->output_redirect[i] \
 					, APPFILE);
 		}
 	}
 }
 
-int	openfile(char	*filename, int mode)
+int	openfile(t_prompt *prompt, char	*filename, int mode)
 {
 	int	fd;
 
@@ -126,13 +126,13 @@ int	openfile(char	*filename, int mode)
 	if (mode == INFILE)
 	{
 		if (access(filename, R_OK) != 0)
-			ft_file_err(filename);
+			prompt->b_success = ft_file_err(filename);
 		fd = open(filename, O_RDONLY);
 	}
 	else if (mode == OUTFILE)
 	{
 		if (access(filename, R_OK) == 0)
-			unlink(filename);
+			prompt->b_success = (unlink(filename), 1);
 		fd = open(filename, O_RDWR | O_CREAT, S_IRWXU);
 	}
 	else if (mode == APPFILE)
@@ -143,6 +143,6 @@ int	openfile(char	*filename, int mode)
 			fd = open(filename, O_RDWR | O_CREAT, S_IRWXU);
 	}
 	if (fd == -1 && mode != INFILE)
-		ft_file_err(filename);
+		prompt->b_success = ft_file_err(filename);
 	return (fd);
 }

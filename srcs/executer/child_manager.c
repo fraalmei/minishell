@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 15:20:08 by cagonzal          #+#    #+#             */
-/*   Updated: 2023/10/26 13:12:00 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/16 13:47:53 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	wait_childs(void)
 	{
 		status = 0;
 		g_ms->sh_pid = tmp->node_pid;
-		signals_in_prompt();
+		signals_on(0);
 		waitpid(tmp->node_pid, &status, 0);
 		if (tmp->next == NULL)
 			ft_set_errstatus(status);
