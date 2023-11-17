@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 09:09:06 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/11/16 17:35:50 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/17 08:27:41 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	signals_on(int i)
 	else if (i == 2)
 	{
 		signal(SIGINT, signal_hdoc);
-		signal(SIGQUIT, SIG_DFL);
+		signal(SIGQUIT, signal_hdoc);
 	}
 }
 

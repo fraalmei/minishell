@@ -6,7 +6,7 @@
 /*   By: fraalmei <fraalmei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 09:18:16 by fraalmei          #+#    #+#             */
-/*   Updated: 2023/11/02 10:25:50 by fraalmei         ###   ########.fr       */
+/*   Updated: 2023/11/17 09:40:01 by fraalmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	actions(t_prompt *prompt, int type)
 		g_ms->signals->status_code = \
 			unset(&g_ms->envirorment->frst, prompt->arguments);
 	else if (prompt->command && ft_strcmp(prompt->command, "echo") == 0)
-		g_ms->signals->status_code = echo(g_ms->prompt);
+		g_ms->signals->status_code = echo(prompt);
 	if (type == 0)
 		exit (0);
 }
